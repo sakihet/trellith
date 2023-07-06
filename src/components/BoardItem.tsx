@@ -1,5 +1,3 @@
-import { JSX } from "preact/jsx-runtime"
-
 type BoardItemProps = {
   id: string
   name: string
@@ -9,7 +7,7 @@ type BoardItemProps = {
 export function BoardItem(props: BoardItemProps) {
   const { id, name, deleteBoard } = props
 
-  const handleClick = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
+  const handleClick = () => {
     deleteBoard(id)
   }
 

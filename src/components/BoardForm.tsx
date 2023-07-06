@@ -7,7 +7,7 @@ type BoardFormProps = {
 
 export function BoardForm(props: BoardFormProps) {
   const { addBoard } = props
-  const inputElement = useRef(null)
+  const inputElement = useRef<HTMLInputElement>(null)
 
   const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
