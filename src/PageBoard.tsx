@@ -1,7 +1,7 @@
-import { Link } from 'preact-router/match'
 import './app.css'
 import { useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
+import { AppLayout } from './AppLayout'
 
 type PageBoardProps = {
   path: string
@@ -64,66 +64,60 @@ export function PageBoard(props: PageBoardProps) {
   }
 
   return (
-    <>
-      <div class="p-4">
-        <div>
-          <Link href="/">Index</Link>
-          <h1 class="text-center">Board</h1>
-        </div>
-        <div>
-          <div class="flex-row layout-stack-horizontal">
-            {state.lists.length !== 0 &&
-              <>
-                {state.lists.map(list =>
-                  <div
-                    class="w-64 p-4 bg-secondary rounded-2 layout-stack-2"
-                    draggable
-                  >
-                    <div class="flex-row h-6">
-                      <div class="f-1">{list.name}</div>
-                      <button
-                        type="button"
-                        onClick={e => handleClickDelete(e, list.id)}
-                      >x</button>
-                    </div>
-                    <div>
-                      <form onSubmit={e => handleSubmitCard(e, list.id)}>
-                        <input
-                          class="h-6 px-2 rounded-2 border-0"
-                          type="text"
-                          placeholder="Add a card"
-                          ref={inputElementCard}
-                        />
-                      </form>
-                    </div>
-                    <div>
-                      <div class="layout-stack-2">
-                        {list.cards.map(card =>
-                          <div
-                            class="rounded-1 p-2 bg-primary"
-                            draggable
-                            key={card.id}
-                          >{card.name}</div>
-                        )}
-                      </div>
+    <AppLayout>
+      <div>
+        <div class="flex-row layout-stack-horizontal">
+          {state.lists.length !== 0 &&
+            <>
+              {state.lists.map(list =>
+                <div
+                  class="w-64 p-4 bg-secondary rounded-2 layout-stack-2"
+                  draggable
+                >
+                  <div class="flex-row h-6">
+                    <div class="f-1">{list.name}</div>
+                    <button
+                      type="button"
+                      onClick={e => handleClickDelete(e, list.id)}
+                    >x</button>
+                  </div>
+                  <div>
+                    <form onSubmit={e => handleSubmitCard(e, list.id)}>
+                      <input
+                        class="h-6 px-2 rounded-2 border-0"
+                        type="text"
+                        placeholder="Add a card"
+                        ref={inputElementCard}
+                      />
+                    </form>
+                  </div>
+                  <div>
+                    <div class="layout-stack-2">
+                      {list.cards.map(card =>
+                        <div
+                          class="rounded-1 p-2 bg-primary"
+                          draggable
+                          key={card.id}
+                        >{card.name}</div>
+                      )}
                     </div>
                   </div>
-                )}
-              </>
-            }
-            <div class="p-4">
-              <form onSubmit={handleSubmitList}>
-                <input
-                  class="h-6 px-2 rounded-2 border-1"
-                  type="text"
-                  placeholder="Enter list title..."
-                  ref={inputElement}
-                />
-              </form>
-            </div>
+                </div>
+              )}
+            </>
+          }
+          <div class="p-4">
+            <form onSubmit={handleSubmitList}>
+              <input
+                class="h-6 px-2 rounded-2 border-1"
+                type="text"
+                placeholder="Enter list title..."
+                ref={inputElement}
+              />
+            </form>
           </div>
         </div>
       </div>
-    </>
+    </AppLayout>
   )
 }

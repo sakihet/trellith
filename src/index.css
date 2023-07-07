@@ -42,6 +42,9 @@ body {
 .h-8 {
   height: 2rem;
 }
+.h-12 {
+  height: 3rem;
+}
 .h-full {
   height: 100%;
 }
@@ -72,6 +75,15 @@ body {
 }
 .text-center {
   text-align: center;
+}
+.text-small {
+  font-size: 0.75rem;
+}
+.text-medium {
+  font-size: 1rem;
+}
+.text-large {
+  font-size: 1.25rem;
 }
 .font-mono {
   font-family: monospace;
