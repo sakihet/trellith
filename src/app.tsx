@@ -8,7 +8,12 @@ type State = {
   boards: Board[]
 }
 
-export function App() {
+type AppProps = {
+  path: string
+}
+
+export function App(props: AppProps) {
+  const { path } = props
   const [state, setState] = useState<State>({ boards: []})
 
   const addBoard = (name: string) => {

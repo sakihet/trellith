@@ -1,3 +1,5 @@
+import { Link } from "preact-router/match"
+
 type BoardItemProps = {
   id: string
   name: string
@@ -15,10 +17,12 @@ export function BoardItem(props: BoardItemProps) {
     <li class="h-8">
       <div class="flex-row">
         <div class="f-1">
-          <a
+          <Link
             class="text-decoration-none"
-            href=""
-          >{ name }</a>
+            href={`/board/${id}`}
+          >
+            { name }
+          </Link>
         </div>
         <button
           class=""

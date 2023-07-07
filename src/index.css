@@ -8,6 +8,21 @@ body {
   margin-right: auto;
   max-width: 60ch;
 }
+.layout-stack-1 > * + * {
+  margin-top: 0.25rem;
+}
+.layout-stack-2 > * + * {
+  margin-top: 0.5rem;
+}
+.layout-stack-3 > * + * {
+  margin-top: 0.75rem;
+}
+.layout-stack-4 > * + * {
+  margin-top: 1rem;
+}
+.layout-stack-horizontal > * + * {
+  margin-left: 1rem;
+}
 
 /* utility */
 .flex-row {
@@ -26,6 +41,15 @@ body {
 }
 .h-8 {
   height: 2rem;
+}
+.h-full {
+  height: 100%;
+}
+.w-64 {
+  width: 16rem;
+}
+.w-full {
+  width: 100%;
 }
 .p-1 {
   padding: 0.25rem;
@@ -72,4 +96,10 @@ body {
 }
 .rounded-2 {
   border-radius: 0.5rem;
+}
+.bg-primary {
+  background-color: #ffffff;
+}
+.bg-secondary {
+  background-color: #f3f3f3
 }
