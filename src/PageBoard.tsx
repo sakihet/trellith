@@ -20,12 +20,13 @@ type BoardState = {
 }
 
 export function PageBoard(props: PageBoardProps) {
+  console.log('props', props)
   const [state, setState] = useState<BoardState>({ lists: [] })
   const inputElement = useRef<HTMLInputElement>(null)
   const inputElementCard = useRef<HTMLInputElement>(null)
 
   const handleClickDelete = (e: JSX.TargetedEvent<HTMLButtonElement>, id: string) => {
-    console.log('click delete')
+    console.log('click delete', e)
     setState({ lists: [...state.lists.filter(l => l.id !== id)]})
     return undefined
   }

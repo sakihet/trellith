@@ -14,6 +14,7 @@ type AppProps = {
 
 export function App(props: AppProps) {
   const { path } = props
+  console.log('path', path)
   const [state, setState] = useState<State>({ boards: []})
 
   const addBoard = (name: string) => {
