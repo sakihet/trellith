@@ -3,7 +3,7 @@ import './app.css'
 import { BoardForm } from './components/BoardForm'
 import { Board } from './types/board'
 import { BoardItem } from './components/BoardItem'
-import { AppLayout } from './AppLayout'
+import { AppLayout } from './components/AppLayout'
 
 type State = {
   boards: Board[]

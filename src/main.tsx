@@ -2,7 +2,7 @@ import { render } from 'preact'
 import Router from 'preact-router'
 import { App } from './app.tsx'
 import './index.css'
-import { PageBoard } from './PageBoard.tsx'
+import { PageBoard } from './components/PageBoard.tsx'
 
 const Main = () => (
   <Router>

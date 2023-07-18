@@ -1,4 +1,4 @@
-import './app.css'
+import '../app.css'
 import { useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { AppLayout } from './AppLayout'

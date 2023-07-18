@@ -15,21 +15,19 @@ export function BoardItem(props: BoardItemProps) {
 
   return (
     <li class="h-8">
-      <div class="flex-row">
+      <Link
+        class="text-decoration-none flex-row"
+        href={`/board/${id}`}
+      >
         <div class="f-1">
-          <Link
-            class="text-decoration-none"
-            href={`/board/${id}`}
-          >
-            { name }
-          </Link>
+          { name }
         </div>
         <button
           class=""
           type="button"
           onClick={handleClick}
         >x</button>
-      </div>
+      </Link>
     </li>
   )
 }
