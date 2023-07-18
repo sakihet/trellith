@@ -14,20 +14,24 @@ export function BoardItem(props: BoardItemProps) {
   }
 
   return (
-    <li class="h-8">
-      <Link
-        class="text-decoration-none flex-row"
-        href={`/board/${id}`}
-      >
-        <div class="f-1">
-          { name }
+    <li class="">
+      <div class="flex-row">
+        <div class="f-1 p-2 bg-primary h-8">
+          <Link
+            class="text-decoration-none flex-row"
+            href={`/board/${id}`}
+          >
+            { name }
+          </Link>
         </div>
-        <button
-          class=""
-          type="button"
-          onClick={handleClick}
-        >x</button>
-      </Link>
+        <div class="bg-primary w-8 h-8 flex-column">
+          <button
+            class="m-auto"
+            type="button"
+            onClick={handleClick}
+          >x</button>
+        </div>
+      </div>
     </li>
   )
 }

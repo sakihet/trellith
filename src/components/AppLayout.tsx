@@ -12,7 +12,9 @@ export function AppLayout(props: AppLayoutProps) {
           <h1 class="m-0 text-center text-large">DnD Board (WIP)</h1>
         </Link>
       </div>
-      <div>{props.children}</div>
+      <div class="">
+        {props.children}
+      </div>
     </div>
   )
 }

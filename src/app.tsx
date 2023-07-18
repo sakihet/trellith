@@ -33,25 +33,27 @@ export function App(props: AppProps) {
 
   return (
     <AppLayout>
-      <div class="layout-center">
-        <div>
-          <div>
-            <h2 class="text-left text-large">Boards</h2>
-          </div>
-          <div>
-            <BoardForm addBoard={addBoard}/>
-          </div>
-          <div>
-            <ul class="list-style-none pl-0">
-              {state.boards.map(board =>
-                <BoardItem
-                  key={board.id}
-                  id={board.id}
-                  name={board.name}
-                  deleteBoard={deleteBoard}
-                />
-              )}
-            </ul>
+      <div class="bg-secondary p-4">
+        <div class="layout-center">
+          <div class="layout-stack-4">
+            <div>
+              <h2 class="text-left text-large">Boards</h2>
+            </div>
+            <div>
+              <BoardForm addBoard={addBoard}/>
+            </div>
+            <div>
+              <ul class="list-style-none pl-0 layout-stack-2">
+                {state.boards.map(board =>
+                  <BoardItem
+                    key={board.id}
+                    id={board.id}
+                    name={board.name}
+                    deleteBoard={deleteBoard}
+                  />
+                )}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

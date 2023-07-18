@@ -21,10 +21,11 @@ export function BoardForm(props: BoardFormProps) {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        class="h-6 px-2 rounded-2 border-1"
+        class="h-8 px-2 rounded-2 border-1 border-solid border-color-primary"
         type="text"
-        ref={inputElement}
+        placeholder={""}
         maxLength={24}
+        ref={inputElement}
       />
     </form>
   )
