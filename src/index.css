@@ -54,6 +54,9 @@ body {
 .w-full {
   width: 100%;
 }
+.m-0 {
+  margin: 0;
+}
 .p-1 {
   padding: 0.25rem;
 }
