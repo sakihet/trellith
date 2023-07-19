@@ -1,7 +1,9 @@
 import '../app.css'
-import { useRef, useState } from 'preact/hooks'
+import { useEffect, useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { AppLayout } from './AppLayout'
+import { State } from './PageIndex'
+import { load, save } from '../utils'
 
 type PageBoardProps = {
   path: string
@@ -21,13 +23,31 @@ type BoardState = {
 
 export function PageBoard(props: PageBoardProps) {
   console.log('props', props)
-  const [state, setState] = useState<BoardState>({ lists: [] })
+  const [didMount, setDidMount] = useState(false)
+  const [state, setState] = useState<State>({ boards: [] })
+  const [boardState, setBoardState] = useState<BoardState>({ lists: [] })
   const inputElement = useRef<HTMLInputElement>(null)
   const inputElementCard = useRef<HTMLInputElement>(null)
 
+  useEffect(() => {
+    console.log('effect')
+    setDidMount(true)
+    const result = load()
+    if (result) {
+      setState(result)
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log('state effect', didMount)
+    if (didMount) {
+      save(state)
+    }
+  }, [state])
+
   const handleClickDelete = (e: JSX.TargetedEvent<HTMLButtonElement>, id: string) => {
     console.log('click delete', e)
-    setState({ lists: [...state.lists.filter(l => l.id !== id)]})
+    setBoardState({ lists: [...boardState.lists.filter(l => l.id !== id)]})
     return undefined
   }
 
@@ -38,14 +58,14 @@ export function PageBoard(props: PageBoardProps) {
         id: crypto.randomUUID(),
         name: inputElementCard.current.value
       }
-      const updated = state.lists.map(l => {
+      const updated = boardState.lists.map(l => {
         if (l.id === id) {
           return { ...l, cards: [...l.cards, card] }
         } else {
           return l
         }
       })
-      setState({ lists: updated })
+      setBoardState({ lists: updated })
       inputElementCard.current.value = ''
     }
   }
@@ -58,7 +78,7 @@ export function PageBoard(props: PageBoardProps) {
         name: inputElement.current.value,
         cards: []
       }
-      setState({ lists: [...state.lists, boardList] })
+      setBoardState({ lists: [...boardState.lists, boardList] })
       inputElement.current.value = ''
     }
   }
@@ -66,10 +86,15 @@ export function PageBoard(props: PageBoardProps) {
   return (
     <AppLayout>
       <div>
+        <div>
+          <h2 class="text-large">
+            {state.boards.find(x => x.id === props.board_id)?.name}
+          </h2>
+        </div>
         <div class="flex-row layout-stack-horizontal">
-          {state.lists.length !== 0 &&
+          {boardState.lists.length !== 0 &&
             <>
-              {state.lists.map(list =>
+              {boardState.lists.map(list =>
                 <div
                   class="w-64 p-4 bg-secondary rounded-2 layout-stack-2"
                   draggable

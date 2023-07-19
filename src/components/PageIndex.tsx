@@ -6,7 +6,7 @@ import { BoardItem } from './BoardItem'
 import { AppLayout } from './AppLayout'
 import { load, save } from '../utils'
 
-type State = {
+export type State = {
   boards: Board[]
 }
 
