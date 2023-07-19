@@ -39,13 +39,24 @@ export function PageBoard(props: PageBoardProps) {
   }, [])
 
   useEffect(() => {
-    console.log('state effect', didMount)
+    console.log('boardState effect', didMount)
     if (didMount) {
-      save(state)
+      console.log('TODO: save', state)
     }
-  }, [state])
+  }, [boardState])
 
-  const handleClickDelete = (e: JSX.TargetedEvent<HTMLButtonElement>, id: string) => {
+  const handleClickDeleteCard = (listId: string, cardId: string) => {
+    const updated = boardState.lists.map(l => {
+      if (l.id === listId) {
+        return { ...l, cards: l.cards.filter(x => x.id !== cardId) }
+      } else {
+        return l
+      }
+    })
+    setBoardState({ lists: updated })
+  }
+
+  const handleClickDeleteList = (e: JSX.TargetedEvent<HTMLButtonElement>, id: string) => {
     console.log('click delete', e)
     setBoardState({ lists: [...boardState.lists.filter(l => l.id !== id)]})
     return undefined
@@ -104,7 +115,7 @@ export function PageBoard(props: PageBoardProps) {
                     <button
                       class="border-none text-secondary"
                       type="button"
-                      onClick={e => handleClickDelete(e, list.id)}
+                      onClick={e => handleClickDeleteList(e, list.id)}
                     >x</button>
                   </div>
                   <div>
@@ -121,10 +132,19 @@ export function PageBoard(props: PageBoardProps) {
                     <div class="layout-stack-2">
                       {list.cards.map(card =>
                         <div
-                          class="rounded-1 p-2 bg-primary"
+                          class="rounded-1 p-2 bg-primary flex-row"
                           draggable
                           key={card.id}
-                        >{card.name}</div>
+                        >
+                          <div class="f-1">{card.name}</div>
+                          <div>
+                            <button
+                              class="border-none text-secondary"
+                              type="button"
+                              onClick={e => { handleClickDeleteCard(list.id, card.id)} }
+                            >x</button>
+                          </div>
+                        </div>
                       )}
                     </div>
                   </div>
