@@ -102,6 +102,7 @@ export function PageBoard(props: PageBoardProps) {
                   <div class="flex-row h-6">
                     <div class="f-1">{list.name}</div>
                     <button
+                      class="border-none text-secondary"
                       type="button"
                       onClick={e => handleClickDelete(e, list.id)}
                     >x</button>
@@ -134,7 +135,7 @@ export function PageBoard(props: PageBoardProps) {
           <div class="p-4">
             <form onSubmit={handleSubmitList}>
               <input
-                class="h-6 px-2 rounded-2 border-1"
+                class="h-6 px-2 rounded-2 border-1 border-solid border-color-primary"
                 type="text"
                 placeholder="Enter list title..."
                 ref={inputElement}
