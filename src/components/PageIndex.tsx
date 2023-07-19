@@ -37,7 +37,8 @@ export function PageIndex(props: PageIndexProps) {
     console.log('add board', name)
     const board: Board = {
       id: crypto.randomUUID(),
-      name: name
+      name: name,
+      lists: []
     }
     setState({ boards: [...state.boards, board]})
   }

@@ -2,11 +2,12 @@ import '../app.css'
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { AppLayout } from './AppLayout'
-import { load, save } from '../utils'
+import { load } from '../utils'
 import { State } from '../types/state'
 import { BoardList } from '../types/boardList'
 
 type PageBoardProps = {
+  board_id?: string
   path: string
 }
 
@@ -38,7 +39,8 @@ export function PageBoard(props: PageBoardProps) {
     }
   }, [boardState])
 
-  const handleClickDeleteCard = (listId: string, cardId: string) => {
+  const handleClickDeleteCard = (e: JSX.TargetedEvent<HTMLButtonElement>, listId: string, cardId: string) => {
+    console.log('click delete card', e)
     const updated = boardState.lists.map(l => {
       if (l.id === listId) {
         return { ...l, cards: l.cards.filter(x => x.id !== cardId) }
@@ -134,7 +136,7 @@ export function PageBoard(props: PageBoardProps) {
                             <button
                               class="border-none text-secondary"
                               type="button"
-                              onClick={e => { handleClickDeleteCard(list.id, card.id)} }
+                              onClick={e => handleClickDeleteCard(e, list.id, card.id)}
                             >x</button>
                           </div>
                         </div>
