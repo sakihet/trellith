@@ -4,6 +4,7 @@ import { BoardForm } from './BoardForm'
 import { Board } from '../types/board'
 import { BoardItem } from './BoardItem'
 import { AppLayout } from './AppLayout'
+import { load, save } from '../utils'
 
 type State = {
   boards: Board[]
@@ -11,23 +12,6 @@ type State = {
 
 type PageIndexProps = {
   path: string
-}
-
-const LOCAL_STORAGE_KEY = 'dnd-board'
-
-const save = (obj: {}) => {
-  console.log('save')
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(obj))
-}
-
-const load = () => {
-  console.log('load')
-  const value = localStorage.getItem(LOCAL_STORAGE_KEY)
-  if (value) {
-    return JSON.parse(value)
-  } else {
-    return { boards: [] }
-  }
 }
 
 export function PageIndex(props: PageIndexProps) {
