@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'preact/hooks'
-import './app.css'
-import { BoardForm } from './components/BoardForm'
-import { Board } from './types/board'
-import { BoardItem } from './components/BoardItem'
-import { AppLayout } from './components/AppLayout'
+import '../app.css'
+import { BoardForm } from './BoardForm'
+import { Board } from '../types/board'
+import { BoardItem } from './BoardItem'
+import { AppLayout } from './AppLayout'
 
 type State = {
   boards: Board[]
 }
 
-type AppProps = {
+type PageIndexProps = {
   path: string
 }
 
@@ -30,7 +30,7 @@ const load = () => {
   }
 }
 
-export function App(props: AppProps) {
+export function PageIndex(props: PageIndexProps) {
   const { path } = props
   console.log('path', path)
   const [didMount, setDidMount] = useState(false)
