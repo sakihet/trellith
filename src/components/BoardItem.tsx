@@ -26,7 +26,7 @@ export function BoardItem(props: BoardItemProps) {
         </div>
         <div class="bg-primary w-8 h-8 flex-column">
           <button
-            class="m-auto"
+            class="m-auto border-none text-secondary"
             type="button"
             onClick={handleClick}
           >x</button>

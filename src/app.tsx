@@ -67,7 +67,7 @@ export function App(props: AppProps) {
 
   return (
     <AppLayout>
-      <div class="bg-secondary p-4">
+      <div class="p-4">
         <div class="layout-center">
           <div class="layout-stack-4">
             <div>
