@@ -5,10 +5,7 @@ import { Board } from '../types/board'
 import { BoardItem } from './BoardItem'
 import { AppLayout } from './AppLayout'
 import { load, save } from '../utils'
-
-export type State = {
-  boards: Board[]
-}
+import { State } from '../types/state'
 
 type PageIndexProps = {
   path: string

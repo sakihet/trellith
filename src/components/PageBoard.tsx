@@ -2,21 +2,14 @@ import '../app.css'
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { AppLayout } from './AppLayout'
-import { State } from './PageIndex'
 import { load, save } from '../utils'
+import { State } from '../types/state'
+import { BoardList } from '../types/boardList'
 
 type PageBoardProps = {
   path: string
 }
-type Card = {
-  id: string
-  name: string
-}
-type BoardList = {
-  id: string
-  name: string
-  cards: Card[]
-}
+
 type BoardState = {
   lists: BoardList[]
 }
