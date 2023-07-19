@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 import './app.css'
 import { BoardForm } from './components/BoardForm'
 import { Board } from './types/board'
@@ -13,10 +13,44 @@ type AppProps = {
   path: string
 }
 
+const LOCAL_STORAGE_KEY = 'dnd-board'
+
+const save = (obj: {}) => {
+  console.log('save')
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(obj))
+}
+
+const load = () => {
+  console.log('load')
+  const value = localStorage.getItem(LOCAL_STORAGE_KEY)
+  if (value) {
+    return JSON.parse(value)
+  } else {
+    return { boards: [] }
+  }
+}
+
 export function App(props: AppProps) {
   const { path } = props
   console.log('path', path)
-  const [state, setState] = useState<State>({ boards: []})
+  const [didMount, setDidMount] = useState(false)
+  const [state, setState] = useState<State>({ boards: [] })
+
+  useEffect(() => {
+    console.log('effect')
+    setDidMount(true)
+    const result = load()
+    if (result) {
+      setState(result)
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log('state effect', didMount)
+    if (didMount) {
+      save(state)
+    }
+  }, [state])
 
   const addBoard = (name: string) => {
     console.log('add board', name)
