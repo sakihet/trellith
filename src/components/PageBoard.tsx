@@ -27,6 +27,8 @@ export function PageBoard(props: PageBoardProps) {
   const [didMount, setDidMount] = useState(false)
   const [state, setState] = useState<State>({ boards: [] })
   const [boardState, setBoardState] = useState<BoardState>({ lists: [] })
+  const [draggingCardId, setDraggingCardId] = useState<string | undefined>(undefined)
+  const [draggingCardListId, setDraggingCardListId] = useState<string | undefined>(undefined)
   const inputElement = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -74,6 +76,28 @@ export function PageBoard(props: PageBoardProps) {
     return undefined
   }
 
+  const handleDragOver = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+  }
+
+  const handleDragEnd = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    setDraggingCardId(undefined)
+    setDraggingCardListId(undefined)
+  }
+
+  const handleDragStart = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    const {cardId, listId} = e.currentTarget.dataset
+    setDraggingCardId(cardId)
+    setDraggingCardListId(listId)
+  }
+
+  const handleDrop = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    const {listId} = e.currentTarget.dataset
+    if (draggingCardId && draggingCardListId && listId) {
+      moveCard(draggingCardId, draggingCardListId, listId)
+    }
+  }
+
   const addCard = (params: AddCardParams) => {
     console.log('add card', params)
     const card: Card = {
@@ -88,6 +112,22 @@ export function PageBoard(props: PageBoardProps) {
       }
     })
     setBoardState({ lists: updated })
+  }
+
+  const moveCard = (cardId: string, listIdSrc: string, listIdDst: string) => {
+    const cardTarget = boardState.lists.find(l => l.id === listIdSrc)?.cards.find(c => c.id === cardId)
+    if (cardTarget && (listIdSrc !== listIdDst)) {
+      const updated = boardState.lists.map(l => {
+        if (l.id === listIdSrc) {
+          return { ...l, cards: l.cards.filter(x => x.id !== cardId)}
+        } else if (l.id === listIdDst) {
+          return { ...l, cards: [cardTarget, ...l.cards]}
+        } else {
+          return l
+        }
+      })
+      setBoardState({ lists: updated })
+    }
   }
 
   const handleSubmitList = (e: JSX.TargetedEvent<HTMLFormElement>) => {
@@ -114,7 +154,10 @@ export function PageBoard(props: PageBoardProps) {
         {boardState.lists.length !== 0 && boardState.lists.map(list =>
           <div
             class="w-64 p-4 bg-secondary rounded-2 layout-stack-2"
-            draggable
+            // draggable
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            data-list-id={list.id}
           >
             <div class="flex-row h-6">
               <div class="f-1">{list.name}</div>
@@ -137,6 +180,10 @@ export function PageBoard(props: PageBoardProps) {
                     class="rounded-1 p-2 bg-primary flex-row"
                     draggable
                     key={card.id}
+                    onDragEnd={handleDragEnd}
+                    onDragStart={handleDragStart}
+                    data-card-id={card.id}
+                    data-list-id={list.id}
                   >
                     <div class="f-1">{card.name}</div>
                     <div>
