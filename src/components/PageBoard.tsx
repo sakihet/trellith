@@ -5,6 +5,8 @@ import { AppLayout } from './AppLayout'
 import { load, save } from '../utils'
 import { State } from '../types/state'
 import { BoardList } from '../types/boardList'
+import { CardForm } from './CardForm'
+import { Card } from '../types/card'
 
 type PageBoardProps = {
   board_id?: string
@@ -15,13 +17,17 @@ type BoardState = {
   lists: BoardList[]
 }
 
+export type AddCardParams = {
+  listId: string
+  cardName: string
+}
+
 export function PageBoard(props: PageBoardProps) {
   console.log('props', props)
   const [didMount, setDidMount] = useState(false)
   const [state, setState] = useState<State>({ boards: [] })
   const [boardState, setBoardState] = useState<BoardState>({ lists: [] })
   const inputElement = useRef<HTMLInputElement>(null)
-  const inputElementCard = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     console.log('effect')
@@ -68,23 +74,20 @@ export function PageBoard(props: PageBoardProps) {
     return undefined
   }
 
-  const handleSubmitCard = (e: JSX.TargetedEvent<HTMLFormElement>, id: string) => {
-    e.preventDefault()
-    if (inputElementCard.current && inputElementCard.current.value.length !== 0) {
-      const card = {
-        id: crypto.randomUUID(),
-        name: inputElementCard.current.value
-      }
-      const updated = boardState.lists.map(l => {
-        if (l.id === id) {
-          return { ...l, cards: [...l.cards, card] }
-        } else {
-          return l
-        }
-      })
-      setBoardState({ lists: updated })
-      inputElementCard.current.value = ''
+  const addCard = (params: AddCardParams) => {
+    console.log('add card', params)
+    const card: Card = {
+      id: crypto.randomUUID(),
+      name: params.cardName
     }
+    const updated = boardState.lists.map(l => {
+      if (l.id === params.listId) {
+        return { ...l, cards: [...l.cards, card] }
+      } else {
+        return l
+      }
+    })
+    setBoardState({ lists: updated })
   }
 
   const handleSubmitList = (e: JSX.TargetedEvent<HTMLFormElement>) => {
@@ -122,14 +125,10 @@ export function PageBoard(props: PageBoardProps) {
               >x</button>
             </div>
             <div>
-              <form onSubmit={e => handleSubmitCard(e, list.id)}>
-                <input
-                  class="h-6 px-2 rounded-2 border-0"
-                  type="text"
-                  placeholder="Add a card"
-                  ref={inputElementCard}
-                />
-              </form>
+              <CardForm
+                listId={list.id}
+                addCard={addCard}
+              />
             </div>
             <div>
               <div class="layout-stack-2">
