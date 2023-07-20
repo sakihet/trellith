@@ -2,7 +2,7 @@ import '../app.css'
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { AppLayout } from './AppLayout'
-import { load } from '../utils'
+import { load, save } from '../utils'
 import { State } from '../types/state'
 import { BoardList } from '../types/boardList'
 
@@ -29,13 +29,24 @@ export function PageBoard(props: PageBoardProps) {
     const result = load()
     if (result) {
       setState(result)
+      const b = result.boards.find(x => x.id === props.board_id)
+      if (b) {
+        setBoardState(b)
+      }
     }
   }, [])
 
   useEffect(() => {
     console.log('boardState effect', didMount)
     if (didMount) {
-      console.log('TODO: save', state)
+      const updated = state.boards.map(b => {
+        if (b.id === props.board_id) {
+          return { ...b, lists: boardState.lists }
+        } else {
+          return b
+        }
+      })
+      save({ boards: updated })
     }
   }, [boardState])
 
