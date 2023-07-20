@@ -80,7 +80,7 @@ export function PageBoard(props: PageBoardProps) {
     e.preventDefault()
   }
 
-  const handleDragEnd = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+  const handleDragEnd = () => {
     setDraggingCardId(undefined)
     setDraggingCardListId(undefined)
   }
