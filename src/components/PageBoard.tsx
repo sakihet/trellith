@@ -103,71 +103,65 @@ export function PageBoard(props: PageBoardProps) {
   return (
     <AppLayout>
       <div>
-        <div>
-          <h2 class="text-large">
-            {state.boards.find(x => x.id === props.board_id)?.name}
-          </h2>
-        </div>
-        <div class="flex-row layout-stack-horizontal">
-          {boardState.lists.length !== 0 &&
-            <>
-              {boardState.lists.map(list =>
-                <div
-                  class="w-64 p-4 bg-secondary rounded-2 layout-stack-2"
-                  draggable
-                >
-                  <div class="flex-row h-6">
-                    <div class="f-1">{list.name}</div>
-                    <button
-                      class="border-none text-secondary"
-                      type="button"
-                      onClick={e => handleClickDeleteList(e, list.id)}
-                    >x</button>
-                  </div>
-                  <div>
-                    <form onSubmit={e => handleSubmitCard(e, list.id)}>
-                      <input
-                        class="h-6 px-2 rounded-2 border-0"
-                        type="text"
-                        placeholder="Add a card"
-                        ref={inputElementCard}
-                      />
-                    </form>
-                  </div>
-                  <div>
-                    <div class="layout-stack-2">
-                      {list.cards.map(card =>
-                        <div
-                          class="rounded-1 p-2 bg-primary flex-row"
-                          draggable
-                          key={card.id}
-                        >
-                          <div class="f-1">{card.name}</div>
-                          <div>
-                            <button
-                              class="border-none text-secondary"
-                              type="button"
-                              onClick={e => handleClickDeleteCard(e, list.id, card.id)}
-                            >x</button>
-                          </div>
-                        </div>
-                      )}
+        <h2 class="text-large">
+          {state.boards.find(x => x.id === props.board_id)?.name}
+        </h2>
+      </div>
+      <div class="flex-row layout-stack-horizontal">
+        {boardState.lists.length !== 0 && boardState.lists.map(list =>
+          <div
+            class="w-64 p-4 bg-secondary rounded-2 layout-stack-2"
+            draggable
+          >
+            <div class="flex-row h-6">
+              <div class="f-1">{list.name}</div>
+              <button
+                class="border-none text-secondary"
+                type="button"
+                onClick={e => handleClickDeleteList(e, list.id)}
+              >x</button>
+            </div>
+            <div>
+              <form onSubmit={e => handleSubmitCard(e, list.id)}>
+                <input
+                  class="h-6 px-2 rounded-2 border-0"
+                  type="text"
+                  placeholder="Add a card"
+                  ref={inputElementCard}
+                />
+              </form>
+            </div>
+            <div>
+              <div class="layout-stack-2">
+                {list.cards.map(card =>
+                  <div
+                    class="rounded-1 p-2 bg-primary flex-row"
+                    draggable
+                    key={card.id}
+                  >
+                    <div class="f-1">{card.name}</div>
+                    <div>
+                      <button
+                        class="border-none text-secondary"
+                        type="button"
+                        onClick={e => handleClickDeleteCard(e, list.id, card.id)}
+                      >x</button>
                     </div>
                   </div>
-                </div>
-              )}
-            </>
-          }
-          <div class="p-4">
-            <form onSubmit={handleSubmitList}>
-              <input
-                class="h-6 px-2 rounded-2 border-1 border-solid border-color-primary"
-                type="text"
-                placeholder="Enter list title..."
-                ref={inputElement}
-              />
-            </form>
+                )}
+              </div>
+            </div>
           </div>
+        )}
+        <div class="p-4">
+          <form onSubmit={handleSubmitList}>
+            <input
+              class="h-6 px-2 rounded-2 border-1 border-solid border-color-primary"
+              type="text"
+              placeholder="Enter list title..."
+              ref={inputElement}
+            />
+          </form>
         </div>
       </div>
     </AppLayout>
