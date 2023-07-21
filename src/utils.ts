@@ -16,3 +16,7 @@ export const load = (): State => {
     return { boards: [] }
   }
 }
+
+export const remove = () => {
+  localStorage.removeItem(LOCAL_STORAGE_KEY)
+}

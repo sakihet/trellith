@@ -4,7 +4,7 @@ import { BoardForm } from './BoardForm'
 import { Board } from '../types/board'
 import { BoardItem } from './BoardItem'
 import { AppLayout } from './AppLayout'
-import { load, save } from '../utils'
+import { load, remove, save } from '../utils'
 import { State } from '../types/state'
 
 type PageIndexProps = {
@@ -47,6 +47,13 @@ export function PageIndex(props: PageIndexProps) {
     setState({ boards: [...state.boards.filter(b => b.id !== id)]})
   }
 
+  const handleClickClear = () => {
+    if (window.confirm('Do you really want to clear data?')) {
+      remove()
+      setState({boards: []})
+    }
+  }
+
   return (
     <AppLayout>
       <div class="p-4">
@@ -54,6 +61,13 @@ export function PageIndex(props: PageIndexProps) {
           <div class="layout-stack-4">
             <div>
               <h2 class="text-left text-large">Boards</h2>
+            </div>
+            <div class="text-right">
+              <button
+                class=""
+                type="button"
+                onClick={handleClickClear}
+              >Clear</button>
             </div>
             <div>
               <BoardForm addBoard={addBoard}/>
