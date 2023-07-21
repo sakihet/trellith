@@ -194,3 +194,6 @@ body {
 .bg-secondary {
   background-color: var(--color-bg-secondary);
 }
+.cursor-grab {
+  cursor: grab;
+}

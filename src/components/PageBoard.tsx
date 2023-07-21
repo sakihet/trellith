@@ -29,6 +29,7 @@ export function PageBoard(props: PageBoardProps) {
   const [boardState, setBoardState] = useState<BoardState>({ lists: [] })
   const [draggingCardId, setDraggingCardId] = useState<string | undefined>(undefined)
   const [draggingCardListId, setDraggingCardListId] = useState<string | undefined>(undefined)
+  const [draggingListId, setDraggingListId] = useState<string | undefined>(undefined)
   const inputElement = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -80,21 +81,46 @@ export function PageBoard(props: PageBoardProps) {
     e.preventDefault()
   }
 
-  const handleDragEnd = () => {
+  const handleDragEndCard = () => {
     setDraggingCardId(undefined)
     setDraggingCardListId(undefined)
   }
 
-  const handleDragStart = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+  const handleDragStartCard = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
     const {cardId, listId} = e.currentTarget.dataset
     setDraggingCardId(cardId)
     setDraggingCardListId(listId)
+  }
+
+  const swap = (ary: BoardList[], idx1: number, idx2: number) => {
+    [ary[idx1], ary[idx2]] = [ary[idx2], ary[idx1]]
+    return ary
   }
 
   const handleDrop = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
     const {listId} = e.currentTarget.dataset
     if (draggingCardId && draggingCardListId && listId) {
       moveCard(draggingCardId, draggingCardListId, listId)
+    } else if (!draggingCardId && draggingListId && listId) {
+      swapList(draggingListId, listId)
+    }
+  }
+
+  const swapList = (listId1: string, listId2: string) => {
+    const idx1 = boardState.lists.findIndex(l => l.id === listId1)
+    const idx2 = boardState.lists.findIndex(l => l.id === listId2)
+    const swapped = swap(boardState.lists, idx1, idx2)
+    setBoardState({ lists: swapped })
+  }
+
+  const handleDragEndList = () => {
+    setDraggingListId(undefined)
+  }
+
+  const handleDragStartList = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    const {listId} = e.currentTarget.dataset
+    if (listId) {
+      setDraggingListId(listId)
     }
   }
 
@@ -154,12 +180,14 @@ export function PageBoard(props: PageBoardProps) {
         {boardState.lists.length !== 0 && boardState.lists.map(list =>
           <div
             class="w-64 p-4 bg-secondary rounded-2 layout-stack-2"
-            // draggable
+            draggable
             onDrop={handleDrop}
             onDragOver={handleDragOver}
+            onDragEnd={handleDragEndList}
+            onDragStart={handleDragStartList}
             data-list-id={list.id}
           >
-            <div class="flex-row h-6">
+            <div class="flex-row h-6 cursor-grab">
               <div class="f-1">{list.name}</div>
               <button
                 class="border-none text-secondary"
@@ -177,11 +205,11 @@ export function PageBoard(props: PageBoardProps) {
               <div class="layout-stack-2">
                 {list.cards.map(card =>
                   <div
-                    class="rounded-1 p-2 bg-primary flex-row"
+                    class="rounded-1 p-2 bg-primary flex-row cursor-grab"
                     draggable
                     key={card.id}
-                    onDragEnd={handleDragEnd}
-                    onDragStart={handleDragStart}
+                    onDragEnd={handleDragEndCard}
+                    onDragStart={handleDragStartCard}
                     data-card-id={card.id}
                     data-list-id={list.id}
                   >
