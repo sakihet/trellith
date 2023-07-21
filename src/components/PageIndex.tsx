@@ -56,7 +56,7 @@ export function PageIndex(props: PageIndexProps) {
 
   return (
     <AppLayout>
-      <div class="p-4">
+      <div class="">
         <div class="layout-center">
           <div class="layout-stack-4">
             <div>
