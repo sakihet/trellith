@@ -14,3 +14,8 @@ DnD board is a web-based, board-style, list-making app.
 
 - Rename
 - Improve DnD
+
+## Tech
+
+- [Vite](https://vitejs.dev/)
+- [Preact](https://preactjs.com/)
