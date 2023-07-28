@@ -8,6 +8,7 @@ import { BoardList } from '../types/boardList'
 import { CardForm } from './CardForm'
 import { Card } from '../types/card'
 import { BoardHeader } from './BoardHeader'
+import { CardItem } from './CardItem'
 
 type PageBoardProps = {
   board_id?: string
@@ -62,16 +63,19 @@ export function PageBoard(props: PageBoardProps) {
     }
   }, [boardState])
 
-  const handleClickDeleteCard = (e: JSX.TargetedEvent<HTMLButtonElement>, listId: string, cardId: string) => {
+  const handleClickDeleteCard = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
     console.log('click delete card', e)
-    const updated = boardState.lists.map(l => {
-      if (l.id === listId) {
-        return { ...l, cards: l.cards.filter(x => x.id !== cardId) }
-      } else {
-        return l
-      }
-    })
-    setBoardState({ lists: updated })
+    const {cardId, listId} = e.currentTarget.dataset
+    if (cardId && listId) {
+      const updated = boardState.lists.map(l => {
+        if (l.id === listId) {
+          return { ...l, cards: l.cards.filter(x => x.id !== cardId) }
+        } else {
+          return l
+        }
+      })
+      setBoardState({ lists: updated })
+    }
   }
 
   const handleClickDeleteList = (e: JSX.TargetedEvent<HTMLButtonElement>, id: string) => {
@@ -84,7 +88,8 @@ export function PageBoard(props: PageBoardProps) {
     e.preventDefault()
   }
 
-  const handleDragEndCard = () => {
+  const handleDragEndCard = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    console.log('drag end', e)
     setDraggingCardId(undefined)
     setDraggingCardListId(undefined)
   }
@@ -207,24 +212,15 @@ export function PageBoard(props: PageBoardProps) {
             <div>
               <div class="layout-stack-2">
                 {list.cards.map(card =>
-                  <div
-                    class="rounded-1 p-2 bg-primary flex-row cursor-grab"
-                    draggable
+                  <CardItem
                     key={card.id}
-                    onDragEnd={handleDragEndCard}
-                    onDragStart={handleDragStartCard}
-                    data-card-id={card.id}
-                    data-list-id={list.id}
-                  >
-                    <div class="f-1">{card.name}</div>
-                    <div>
-                      <button
-                        class="border-none text-secondary"
-                        type="button"
-                        onClick={e => handleClickDeleteCard(e, list.id, card.id)}
-                      >x</button>
-                    </div>
-                  </div>
+                    id={card.id}
+                    listId={list.id}
+                    name={card.name}
+                    handleClickDelete={handleClickDeleteCard}
+                    handleDragEnd={handleDragEndCard}
+                    handleDragStart={handleDragStartCard}
+                  />
                 )}
               </div>
             </div>
