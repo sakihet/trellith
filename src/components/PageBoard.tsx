@@ -9,6 +9,7 @@ import { CardForm } from './CardForm'
 import { Card } from '../types/card'
 import { BoardHeader } from './BoardHeader'
 import { CardItem } from './CardItem'
+import { ListHeader } from './ListHeader'
 
 type PageBoardProps = {
   board_id?: string
@@ -78,10 +79,12 @@ export function PageBoard(props: PageBoardProps) {
     }
   }
 
-  const handleClickDeleteList = (e: JSX.TargetedEvent<HTMLButtonElement>, id: string) => {
+  const handleClickDeleteList = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
     console.log('click delete', e)
-    setBoardState({ lists: [...boardState.lists.filter(l => l.id !== id)]})
-    return undefined
+    const {listId} = e.currentTarget.dataset
+    if (listId) {
+      setBoardState({ lists: [...boardState.lists.filter(l => l.id !== listId)]})
+    }
   }
 
   const handleDragOver = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
@@ -180,9 +183,7 @@ export function PageBoard(props: PageBoardProps) {
   return (
     <AppLayout>
       <div>
-        <BoardHeader
-          name={boardName}
-        />
+        <BoardHeader name={boardName} />
       </div>
       <div class="flex-row layout-stack-horizontal">
         {boardState.lists.length !== 0 && boardState.lists.map(list =>
@@ -195,14 +196,11 @@ export function PageBoard(props: PageBoardProps) {
             onDragStart={handleDragStartList}
             data-list-id={list.id}
           >
-            <div class="flex-row h-6 cursor-grab">
-              <div class="f-1">{list.name}</div>
-              <button
-                class="border-none text-secondary"
-                type="button"
-                onClick={e => handleClickDeleteList(e, list.id)}
-              >x</button>
-            </div>
+            <ListHeader
+              id={list.id}
+              name={list.name}
+              handleClickDeleteList={handleClickDeleteList}
+            />
             <div>
               <CardForm
                 listId={list.id}
