@@ -7,6 +7,7 @@ import { State } from '../types/state'
 import { BoardList } from '../types/boardList'
 import { CardForm } from './CardForm'
 import { Card } from '../types/card'
+import { BoardHeader } from './BoardHeader'
 
 type PageBoardProps = {
   board_id?: string
@@ -31,6 +32,7 @@ export function PageBoard(props: PageBoardProps) {
   const [draggingCardListId, setDraggingCardListId] = useState<string | undefined>(undefined)
   const [draggingListId, setDraggingListId] = useState<string | undefined>(undefined)
   const inputElement = useRef<HTMLInputElement>(null)
+  const [boardName, setBoardName] = useState("")
 
   useEffect(() => {
     console.log('effect')
@@ -41,6 +43,7 @@ export function PageBoard(props: PageBoardProps) {
       const b = result.boards.find(x => x.id === props.board_id)
       if (b) {
         setBoardState(b)
+        setBoardName(b.name)
       }
     }
   }, [])
@@ -172,9 +175,9 @@ export function PageBoard(props: PageBoardProps) {
   return (
     <AppLayout>
       <div>
-        <h2 class="text-large">
-          {state.boards.find(x => x.id === props.board_id)?.name}
-        </h2>
+        <BoardHeader
+          name={boardName}
+        />
       </div>
       <div class="flex-row layout-stack-horizontal">
         {boardState.lists.length !== 0 && boardState.lists.map(list =>
