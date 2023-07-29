@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'preact/hooks'
 import '../app.css'
 import { BoardForm } from './BoardForm'
-import { Board } from '../types/board'
 import { BoardItem } from './BoardItem'
 import { AppLayout } from './AppLayout'
-import { load, remove, save } from '../utils'
+import { load } from '../utils'
 import { State } from '../types/state'
+import { ApplicationService } from '../applications/applicationService'
 
 type PageIndexProps = {
   path: string
@@ -14,43 +14,32 @@ type PageIndexProps = {
 export function PageIndex(props: PageIndexProps) {
   const { path } = props
   console.log('path', path)
-  const [didMount, setDidMount] = useState(false)
   const [state, setState] = useState<State>({ boards: [] })
+  const service = new ApplicationService()
 
   useEffect(() => {
     console.log('effect')
-    setDidMount(true)
     const result = load()
     if (result) {
       setState(result)
     }
   }, [])
 
-  useEffect(() => {
-    console.log('state effect', didMount)
-    if (didMount) {
-      save(state)
-    }
-  }, [state])
-
   const addBoard = (name: string) => {
     console.log('add board', name)
-    const board: Board = {
-      id: crypto.randomUUID(),
-      name: name,
-      lists: []
-    }
-    setState({ boards: [...state.boards, board]})
+    const updated = service.createBoard(state, name)
+    setState(updated)
   }
   const deleteBoard = (id: string) => {
     console.log('delete board', id)
-    setState({ boards: [...state.boards.filter(b => b.id !== id)]})
+    const updated = service.deleteBoard(state, id)
+    setState(updated)
   }
 
   const handleClickClear = () => {
     if (window.confirm('Do you really want to clear data?')) {
-      remove()
-      setState({boards: []})
+      const updated = service.clear()
+      setState(updated)
     }
   }
 
