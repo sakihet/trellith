@@ -10,13 +10,14 @@ import { Card } from '../types/card'
 import { BoardHeader } from './BoardHeader'
 import { CardItem } from './CardItem'
 import { ListHeader } from './ListHeader'
+import { ApplicationService } from '../applications/applicationService'
 
 type PageBoardProps = {
   board_id?: string
   path: string
 }
 
-type BoardState = {
+export type BoardState = {
   lists: BoardList[]
 }
 
@@ -35,6 +36,7 @@ export function PageBoard(props: PageBoardProps) {
   const [draggingListId, setDraggingListId] = useState<string | undefined>(undefined)
   const inputElement = useRef<HTMLInputElement>(null)
   const [boardName, setBoardName] = useState("")
+  const service = new ApplicationService()
 
   useEffect(() => {
     console.log('effect')
@@ -83,7 +85,8 @@ export function PageBoard(props: PageBoardProps) {
     console.log('click delete', e)
     const {listId} = e.currentTarget.dataset
     if (listId) {
-      setBoardState({ lists: [...boardState.lists.filter(l => l.id !== listId)]})
+      const updated = service.deleteList(boardState, listId)
+      setBoardState(updated)
     }
   }
 
@@ -170,12 +173,8 @@ export function PageBoard(props: PageBoardProps) {
   const handleSubmitList = (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputElement.current) {
-      const boardList = {
-        id: crypto.randomUUID(),
-        name: inputElement.current.value,
-        cards: []
-      }
-      setBoardState({ lists: [...boardState.lists, boardList] })
+      const updated = service.createList(boardState, inputElement.current.value)
+      setBoardState(updated)
       inputElement.current.value = ''
     }
   }

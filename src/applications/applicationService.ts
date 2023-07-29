@@ -1,4 +1,6 @@
+import { BoardState } from "../components/PageBoard"
 import { Board } from "../types/board"
+import { BoardList } from "../types/boardList"
 import { State } from "../types/state"
 import { remove, save } from "../utils"
 
@@ -26,13 +28,18 @@ export class ApplicationService {
     return state
   }
   // List
-  createList () {
-    // TODO
-    return
+  createList (boardState: BoardState, name: string): BoardState {
+    const list: BoardList = {
+        id: crypto.randomUUID(),
+        name: name,
+        cards: []
+      }
+    boardState = { lists: [...boardState.lists, list] }
+    return boardState
   }
-  deleteList () {
-    // TODO
-    return
+  deleteList (boardState: BoardState, id: string): BoardState {
+    boardState = { lists: [...boardState.lists.filter(l => l.id !== id)] }
+    return boardState
   }
   // Card
   createCard () {
