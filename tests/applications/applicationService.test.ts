@@ -24,14 +24,35 @@ class RepositoryObject implements Repository {
 
 describe('ApplicationService', () => {
   let service
+  const id = '75a2e479-2170-4569-af30-fd1323f66082'
+  const state = {
+    boards: [
+      {
+        id: id,
+        name: 'board1',
+        lists: []
+      }
+    ]
+  }
 
   beforeEach(() => {
-  })
-  it('createBoard', () => {
-    const state = {boards: []}
     const repository = new RepositoryObject(state)
     service = new ApplicationService(repository)
-    const updated = service.createBoard(state, 'board1')
-    expect(updated.boards.length).toEqual(1)
+  })
+  it('createBoard', () => {
+    const updated = service.createBoard(state, 'board2')
+    expect(updated.boards.length).toEqual(2)
+  })
+  it('deleteBoard', () => {
+    const updated = service.deleteBoard(state, id)
+    expect(updated.boards.length).toEqual(0)
+  })
+  it.skip('createList', () => {
+  })
+  it.skip('deleteList', () => {
+  })
+  it.skip('createCard', () => {
+  })
+  it.skip('deleteCard', () => {
   })
 })
