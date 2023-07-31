@@ -2,7 +2,13 @@ import { State } from "../types/state";
 
 const LOCAL_STORAGE_KEY = 'dnd-board'
 
-export class Repository {
+export interface Repository {
+  set: (state: State) => void
+  get: () => State
+  remove: () => void
+}
+
+export class RepositoryLocalStorage implements Repository {
   set (state: State) {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state))
     return

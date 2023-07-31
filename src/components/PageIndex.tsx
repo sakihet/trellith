@@ -6,7 +6,7 @@ import { AppLayout } from './AppLayout'
 import { load } from '../utils'
 import { State } from '../types/state'
 import { ApplicationService } from '../applications/applicationService'
-import { Repository } from '../repositories/repository'
+import { RepositoryLocalStorage } from '../repositories/repository'
 import { JSX } from 'preact/jsx-runtime'
 
 type PageIndexProps = {
@@ -18,7 +18,7 @@ export function PageIndex(props: PageIndexProps) {
   console.log('path', path)
   const [state, setState] = useState<State>({ boards: [] })
   const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
-  const repository = new Repository()
+  const repository = new RepositoryLocalStorage()
   const service = new ApplicationService(repository)
 
   useEffect(() => {
