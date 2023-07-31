@@ -1,14 +1,22 @@
 import { BoardState } from "../components/PageBoard"
+import { Repository } from "../repositories/repository"
 import { Board } from "../types/board"
 import { BoardList } from "../types/boardList"
 import { State } from "../types/state"
-import { remove, save } from "../utils"
 
 export class ApplicationService {
+  repository: Repository
+
+  constructor (
+    repository: Repository
+  ) {
+    this.repository = repository
+  }
+
   // Utils
   clear (): State {
     const state = {boards: []}
-    remove()
+    this.repository.remove()
     return state
   }
   // Board
@@ -19,12 +27,12 @@ export class ApplicationService {
       lists: []
     }
     state = { boards: [board, ...state.boards]}
-    save(state)
+    this.repository.set(state)
     return state
   }
   deleteBoard (state: State, id: string): State {
     state = { boards: [...state.boards.filter(b => b.id !== id)]}
-    save(state)
+    this.repository.set(state)
     return state
   }
   // List

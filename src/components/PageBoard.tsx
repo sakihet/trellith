@@ -11,6 +11,7 @@ import { BoardHeader } from './BoardHeader'
 import { CardItem } from './CardItem'
 import { ListHeader } from './ListHeader'
 import { ApplicationService } from '../applications/applicationService'
+import { Repository } from '../repositories/repository'
 
 type PageBoardProps = {
   board_id?: string
@@ -36,7 +37,8 @@ export function PageBoard(props: PageBoardProps) {
   const [draggingListId, setDraggingListId] = useState<string | undefined>(undefined)
   const inputElement = useRef<HTMLInputElement>(null)
   const [boardName, setBoardName] = useState("")
-  const service = new ApplicationService()
+  const repository = new Repository()
+  const service = new ApplicationService(repository)
 
   useEffect(() => {
     console.log('effect')

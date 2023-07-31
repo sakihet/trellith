@@ -6,6 +6,7 @@ import { AppLayout } from './AppLayout'
 import { load } from '../utils'
 import { State } from '../types/state'
 import { ApplicationService } from '../applications/applicationService'
+import { Repository } from '../repositories/repository'
 
 type PageIndexProps = {
   path: string
@@ -15,7 +16,8 @@ export function PageIndex(props: PageIndexProps) {
   const { path } = props
   console.log('path', path)
   const [state, setState] = useState<State>({ boards: [] })
-  const service = new ApplicationService()
+  const repository = new Repository()
+  const service = new ApplicationService(repository)
 
   useEffect(() => {
     console.log('effect')
