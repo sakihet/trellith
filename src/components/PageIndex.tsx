@@ -7,6 +7,7 @@ import { load } from '../utils'
 import { State } from '../types/state'
 import { ApplicationService } from '../applications/applicationService'
 import { Repository } from '../repositories/repository'
+import { JSX } from 'preact/jsx-runtime'
 
 type PageIndexProps = {
   path: string
@@ -16,6 +17,7 @@ export function PageIndex(props: PageIndexProps) {
   const { path } = props
   console.log('path', path)
   const [state, setState] = useState<State>({ boards: [] })
+  const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
   const repository = new Repository()
   const service = new ApplicationService(repository)
 
@@ -45,6 +47,30 @@ export function PageIndex(props: PageIndexProps) {
     }
   }
 
+  const handleDragEnd = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    console.log('drag end', e)
+    setDraggingBoardId(undefined)
+  }
+
+  const handleDragOver = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+  }
+
+  const handleDragStart = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    console.log('drag start')
+    const {boardId} = e.currentTarget.dataset
+    if (boardId) {
+      setDraggingBoardId(boardId)
+      console.log(draggingBoardId)
+    }
+  }
+
+  const handleDrop = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    console.log('drop', e)
+    const {boardId} = e.currentTarget.dataset
+    console.log(boardId)
+  }
+
   return (
     <AppLayout>
       <div class="">
@@ -64,16 +90,20 @@ export function PageIndex(props: PageIndexProps) {
               <BoardForm addBoard={addBoard}/>
             </div>
             <div>
-              <ul class="list-style-none pl-0 layout-stack-2">
-                {state.boards.map(board =>
+              <div class="layout-stack-2">
+                {state.boards.map((board) =>
                   <BoardItem
                     key={board.id}
                     id={board.id}
                     name={board.name}
                     deleteBoard={deleteBoard}
+                    handleDragEnd={handleDragEnd}
+                    handleDragOver={handleDragOver}
+                    handleDragStart={handleDragStart}
+                    handleDrop={handleDrop}
                   />
                 )}
-              </ul>
+              </div>
             </div>
           </div>
         </div>

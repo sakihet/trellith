@@ -1,37 +1,51 @@
 import { Link } from "preact-router/match"
+import { JSX } from "preact/jsx-runtime"
 
 type BoardItemProps = {
   id: string
   name: string
   deleteBoard: (id: string) => void
+  handleDragEnd: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+  handleDragOver: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+  handleDragStart: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+  handleDrop: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
 }
 
 export function BoardItem(props: BoardItemProps) {
-  const { id, name, deleteBoard } = props
+  const { id, name, deleteBoard, handleDragEnd, handleDragOver, handleDragStart, handleDrop } = props
 
   const handleClick = () => {
     deleteBoard(id)
   }
 
   return (
-    <li class="">
-      <div class="flex-row">
-        <div class="f-1 p-2 bg-primary h-8">
-          <Link
-            class="text-decoration-none flex-row"
-            href={`/board/${id}`}
-          >
-            { name }
-          </Link>
-        </div>
-        <div class="bg-primary w-8 h-8 flex-column">
-          <button
-            class="m-auto border-none text-secondary"
-            type="button"
-            onClick={handleClick}
-          >x</button>
-        </div>
+    <div
+      class="flex-row"
+      draggable
+      onDragEnd={handleDragEnd}
+      onDragOver={handleDragOver}
+      onDragStart={handleDragStart}
+      onDrop={handleDrop}
+      data-board-id={id}
+      data-first={false}
+      data-last={false}
+    >
+      <div class="f-1 p-2 bg-primary h-8">
+        <Link
+          class="text-decoration-none flex-row"
+          href={`/board/${id}`}
+          draggable={false}
+        >
+          { name }
+        </Link>
       </div>
-    </li>
+      <div class="bg-primary w-8 h-8 flex-column">
+        <button
+          class="m-auto border-none text-secondary"
+          type="button"
+          onClick={handleClick}
+        >x</button>
+      </div>
+    </div>
   )
 }
