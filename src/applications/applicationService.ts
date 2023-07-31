@@ -1,3 +1,4 @@
+import crypto from "crypto"
 import { BoardState } from "../components/PageBoard"
 import { Repository } from "../repositories/repository"
 import { Board } from "../types/board"
