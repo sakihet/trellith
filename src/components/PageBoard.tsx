@@ -86,9 +86,13 @@ export function PageBoard(props: PageBoardProps) {
   const handleClickDeleteList = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
     console.log('click delete', e)
     const {listId} = e.currentTarget.dataset
-    if (listId) {
-      const updated = service.deleteList(boardState, listId)
-      setBoardState(updated)
+    if (listId && props.board_id) {
+      const updated = service.deleteList(state, listId, props.board_id)
+      setState(updated)
+      const board = updated.boards.find(b => b.id === props.board_id)
+      if (board) {
+        setBoardState(board)
+      }
     }
   }
 

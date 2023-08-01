@@ -57,9 +57,17 @@ export class ApplicationService {
     this.repository.set(state)
     return state
   }
-  deleteList (boardState: BoardState, id: string): BoardState {
-    boardState = { lists: [...boardState.lists.filter(l => l.id !== id)] }
-    return boardState
+  deleteList (state: State, id: string, boardId: string): State {
+    const updatedBoards = state.boards.map(b => {
+      if (b.id === boardId) {
+        return {...b, lists: b.lists.filter(l => l.id !== id)}
+      } else {
+        return b
+      }
+    })
+    state = {boards: updatedBoards}
+    this.repository.set(state)
+    return state
   }
   // Card
   createCard () {
