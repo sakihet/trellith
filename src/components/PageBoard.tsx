@@ -70,15 +70,13 @@ export function PageBoard(props: PageBoardProps) {
   const handleClickDeleteCard = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
     console.log('click delete card', e)
     const {cardId, listId} = e.currentTarget.dataset
-    if (cardId && listId) {
-      const updated = boardState.lists.map(l => {
-        if (l.id === listId) {
-          return { ...l, cards: l.cards.filter(x => x.id !== cardId) }
-        } else {
-          return l
-        }
-      })
-      setBoardState({ lists: updated })
+    if (cardId && listId && props.board_id) {
+      const updated = service.deleteCard(state, cardId, props.board_id, listId)
+      setState(updated)
+      const board = updated.boards.find(b => b.id === props.board_id)
+      if (board) {
+        setBoardState(board)
+      }
     }
   }
 

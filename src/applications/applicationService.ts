@@ -91,12 +91,33 @@ export class ApplicationService {
           return b
         }
       })
-      return {boards: boards}
+      const updatedState = {boards: boards}
+      this.repository.set(updatedState)
+      return updatedState
     }
     return state
   }
-  deleteCard () {
-    // TODO
-    return
+  deleteCard (state: State, cardId: string, boardId: string, listId: string): State {
+    const board = state.boards.find(b => b.id === boardId)
+    if (board) {
+      const updatedLists = board.lists.map(l => {
+        if (l.id === listId) {
+          return {...l, cards: l.cards.filter(c => c.id !== cardId)}
+        } else {
+          return l
+        }
+      })
+      const boards = state.boards.map(b => {
+        if (b.id === boardId) {
+          return {...b, lists: updatedLists}
+        } else {
+          return b
+        }
+      })
+      const updatedState = {boards: boards}
+      this.repository.set(updatedState)
+      return updatedState
+    }
+    return state
   }
 }

@@ -73,6 +73,8 @@ describe('ApplicationService', () => {
     const updated = service.createCard(state, 'card2', boardId1, listId1)
     expect(updated.boards.find(b => b.id === boardId1).lists.find(l => l.id === listId1).cards.length).toEqual(2)
   })
-  it.skip('deleteCard', () => {
+  it('deleteCard', () => {
+    const updated = service.deleteCard(state, cardId1, boardId1, listId1)
+    expect(updated.boards.find(b => b.id === boardId1).lists.find(l => l.id === listId1).cards.length).toEqual(0)
   })
 })
