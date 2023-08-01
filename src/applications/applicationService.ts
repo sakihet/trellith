@@ -1,4 +1,4 @@
-import crypto from "crypto"
+import { v4 as uuidv4 } from 'uuid'
 import { BoardState } from "../components/PageBoard"
 import { Repository } from "../repositories/repository"
 import { Board } from "../types/board"
@@ -26,7 +26,7 @@ export class ApplicationService {
   // Board
   createBoard (state: State, name: string): State {
     const board: Board = {
-      id: crypto.randomUUID(),
+      id: uuidv4(),
       name: name,
       lists: []
     }
@@ -42,7 +42,7 @@ export class ApplicationService {
   // List
   createList (state: State, name: string, boardId: string): State {
     const list: BoardList = {
-      id: crypto.randomUUID(),
+      id: uuidv4(),
       name: name,
       cards: []
     }
