@@ -20,6 +20,9 @@ export class ApplicationService {
     this.repository.remove()
     return state
   }
+  load (): State {
+    return this.repository.get()
+  }
   // Board
   createBoard (state: State, name: string): State {
     const board: Board = {

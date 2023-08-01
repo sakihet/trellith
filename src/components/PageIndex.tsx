@@ -3,7 +3,6 @@ import '../app.css'
 import { BoardForm } from './BoardForm'
 import { BoardItem } from './BoardItem'
 import { AppLayout } from './AppLayout'
-import { load } from '../utils'
 import { State } from '../types/state'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
@@ -23,7 +22,7 @@ export function PageIndex(props: PageIndexProps) {
 
   useEffect(() => {
     console.log('effect')
-    const result = load()
+    const result = service.load()
     if (result) {
       setState(result)
     }

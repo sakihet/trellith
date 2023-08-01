@@ -2,7 +2,7 @@ import '../app.css'
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { AppLayout } from './AppLayout'
-import { load, save } from '../utils'
+import { save } from '../utils'
 import { State } from '../types/state'
 import { BoardList } from '../types/boardList'
 import { CardForm } from './CardForm'
@@ -43,7 +43,7 @@ export function PageBoard(props: PageBoardProps) {
   useEffect(() => {
     console.log('effect')
     setDidMount(true)
-    const result = load()
+    const result = service.load()
     if (result) {
       setState(result)
       const b = result.boards.find(x => x.id === props.board_id)
