@@ -146,18 +146,14 @@ export function PageBoard(props: PageBoardProps) {
 
   const addCard = (params: AddCardParams) => {
     console.log('add card', params)
-    const card: Card = {
-      id: crypto.randomUUID(),
-      name: params.cardName
-    }
-    const updated = boardState.lists.map(l => {
-      if (l.id === params.listId) {
-        return { ...l, cards: [...l.cards, card] }
-      } else {
-        return l
+    if (props.board_id) {
+      const updated = service.createCard(state, params.cardName, props.board_id, params.listId)
+      setState(updated)
+      const board = updated.boards.find(b => b.id === props.board_id)
+      if (board) {
+        setBoardState(board)
       }
-    })
-    setBoardState({ lists: updated })
+    }
   }
 
   const moveCard = (cardId: string, listIdSrc: string, listIdDst: string) => {

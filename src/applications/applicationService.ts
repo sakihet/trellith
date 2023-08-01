@@ -4,6 +4,7 @@ import { Repository } from "../repositories/repository"
 import { Board } from "../types/board"
 import { BoardList } from "../types/boardList"
 import { State } from "../types/state"
+import { Card } from '../types/card'
 
 export class ApplicationService {
   repository: Repository
@@ -70,9 +71,30 @@ export class ApplicationService {
     return state
   }
   // Card
-  createCard () {
-    // TODO
-    return
+  createCard (state: State, name: string, boardId: string, listId: string): State {
+    const card: Card = {
+      id: uuidv4(),
+      name: name
+    }
+    const board = state.boards.find(b => b.id === boardId)
+    if (board) {
+      const updatedLists = board.lists.map(l => {
+        if (l.id === listId) {
+          return {...l, cards: [...l.cards, card]}
+        } else {
+          return l
+        }
+      })
+      const boards = state.boards.map(b => {
+        if (b.id === boardId) {
+          return {...b, lists: updatedLists}
+        } else {
+          return b
+        }
+      })
+      return {boards: boards}
+    }
+    return state
   }
   deleteCard () {
     // TODO
