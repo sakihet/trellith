@@ -68,7 +68,7 @@ export function PageIndex(props: PageIndexProps) {
   const handleDrop = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
     const {boardId, pos} = e.currentTarget.dataset
     if (boardId && pos && draggingBoardId) {
-      const updated = service.moveBoard(state, draggingBoardId, pos as Pos)
+      const updated = service.moveBoard(state, draggingBoardId, pos as Pos, boardId)
       setState(updated)
     }
   }
