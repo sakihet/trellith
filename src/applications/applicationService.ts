@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid'
-import { BoardState } from "../components/PageBoard"
 import { Repository } from "../repositories/repository"
 import { Board } from "../types/board"
 import { BoardList } from "../types/boardList"

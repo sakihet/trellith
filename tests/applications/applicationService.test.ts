@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { ApplicationService } from '../../src/applications/applicationService'
 import { Repository } from '../../src/repositories/repository'
@@ -24,13 +25,26 @@ class RepositoryObject implements Repository {
 
 describe('ApplicationService', () => {
   let service
-  const id = '75a2e479-2170-4569-af30-fd1323f66082'
+  const boardId1 = uuidv4()
+  const listId1 = uuidv4()
+  const cardId1 = uuidv4()
   const state = {
     boards: [
       {
-        id: id,
+        id: boardId1,
         name: 'board1',
-        lists: []
+        lists: [
+          {
+            id: listId1,
+            name: 'list1',
+            cards: [
+              {
+                id: cardId1,
+                name: 'card 1'
+              }
+            ]
+          }
+        ]
       }
     ]
   }
@@ -44,14 +58,20 @@ describe('ApplicationService', () => {
     expect(updated.boards.length).toEqual(2)
   })
   it('deleteBoard', () => {
-    const updated = service.deleteBoard(state, id)
+    const updated = service.deleteBoard(state, boardId1)
     expect(updated.boards.length).toEqual(0)
   })
-  it.skip('createList', () => {
+  it('createList', () => {
+    const updated = service.createList(state, 'list2', boardId1)
+    expect(updated.boards.find(b => b.id === boardId1).lists.length).toEqual(2)
   })
-  it.skip('deleteList', () => {
+  it('deleteList', () => {
+    const updated = service.deleteList(state, listId1, boardId1)
+    expect(updated.boards.find(b => b.id === boardId1).lists.length).toEqual(0)
   })
-  it.skip('createCard', () => {
+  it('createCard', () => {
+    const updated = service.createCard(state, 'card2', boardId1, listId1)
+    expect(updated.boards.find(b => b.id === boardId1).lists.find(l => l.id === listId1).cards.length).toEqual(2)
   })
   it.skip('deleteCard', () => {
   })
