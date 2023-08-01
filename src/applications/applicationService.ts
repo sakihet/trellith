@@ -40,14 +40,22 @@ export class ApplicationService {
     return state
   }
   // List
-  createList (boardState: BoardState, name: string): BoardState {
+  createList (state: State, name: string, boardId: string): State {
     const list: BoardList = {
-        id: crypto.randomUUID(),
-        name: name,
-        cards: []
+      id: crypto.randomUUID(),
+      name: name,
+      cards: []
+    }
+    const updatedBoards = state.boards.map(b => {
+      if (b.id === boardId) {
+        return {...b, lists: [...b.lists, list]}
+      } else {
+        return b
       }
-    boardState = { lists: [...boardState.lists, list] }
-    return boardState
+    })
+    state = {boards: updatedBoards}
+    this.repository.set(state)
+    return state
   }
   deleteList (boardState: BoardState, id: string): BoardState {
     boardState = { lists: [...boardState.lists.filter(l => l.id !== id)] }

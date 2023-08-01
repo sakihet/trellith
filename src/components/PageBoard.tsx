@@ -175,9 +175,15 @@ export function PageBoard(props: PageBoardProps) {
   const handleSubmitList = (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputElement.current) {
-      const updated = service.createList(boardState, inputElement.current.value)
-      setBoardState(updated)
-      inputElement.current.value = ''
+      if (props.board_id) {
+        const updated = service.createList(state, inputElement.current.value, props.board_id)
+        setState(updated)
+        const board = updated.boards.find(b => b.id === props.board_id)
+        if (board) {
+          setBoardState(board)
+        }
+        inputElement.current.value = ''
+      }
     }
   }
 
