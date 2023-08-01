@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
+    "@types/uuid": "^9.0.2",
     "typescript": "^5.0.2",
     "vite": "^4.4.0",
     "vitest": "^0.33.0"
