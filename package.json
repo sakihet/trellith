@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "preact": "^10.15.1",
-    "preact-router": "^4.1.1"
+    "preact-router": "^4.1.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
