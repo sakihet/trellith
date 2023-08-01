@@ -4,6 +4,7 @@ import { Board } from "../types/board"
 import { BoardList } from "../types/boardList"
 import { State } from "../types/state"
 import { Card } from '../types/card'
+import { Pos } from '../types/pos'
 
 export class ApplicationService {
   repository: Repository
@@ -37,6 +38,30 @@ export class ApplicationService {
   deleteBoard (state: State, id: string): State {
     state = { boards: [...state.boards.filter(b => b.id !== id)]}
     this.repository.set(state)
+    return state
+  }
+  moveBoard (state: State, draggingBoardId: string, pos: Pos): State {
+    const board = state.boards.find(b => b.id === draggingBoardId)
+    const updated = {boards: state.boards.filter(b => b.id !== draggingBoardId)}
+    let stateMoved
+    if (board) {
+      switch (pos) {
+        case 'first':
+          stateMoved = {boards: [board, ...updated.boards]}
+          this.repository.set(stateMoved)
+          return stateMoved
+        case 'middle':
+          console.log('move to middle')
+          // TODO
+          break
+        case 'last':
+          stateMoved = {boards: [...updated.boards, board]}
+          this.repository.set(stateMoved)
+          return stateMoved
+        default:
+          break
+      }
+    }
     return state
   }
   // List

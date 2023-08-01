@@ -7,6 +7,7 @@ import { State } from '../types/state'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
 import { JSX } from 'preact/jsx-runtime'
+import { Pos } from '../types/pos'
 
 type PageIndexProps = {
   path: string
@@ -65,9 +66,11 @@ export function PageIndex(props: PageIndexProps) {
   }
 
   const handleDrop = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
-    console.log('drop', e)
-    const {boardId} = e.currentTarget.dataset
-    console.log(boardId)
+    const {boardId, pos} = e.currentTarget.dataset
+    if (boardId && pos && draggingBoardId) {
+      const updated = service.moveBoard(state, draggingBoardId, pos as Pos)
+      setState(updated)
+    }
   }
 
   return (
@@ -90,11 +93,12 @@ export function PageIndex(props: PageIndexProps) {
             </div>
             <div>
               <div class="layout-stack-2">
-                {state.boards.map((board) =>
+                {state.boards.map((board, idx) =>
                   <BoardItem
                     key={board.id}
                     id={board.id}
                     name={draggingBoardId === board.id ? '' : board.name}
+                    pos={idx === 0 ? "first" : (idx === (state.boards.length - 1) ? "last" : "middle")}
                     deleteBoard={deleteBoard}
                     handleDragEnd={handleDragEnd}
                     handleDragOver={handleDragOver}
