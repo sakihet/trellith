@@ -59,7 +59,7 @@ export function PageIndex(props: PageIndexProps) {
     console.log('drag start')
     const {boardId} = e.currentTarget.dataset
     if (boardId) {
-      setDraggingBoardId(boardId)
+      setTimeout(() => {setDraggingBoardId(boardId)}, 100)
       console.log(draggingBoardId)
     }
   }
@@ -94,7 +94,7 @@ export function PageIndex(props: PageIndexProps) {
                   <BoardItem
                     key={board.id}
                     id={board.id}
-                    name={board.name}
+                    name={draggingBoardId === board.id ? '' : board.name}
                     deleteBoard={deleteBoard}
                     handleDragEnd={handleDragEnd}
                     handleDragOver={handleDragOver}
