@@ -106,6 +106,12 @@ body {
 .w-8 {
   width: 2rem;
 }
+.w-16 {
+  width: 4rem;
+}
+.w-32 {
+  width: 8rem;
+}
 .w-64 {
   width: 16rem;
 }

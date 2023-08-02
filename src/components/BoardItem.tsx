@@ -33,7 +33,7 @@ export function BoardItem(props: BoardItemProps) {
     >
       <div class="f-1 p-2 bg-primary h-8">
         <Link
-          class="text-decoration-none flex-row"
+          class="text-decoration-none flex-row text-primary"
           href={`/board/${id}`}
           draggable={false}
         >
