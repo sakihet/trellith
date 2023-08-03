@@ -17,9 +17,8 @@ export class ApplicationService {
 
   // Utils
   clear (): State {
-    const state = {boards: []}
     this.repository.remove()
-    return state
+    return {boards: []}
   }
   load (): State {
     return this.repository.get()
@@ -31,14 +30,14 @@ export class ApplicationService {
       name: name,
       lists: []
     }
-    state = { boards: [board, ...state.boards]}
-    this.repository.set(state)
-    return state
+    const updated = {boards: [board, ...state.boards]}
+    this.repository.set(updated)
+    return updated
   }
   deleteBoard (state: State, id: string): State {
-    state = { boards: [...state.boards.filter(b => b.id !== id)]}
-    this.repository.set(state)
-    return state
+    const updated = {boards: [...state.boards.filter(b => b.id !== id)]}
+    this.repository.set(updated)
+    return updated
   }
   moveBoard (state: State, draggingBoardId: string, pos: Pos, dropTargetBoardId: string): State {
     const board = state.boards.find(b => b.id === draggingBoardId)
@@ -47,8 +46,7 @@ export class ApplicationService {
     if (board) {
       switch (pos) {
         case 'first':
-          updated = {boards: state.boards.filter(b => b.id !== draggingBoardId)}
-          stateMoved = {boards: [board, ...updated.boards]}
+          stateMoved = {boards: [board, ...state.boards.filter(b => b.id !== draggingBoardId)]}
           this.repository.set(stateMoved)
           return stateMoved
         case 'middle':
@@ -98,28 +96,30 @@ export class ApplicationService {
       name: name,
       cards: []
     }
-    const updatedBoards = state.boards.map(b => {
-      if (b.id === boardId) {
-        return {...b, lists: [...b.lists, list]}
-      } else {
-        return b
-      }
-    })
-    state = {boards: updatedBoards}
-    this.repository.set(state)
-    return state
+    const updated = {
+      boards: state.boards.map(b => {
+        if (b.id === boardId) {
+          return {...b, lists: [...b.lists, list]}
+        } else {
+          return b
+        }
+      })
+    }
+    this.repository.set(updated)
+    return updated
   }
   deleteList (state: State, id: string, boardId: string): State {
-    const updatedBoards = state.boards.map(b => {
-      if (b.id === boardId) {
-        return {...b, lists: b.lists.filter(l => l.id !== id)}
-      } else {
-        return b
-      }
-    })
-    state = {boards: updatedBoards}
-    this.repository.set(state)
-    return state
+    const updated = {
+      boards: state.boards.map(b => {
+        if (b.id === boardId) {
+          return {...b, lists: b.lists.filter(l => l.id !== id)}
+        } else {
+          return b
+        }
+      })
+    }
+    this.repository.set(updated)
+    return updated
   }
   // Card
   createCard (state: State, name: string, boardId: string, listId: string): State {
@@ -136,16 +136,17 @@ export class ApplicationService {
           return l
         }
       })
-      const boards = state.boards.map(b => {
-        if (b.id === boardId) {
-          return {...b, lists: updatedLists}
-        } else {
-          return b
-        }
-      })
-      const updatedState = {boards: boards}
-      this.repository.set(updatedState)
-      return updatedState
+      const updated = {
+        boards: state.boards.map(b => {
+          if (b.id === boardId) {
+            return {...b, lists: updatedLists}
+          } else {
+            return b
+          }
+        })
+      }
+      this.repository.set(updated)
+      return updated
     }
     return state
   }
@@ -159,16 +160,17 @@ export class ApplicationService {
           return l
         }
       })
-      const boards = state.boards.map(b => {
-        if (b.id === boardId) {
-          return {...b, lists: updatedLists}
-        } else {
-          return b
-        }
-      })
-      const updatedState = {boards: boards}
-      this.repository.set(updatedState)
-      return updatedState
+      const updated = {
+        boards: state.boards.map(b => {
+          if (b.id === boardId) {
+            return {...b, lists: updatedLists}
+          } else {
+            return b
+          }
+        })
+      }
+      this.repository.set(updated)
+      return updated
     }
     return state
   }
