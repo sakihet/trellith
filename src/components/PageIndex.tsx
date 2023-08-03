@@ -39,6 +39,10 @@ export function PageIndex(props: PageIndexProps) {
     const updated = service.deleteBoard(state, id)
     setState(updated)
   }
+  const updateBoardName = (id: string, name: string) => {
+    const updated = service.updateBoardName(state, name, id)
+    setState(updated)
+  }
 
   const handleClickClear = () => {
     if (window.confirm('Do you really want to clear data?')) {
@@ -100,6 +104,7 @@ export function PageIndex(props: PageIndexProps) {
                     name={draggingBoardId === board.id ? '' : board.name}
                     pos={idx === 0 ? "first" : (idx === (state.boards.length - 1) ? "last" : "middle")}
                     deleteBoard={deleteBoard}
+                    updateBoardName={updateBoardName}
                     handleDragEnd={handleDragEnd}
                     handleDragOver={handleDragOver}
                     handleDragStart={handleDragStart}

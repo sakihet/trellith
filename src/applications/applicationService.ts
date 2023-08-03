@@ -80,6 +80,17 @@ export class ApplicationService {
     }
     return state
   }
+  updateBoardName (state: State, name: string, boardId: string) {
+    const updated = {boards: state.boards.map(b => {
+      if (b.id === boardId) {
+        return {...b, name: name}
+      } else {
+        return b
+      }
+    })}
+    this.repository.set(updated)
+    return updated
+  }
   // List
   createList (state: State, name: string, boardId: string): State {
     const list: BoardList = {
