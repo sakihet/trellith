@@ -141,6 +141,17 @@ export function PageBoard(props: PageBoardProps) {
     }
   }
 
+  const updateListName = (id: string, name: string) => {
+    if (props.board_id) {
+      const updated = service.updateListName(state, name, props.board_id, id)
+      setState(updated)
+      const board = updated.boards.find(b => b.id === props.board_id)
+      if (board) {
+        setBoardState(board)
+      }
+    }
+  }
+
   const addCard = (params: AddCardParams) => {
     console.log('add card', params)
     if (props.board_id) {
@@ -203,6 +214,7 @@ export function PageBoard(props: PageBoardProps) {
             <ListHeader
               id={list.id}
               name={list.name}
+              updateListName={updateListName}
               handleClickDeleteList={handleClickDeleteList}
             />
             <div>

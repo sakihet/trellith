@@ -109,6 +109,19 @@ export class ApplicationService {
     this.repository.set(updated)
     return updated
   }
+  updateListName (state: State, name: string, boardId: string, listId: string) {
+    const updated = {boards: state.boards.map(b => {
+      if (b.id === boardId) {
+        return {...b, lists: b.lists.map(l => {
+          return (l.id === listId) ? {...l, name: name} : l
+        })}
+      } else {
+        return b
+      }
+    })}
+    this.repository.set(updated)
+    return updated
+  }
   // Card
   createCard (state: State, name: string, boardId: string, listId: string): State {
     const card: Card = {
