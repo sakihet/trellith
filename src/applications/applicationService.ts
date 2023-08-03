@@ -42,13 +42,13 @@ export class ApplicationService {
   moveBoard (state: State, draggingBoardId: string, pos: Pos, dropTargetBoardId: string): State {
     const board = state.boards.find(b => b.id === draggingBoardId)
     let updated
-    let stateMoved
+    let moved
     if (board) {
       switch (pos) {
         case 'first':
-          stateMoved = {boards: [board, ...state.boards.filter(b => b.id !== draggingBoardId)]}
-          this.repository.set(stateMoved)
-          return stateMoved
+          moved = {boards: [board, ...state.boards.filter(b => b.id !== draggingBoardId)]}
+          this.repository.set(moved)
+          return moved
         case 'middle':
           const idxDragging = state.boards.findIndex(b => b.id === draggingBoardId)
           const idxDropTarget = state.boards.findIndex(b => b.id === dropTargetBoardId)
@@ -69,9 +69,9 @@ export class ApplicationService {
           break
         case 'last':
           updated = {boards: state.boards.filter(b => b.id !== draggingBoardId)}
-          stateMoved = {boards: [...updated.boards, board]}
-          this.repository.set(stateMoved)
-          return stateMoved
+          moved = {boards: [...updated.boards, board]}
+          this.repository.set(moved)
+          return moved
         default:
           break
       }
@@ -80,11 +80,7 @@ export class ApplicationService {
   }
   updateBoardName (state: State, name: string, boardId: string) {
     const updated = {boards: state.boards.map(b => {
-      if (b.id === boardId) {
-        return {...b, name: name}
-      } else {
-        return b
-      }
+      return (b.id === boardId) ? {...b, name: name} : b
     })}
     this.repository.set(updated)
     return updated
@@ -98,11 +94,7 @@ export class ApplicationService {
     }
     const updated = {
       boards: state.boards.map(b => {
-        if (b.id === boardId) {
-          return {...b, lists: [...b.lists, list]}
-        } else {
-          return b
-        }
+        return (b.id === boardId) ? {...b, lists: [...b.lists, list]} : b
       })
     }
     this.repository.set(updated)
@@ -111,11 +103,7 @@ export class ApplicationService {
   deleteList (state: State, id: string, boardId: string): State {
     const updated = {
       boards: state.boards.map(b => {
-        if (b.id === boardId) {
-          return {...b, lists: b.lists.filter(l => l.id !== id)}
-        } else {
-          return b
-        }
+        return (b.id === boardId) ? {...b, lists: b.lists.filter(l => l.id !== id)} : b
       })
     }
     this.repository.set(updated)
@@ -130,19 +118,11 @@ export class ApplicationService {
     const board = state.boards.find(b => b.id === boardId)
     if (board) {
       const updatedLists = board.lists.map(l => {
-        if (l.id === listId) {
-          return {...l, cards: [...l.cards, card]}
-        } else {
-          return l
-        }
+        return (l.id === listId) ? {...l, cards: [...l.cards, card]} :l
       })
       const updated = {
         boards: state.boards.map(b => {
-          if (b.id === boardId) {
-            return {...b, lists: updatedLists}
-          } else {
-            return b
-          }
+          return (b.id === boardId) ? {...b, lists: updatedLists} : b
         })
       }
       this.repository.set(updated)
@@ -154,19 +134,11 @@ export class ApplicationService {
     const board = state.boards.find(b => b.id === boardId)
     if (board) {
       const updatedLists = board.lists.map(l => {
-        if (l.id === listId) {
-          return {...l, cards: l.cards.filter(c => c.id !== cardId)}
-        } else {
-          return l
-        }
+        return (l.id === listId) ? {...l, cards: l.cards.filter(c => c.id !== cardId)} : l
       })
       const updated = {
         boards: state.boards.map(b => {
-          if (b.id === boardId) {
-            return {...b, lists: updatedLists}
-          } else {
-            return b
-          }
+          return (b.id === boardId) ? {...b, lists: updatedLists} : b
         })
       }
       this.repository.set(updated)
