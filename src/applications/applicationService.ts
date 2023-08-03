@@ -159,4 +159,24 @@ export class ApplicationService {
     }
     return state
   }
+  updateCardName (state: State, cardId: string, name: string, boardId: string, listId: string): State {
+    const updated = {
+      boards: state.boards.map(b => {
+        return ((b.id === boardId)
+          ? {...b, lists: b.lists.map(l => {
+              return ((l.id === listId)
+                ? {...l, cards: l.cards.map(c => {
+                  return ((c.id === cardId)
+                    ? {...c, name: name}
+                    : c)}
+                  )}
+                : l
+              )
+            })}
+          : b
+        )
+      })
+    }
+    return updated
+  }
 }

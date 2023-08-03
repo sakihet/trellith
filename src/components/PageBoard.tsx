@@ -180,6 +180,17 @@ export function PageBoard(props: PageBoardProps) {
     }
   }
 
+  const updateCardName = (id: string, name: string, listId: string) => {
+    if (props.board_id) {
+      const updated = service.updateCardName(state, id, name, props.board_id, listId)
+      setState(updated)
+      const board = updated.boards.find(b => b.id === props.board_id)
+      if (board) {
+        setBoardState(board)
+      }
+    }
+  }
+
   const handleSubmitList = (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputElement.current) {
@@ -231,6 +242,7 @@ export function PageBoard(props: PageBoardProps) {
                     id={card.id}
                     listId={list.id}
                     name={card.name}
+                    updateCardName={updateCardName}
                     handleClickDelete={handleClickDeleteCard}
                     handleDragEnd={handleDragEndCard}
                     handleDragStart={handleDragStartCard}
