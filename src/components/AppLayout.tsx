@@ -15,7 +15,12 @@ export function AppLayout(props: AppLayoutProps) {
       <div class="f-1 bg-secondary p-4">
         {props.children}
       </div>
-      <div class="h-6"></div>
+      <div class="h-6 text-center text-small p-1">
+        <Link
+          class="text-decoration-none"
+          href="https://github.com/sakihet/trellith"
+        >GitHub</Link>
+      </div>
     </>
   )
 }
