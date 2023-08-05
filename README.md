@@ -1,6 +1,6 @@
-# WIP
+# Trellith(WIP)
 
-DnD board is a web-based, board-style, list-making app. This is a project to create a small Trello clone tailored for minimalists.
+Trellith is a web-based, board-style, list-making app. This is a project to create a small Trello clone tailored for minimalists.
 
 ![dnd-board](screenshots/dnd-board.png)
 

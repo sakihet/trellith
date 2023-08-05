@@ -9,7 +9,7 @@ export function AppLayout(props: AppLayoutProps) {
     <>
       <div class="h-12 p-3">
         <Link href="/" class="text-decoration-none">
-          <h1 class="m-0 text-center text-large">DnD Board (WIP)</h1>
+          <h1 class="m-0 text-center text-large">Trellith (WIP)</h1>
         </Link>
       </div>
       <div class="f-1 bg-secondary p-4">
