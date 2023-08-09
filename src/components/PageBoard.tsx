@@ -191,6 +191,16 @@ export function PageBoard(props: PageBoardProps) {
     }
   }
 
+  const updateBoardName = (id: string, name: string) => {
+    const updated = service.updateBoardName(state, name, id)
+    setState(updated)
+    const board = updated.boards.find(b => b.id === props.board_id)
+    if (board) {
+      setBoardName(board.name)
+      setBoardState(board)
+    }
+  }
+
   const handleSubmitList = (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputElement.current) {
@@ -209,7 +219,13 @@ export function PageBoard(props: PageBoardProps) {
   return (
     <AppLayout>
       <div>
-        <BoardHeader name={boardName} />
+        {props.board_id &&
+          <BoardHeader
+            id={props.board_id}
+            name={boardName}
+            updateBoardName={updateBoardName}
+          />
+        }
       </div>
       <div class="flex-row layout-stack-horizontal">
         {boardState.lists.length !== 0 && boardState.lists.map(list =>

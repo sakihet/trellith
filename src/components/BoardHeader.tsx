@@ -2,29 +2,32 @@ import { useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 
 type BoardHeaderProps = {
+  id: string
   name: string
+  updateBoardName: (id: string, name: string) => void
 }
 
 export function BoardHeader(props: BoardHeaderProps) {
-  const { name } = props
-
+  const { id, name, updateBoardName } = props
   const [isEditing, setIsEditing] = useState(false)
   const inputElement = useRef<HTMLInputElement>(null)
 
-  const handleBlur = (e: JSX.TargetedEvent<HTMLInputElement>) => {
-    console.log('blur', e)
+  const handleBlur = () => {
     setIsEditing(false)
   }
   
-  const handleClick = (e: JSX.TargetedEvent<HTMLHeadElement>) => {
-    console.log('click', e)
+  const handleClick = () => {
     setIsEditing(true)
+    setTimeout(() => {
+      inputElement.current?.focus()
+    }, 100)
   }
 
   const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('submit', e)
-    // TODO: update board name
+    if (inputElement.current?.value) {
+      updateBoardName(id, inputElement.current.value)
+    }
     setIsEditing(false)
   }
 
@@ -44,7 +47,7 @@ export function BoardHeader(props: BoardHeaderProps) {
               ref={inputElement}
             />
           </form>
-        : name
+        : <div>{name}</div>
       }
     </h2>
   )
