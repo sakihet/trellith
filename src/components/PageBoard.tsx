@@ -104,6 +104,9 @@ export function PageBoard(props: PageBoardProps) {
   }
 
   const handleDragStartCard = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    if (e.dataTransfer) {
+      e.dataTransfer.effectAllowed = 'move'
+    }
     const {cardId, listId} = e.currentTarget.dataset
     setDraggingCardId(cardId)
     setDraggingCardListId(listId)
@@ -135,6 +138,9 @@ export function PageBoard(props: PageBoardProps) {
   }
 
   const handleDragStartList = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    if (e.dataTransfer) {
+      e.dataTransfer.effectAllowed = 'move'
+    }
     const {listId} = e.currentTarget.dataset
     if (listId) {
       setDraggingListId(listId)

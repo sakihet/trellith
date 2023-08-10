@@ -62,6 +62,9 @@ export function PageIndex(props: PageIndexProps) {
 
   const handleDragStart = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
     console.log('drag start')
+    if (e.dataTransfer) {
+      e.dataTransfer.effectAllowed = 'move'
+    }
     const {boardId} = e.currentTarget.dataset
     if (boardId) {
       setTimeout(() => {setDraggingBoardId(boardId)}, 100)
