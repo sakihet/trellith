@@ -42,7 +42,7 @@ export function BoardItem(props: BoardItemProps) {
 
   return (
     <div
-      class="flex-row"
+      class="flex-column h-14 p-3 bg-primary rounded-2 drop-shadow cursor-grab"
       draggable
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
@@ -51,7 +51,7 @@ export function BoardItem(props: BoardItemProps) {
       data-board-id={id}
       data-pos={pos}
     >
-      <div class="f-1 p-2 bg-primary h-8">
+      <div class="h-4">
         {editing
           ? <form onSubmit={handleSubmit}>
               <input
@@ -70,16 +70,16 @@ export function BoardItem(props: BoardItemProps) {
             </Link>
         }
       </div>
-      <div class="bg-primary h-8 flex-column">
+      <div class="h-4 flex-row">
+        <div class="f-1"></div>
         <button
-          class="m-auto border-none text-secondary"
+          class="border-none text-secondary px-2"
           type="button"
           onClick={handleClickEdit}
         >Edit</button>
-      </div>
-      <div class="bg-primary w-8 h-8 flex-column">
+        <div class="w-1"></div>
         <button
-          class="m-auto border-none text-secondary"
+          class="border-none text-secondary"
           type="button"
           onClick={handleClickDelete}
         >x</button>

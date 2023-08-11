@@ -35,7 +35,7 @@ export function CardItem(props: CardItemProps) {
 
   return (
     <div
-      class="rounded-1 p-2 bg-primary flex-row cursor-grab"
+      class="rounded-1 p-2 bg-primary flex-row cursor-grab drop-shadow parent-hiding-child"
       draggable
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
@@ -55,7 +55,7 @@ export function CardItem(props: CardItemProps) {
           : <div onClick={handleClickEdit}>{name}</div>
         }
       </div>
-      <div>
+      <div class="hidden-child">
         <button
           class="border-none text-secondary"
           type="button"

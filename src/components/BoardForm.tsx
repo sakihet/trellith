@@ -23,7 +23,7 @@ export function BoardForm(props: BoardFormProps) {
       <input
         class="h-8 w-64 px-2 rounded-2 border-1 border-solid border-color-primary"
         type="text"
-        placeholder={""}
+        placeholder={"Enter board title..."}
         maxLength={24}
         ref={inputElement}
       />

@@ -9,15 +9,15 @@ export function AppLayout(props: AppLayoutProps) {
     <>
       <div class="h-12 p-3">
         <Link href="/" class="text-decoration-none">
-          <h1 class="m-0 text-center text-large">Trellith (WIP)</h1>
+          <h1 class="m-0 text-center text-large text-secondary font-weight-600">Trellith</h1>
         </Link>
       </div>
-      <div class="f-1 bg-secondary p-4">
+      <div class="f-1 bg-secondary p-6">
         {props.children}
       </div>
       <div class="h-6 text-center text-small p-1">
         <Link
-          class="text-decoration-none"
+          class="text-decoration-none text-secondary"
           href="https://github.com/sakihet/trellith"
         >GitHub</Link>
       </div>

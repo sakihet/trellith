@@ -233,10 +233,10 @@ export function PageBoard(props: PageBoardProps) {
           />
         }
       </div>
-      <div class="flex-row layout-stack-horizontal">
+      <div class="flex-row layout-stack-horizontal drop-shadow">
         {boardState.lists.length !== 0 && boardState.lists.map(list =>
           <div
-            class="w-64 p-4 bg-secondary rounded-2 layout-stack-2"
+            class="w-64 p-4 bg-secondary rounded-2 layout-stack-3"
             draggable
             onDrop={handleDrop}
             onDragOver={handleDragOver}

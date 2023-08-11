@@ -86,11 +86,11 @@ export function PageIndex(props: PageIndexProps) {
         <div class="layout-center">
           <div class="layout-stack-4">
             <div>
-              <h2 class="text-left text-large">Boards</h2>
+              <h2 class="text-left text-large text-secondary">Boards</h2>
             </div>
             <div class="text-right">
               <button
-                class=""
+                class="px-2 py-1 border-1 border-solid border-color-primary"
                 type="button"
                 onClick={handleClickClear}
               >Clear</button>
