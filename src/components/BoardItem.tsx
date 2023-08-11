@@ -42,7 +42,7 @@ export function BoardItem(props: BoardItemProps) {
 
   return (
     <div
-      class="flex-column h-14 p-3 bg-primary rounded-2 drop-shadow cursor-grab"
+      class="flex-column h-14 p-3 bg-primary rounded-2 drop-shadow cursor-grab parent-hiding-child"
       draggable
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
@@ -70,7 +70,7 @@ export function BoardItem(props: BoardItemProps) {
             </Link>
         }
       </div>
-      <div class="h-4 flex-row">
+      <div class="h-4 flex-row hidden-child">
         <div class="f-1"></div>
         <button
           class="border-none text-secondary px-2"

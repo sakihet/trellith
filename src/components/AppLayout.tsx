@@ -7,7 +7,7 @@ type AppLayoutProps = {
 export function AppLayout(props: AppLayoutProps) {
   return (
     <>
-      <div class="h-12 p-3 flex-row">
+      <div class="h-12 p-3 flex-row bg-secondary drop-shadow">
         <div class="f-1"></div>
         <div class="f-1">
           <Link
@@ -18,18 +18,20 @@ export function AppLayout(props: AppLayoutProps) {
           </Link>
         </div>
         <div class="f-1 text-right">
-          <Link
-            href="/about"
-            class="text-decoration-none m-auto text-secondary"
-          >
-            About
-          </Link>
+          <div class="py-1">
+            <Link
+              href="/about"
+              class="text-decoration-none m-auto text-secondary"
+            >
+              About
+            </Link>
+          </div>
         </div>
       </div>
       <div class="f-1 bg-secondary p-6">
         {props.children}
       </div>
-      <div class="h-6 text-center text-small p-1">
+      <div class="h-6 text-center text-small p-1 bg-secondary">
         <Link
           class="text-decoration-none text-secondary"
           href="https://github.com/sakihet/trellith"
