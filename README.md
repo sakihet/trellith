@@ -1,8 +1,11 @@
-# Trellith(WIP)
+# Trellith
 
-Trellith is a web-based, board-style, list-making app. This is a project to create a small Trello clone tailored for minimalists.
+[Trellith](https://trellith.vercel.app/) is a tiny Trello clone tailored for minimalists. You can start using it by opening the URL. Data is stored in your browser's localStorage.
 
-![dnd-board](screenshots/dnd-board.png)
+## Screenshots
+
+![trellith-index](screenshots/trellith-index.png)
+![trellith-board](screenshots/trellith-board.png)
 
 ## Features
 
