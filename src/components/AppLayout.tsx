@@ -14,7 +14,9 @@ export function AppLayout(props: AppLayoutProps) {
             href="/"
             class="text-decoration-none"
           >
-            <h1 class="m-0 text-center text-large text-secondary font-weight-600">Trellith</h1>
+            <h1 class="m-0 text-center text-large text-secondary font-weight-600">
+              Trellith
+            </h1>
           </Link>
         </div>
         <div class="f-1 text-right">
