@@ -242,6 +242,9 @@ body {
 .border-color-primary {
   border-color: var(--color-border-primary);
 }
+.border-b-1 {
+  border-bottom-width: 1px;
+}
 .rounded-1 {
   border-radius: 0.25rem;
 }

@@ -7,7 +7,7 @@ type AppLayoutProps = {
 export function AppLayout(props: AppLayoutProps) {
   return (
     <>
-      <div class="h-12 p-3 flex-row bg-secondary drop-shadow">
+      <div class="h-12 p-3 flex-row bg-secondary border-0 border-b-1 border-solid border-color-primary">
         <div class="f-1"></div>
         <div class="f-1">
           <Link
