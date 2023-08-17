@@ -14,15 +14,19 @@
 - Create cards
 - DnD Board
 - DnD List
+- DnD Card
 - Rename
 
 ### TODO
 
-- DnD Card
+- Fix some bugs
+- Refactor
 
 ## Tech
 
-- [Vite](https://vitejs.dev/)
-- [Vitest](https://vitest.dev/)
 - [Preact](https://preactjs.com/)
 - [preact-router](https://github.com/preactjs/preact-router)
+- [uuid](https://github.com/uuidjs/uuid)
+- [Vite](https://vitejs.dev/)
+- [Vitest](https://vitest.dev/)
+- [vite-plugin-pwa](https://vite-pwa-org.netlify.app/)
