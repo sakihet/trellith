@@ -1,18 +1,31 @@
 import { useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
+import { Pos } from "../types/pos"
 
 type CardItemProps = {
   id: string
   listId: string
   name: string
+  pos: Pos
   updateCardName: (id: string, name: string, listId: string) => void
   handleClickDelete: (e: JSX.TargetedEvent<HTMLButtonElement>) => void
   handleDragEnd: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
   handleDragStart: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+  handleDrop: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
 }
 
 export function CardItem(props: CardItemProps) {
-  const {id, listId, name, updateCardName, handleClickDelete, handleDragEnd, handleDragStart} = props
+  const {
+    id,
+    listId,
+    name,
+    pos,
+    updateCardName,
+    handleClickDelete,
+    handleDragEnd,
+    handleDragStart,
+    handleDrop
+  } = props
   const [editing, setEditing] = useState(false)
   const inputElement = useRef<HTMLInputElement>(null)
 
@@ -39,8 +52,10 @@ export function CardItem(props: CardItemProps) {
       draggable
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
+      onDrop={handleDrop}
       data-card-id={id}
       data-list-id={listId}
+      data-pos={pos}
     >
       <div class="f-1">
         {editing

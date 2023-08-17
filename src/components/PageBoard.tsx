@@ -11,6 +11,7 @@ import { CardItem } from './CardItem'
 import { ListHeader } from './ListHeader'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
+import { Pos } from '../types/pos'
 
 type PageBoardProps = {
   board_id?: string
@@ -117,16 +118,24 @@ export function PageBoard(props: PageBoardProps) {
     return ary
   }
 
-  const handleDrop = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+  const handleDropOnCard = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    const {cardId, listId, pos} = e.currentTarget.dataset
+    if (pos && cardId && listId && props.board_id) {
+      moveCard(pos as Pos, cardId, props.board_id, listId)
+    }
+  }
+
+  const handleDropOnList = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
     const {listId} = e.currentTarget.dataset
     if (draggingCardId && draggingCardListId && listId) {
-      moveCard(draggingCardId, draggingCardListId, listId)
+      moveCardToAnotherList(draggingCardId, draggingCardListId, listId)
     } else if (!draggingCardId && draggingListId && listId) {
       swapList(draggingListId, listId)
     }
   }
 
   const swapList = (listId1: string, listId2: string) => {
+    // TODO: move to application service
     const idx1 = boardState.lists.findIndex(l => l.id === listId1)
     const idx2 = boardState.lists.findIndex(l => l.id === listId2)
     const swapped = swap(boardState.lists, idx1, idx2)
@@ -170,7 +179,19 @@ export function PageBoard(props: PageBoardProps) {
     }
   }
 
-  const moveCard = (cardId: string, listIdSrc: string, listIdDst: string) => {
+  const moveCard = (pos: Pos, dropTargetCardId: string, dropTargetBoardId: string, dropTargetListId: string) => {
+    if (draggingCardId) {
+      const updated = service.moveCard(state, draggingCardId, pos, dropTargetCardId, dropTargetBoardId, dropTargetListId)
+      setState(updated)
+      const board = updated.boards.find(b => b.id === props.board_id)
+      if (board) {
+        setBoardState(board)
+      }
+    }
+  }
+
+  const moveCardToAnotherList = (cardId: string, listIdSrc: string, listIdDst: string) => {
+    // TODO: move to application service
     const cardTarget = boardState.lists.find(l => l.id === listIdSrc)?.cards.find(c => c.id === cardId)
     if (cardTarget && (listIdSrc !== listIdDst)) {
       const updated = boardState.lists.map(l => {
@@ -238,7 +259,7 @@ export function PageBoard(props: PageBoardProps) {
           <div
             class="w-64 p-4 bg-secondary rounded-2 layout-stack-3"
             draggable
-            onDrop={handleDrop}
+            onDrop={handleDropOnList}
             onDragOver={handleDragOver}
             onDragEnd={handleDragEndList}
             onDragStart={handleDragStartList}
@@ -258,16 +279,18 @@ export function PageBoard(props: PageBoardProps) {
             </div>
             <div>
               <div class="layout-stack-2">
-                {list.cards.map(card =>
+                {list.cards.map((card, idx) =>
                   <CardItem
                     key={card.id}
                     id={card.id}
                     listId={list.id}
                     name={card.name}
+                    pos={idx === 0 ? "first" : (idx === (list.cards.length - 1) ? "last" : "middle")}
                     updateCardName={updateCardName}
                     handleClickDelete={handleClickDeleteCard}
                     handleDragEnd={handleDragEndCard}
                     handleDragStart={handleDragStartCard}
+                    handleDrop={handleDropOnCard}
                   />
                 )}
               </div>

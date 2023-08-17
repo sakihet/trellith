@@ -159,6 +159,69 @@ export class ApplicationService {
     }
     return state
   }
+  moveCard (
+    state: State,
+    draggingCardId: string,
+    pos: Pos,
+    dropTargetCardId: string,
+    dropTargetBoardId: string,
+    dropTargetListId: string
+  ): State {
+    const board = state.boards.find(b => b.id === dropTargetBoardId)
+    if (board) {
+      const list = board.lists.find(l => l.id === dropTargetListId)
+      if (list) {
+        const card = list.cards.find(c => c.id === draggingCardId)
+        if (card) {
+          switch (pos) {
+            case 'first':
+              const listsUpdatedAtfirst = board.lists.map(l => {
+                return (l.id === list.id) ? {...list, cards: [card, ...list.cards.filter(c => c.id !== draggingCardId)]} : l
+              })
+              const updatedAtFirst = {
+                boards: state.boards.map(b => {
+                  return (b.id === board.id) ? {...b, lists: listsUpdatedAtfirst} : b
+                })
+              }
+              this.repository.set(updatedAtFirst)
+              return updatedAtFirst
+            case 'middle':
+              const idxDragging = list.cards.findIndex(c => c.id === draggingCardId)
+              const idxDropTarget = list.cards.findIndex(c => c.id === dropTargetCardId)
+              let cardsUpdated = list.cards.filter(c => c.id !== draggingCardId)
+              const idx = cardsUpdated.findIndex(c => c.id === dropTargetCardId)
+              if (idxDragging < idxDropTarget) {
+                cardsUpdated.splice(idx + 1, 0, card)
+              } else if (idxDropTarget < idxDragging) {
+                cardsUpdated.splice(idx, 0, card)
+              }
+              const listsUpdatedAtMiddle = board.lists.map(l => {
+                return (l.id === list.id) ? {...list, cards: cardsUpdated} : l
+              })
+              const updatedAtMiddle = {
+                boards: state.boards.map(b => {
+                  return (b.id === board.id) ? {...b, lists: listsUpdatedAtMiddle} : b
+                })
+              }
+              this.repository.set(updatedAtMiddle)
+              return updatedAtMiddle
+            case 'last':
+              const listsUpdatedAtLast = board.lists.map(l => {
+                return (l.id === list.id) ? {...list, cards: [...list.cards.filter(c => c.id !== draggingCardId), card]} : l
+              })
+              const updatedAtLast = {
+                boards: state.boards.map(b => {
+                  return (b.id === board.id) ? {...b, lists: listsUpdatedAtLast} : b
+                })
+              }
+              this.repository.set(updatedAtLast)
+              return updatedAtLast
+          }
+        }
+      }
+    }
+    return state
+  }
   updateCardName (state: State, cardId: string, name: string, boardId: string, listId: string): State {
     const updated = {
       boards: state.boards.map(b => {
