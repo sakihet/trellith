@@ -166,6 +166,10 @@ body {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
+.py-05 {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+}
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -196,12 +200,15 @@ body {
 }
 .text-small {
   font-size: 0.75rem;
+  line-height: 1rem;
 }
 .text-medium {
   font-size: 1rem;
+  line-height: 1.5rem;
 }
 .text-large {
   font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 .text-primary {
   color: var(--color-text-primary);
