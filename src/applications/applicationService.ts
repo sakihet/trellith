@@ -41,37 +41,28 @@ export class ApplicationService {
   }
   moveBoard (state: State, draggingBoardId: string, pos: Pos, dropTargetBoardId: string): State {
     const board = state.boards.find(b => b.id === draggingBoardId)
-    let updated
-    let moved
     if (board) {
       switch (pos) {
         case 'first':
-          moved = {boards: [board, ...state.boards.filter(b => b.id !== draggingBoardId)]}
-          this.repository.set(moved)
-          return moved
+          const updatedAtFirst = {boards: [board, ...state.boards.filter(b => b.id !== draggingBoardId)]}
+          this.repository.set(updatedAtFirst)
+          return updatedAtFirst
         case 'middle':
           const idxDragging = state.boards.findIndex(b => b.id === draggingBoardId)
           const idxDropTarget = state.boards.findIndex(b => b.id === dropTargetBoardId)
+          const updatedAtMiddle = {boards: state.boards.filter(b => b.id !== draggingBoardId)}
+          const idx = updatedAtMiddle.boards.findIndex(b => b.id === dropTargetBoardId)
           if (idxDragging < idxDropTarget) {
-            updated = {boards: state.boards.filter(b => b.id !== draggingBoardId)}
-            const idx = updated.boards.findIndex(b => b.id === dropTargetBoardId)
-            updated.boards.splice(idx + 1, 0, board)
-            this.repository.set(updated)
-            return updated
+            updatedAtMiddle.boards.splice(idx + 1, 0, board)
           } else if (idxDropTarget < idxDragging) {
-            updated = {boards: state.boards.filter(b => b.id !== draggingBoardId)}
-            const idx = updated.boards.findIndex(b => b.id === dropTargetBoardId)
-            updated.boards.splice(idx, 0, board)
-             this.repository.set(updated)
-            return updated
-          } else {
+            updatedAtMiddle.boards.splice(idx, 0, board)
           }
-          break
-        case 'last':
-          updated = {boards: state.boards.filter(b => b.id !== draggingBoardId)}
-          moved = {boards: [...updated.boards, board]}
-          this.repository.set(moved)
-          return moved
+          this.repository.set(updatedAtMiddle)
+          return updatedAtMiddle
+      case 'last':
+          const updatedAtLast = {boards: [...state.boards.filter(b => b.id !== draggingBoardId), board]}
+          this.repository.set(updatedAtLast)
+          return updatedAtLast
         default:
           break
       }
