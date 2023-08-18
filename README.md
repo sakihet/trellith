@@ -1,6 +1,8 @@
 # Trellith
 
-[Trellith](https://trellith.vercel.app/) is a tiny Trello clone tailored for minimalists. You can start using it by opening the URL. Data is stored in your browser's localStorage.
+[Trellith](https://trellith.vercel.app/) is an open source, tiny Trello clone PWA tailored for minimalists. You can start using it by opening the URL. There is no need to create any account. Data is only stored in your browser's localStorage.
+
+![trellith-logo](public/pwa-192x192.png)
 
 ## Screenshots
 
