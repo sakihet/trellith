@@ -15,8 +15,8 @@ export function PageAbout(props: PageAboutProps) {
           <h2>About</h2>
         </div>
         <div>
-          <p class="">
-            Trellith is a project to make a tiny Trello clone tailored for minimalists.
+          <p class="text-medium">
+            Trellith is an open source, tiny Trello clone PWA tailored for minimalists. You can start using it by opening the URL. There is no need to create any account. Data is only stored in your browser's localStorage.
           </p>
         </div>
       </div>
