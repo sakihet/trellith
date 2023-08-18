@@ -68,29 +68,27 @@ export function PageBoard(props: PageBoardProps) {
     }
   }, [boardState])
 
+  const updateStates = (state: State) => {
+    setState(state)
+    const board = state.boards.find(b => b.id === props.board_id)
+    if (board) {
+      setBoardState(board)
+    }
+  }
+
   const handleClickDeleteCard = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
-    console.log('click delete card', e)
     const {cardId, listId} = e.currentTarget.dataset
     if (cardId && listId && props.board_id) {
       const updated = service.deleteCard(state, cardId, props.board_id, listId)
-      setState(updated)
-      const board = updated.boards.find(b => b.id === props.board_id)
-      if (board) {
-        setBoardState(board)
-      }
+      updateStates(updated)
     }
   }
 
   const handleClickDeleteList = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
-    console.log('click delete', e)
     const {listId} = e.currentTarget.dataset
     if (listId && props.board_id) {
       const updated = service.deleteList(state, listId, props.board_id)
-      setState(updated)
-      const board = updated.boards.find(b => b.id === props.board_id)
-      if (board) {
-        setBoardState(board)
-      }
+      updateStates(updated)
     }
   }
 
@@ -159,34 +157,21 @@ export function PageBoard(props: PageBoardProps) {
   const updateListName = (id: string, name: string) => {
     if (props.board_id) {
       const updated = service.updateListName(state, name, props.board_id, id)
-      setState(updated)
-      const board = updated.boards.find(b => b.id === props.board_id)
-      if (board) {
-        setBoardState(board)
-      }
+      updateStates(updated)
     }
   }
 
   const addCard = (params: AddCardParams) => {
-    console.log('add card', params)
     if (props.board_id) {
       const updated = service.createCard(state, params.cardName, props.board_id, params.listId)
-      setState(updated)
-      const board = updated.boards.find(b => b.id === props.board_id)
-      if (board) {
-        setBoardState(board)
-      }
+      updateStates(updated)
     }
   }
 
   const moveCard = (pos: Pos, dropTargetCardId: string, dropTargetBoardId: string, dropTargetListId: string) => {
     if (draggingCardId) {
       const updated = service.moveCard(state, draggingCardId, pos, dropTargetCardId, dropTargetBoardId, dropTargetListId)
-      setState(updated)
-      const board = updated.boards.find(b => b.id === props.board_id)
-      if (board) {
-        setBoardState(board)
-      }
+      updateStates(updated)
     }
   }
 
@@ -194,7 +179,7 @@ export function PageBoard(props: PageBoardProps) {
     // TODO: move to application service
     const cardTarget = boardState.lists.find(l => l.id === listIdSrc)?.cards.find(c => c.id === cardId)
     if (cardTarget && (listIdSrc !== listIdDst)) {
-      const updated = boardState.lists.map(l => {
+      const updatedLists = boardState.lists.map(l => {
         if (l.id === listIdSrc) {
           return { ...l, cards: l.cards.filter(x => x.id !== cardId)}
         } else if (l.id === listIdDst) {
@@ -203,7 +188,7 @@ export function PageBoard(props: PageBoardProps) {
           return l
         }
       })
-      setBoardState({ lists: updated })
+      setBoardState({ lists: updatedLists })
     }
   }
 
@@ -220,11 +205,10 @@ export function PageBoard(props: PageBoardProps) {
 
   const updateBoardName = (id: string, name: string) => {
     const updated = service.updateBoardName(state, name, id)
-    setState(updated)
+    updateStates(updated)
     const board = updated.boards.find(b => b.id === props.board_id)
     if (board) {
       setBoardName(board.name)
-      setBoardState(board)
     }
   }
 
@@ -233,11 +217,7 @@ export function PageBoard(props: PageBoardProps) {
     if (inputElement.current) {
       if (props.board_id) {
         const updated = service.createList(state, inputElement.current.value, props.board_id)
-        setState(updated)
-        const board = updated.boards.find(b => b.id === props.board_id)
-        if (board) {
-          setBoardState(board)
-        }
+        updateStates(updated)
         inputElement.current.value = ''
       }
     }
