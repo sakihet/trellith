@@ -30,15 +30,15 @@ export function PageIndex(props: PageIndexProps) {
   }, [])
 
   const addBoard = (name: string) => {
-    console.log('add board', name)
     const updated = service.createBoard(state, name)
     setState(updated)
   }
+
   const deleteBoard = (id: string) => {
-    console.log('delete board', id)
     const updated = service.deleteBoard(state, id)
     setState(updated)
   }
+
   const updateBoardName = (id: string, name: string) => {
     const updated = service.updateBoardName(state, name, id)
     setState(updated)
@@ -56,12 +56,9 @@ export function PageIndex(props: PageIndexProps) {
     setDraggingBoardId(undefined)
   }
 
-  const handleDragOver = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
-    e.preventDefault()
-  }
+  const handleDragOver = (e: JSX.TargetedDragEvent<HTMLDivElement>) => e.preventDefault()
 
   const handleDragStart = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
-    console.log('drag start')
     if (e.dataTransfer) {
       e.dataTransfer.effectAllowed = 'move'
     }
