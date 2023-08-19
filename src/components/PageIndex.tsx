@@ -100,8 +100,7 @@ export function PageIndex(props: PageIndexProps) {
                 {state.boards.map((board, idx) =>
                   <BoardItem
                     key={board.id}
-                    id={board.id}
-                    name={draggingBoardId === board.id ? '' : board.name}
+                    board={board}
                     pos={idx === 0 ? "first" : (idx === (state.boards.length - 1) ? "last" : "middle")}
                     deleteBoard={deleteBoard}
                     updateBoardName={updateBoardName}

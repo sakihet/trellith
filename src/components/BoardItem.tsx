@@ -2,10 +2,10 @@ import { Link } from "preact-router/match"
 import { JSX } from "preact/jsx-runtime"
 import { Pos } from "../types/pos"
 import { useRef, useState } from "preact/hooks"
+import { Board } from "../types/board"
 
 type BoardItemProps = {
-  id: string
-  name: string
+  board: Omit<Board, 'lists'>
   pos: Pos
   deleteBoard: (id: string) => void
   updateBoardName: (id: string, name: string) => void
@@ -16,7 +16,7 @@ type BoardItemProps = {
 }
 
 export function BoardItem(props: BoardItemProps) {
-  const { id, name, pos, deleteBoard, updateBoardName, handleDragEnd, handleDragOver, handleDragStart, handleDrop } = props
+  const { board, pos, deleteBoard, updateBoardName, handleDragEnd, handleDragOver, handleDragStart, handleDrop } = props
   const [editing, setEditing] = useState(false)
   const inputElement = useRef<HTMLInputElement>(null)
 
@@ -30,12 +30,12 @@ export function BoardItem(props: BoardItemProps) {
     }, 100)
   }
   const handleClickDelete = () => {
-    deleteBoard(id)
+    deleteBoard(board.id)
   }
   const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputElement.current?.value) {
-      updateBoardName(id, inputElement.current?.value)
+      updateBoardName(board.id, inputElement.current?.value)
     }
     setEditing(false)
   }
@@ -48,7 +48,7 @@ export function BoardItem(props: BoardItemProps) {
       onDragOver={handleDragOver}
       onDragStart={handleDragStart}
       onDrop={handleDrop}
-      data-board-id={id}
+      data-board-id={board.id}
       data-pos={pos}
     >
       <div class="h-4">
@@ -56,17 +56,17 @@ export function BoardItem(props: BoardItemProps) {
           ? <form onSubmit={handleSubmit}>
               <input
                 type="text"
-                value={name}
+                value={board.name}
                 onBlur={handleBlur}
                 ref={inputElement}
               />
             </form>
           : <Link
               class="text-decoration-none flex-row text-primary"
-              href={`/board/${id}`}
+              href={`/board/${board.id}`}
               draggable={false}
             >
-              { name }
+              { board.name }
             </Link>
         }
       </div>
