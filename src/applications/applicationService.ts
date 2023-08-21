@@ -50,15 +50,17 @@ export class ApplicationService {
         case 'middle':
           const idxDragging = state.boards.findIndex(b => b.id === draggingBoardId)
           const idxDropTarget = state.boards.findIndex(b => b.id === dropTargetBoardId)
-          const updatedAtMiddle = {boards: state.boards.filter(b => b.id !== draggingBoardId)}
-          const idx = updatedAtMiddle.boards.findIndex(b => b.id === dropTargetBoardId)
-          if (idxDragging < idxDropTarget) {
-            updatedAtMiddle.boards.splice(idx + 1, 0, board)
-          } else if (idxDropTarget < idxDragging) {
-            updatedAtMiddle.boards.splice(idx, 0, board)
+          const found = state.boards.find(b => b.id === draggingBoardId)
+          if (found) {
+            const stateDeleted = {boards: state.boards.filter(b => b.id !== draggingBoardId)}
+            const idx = stateDeleted.boards.findIndex(b => b.id === dropTargetBoardId)
+            const idxSlice = (idxDragging < idxDropTarget) ? (idx + 1) : ((idxDropTarget < idxDragging) ? idx : 0)
+            const updatedAtMiddle = {boards: [...stateDeleted.boards.slice(0, idxSlice), found, ...stateDeleted.boards.slice(idxSlice)]}
+            this.repository.set(updatedAtMiddle)
+            return updatedAtMiddle
+          } else {
+            throw Error('moveBoard failed')
           }
-          this.repository.set(updatedAtMiddle)
-          return updatedAtMiddle
       case 'last':
           const updatedAtLast = {boards: [...state.boards.filter(b => b.id !== draggingBoardId), board]}
           this.repository.set(updatedAtLast)
