@@ -102,6 +102,48 @@ export class ApplicationService {
     this.repository.set(updated)
     return updated
   }
+  findList (state: State, id: string, boardId: string): List | undefined{
+    return state.boards.find(b => b.id === boardId)?.lists.find(l => l.id === id)
+  }
+  moveList (state: State, draggingListId: string, boardId: string, dropTargetListId: string, pos: Pos): State {
+    const board = state.boards.find(b => b.id === boardId)
+    if (board) {
+      const idxDragging = board.lists.findIndex(b => b.id === draggingListId)
+      const idxDropTarget = board.lists.findIndex(b => b.id === dropTargetListId)
+      const found = board.lists.find(l => l.id === draggingListId)
+      const listsDeleted = board.lists.filter(l => l.id !== draggingListId)
+      if (found) {
+        switch (pos) {
+          case 'first':
+            const listsUpdatedAtFirst = [found, ...listsDeleted]
+            const updatedAtFirst: State = {boards: state.boards.map(b => {
+              return (b.id === boardId) ? {...b, lists: listsUpdatedAtFirst} : b
+            })}
+            this.repository.set(updatedAtFirst)
+            return updatedAtFirst
+          case 'middle':
+            const idx = listsDeleted.findIndex(l => l.id === dropTargetListId)
+            const idxSlice = (idxDragging < idxDropTarget) ? (idx + 1) : ((idxDropTarget <idxDragging) ? idx : 0)
+            const listsUpdated = [...listsDeleted.slice(0, idxSlice), found, ...listsDeleted.slice(idxSlice)]
+            const updatedAtMiddle: State = {boards: state.boards.map(b => {
+              return (b.id === boardId) ? {...b, lists: listsUpdated} : b
+            })}
+            this.repository.set(updatedAtMiddle)
+            return updatedAtMiddle
+          case 'last':
+            const listsUpdatedAtLast = [...listsDeleted, found]
+            const updatedAtLast: State = {boards: state.boards.map(b => {
+              return (b.id === boardId) ? {...b, lists: listsUpdatedAtLast} : b
+            })}
+            this.repository.set(updatedAtLast)
+            return updatedAtLast
+          default:
+            break
+        }
+      }
+    }
+    return state
+  }
   updateListName (state: State, name: string, boardId: string, listId: string) {
     const updated = {boards: state.boards.map(b => {
       if (b.id === boardId) {

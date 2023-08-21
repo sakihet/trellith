@@ -111,10 +111,10 @@ export function PageBoard(props: PageBoardProps) {
     setDraggingCardListId(listId)
   }
 
-  const swap = (ary: List[], idx1: number, idx2: number) => {
-    [ary[idx1], ary[idx2]] = [ary[idx2], ary[idx1]]
-    return ary
-  }
+  // const swap = (ary: List[], idx1: number, idx2: number) => {
+  //   [ary[idx1], ary[idx2]] = [ary[idx2], ary[idx1]]
+  //   return ary
+  // }
 
   const handleDropOnCard = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
     const {cardId, listId, pos} = e.currentTarget.dataset
@@ -124,21 +124,21 @@ export function PageBoard(props: PageBoardProps) {
   }
 
   const handleDropOnList = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
-    const {listId} = e.currentTarget.dataset
+    const {listId, listPos} = e.currentTarget.dataset
     if (draggingCardId && draggingCardListId && listId) {
       moveCardToAnotherList(draggingCardId, draggingCardListId, listId)
-    } else if (!draggingCardId && draggingListId && listId) {
-      swapList(draggingListId, listId)
+    } else if (!draggingCardId && draggingListId && listId && props.board_id) {
+      const updated = service.moveList(state, draggingListId, props.board_id, listId, listPos as Pos)
+      updateStates(updated)
     }
   }
 
-  const swapList = (listId1: string, listId2: string) => {
-    // TODO: move to application service
-    const idx1 = boardState.lists.findIndex(l => l.id === listId1)
-    const idx2 = boardState.lists.findIndex(l => l.id === listId2)
-    const swapped = swap(boardState.lists, idx1, idx2)
-    setBoardState({ lists: swapped })
-  }
+  // const swapList = (listId1: string, listId2: string) => {
+  //   const idx1 = boardState.lists.findIndex(l => l.id === listId1)
+  //   const idx2 = boardState.lists.findIndex(l => l.id === listId2)
+  //   const swapped = swap(boardState.lists, idx1, idx2)
+  //   setBoardState({ lists: swapped })
+  // }
 
   const handleDragEndList = () => {
     setDraggingListId(undefined)
@@ -235,7 +235,7 @@ export function PageBoard(props: PageBoardProps) {
         }
       </div>
       <div class="flex-row layout-stack-horizontal drop-shadow">
-        {boardState.lists.length !== 0 && boardState.lists.map(list =>
+        {boardState.lists.length !== 0 && boardState.lists.map((list, idx) =>
           <div
             class="w-64 p-4 bg-secondary rounded-2 layout-stack-3"
             draggable
@@ -244,6 +244,7 @@ export function PageBoard(props: PageBoardProps) {
             onDragEnd={handleDragEndList}
             onDragStart={handleDragStartList}
             data-list-id={list.id}
+            data-list-pos={idx === 0 ? "first" : (idx === (boardState.lists.length - 1) ? "last" : "middle")}
           >
             <ListHeader
               id={list.id}
