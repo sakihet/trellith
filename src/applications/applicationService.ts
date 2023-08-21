@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid'
 import { Repository } from "../repositories/repository"
 import { Board } from "../types/board"
-import { BoardList } from "../types/boardList"
+import { List } from "../types/list"
 import { State } from "../types/state"
 import { Card } from '../types/card'
 import { Pos } from '../types/pos'
@@ -80,7 +80,7 @@ export class ApplicationService {
   }
   // List
   createList (state: State, name: string, boardId: string): State {
-    const list: BoardList = {
+    const list: List = {
       id: uuidv4(),
       name: name,
       cards: []

@@ -1,6 +1,6 @@
 import { Card } from "./card"
 
-export type BoardList = {
+export type List = {
   id: string
   name: string
   cards: Card[]

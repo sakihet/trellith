@@ -4,7 +4,7 @@ import { JSX } from 'preact/jsx-runtime'
 import { AppLayout } from './AppLayout'
 import { save } from '../utils'
 import { State } from '../types/state'
-import { BoardList } from '../types/boardList'
+import { List } from '../types/list'
 import { CardForm } from './CardForm'
 import { BoardHeader } from './BoardHeader'
 import { CardItem } from './CardItem'
@@ -19,7 +19,7 @@ type PageBoardProps = {
 }
 
 export type BoardState = {
-  lists: BoardList[]
+  lists: List[]
 }
 
 export type AddCardParams = {
@@ -111,7 +111,7 @@ export function PageBoard(props: PageBoardProps) {
     setDraggingCardListId(listId)
   }
 
-  const swap = (ary: BoardList[], idx1: number, idx2: number) => {
+  const swap = (ary: List[], idx1: number, idx2: number) => {
     [ary[idx1], ary[idx2]] = [ary[idx2], ary[idx1]]
     return ary
   }

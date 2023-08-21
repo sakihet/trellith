@@ -1,7 +1,7 @@
-import { BoardList } from "./boardList"
+import { List } from "./list"
 
 export type Board = {
   id: string
   name: string
-  lists: BoardList[]
+  lists: List[]
 }
