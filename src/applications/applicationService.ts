@@ -257,6 +257,27 @@ export class ApplicationService {
     }
     return state
   }
+  findCard (state: State, id: string, boardId: string, listId: string) {
+    return state.boards.find(b => b.id === boardId)?.lists.find(l => l.id === listId)?.cards.find(b => b.id === id)
+  }
+  moveCardToAnotherList (state: State, id: string, boardId: string, listIdSrc: string, listIdDst: string) {
+    const found = this.findCard(state, id, boardId, listIdSrc)
+    if (found && (listIdSrc !== listIdDst)) {
+      const stateDeleted = this.deleteCard(state, id, boardId, listIdSrc)
+      const updated: State = {boards: stateDeleted.boards.map(b => {
+        if (b.id === boardId) {
+          return {...b, lists: b.lists.map(l => {
+            return (l.id === listIdDst) ? {...l, cards: [found, ...l.cards]} : l
+          })}
+        } else {
+          return b
+        }
+      })}
+      this.repository.set(updated)
+      return updated
+    }
+    return state
+  }
   updateCardName (state: State, cardId: string, name: string, boardId: string, listId: string): State {
     const updated = {
       boards: state.boards.map(b => {

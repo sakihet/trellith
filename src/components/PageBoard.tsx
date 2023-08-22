@@ -125,11 +125,14 @@ export function PageBoard(props: PageBoardProps) {
 
   const handleDropOnList = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
     const {listId, listPos} = e.currentTarget.dataset
-    if (draggingCardId && draggingCardListId && listId) {
-      moveCardToAnotherList(draggingCardId, draggingCardListId, listId)
-    } else if (!draggingCardId && draggingListId && listId && props.board_id) {
-      const updated = service.moveList(state, draggingListId, props.board_id, listId, listPos as Pos)
-      updateStates(updated)
+    if (props.board_id) {
+      if (draggingCardId && draggingCardListId && listId) {
+        const updated = service.moveCardToAnotherList(state, draggingCardId, props.board_id, draggingCardListId, listId)
+        updateStates(updated)
+      } else if (!draggingCardId && draggingListId && listId) {
+        const updated = service.moveList(state, draggingListId, props.board_id, listId, listPos as Pos)
+        updateStates(updated)
+      }
     }
   }
 
@@ -172,23 +175,6 @@ export function PageBoard(props: PageBoardProps) {
     if (draggingCardId) {
       const updated = service.moveCard(state, draggingCardId, pos, dropTargetCardId, dropTargetBoardId, dropTargetListId)
       updateStates(updated)
-    }
-  }
-
-  const moveCardToAnotherList = (cardId: string, listIdSrc: string, listIdDst: string) => {
-    // TODO: move to application service
-    const cardTarget = boardState.lists.find(l => l.id === listIdSrc)?.cards.find(c => c.id === cardId)
-    if (cardTarget && (listIdSrc !== listIdDst)) {
-      const updatedLists = boardState.lists.map(l => {
-        if (l.id === listIdSrc) {
-          return { ...l, cards: l.cards.filter(x => x.id !== cardId)}
-        } else if (l.id === listIdDst) {
-          return { ...l, cards: [cardTarget, ...l.cards]}
-        } else {
-          return l
-        }
-      })
-      setBoardState({ lists: updatedLists })
     }
   }
 
