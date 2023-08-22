@@ -220,10 +220,10 @@ export function PageBoard(props: PageBoardProps) {
           />
         }
       </div>
-      <div class="flex-row layout-stack-horizontal drop-shadow">
+      <div class="flex-row layout-stack-horizontal">
         {boardState.lists.length !== 0 && boardState.lists.map((list, idx) =>
           <div
-            class="w-64 p-4 bg-secondary rounded-2 layout-stack-3"
+            class="w-64 p-4 bg-secondary rounded-2 layout-stack-3 drop-shadow"
             draggable
             onDrop={handleDropOnList}
             onDragOver={handleDragOver}
@@ -267,7 +267,7 @@ export function PageBoard(props: PageBoardProps) {
         <div class="p-4">
           <form onSubmit={handleSubmitList}>
             <input
-              class="h-6 px-2 rounded-2 border-1 border-solid border-color-primary"
+              class="h-6 px-2 rounded-2 border-solid border-1 border-color-primary"
               type="text"
               placeholder="Enter list title..."
               ref={inputElement}

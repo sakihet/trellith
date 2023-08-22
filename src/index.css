@@ -252,6 +252,9 @@ body {
 .border-b-1 {
   border-bottom-width: 1px;
 }
+.border-t-1 {
+  border-top-width: 1px;
+}
 .rounded-1 {
   border-radius: 0.25rem;
 }
