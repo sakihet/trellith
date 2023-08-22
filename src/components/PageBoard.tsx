@@ -172,8 +172,8 @@ export function PageBoard(props: PageBoardProps) {
   }
 
   const moveCard = (pos: Pos, dropTargetCardId: string, dropTargetBoardId: string, dropTargetListId: string) => {
-    if (draggingCardId) {
-      const updated = service.moveCard(state, draggingCardId, pos, dropTargetCardId, dropTargetBoardId, dropTargetListId)
+    if (draggingCardId && draggingCardListId) {
+      const updated = service.moveCard(state, draggingCardId, dropTargetBoardId, draggingCardListId, pos, dropTargetCardId, dropTargetBoardId, dropTargetListId)
       updateStates(updated)
     }
   }
