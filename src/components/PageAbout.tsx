@@ -12,7 +12,7 @@ export function PageAbout(props: PageAboutProps) {
     <AppLayout>
       <div class="layout-center">
         <div>
-          <h2>About</h2>
+          <h2 class="text-left text-large text-primary">About</h2>
         </div>
         <div>
           <p class="text-medium">
