@@ -2,7 +2,6 @@ import '../app.css'
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { AppLayout } from './AppLayout'
-import { save } from '../utils'
 import { State } from '../types/state'
 import { List } from '../types/list'
 import { CardForm } from './CardForm'
@@ -57,14 +56,6 @@ export function PageBoard(props: PageBoardProps) {
   useEffect(() => {
     console.log('boardState effect', didMount)
     if (didMount) {
-      const updated = state.boards.map(b => {
-        if (b.id === props.board_id) {
-          return { ...b, lists: boardState.lists }
-        } else {
-          return b
-        }
-      })
-      save({ boards: updated })
     }
   }, [boardState])
 
