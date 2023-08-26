@@ -79,38 +79,36 @@ export function PageIndex(props: PageIndexProps) {
 
   return (
     <AppLayout>
-      <div class="">
-        <div class="layout-center">
-          <div class="layout-stack-4">
-            <div class="flex-row">
-              <h2 class="text-left text-large text-primary f-1">Boards</h2>
-              <div class="flex-column">
-                <button
-                  class="m-auto px-2 py-1 border-1 border-solid border-color-primary"
-                  type="button"
-                  onClick={handleClickClear}
-                >Clear</button>
-              </div>
+      <div class="layout-center overflow-y-hidden">
+        <div class="layout-stack-2 overflow-y-hidden">
+          <div class="flex-row">
+            <h2 class="text-left text-large text-primary f-1">Boards</h2>
+            <div class="flex-column">
+              <button
+                class="m-auto px-2 py-1 border-1 border-solid border-color-primary"
+                type="button"
+                onClick={handleClickClear}
+              >Clear</button>
             </div>
-            <div>
-              <BoardForm addBoard={addBoard}/>
-            </div>
-            <div>
-              <div class="layout-stack-2">
-                {state.boards.map((board, idx) =>
-                  <BoardItem
-                    key={board.id}
-                    board={board}
-                    pos={idx === 0 ? "first" : (idx === (state.boards.length - 1) ? "last" : "middle")}
-                    deleteBoard={deleteBoard}
-                    updateBoardName={updateBoardName}
-                    handleDragEnd={handleDragEnd}
-                    handleDragOver={handleDragOver}
-                    handleDragStart={handleDragStart}
-                    handleDrop={handleDrop}
-                  />
-                )}
-              </div>
+          </div>
+          <div>
+            <BoardForm addBoard={addBoard}/>
+          </div>
+          <div class="overflow-y-hidden">
+            <div class="layout-stack-2 overflow-y-auto height-board-list py-2 pr-2">
+              {state.boards.map((board, idx) =>
+                <BoardItem
+                  key={board.id}
+                  board={board}
+                  pos={idx === 0 ? "first" : (idx === (state.boards.length - 1) ? "last" : "middle")}
+                  deleteBoard={deleteBoard}
+                  updateBoardName={updateBoardName}
+                  handleDragEnd={handleDragEnd}
+                  handleDragOver={handleDragOver}
+                  handleDragStart={handleDragStart}
+                  handleDrop={handleDrop}
+                />
+              )}
             </div>
           </div>
         </div>

@@ -30,7 +30,7 @@ export function AppLayout(props: AppLayoutProps) {
           </div>
         </div>
       </div>
-      <div class="f-1 bg-primary p-6">
+      <div class="f-1 bg-primary p-6 overflow-y-hidden">
         {props.children}
       </div>
       <div class="h-6 text-center text-small p-1 bg-primary border-solid border-0 border-t-1 border-color-primary">

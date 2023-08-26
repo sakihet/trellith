@@ -53,6 +53,7 @@ body {
 /* id css */
 #app {
   min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -166,6 +167,14 @@ body {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 .py-05 {
   padding-top: 0.125rem;
   padding-bottom: 0.125rem;
@@ -188,6 +197,12 @@ body {
 }
 .pl-0 {
   padding: 0;
+}
+.pr-2 {
+  padding-right: 0.5rem;
+}
+.pr-4 {
+  padding-right: 1rem;
 }
 .text-left {
   text-align: left;
@@ -311,4 +326,7 @@ body {
 }
 .parent-hiding-child > .hidden-child {
   visibility: hidden;
+}
+.height-board-list {
+  max-height: calc(100vh - 14rem);
 }
