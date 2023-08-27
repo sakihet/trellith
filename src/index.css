@@ -198,6 +198,9 @@ body {
 .pl-0 {
   padding: 0;
 }
+.pr-1 {
+  padding-right: 0.25rem;
+}
 .pr-2 {
   padding-right: 0.5rem;
 }
@@ -327,6 +330,10 @@ body {
 .parent-hiding-child > .hidden-child {
   visibility: hidden;
 }
+/* height specific */
 .height-board-list {
   max-height: calc(100vh - 14rem);
+}
+.height-card-list {
+  max-height: calc(100vh - 18rem);
 }

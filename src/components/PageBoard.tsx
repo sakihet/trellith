@@ -235,8 +235,8 @@ export function PageBoard(props: PageBoardProps) {
                 addCard={addCard}
               />
             </div>
-            <div>
-              <div class="layout-stack-2">
+            <div class="overflow-y-auto">
+              <div class="layout-stack-2 height-card-list">
                 {list.cards.map((card, idx) =>
                   <CardItem
                     key={card.id}

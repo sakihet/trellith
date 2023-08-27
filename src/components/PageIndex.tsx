@@ -94,7 +94,7 @@ export function PageIndex(props: PageIndexProps) {
           <div>
             <BoardForm addBoard={addBoard}/>
           </div>
-          <div class="overflow-y-hidden">
+          <div class="overflow-y-auto">
             <div class="layout-stack-2 overflow-y-auto height-board-list py-2 pr-2">
               {state.boards.map((board, idx) =>
                 <BoardItem
