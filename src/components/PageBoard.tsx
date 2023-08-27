@@ -213,46 +213,49 @@ export function PageBoard(props: PageBoardProps) {
       </div>
       <div class="flex-row layout-stack-horizontal">
         {boardState.lists.length !== 0 && boardState.lists.map((list, idx) =>
-          <div
-            class="w-64 p-4 bg-secondary rounded-2 layout-stack-3 drop-shadow"
-            draggable
-            onDrop={handleDropOnList}
-            onDragOver={handleDragOver}
-            onDragEnd={handleDragEndList}
-            onDragStart={handleDragStartList}
-            data-list-id={list.id}
-            data-list-pos={idx === 0 ? "first" : (idx === (boardState.lists.length - 1) ? "last" : "middle")}
-          >
-            <ListHeader
-              id={list.id}
-              name={list.name}
-              updateListName={updateListName}
-              handleClickDeleteList={handleClickDeleteList}
-            />
-            <div>
-              <CardForm
-                listId={list.id}
-                addCard={addCard}
+          <div class="flex-column">
+            <div
+              class="w-64 p-4 bg-secondary rounded-2 layout-stack-4 drop-shadow"
+              draggable
+              onDrop={handleDropOnList}
+              onDragOver={handleDragOver}
+              onDragEnd={handleDragEndList}
+              onDragStart={handleDragStartList}
+              data-list-id={list.id}
+              data-list-pos={idx === 0 ? "first" : (idx === (boardState.lists.length - 1) ? "last" : "middle")}
+            >
+              <ListHeader
+                id={list.id}
+                name={list.name}
+                updateListName={updateListName}
+                handleClickDeleteList={handleClickDeleteList}
               />
-            </div>
-            <div class="overflow-y-auto">
-              <div class="layout-stack-2 height-card-list">
-                {list.cards.map((card, idx) =>
-                  <CardItem
-                    key={card.id}
-                    id={card.id}
-                    listId={list.id}
-                    name={card.name}
-                    pos={idx === 0 ? "first" : (idx === (list.cards.length - 1) ? "last" : "middle")}
-                    updateCardName={updateCardName}
-                    handleClickDelete={handleClickDeleteCard}
-                    handleDragEnd={handleDragEndCard}
-                    handleDragStart={handleDragStartCard}
-                    handleDrop={handleDropOnCard}
-                  />
-                )}
+              <div>
+                <CardForm
+                  listId={list.id}
+                  addCard={addCard}
+                />
+              </div>
+              <div class="overflow-y-auto">
+                <div class="layout-stack-2 height-card-list">
+                  {list.cards.map((card, idx) =>
+                    <CardItem
+                      key={card.id}
+                      id={card.id}
+                      listId={list.id}
+                      name={card.name}
+                      pos={idx === 0 ? "first" : (idx === (list.cards.length - 1) ? "last" : "middle")}
+                      updateCardName={updateCardName}
+                      handleClickDelete={handleClickDeleteCard}
+                      handleDragEnd={handleDragEndCard}
+                      handleDragStart={handleDragStartCard}
+                      handleDrop={handleDropOnCard}
+                    />
+                  )}
+                </div>
               </div>
             </div>
+            <div class="f-1"></div>
           </div>
         )}
         <div class="p-4">

@@ -82,7 +82,7 @@ export function PageIndex(props: PageIndexProps) {
       <div class="layout-center overflow-y-hidden">
         <div class="layout-stack-2 overflow-y-hidden">
           <div class="flex-row">
-            <h2 class="text-left text-large text-primary f-1">Boards</h2>
+            <h2 class="text-left text-large text-primary f-1 m-0">Boards</h2>
             <div class="flex-column">
               <button
                 class="m-auto px-2 py-1 border-1 border-solid border-color-primary"

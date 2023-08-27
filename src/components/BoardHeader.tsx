@@ -33,7 +33,7 @@ export function BoardHeader(props: BoardHeaderProps) {
 
   return (
     <h2
-      class="text-large"
+      class="text-large m-0 h-8"
       onClick={handleClick}
     >
       {isEditing

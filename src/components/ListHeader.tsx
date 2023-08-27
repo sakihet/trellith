@@ -31,7 +31,7 @@ export function ListHeader(props: ListHeaderProps) {
   }
 
   return (
-    <div class="flex-row h-8 cursor-grab parent-hiding-child">
+    <div class="flex-row h-4 cursor-grab parent-hiding-child">
       <div class="f-1">
         {editing
           ? <form onSubmit={handleSubmit}>
