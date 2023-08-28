@@ -48,7 +48,7 @@ export function CardItem(props: CardItemProps) {
 
   return (
     <div
-      class="rounded-1 p-2 bg-primary flex-row cursor-grab drop-shadow parent-hiding-child"
+      class="rounded-1 p-2 bg-primary flex-row cursor-grab drop-shadow parent-hiding-child hover-bg-card-item"
       draggable
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}

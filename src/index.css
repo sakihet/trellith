@@ -122,6 +122,9 @@ body {
 .w-16 {
   width: 4rem;
 }
+.w-24 {
+  width: 6rem;
+}
 .w-32 {
   width: 8rem;
 }
@@ -323,6 +326,15 @@ body {
 }
 .overflow-y-scroll {
   overflow-y: scroll;
+}
+.hover-bg-board-item:hover {
+  background-color: var(--color-gray-50);
+}
+.hover-bg-card-item:hover {
+  background-color: var(--color-gray-50);
+}
+.hover-bg-link:hover {
+  background-color: var(--color-gray-100);
 }
 .parent-hiding-child:hover > .hidden-child {
   visibility: visible;

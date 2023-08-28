@@ -42,7 +42,7 @@ export function BoardItem(props: BoardItemProps) {
 
   return (
     <div
-      class="flex-column h-14 p-3 bg-primary rounded-2 cursor-grab parent-hiding-child border-solid border-1 border-color-primary"
+      class="flex-column h-14 p-3 bg-primary rounded-2 cursor-grab parent-hiding-child border-solid border-1 border-color-primary hover-bg-board-item"
       draggable
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
