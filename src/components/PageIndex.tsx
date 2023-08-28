@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'preact/hooks'
-import '../app.css'
+import { JSX } from 'preact/jsx-runtime'
+import { AppLayout } from './AppLayout'
 import { BoardForm } from './BoardForm'
 import { BoardItem } from './BoardItem'
-import { AppLayout } from './AppLayout'
-import { State } from '../types/state'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
-import { JSX } from 'preact/jsx-runtime'
 import { Pos } from '../types/pos'
+import { State } from '../types/state'
+import '../app.css'
 
 type PageIndexProps = {
   path: string
@@ -22,7 +22,6 @@ export function PageIndex(props: PageIndexProps) {
   const service = new ApplicationService(repository)
 
   useEffect(() => {
-    console.log('effect')
     const result = service.load()
     if (result) {
       setState(result)
@@ -51,10 +50,7 @@ export function PageIndex(props: PageIndexProps) {
     }
   }
 
-  const handleDragEnd = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
-    console.log('drag end', e)
-    setDraggingBoardId(undefined)
-  }
+  const handleDragEnd = () => setDraggingBoardId(undefined)
 
   const handleDragOver = (e: JSX.TargetedDragEvent<HTMLDivElement>) => e.preventDefault()
 

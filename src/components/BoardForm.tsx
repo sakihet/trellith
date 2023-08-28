@@ -12,7 +12,6 @@ export function BoardForm(props: BoardFormProps) {
   const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputElement.current) {
-      console.log('submit', inputElement.current.value)
       addBoard(inputElement.current.value)
       inputElement.current.value = ''
     }

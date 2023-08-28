@@ -2,15 +2,15 @@ import '../app.css'
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { AppLayout } from './AppLayout'
-import { State } from '../types/state'
-import { List } from '../types/list'
 import { CardForm } from './CardForm'
 import { BoardHeader } from './BoardHeader'
 import { CardItem } from './CardItem'
 import { ListHeader } from './ListHeader'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
+import { List } from '../types/list'
 import { Pos } from '../types/pos'
+import { State } from '../types/state'
 
 type PageBoardProps = {
   board_id?: string
@@ -40,7 +40,6 @@ export function PageBoard(props: PageBoardProps) {
   const service = new ApplicationService(repository)
 
   useEffect(() => {
-    console.log('effect')
     setDidMount(true)
     const result = service.load()
     if (result) {
@@ -52,12 +51,6 @@ export function PageBoard(props: PageBoardProps) {
       }
     }
   }, [])
-
-  useEffect(() => {
-    console.log('boardState effect', didMount)
-    if (didMount) {
-    }
-  }, [boardState])
 
   const updateStates = (state: State) => {
     setState(state)
@@ -83,12 +76,9 @@ export function PageBoard(props: PageBoardProps) {
     }
   }
 
-  const handleDragOver = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
-    e.preventDefault()
-  }
+  const handleDragOver = (e: JSX.TargetedDragEvent<HTMLDivElement>) => e.preventDefault()
 
-  const handleDragEndCard = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
-    console.log('drag end', e)
+  const handleDragEndCard = () => {
     setDraggingCardId(undefined)
     setDraggingCardListId(undefined)
   }
@@ -101,11 +91,6 @@ export function PageBoard(props: PageBoardProps) {
     setDraggingCardId(cardId)
     setDraggingCardListId(listId)
   }
-
-  // const swap = (ary: List[], idx1: number, idx2: number) => {
-  //   [ary[idx1], ary[idx2]] = [ary[idx2], ary[idx1]]
-  //   return ary
-  // }
 
   const handleDropOnCard = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
     const {cardId, listId, pos} = e.currentTarget.dataset
@@ -126,13 +111,6 @@ export function PageBoard(props: PageBoardProps) {
       }
     }
   }
-
-  // const swapList = (listId1: string, listId2: string) => {
-  //   const idx1 = boardState.lists.findIndex(l => l.id === listId1)
-  //   const idx2 = boardState.lists.findIndex(l => l.id === listId2)
-  //   const swapped = swap(boardState.lists, idx1, idx2)
-  //   setBoardState({ lists: swapped })
-  // }
 
   const handleDragEndList = () => {
     setDraggingListId(undefined)
