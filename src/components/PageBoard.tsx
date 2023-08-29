@@ -29,7 +29,6 @@ export type AddCardParams = {
 export function PageBoard(props: PageBoardProps) {
   console.log('props', props)
   const [state, setState] = useState<State>({ boards: [] })
-  const [boardState, setBoardState] = useState<BoardState>({ lists: [] })
   const [draggingCardId, setDraggingCardId] = useState<string | undefined>(undefined)
   const [draggingCardListId, setDraggingCardListId] = useState<string | undefined>(undefined)
   const [draggingListId, setDraggingListId] = useState<string | undefined>(undefined)
@@ -44,7 +43,6 @@ export function PageBoard(props: PageBoardProps) {
       setState(result)
       const b = result.boards.find(x => x.id === props.board_id)
       if (b) {
-        setBoardState(b)
         setBoardName(b.name)
       }
     }
@@ -52,10 +50,6 @@ export function PageBoard(props: PageBoardProps) {
 
   const updateStates = (state: State) => {
     setState(state)
-    const board = state.boards.find(b => b.id === props.board_id)
-    if (board) {
-      setBoardState(board)
-    }
   }
 
   const handleClickDeleteCard = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
@@ -149,10 +143,6 @@ export function PageBoard(props: PageBoardProps) {
     if (props.board_id) {
       const updated = service.updateCardName(state, id, name, props.board_id, listId)
       setState(updated)
-      const board = updated.boards.find(b => b.id === props.board_id)
-      if (board) {
-        setBoardState(board)
-      }
     }
   }
 
@@ -176,6 +166,10 @@ export function PageBoard(props: PageBoardProps) {
     }
   }
 
+  const found = state.boards.find(b => {
+    return b.id === props.board_id
+  })
+
   return (
     <AppLayout>
       <div>
@@ -188,7 +182,7 @@ export function PageBoard(props: PageBoardProps) {
         }
       </div>
       <div class="flex-row layout-stack-horizontal">
-        {boardState.lists.length !== 0 && boardState.lists.map((list, idx) =>
+        {found && found.lists.map((list, idx) =>
           <div class="flex-column">
             <div
               class="w-64 p-4 bg-secondary rounded-2 layout-stack-4 drop-shadow"
@@ -198,7 +192,7 @@ export function PageBoard(props: PageBoardProps) {
               onDragEnd={handleDragEndList}
               onDragStart={handleDragStartList}
               data-list-id={list.id}
-              data-list-pos={idx === 0 ? "first" : (idx === (boardState.lists.length - 1) ? "last" : "middle")}
+              data-list-pos={idx === 0 ? "first" : (idx === (found.lists.length - 1) ? "last" : "middle")}
             >
               <ListHeader
                 id={list.id}
