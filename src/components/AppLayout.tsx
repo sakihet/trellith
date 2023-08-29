@@ -1,4 +1,5 @@
 import { Link } from "preact-router/match"
+import {version} from '../../package.json'
 
 type AppLayoutProps = {
   children: any
@@ -33,11 +34,21 @@ export function AppLayout(props: AppLayoutProps) {
       <div class="f-1 bg-primary p-6 overflow-y-hidden">
         {props.children}
       </div>
-      <div class="h-6 text-center text-small p-1 bg-primary border-solid border-0 border-t-1 border-color-primary">
-        <Link
-          class="text-decoration-none text-secondary hover-bg-link px-1"
-          href="https://github.com/sakihet/trellith"
-        >GitHub</Link>
+      <div class="h-6 text-small p-1 bg-primary border-solid border-0 border-t-1 border-color-primary flex-row">
+        <div class="f-1"></div>
+        <div class="text-center layout-stack-horizontal">
+          <Link
+            class="text-decoration-none text-secondary hover-bg-link px-1"
+            href="https://sakih.net/"
+          >© 2023 saki</Link>
+          <Link
+            class="text-decoration-none text-secondary hover-bg-link px-1"
+            href="https://github.com/sakihet/trellith"
+          >GitHub</Link>
+        </div>
+        <div class="f-1 text-right">
+          <span class="font-mono text-secondary">v{version}</span>
+        </div>
       </div>
     </>
   )
