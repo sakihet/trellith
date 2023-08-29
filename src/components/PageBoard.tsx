@@ -28,7 +28,6 @@ export type AddCardParams = {
 
 export function PageBoard(props: PageBoardProps) {
   console.log('props', props)
-  const [didMount, setDidMount] = useState(false)
   const [state, setState] = useState<State>({ boards: [] })
   const [boardState, setBoardState] = useState<BoardState>({ lists: [] })
   const [draggingCardId, setDraggingCardId] = useState<string | undefined>(undefined)
@@ -40,7 +39,6 @@ export function PageBoard(props: PageBoardProps) {
   const service = new ApplicationService(repository)
 
   useEffect(() => {
-    setDidMount(true)
     const result = service.load()
     if (result) {
       setState(result)
