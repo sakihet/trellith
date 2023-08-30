@@ -330,6 +330,24 @@ export class ApplicationService {
     }
     return state
   }
+  moveCardToLastOfAnotherList (state: State, id: string, boardId: string, listIdSrc: string, listIdDst: string) {
+    const found = this.findCard(state, id, boardId, listIdSrc)
+    if (found && (listIdSrc !== listIdDst)) {
+      const stateDeleted = this.deleteCard(state, id, boardId, listIdSrc)
+      const updated: State = {boards: stateDeleted.boards.map(b => {
+        if (b.id === boardId) {
+          return {...b, lists: b.lists.map(l => {
+            return (l.id === listIdDst) ? {...l, cards: [...l.cards, found]} : l
+          })}
+        } else {
+          return b
+        }
+      })}
+      this.repository.set(updated)
+      return updated
+    }
+    return state
+  }
   updateCardName (state: State, cardId: string, name: string, boardId: string, listId: string): State {
     const updated = {
       boards: state.boards.map(b => {

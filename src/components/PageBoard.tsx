@@ -4,13 +4,13 @@ import { JSX } from 'preact/jsx-runtime'
 import { AppLayout } from './AppLayout'
 import { CardForm } from './CardForm'
 import { BoardHeader } from './BoardHeader'
-import { CardItem } from './CardItem'
 import { ListHeader } from './ListHeader'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
 import { List } from '../types/list'
 import { Pos } from '../types/pos'
 import { State } from '../types/state'
+import { CardList } from './CardList'
 
 type PageBoardProps = {
   board_id?: string
@@ -34,6 +34,7 @@ export function PageBoard(props: PageBoardProps) {
   const [draggingListId, setDraggingListId] = useState<string | undefined>(undefined)
   const inputElement = useRef<HTMLInputElement>(null)
   const [boardName, setBoardName] = useState("")
+  const [dragEnteredListId, setDragEnteredListId] = useState<string | undefined>(undefined)
   const repository = new RepositoryLocalStorage()
   const service = new ApplicationService(repository)
 
@@ -104,6 +105,14 @@ export function PageBoard(props: PageBoardProps) {
     }
   }
 
+  const handleDropOnSpacer = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+    const {listId, spacer} = e.currentTarget.dataset
+    if (listId && spacer && draggingCardId && props.board_id && draggingCardListId) {
+      const updated = service.moveCardToLastOfAnotherList(state, draggingCardId, props.board_id, draggingCardListId, listId)
+      updateStates(updated)
+    }
+  }
+
   const handleDragEndList = () => {
     setDraggingListId(undefined)
   }
@@ -166,6 +175,11 @@ export function PageBoard(props: PageBoardProps) {
     }
   }
 
+  const handleDragEnterCard = (e: JSX.TargetedEvent<HTMLDivElement>) => {
+    const {listId} = e.currentTarget.dataset
+    setDragEnteredListId(listId)
+  }
+
   const found = state.boards.find(b => {
     return b.id === props.board_id
   })
@@ -207,22 +221,18 @@ export function PageBoard(props: PageBoardProps) {
                 />
               </div>
               <div class="overflow-y-auto">
-                <div class="layout-stack-2 height-card-list">
-                  {list.cards.map((card, idx) =>
-                    <CardItem
-                      key={card.id}
-                      id={card.id}
-                      listId={list.id}
-                      name={card.name}
-                      pos={idx === 0 ? "first" : (idx === (list.cards.length - 1) ? "last" : "middle")}
-                      updateCardName={updateCardName}
-                      handleClickDelete={handleClickDeleteCard}
-                      handleDragEnd={handleDragEndCard}
-                      handleDragStart={handleDragStartCard}
-                      handleDrop={handleDropOnCard}
-                    />
-                  )}
-                </div>
+                <CardList
+                  cards={list.cards}
+                  listId={list.id}
+                  isDragEnterCardFromTheOther={!!draggingCardListId && (list.id !== draggingCardListId) && (list.id === dragEnteredListId)}
+                  updateCardName={updateCardName}
+                  handleClickDeleteCard={handleClickDeleteCard}
+                  handleDragEndCard={handleDragEndCard}
+                  handleDragEnterCard={handleDragEnterCard}
+                  handleDragStartCard={handleDragStartCard}
+                  handleDropOnCard={handleDropOnCard}
+                  handleDropOnSpacer={handleDropOnSpacer}
+                />
               </div>
             </div>
             <div class="f-1"></div>

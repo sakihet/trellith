@@ -2,12 +2,12 @@ import { useEffect, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { AppLayout } from './AppLayout'
 import { BoardForm } from './BoardForm'
-import { BoardItem } from './BoardItem'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
 import { Pos } from '../types/pos'
 import { State } from '../types/state'
 import '../app.css'
+import { BoardList } from './BoardList'
 
 type PageIndexProps = {
   path: string
@@ -91,21 +91,15 @@ export function PageIndex(props: PageIndexProps) {
             <BoardForm addBoard={addBoard}/>
           </div>
           <div class="overflow-y-auto">
-            <div class="layout-stack-2 overflow-y-auto height-board-list py-2 pr-2">
-              {state.boards.map((board, idx) =>
-                <BoardItem
-                  key={board.id}
-                  board={board}
-                  pos={idx === 0 ? "first" : (idx === (state.boards.length - 1) ? "last" : "middle")}
-                  deleteBoard={deleteBoard}
-                  updateBoardName={updateBoardName}
-                  handleDragEnd={handleDragEnd}
-                  handleDragOver={handleDragOver}
-                  handleDragStart={handleDragStart}
-                  handleDrop={handleDrop}
-                />
-              )}
-            </div>
+            <BoardList
+              boards={state.boards}
+              deleteBoard={deleteBoard}
+              updateBoardName={updateBoardName}
+              handleDragEnd={handleDragEnd}
+              handleDragOver={handleDragOver}
+              handleDragStart={handleDragStart}
+              handleDrop={handleDrop}
+            />
           </div>
         </div>
       </div>
