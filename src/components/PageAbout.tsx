@@ -10,9 +10,9 @@ export function PageAbout(props: PageAboutProps) {
 
   return (
     <AppLayout>
-      <div class="layout-center">
-        <div>
-          <h2 class="text-left text-large text-primary">About</h2>
+      <div class="height-page-about overflow-y-auto">
+        <div class="layout-center">
+          <h2 class="text-left text-large text-primary text-large">About</h2>
           <p class="text-medium">
             Trellith is a tiny Trello clone PWA build with Preact and TypeScript, not storing data in cloud storage. You can start using it by just opening the URL. There is no need to create any accounts. Data is only stored in your browser's localStorage.
           </p>

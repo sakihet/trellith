@@ -30,6 +30,13 @@
 body {
   margin: 0;
 }
+/* *,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} */
 
 /* tokens light */
 body {
@@ -347,8 +354,11 @@ body {
 }
 /* height specific */
 .height-board-list {
-  max-height: calc(100vh - 14rem);
+  max-height: calc(100vh - 12rem);
 }
 .height-card-list {
   max-height: calc(100vh - 16rem);
+}
+.height-page-about {
+  max-height: calc(100vh - 7.5rem);
 }
