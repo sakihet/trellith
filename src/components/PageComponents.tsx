@@ -22,7 +22,7 @@ export function PageComponents(props: PageComponentsProps) {
 
   return (
     <AppLayout>
-      <div class="">
+      <div class="layout-stack-4">
         <div>
           <h2>Components</h2>
         </div>
@@ -73,6 +73,43 @@ export function PageComponents(props: PageComponentsProps) {
                 handleDragStart={() => {}}
                 handleDrop={() => {}}
               />
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2>Sandbox</h2>
+        </div>
+        <div>
+          <details class="pattern-dropdown">
+            <summary class="w-8 h-8 border-solid border-1 border-color-primary flex-column rounded-2 cursor-pointer">
+              <div class="m-auto">...</div>
+            </summary>
+            <div class="border-solid border-1 border-color-primary rounded-2 py-2">
+              <ul class="list-style-none pl-0 py-0 m-0 text-secondary">
+                <li class="h-8 px-4 py-2 hover cursor-pointer">Item 1</li>
+                <li class="h-8 px-4 py-2 hover cursor-pointer">Item 2</li>
+                <li class="h-8 px-4 py-2 hover cursor-pointer">Item 3</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+        <div>
+          <div class="flex-row h-8">
+            <div class="f-1">
+            </div>
+            <div class="w-8 overflow-hidden">
+              <details class="pattern-dropdown">
+                <summary class="w-8 h-8 border-solid border-1 border-color-primary flex-column rounded-2 cursor-pointer">
+                  <div class="m-auto">...</div>
+                </summary>
+                <div class="border-solid border-1 border-color-primary rounded-2 py-2 r-3 t-1">
+                  <ul class="list-style-none pl-0 py-0 m-0 text-secondary">
+                    <li class="h-8 px-4 py-2 hover cursor-pointer">Item 1</li>
+                    <li class="h-8 px-4 py-2 hover cursor-pointer">Item 2</li>
+                    <li class="h-8 px-4 py-2 hover cursor-pointer">Item 3</li>
+                  </ul>
+                </div>
+              </details>
             </div>
           </div>
         </div>

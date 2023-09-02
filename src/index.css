@@ -307,6 +307,9 @@ body {
 .cursor-grab {
   cursor: grab;
 }
+.cursor-pointer {
+  cursor: pointer;
+}
 .drop-shadow {
   filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
 }
@@ -337,6 +340,9 @@ body {
 .overflow-y-scroll {
   overflow-y: scroll;
 }
+.hover:hover {
+  background-color: var(--color-gray-100);
+}
 .hover-bg-board-item:hover {
   background-color: var(--color-gray-50);
 }
@@ -361,4 +367,29 @@ body {
 }
 .height-page-about {
   max-height: calc(100vh - 7.5rem);
+}
+/* pattern */
+/* pattern-dropdown */
+.pattern-dropdown > summary {
+  list-style: none;
+}
+.pattern-dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+.pattern-dropdown > div {
+  position: absolute;
+  z-index: 100;
+}
+details[open].pattern-dropdown > summary:before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+}
+.r-3 {
+  right: 1.5rem;
 }
