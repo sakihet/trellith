@@ -32,9 +32,9 @@ export function BoardHeader(props: BoardHeaderProps) {
   }
 
   return (
-    <div class="flex-row h-8">
+    <div class="flex-row h-12 p-3">
       <h2
-        class="f-1 text-large m-0"
+        class="f-1 text-medium m-0"
         onClick={handleClick}
       >
         {isEditing
@@ -51,7 +51,18 @@ export function BoardHeader(props: BoardHeaderProps) {
           : <div>{name}</div>
         }
       </h2>
-      <div class="w-8 h-8"></div>
+      <div class="w-6 h-6">
+        {/* <details class="pattern-dropdown">
+          <summary class="w-6 h-6 border-solid border-1 border-color-primary flex-column cursor-pointer">
+            <div class="m-auto text-secondary">...</div>
+          </summary>
+          <div class="border-solid border-1 border-color-primary py-1 r-3 bg-primary">
+            <ul class="list-style-none pl-0 py-0 m-0 text-secondary">
+              <li class="h-8 px-4 py-2 hover cursor-pointer">Item 1</li>
+            </ul>
+          </div>
+        </details> */}
+      </div>
     </div>
   )
 }

@@ -186,17 +186,15 @@ export function PageBoard(props: PageBoardProps) {
 
   return (
     <AppLayout>
-      <div class="layout-stack-2">
-        <div>
-          {props.board_id &&
-            <BoardHeader
-              id={props.board_id}
-              name={boardName}
-              updateBoardName={updateBoardName}
-            />
-          }
-        </div>
-        <div class="flex-row layout-stack-horizontal">
+      <div class="f-1 flex-column">
+        {props.board_id &&
+          <BoardHeader
+            id={props.board_id}
+            name={boardName}
+            updateBoardName={updateBoardName}
+          />
+        }
+        <div class="f-1 flex-row layout-stack-horizontal px-3 overflow-x-auto">
           {found && found.lists.map((list, idx) =>
             <div class="flex-column">
               <div

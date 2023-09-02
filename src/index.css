@@ -126,6 +126,9 @@ body {
 .w-1 {
   width: 0.25rem;
 }
+.w-6 {
+  width: 1.5rem;
+}
 .w-8 {
   width: 2rem;
 }
@@ -360,10 +363,10 @@ body {
 }
 /* height specific */
 .height-board-list {
-  max-height: calc(100vh - 12rem);
+  max-height: calc(100vh - 10rem);
 }
 .height-card-list {
-  max-height: calc(100vh - 16rem);
+  max-height: calc(100vh - 15.5rem);
 }
 .height-page-about {
   max-height: calc(100vh - 7.5rem);
@@ -390,6 +393,15 @@ details[open].pattern-dropdown > summary:before {
   bottom: 0;
   z-index: 50;
 }
+.r-0 {
+  right: 0;
+}
+.r-1 {
+  right: 0.25rem;
+}
+.r-2 {
+  right: 0.5rem;
+}
 .r-3 {
-  right: 1.5rem;
+  right: 0.75rem;
 }

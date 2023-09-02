@@ -31,7 +31,7 @@ export function AppLayout(props: AppLayoutProps) {
           </div>
         </div>
       </div>
-      <div class="f-1 bg-primary p-6 overflow-y-hidden">
+      <div class="f-1 bg-primary overflow-y-hidden flex-column">
         {props.children}
       </div>
       <div class="h-6 text-small p-1 bg-primary border-solid border-0 border-t-1 border-color-primary flex-row">

@@ -75,10 +75,10 @@ export function PageIndex(props: PageIndexProps) {
 
   return (
     <AppLayout>
-      <div class="layout-center overflow-y-hidden">
-        <div class="layout-stack-2 overflow-y-hidden">
-          <div class="flex-row h-8">
-            <h2 class="text-left text-large text-primary f-1 m-0">Boards</h2>
+      <div class="layout-center overflow-y-hidden px-3 w-full">
+        <div class="overflow-y-hidden">
+          <div class="flex-row h-12 py-3">
+            <h2 class="text-left text-medium text-primary f-1 m-0">Boards</h2>
             <div class="flex-column">
               <button
                 class="m-auto px-2 py-1 border-1 border-solid border-color-primary"
