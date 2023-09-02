@@ -32,23 +32,26 @@ export function BoardHeader(props: BoardHeaderProps) {
   }
 
   return (
-    <h2
-      class="text-large m-0 h-8"
-      onClick={handleClick}
-    >
-      {isEditing
-        ? <form
-            onSubmit={handleSubmit}
-          >
-            <input
-              type="text"
-              value={name}
-              onBlur={handleBlur}
-              ref={inputElement}
-            />
-          </form>
-        : <div>{name}</div>
-      }
-    </h2>
+    <div class="flex-row h-8">
+      <h2
+        class="f-1 text-large m-0"
+        onClick={handleClick}
+      >
+        {isEditing
+          ? <form
+              onSubmit={handleSubmit}
+            >
+              <input
+                type="text"
+                value={name}
+                onBlur={handleBlur}
+                ref={inputElement}
+              />
+            </form>
+          : <div>{name}</div>
+        }
+      </h2>
+      <div class="w-8 h-8"></div>
+    </div>
   )
 }

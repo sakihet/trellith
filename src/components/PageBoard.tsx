@@ -186,67 +186,69 @@ export function PageBoard(props: PageBoardProps) {
 
   return (
     <AppLayout>
-      <div>
-        {props.board_id &&
-          <BoardHeader
-            id={props.board_id}
-            name={boardName}
-            updateBoardName={updateBoardName}
-          />
-        }
-      </div>
-      <div class="flex-row layout-stack-horizontal">
-        {found && found.lists.map((list, idx) =>
-          <div class="flex-column">
-            <div
-              class="w-64 p-4 bg-secondary rounded-2 layout-stack-4 drop-shadow"
-              draggable
-              onDrop={handleDropOnList}
-              onDragOver={handleDragOver}
-              onDragEnd={handleDragEndList}
-              onDragStart={handleDragStartList}
-              data-list-id={list.id}
-              data-list-pos={idx === 0 ? "first" : (idx === (found.lists.length - 1) ? "last" : "middle")}
-            >
-              <ListHeader
-                id={list.id}
-                name={list.name}
-                updateListName={updateListName}
-                handleClickDeleteList={handleClickDeleteList}
-              />
-              <div>
-                <CardForm
-                  listId={list.id}
-                  addCard={addCard}
-                />
-              </div>
-              <div class="overflow-y-auto">
-                <CardList
-                  cards={list.cards}
-                  listId={list.id}
-                  isDragEnterCardFromTheOther={!!draggingCardListId && (list.id !== draggingCardListId) && (list.id === dragEnteredListId)}
-                  updateCardName={updateCardName}
-                  handleClickDeleteCard={handleClickDeleteCard}
-                  handleDragEndCard={handleDragEndCard}
-                  handleDragEnterCard={handleDragEnterCard}
-                  handleDragStartCard={handleDragStartCard}
-                  handleDropOnCard={handleDropOnCard}
-                  handleDropOnSpacer={handleDropOnSpacer}
-                />
-              </div>
-            </div>
-            <div class="f-1"></div>
-          </div>
-        )}
-        <div class="p-4">
-          <form onSubmit={handleSubmitList}>
-            <input
-              class="h-6 px-2 rounded-2 border-solid border-1 border-color-primary"
-              type="text"
-              placeholder="Enter list title..."
-              ref={inputElement}
+      <div class="layout-stack-2">
+        <div>
+          {props.board_id &&
+            <BoardHeader
+              id={props.board_id}
+              name={boardName}
+              updateBoardName={updateBoardName}
             />
-          </form>
+          }
+        </div>
+        <div class="flex-row layout-stack-horizontal">
+          {found && found.lists.map((list, idx) =>
+            <div class="flex-column">
+              <div
+                class="w-64 p-4 bg-secondary rounded-2 layout-stack-4 drop-shadow"
+                draggable
+                onDrop={handleDropOnList}
+                onDragOver={handleDragOver}
+                onDragEnd={handleDragEndList}
+                onDragStart={handleDragStartList}
+                data-list-id={list.id}
+                data-list-pos={idx === 0 ? "first" : (idx === (found.lists.length - 1) ? "last" : "middle")}
+              >
+                <ListHeader
+                  id={list.id}
+                  name={list.name}
+                  updateListName={updateListName}
+                  handleClickDeleteList={handleClickDeleteList}
+                />
+                <div>
+                  <CardForm
+                    listId={list.id}
+                    addCard={addCard}
+                  />
+                </div>
+                <div class="overflow-y-auto">
+                  <CardList
+                    cards={list.cards}
+                    listId={list.id}
+                    isDragEnterCardFromTheOther={!!draggingCardListId && (list.id !== draggingCardListId) && (list.id === dragEnteredListId)}
+                    updateCardName={updateCardName}
+                    handleClickDeleteCard={handleClickDeleteCard}
+                    handleDragEndCard={handleDragEndCard}
+                    handleDragEnterCard={handleDragEnterCard}
+                    handleDragStartCard={handleDragStartCard}
+                    handleDropOnCard={handleDropOnCard}
+                    handleDropOnSpacer={handleDropOnSpacer}
+                  />
+                </div>
+              </div>
+              <div class="f-1"></div>
+            </div>
+          )}
+          <div class="p-4">
+            <form onSubmit={handleSubmitList}>
+              <input
+                class="h-6 px-2 rounded-2 border-solid border-1 border-color-primary"
+                type="text"
+                placeholder="Enter list title..."
+                ref={inputElement}
+              />
+            </form>
+          </div>
         </div>
       </div>
     </AppLayout>
