@@ -83,6 +83,9 @@ body {
 .layout-stack-4 > * + * {
   margin-top: 1rem;
 }
+.layout-stack-8 > * + * {
+  margin-top: 2rem;
+}
 .layout-stack-horizontal > * + * {
   margin-left: 1rem;
 }
@@ -372,7 +375,7 @@ body {
 }
 /* height specific */
 .height-board-list {
-  max-height: calc(100vh - 10rem);
+  max-height: calc(100vh - 18rem);
 }
 .height-card-list {
   max-height: calc(100vh - 15.5rem);
