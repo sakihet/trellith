@@ -366,6 +366,7 @@ export class ApplicationService {
         )
       })
     }
+    this.repository.set(updated)
     return updated
   }
 }
