@@ -1,4 +1,3 @@
-import '../app.css'
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { AppLayout } from './AppLayout'
@@ -7,18 +6,14 @@ import { BoardHeader } from './BoardHeader'
 import { ListHeader } from './ListHeader'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
-import { List } from '../types/list'
 import { Pos } from '../types/pos'
 import { State } from '../types/state'
 import { CardList } from './CardList'
+import '../app.css'
 
 type PageBoardProps = {
   board_id?: string
   path: string
-}
-
-export type BoardState = {
-  lists: List[]
 }
 
 export type AddCardParams = {
