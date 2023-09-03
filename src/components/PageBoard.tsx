@@ -155,6 +155,11 @@ export function PageBoard(props: PageBoardProps) {
     }
   }
 
+  const deleteBoard = (id: string) => {
+    const updated = service.deleteBoard(state, id)
+    setState(updated)
+  }
+
   const updateBoardName = (id: string, name: string) => {
     const updated = service.updateBoardName(state, name, id)
     updateStates(updated)
@@ -192,6 +197,7 @@ export function PageBoard(props: PageBoardProps) {
             id={props.board_id}
             name={boardName}
             updateBoardName={updateBoardName}
+            deleteBoard={deleteBoard}
           />
         }
         <div class="f-1 flex-row layout-stack-horizontal px-3 overflow-x-auto">

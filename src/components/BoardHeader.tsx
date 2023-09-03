@@ -1,3 +1,4 @@
+import { route } from "preact-router"
 import { useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 
@@ -5,10 +6,11 @@ type BoardHeaderProps = {
   id: string
   name: string
   updateBoardName: (id: string, name: string) => void
+  deleteBoard: (id: string) => void
 }
 
 export function BoardHeader(props: BoardHeaderProps) {
-  const { id, name, updateBoardName } = props
+  const { id, name, updateBoardName, deleteBoard } = props
   const [isEditing, setIsEditing] = useState(false)
   const inputElement = useRef<HTMLInputElement>(null)
 
@@ -21,6 +23,11 @@ export function BoardHeader(props: BoardHeaderProps) {
     setTimeout(() => {
       inputElement.current?.focus()
     }, 100)
+  }
+
+  const handleClickDelete = () => {
+    deleteBoard(id)
+    route('/')
   }
 
   const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
@@ -52,16 +59,24 @@ export function BoardHeader(props: BoardHeaderProps) {
         }
       </h2>
       <div class="w-6 h-6">
-        {/* <details class="pattern-dropdown">
+        <details class="pattern-dropdown">
           <summary class="w-6 h-6 border-solid border-1 border-color-primary flex-column cursor-pointer">
             <div class="m-auto text-secondary">...</div>
           </summary>
           <div class="border-solid border-1 border-color-primary py-1 r-3 bg-primary">
             <ul class="list-style-none pl-0 py-0 m-0 text-secondary">
-              <li class="h-8 px-4 py-2 hover cursor-pointer">Item 1</li>
+              <li class="h-8 px-4 py-2 hover cursor-pointer">
+                <button
+                  class="unset px-4"
+                  type="button"
+                  onClick={handleClickDelete}
+                >
+                  Delete
+                </button>
+              </li>
             </ul>
           </div>
-        </details> */}
+        </details>
       </div>
     </div>
   )

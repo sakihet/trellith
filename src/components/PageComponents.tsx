@@ -41,8 +41,6 @@ export function PageComponents(props: PageComponentsProps) {
               <BoardItem
                 board={board}
                 pos="first"
-                deleteBoard={() => {}}
-                updateBoardName={() => {}}
                 handleDragEnd={() => {}}
                 handleDragOver={() => {}}
                 handleDragStart={() => {}}

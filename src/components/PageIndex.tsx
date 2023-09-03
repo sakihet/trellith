@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/hooks'
+import { useEffect, useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { AppLayout } from './AppLayout'
 import { BoardForm } from './BoardForm'
@@ -18,6 +18,8 @@ export function PageIndex(props: PageIndexProps) {
   console.log('path', path)
   const [state, setState] = useState<State>({ boards: [] })
   const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
+  const detailsElement = useRef<HTMLDetailsElement>(null)
+
   const repository = new RepositoryLocalStorage()
   const service = new ApplicationService(repository)
 
@@ -33,20 +35,11 @@ export function PageIndex(props: PageIndexProps) {
     setState(updated)
   }
 
-  const deleteBoard = (id: string) => {
-    const updated = service.deleteBoard(state, id)
-    setState(updated)
-  }
-
-  const updateBoardName = (id: string, name: string) => {
-    const updated = service.updateBoardName(state, name, id)
-    setState(updated)
-  }
-
   const handleClickClear = () => {
     if (window.confirm('Do you really want to clear data?')) {
       const updated = service.clear()
       setState(updated)
+      detailsElement.current?.removeAttribute('open')
     }
   }
 
@@ -75,17 +68,15 @@ export function PageIndex(props: PageIndexProps) {
 
   return (
     <AppLayout>
-      <div class="layout-center overflow-y-hidden px-3 w-full">
-        <div class="overflow-y-hidden">
-          <div class="flex-row h-12 py-3">
+      <div class="layout-center overflow-hidden px-3 w-full">
+        <div class="overflow-hidden">
+          <div class="flex-row h-12 py-3 overflow-hidden">
             <h2 class="text-left text-medium text-primary f-1 m-0">Boards</h2>
-            <div class="flex-column">
-              <button
-                class="m-auto px-2 py-1 border-1 border-solid border-color-primary"
-                type="button"
-                onClick={handleClickClear}
-              >Clear</button>
-            </div>
+            <button
+              class="px-2 border-none text-secondary"
+              type="button"
+              onClick={handleClickClear}
+            >Clear</button>
           </div>
           <div>
             <BoardForm addBoard={addBoard}/>
@@ -93,8 +84,6 @@ export function PageIndex(props: PageIndexProps) {
           <div class="overflow-y-auto">
             <BoardList
               boards={state.boards}
-              deleteBoard={deleteBoard}
-              updateBoardName={updateBoardName}
               handleDragEnd={handleDragEnd}
               handleDragOver={handleDragOver}
               handleDragStart={handleDragStart}

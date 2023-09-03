@@ -120,6 +120,9 @@ body {
 .h-16 {
   height: 4rem;
 }
+.h-18 {
+  height: 4.5rem;
+}
 .h-full {
   height: 100%;
 }
@@ -135,8 +138,14 @@ body {
 .w-16 {
   width: 4rem;
 }
+.w-20 {
+  width: 5rem;
+}
 .w-24 {
   width: 6rem;
+}
+.w-28 {
+  width: 7rem;
 }
 .w-32 {
   width: 8rem;
@@ -404,4 +413,34 @@ details[open].pattern-dropdown > summary:before {
 }
 .r-3 {
   right: 0.75rem;
+}
+.r-4 {
+  right: 1rem;
+}
+.r-5 {
+  right: 1.25rem;
+}
+.r-6 {
+  right: 1.5rem;
+}
+.r-8 {
+  right: 2rem;
+}
+.l-4 {
+  left: 1rem;
+}
+.t-1 {
+  top: 0.25rem;
+}
+.t-8 {
+  top: 2rem;
+}
+.b-8 {
+  bottom: 2rem;
+}
+.unset {
+  all: unset;
+}
+.inline {
+  display: inline;
 }
