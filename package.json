@@ -10,6 +10,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@preact/signals": "^1.2.1",
     "preact": "^10.15.1",
     "preact-router": "^4.1.1",
     "uuid": "^9.0.0"
