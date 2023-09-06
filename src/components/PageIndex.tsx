@@ -1,44 +1,35 @@
-import { useEffect, useRef, useState } from 'preact/hooks'
+import { useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
+import { Signal } from '@preact/signals'
 import { AppLayout } from './AppLayout'
 import { BoardForm } from './BoardForm'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
 import { Pos } from '../types/pos'
 import { State } from '../types/state'
-import '../app.css'
 import { BoardList } from './BoardList'
+import '../app.css'
 
 type PageIndexProps = {
   path: string
+  appState: Signal<State>
 }
 
 export function PageIndex(props: PageIndexProps) {
-  const { path } = props
-  console.log('path', path)
-  const [state, setState] = useState<State>({ boards: [] })
+  const {appState} = props
   const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
   const detailsElement = useRef<HTMLDetailsElement>(null)
 
   const repository = new RepositoryLocalStorage()
   const service = new ApplicationService(repository)
 
-  useEffect(() => {
-    const result = service.load()
-    if (result) {
-      setState(result)
-    }
-  }, [])
-
   const addBoard = (name: string) => {
-    const updated = service.createBoard(state, name)
-    setState(updated)
+    appState.value = service.createBoard(appState.value, name)
   }
 
   const handleClickClear = () => {
     if (window.confirm('Do you really want to clear data?')) {
-      const updated = service.clear()
-      setState(updated)
+      appState.value = service.clear()
       detailsElement.current?.removeAttribute('open')
     }
   }
@@ -54,15 +45,13 @@ export function PageIndex(props: PageIndexProps) {
     const {boardId} = e.currentTarget.dataset
     if (boardId) {
       setTimeout(() => {setDraggingBoardId(boardId)}, 100)
-      console.log(draggingBoardId)
     }
   }
 
   const handleDrop = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
     const {boardId, pos} = e.currentTarget.dataset
     if (boardId && pos && draggingBoardId) {
-      const updated = service.moveBoard(state, draggingBoardId, pos as Pos, boardId)
-      setState(updated)
+      appState.value = service.moveBoard(appState.value, draggingBoardId, pos as Pos, boardId)
     }
   }
 
@@ -93,7 +82,7 @@ export function PageIndex(props: PageIndexProps) {
           </div>
           <div class="overflow-y-auto">
             <BoardList
-              boards={state.boards}
+              boards={appState.value.boards}
               handleDragEnd={handleDragEnd}
               handleDragOver={handleDragOver}
               handleDragStart={handleDragStart}
