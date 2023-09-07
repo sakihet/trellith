@@ -29,7 +29,7 @@ function Main() {
   return (
     <>
       <TheNavBar />
-      <div class="f-1">
+      <div class="f-1 overflow-y-auto">
         <Router>
           <PageIndex
             path="/"

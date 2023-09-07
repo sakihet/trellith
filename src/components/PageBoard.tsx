@@ -169,7 +169,7 @@ export function PageBoard(props: PageBoardProps) {
   })
 
   return (
-    <div class="f-1 flex-column">
+    <div class="flex-column h-full">
       {found &&
         <BoardHeader
           id={found.id}
