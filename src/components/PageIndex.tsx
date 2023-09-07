@@ -1,7 +1,6 @@
 import { useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { Signal } from '@preact/signals'
-import { AppLayout } from './AppLayout'
 import { BoardForm } from './BoardForm'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
@@ -66,46 +65,44 @@ export function PageIndex(props: PageIndexProps) {
   const storageDataSize = getSize()
 
   return (
-    <AppLayout>
-      <div class="layout-center overflow-hidden px-3 w-full layout-stack-8">
-        <div class="overflow-hidden layout-stack-4">
-          <div class="flex-row h-12 py-3 overflow-hidden">
-            <h2 class="text-medium text-primary f-1 m-0">Boards</h2>
-            <button
-              class="px-2 border-none text-secondary"
-              type="button"
-              onClick={handleClickClear}
-            >Clear</button>
-          </div>
-          <div>
-            <BoardForm addBoard={addBoard}/>
-          </div>
-          <div class="overflow-y-auto">
-            <BoardList
-              boards={appState.value.boards}
-              handleDragEnd={handleDragEnd}
-              handleDragOver={handleDragOver}
-              handleDragStart={handleDragStart}
-              handleDrop={handleDrop}
-            />
-          </div>
-          <div>
-            <h2 class="text-medium">Storage</h2>
-            {storageDataSize >=0 &&
-              <div class="px-4 py-1">
-                <span class="text-secondary font-mono">
-                  {storageDataSize} / {STORAGE_LIMIT} bytes used on localStorage
-                </span>
-                <progress
-                  max={STORAGE_LIMIT}
-                  value={storageDataSize}
-                  class="w-full"
-                ></progress>
-              </div>
-            }
-          </div>
+    <div class="layout-center overflow-hidden px-3 w-full layout-stack-8">
+      <div class="overflow-hidden layout-stack-4">
+        <div class="flex-row h-12 py-3 overflow-hidden">
+          <h2 class="text-medium text-primary f-1 m-0">Boards</h2>
+          <button
+            class="px-2 border-none text-secondary"
+            type="button"
+            onClick={handleClickClear}
+          >Clear</button>
+        </div>
+        <div>
+          <BoardForm addBoard={addBoard}/>
+        </div>
+        <div class="overflow-y-auto">
+          <BoardList
+            boards={appState.value.boards}
+            handleDragEnd={handleDragEnd}
+            handleDragOver={handleDragOver}
+            handleDragStart={handleDragStart}
+            handleDrop={handleDrop}
+          />
+        </div>
+        <div>
+          <h2 class="text-medium">Storage</h2>
+          {storageDataSize >=0 &&
+            <div class="px-4 py-1">
+              <span class="text-secondary font-mono">
+                {storageDataSize} / {STORAGE_LIMIT} bytes used on localStorage
+              </span>
+              <progress
+                max={STORAGE_LIMIT}
+                value={storageDataSize}
+                class="w-full"
+              ></progress>
+            </div>
+          }
         </div>
       </div>
-    </AppLayout>
+    </div>
   )
 }

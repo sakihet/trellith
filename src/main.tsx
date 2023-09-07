@@ -10,6 +10,8 @@ import { createAppState } from './appState.ts'
 import { useEffect } from 'preact/hooks'
 import { RepositoryLocalStorage } from './repositories/repository.ts'
 import { ApplicationService } from './applications/applicationService.ts'
+import { TheNavBar } from './components/TheNavBar.tsx'
+import { TheFooter } from './components/TheFooter.tsx'
 
 const {appState} = createAppState()
 
@@ -25,25 +27,31 @@ function Main() {
   }, [])
 
   return (
-    <Router>
-      <PageIndex
-        path="/"
-        appState={appState}
-      />
-      <PageAbout
-        path="/about"
-      />
-      <PageBoard
-        path="/board/:board_id"
-        appState={appState}
-      />
-      <PageComponents
-        path="/components"
-      />
-      <PageDebug
-        path="/debug"
-      />
-    </Router>
+    <>
+      <TheNavBar />
+      <div class="f-1">
+        <Router>
+          <PageIndex
+            path="/"
+            appState={appState}
+          />
+          <PageAbout
+            path="/about"
+          />
+          <PageBoard
+            path="/board/:board_id"
+            appState={appState}
+          />
+          <PageComponents
+            path="/components"
+          />
+          <PageDebug
+            path="/debug"
+          />
+        </Router>
+      </div>
+      <TheFooter />
+    </>
   )
 }
 
