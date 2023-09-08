@@ -1,6 +1,5 @@
 import { render } from 'preact'
 import Router from 'preact-router'
-import './index.css'
 import { PageIndex } from './components/PageIndex.tsx'
 import { PageAbout } from './components/PageAbout.tsx'
 import { PageBoard } from './components/PageBoard.tsx'
@@ -12,6 +11,12 @@ import { RepositoryLocalStorage } from './repositories/repository.ts'
 import { ApplicationService } from './applications/applicationService.ts'
 import { TheNavBar } from './components/TheNavBar.tsx'
 import { TheFooter } from './components/TheFooter.tsx'
+import './css/token.css'
+import './css/reset.css'
+import './css/base.css'
+import './css/utility.css'
+import './css/layout.css'
+import './css/pattern.css'
 
 const {appState} = createAppState()
 

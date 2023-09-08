@@ -7,7 +7,6 @@ import { RepositoryLocalStorage } from '../repositories/repository'
 import { Pos } from '../types/pos'
 import { State } from '../types/state'
 import { BoardList } from './BoardList'
-import '../app.css'
 
 type PageIndexProps = {
   path: string

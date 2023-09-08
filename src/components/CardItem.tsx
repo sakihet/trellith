@@ -72,7 +72,7 @@ export function CardItem(props: CardItemProps) {
       </div>
       <div class="hidden-child">
         <button
-          class="border-none text-secondary"
+          class="border-none text-secondary px-1"
           type="button"
           data-card-id={id}
           data-list-id={listId}

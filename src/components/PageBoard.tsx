@@ -9,7 +9,6 @@ import { RepositoryLocalStorage } from '../repositories/repository'
 import { Pos } from '../types/pos'
 import { State } from '../types/state'
 import { CardList } from './CardList'
-import '../app.css'
 
 type PageBoardProps = {
   board_id?: string

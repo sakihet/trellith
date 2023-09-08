@@ -1,0 +1,25 @@
+body {
+  color: var(--color-text-primary);
+  font-family: sans-serif;
+  line-height: 1.5rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+h2 {
+  font-size: 1.25rem;
+}
+h3 {
+  font-size: 1.125rem;
+}
+h4 {
+  font-size: 1rem;
+}
+
+#app {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

@@ -15,10 +15,10 @@ export function TheNavBar() {
         </Link>
       </div>
       <div class="f-1 h-6 text-right">
-        <div class="py-05">
+        <div>
           <Link
             href="/about"
-            class="text-decoration-none text-secondary text-small"
+            class="text-decoration-none text-secondary text-small hover px-2 py-1"
           >
             About
           </Link>

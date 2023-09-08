@@ -48,7 +48,7 @@ export function ListHeader(props: ListHeaderProps) {
         }
       </div>
       <button
-        class="border-none text-secondary hidden-child h-4"
+        class="border-none text-secondary hidden-child h-4 px-1"
         type="button"
         onClick={handleClickDeleteList}
         data-list-id={id}

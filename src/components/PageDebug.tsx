@@ -1,5 +1,3 @@
-import '../app.css'
-
 type PageDebugProps = {
   path: string
 }

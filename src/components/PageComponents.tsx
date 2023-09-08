@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid'
-import '../app.css'
 import { Board } from '../types/board'
 import { BoardForm } from './BoardForm'
 import { BoardItem } from './BoardItem'

@@ -1,0 +1,21 @@
+/* dropdown */
+.pattern-dropdown > summary {
+  list-style: none;
+}
+.pattern-dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+.pattern-dropdown > div {
+  position: absolute;
+  z-index: 100;
+}
+details[open].pattern-dropdown > summary:before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+}
