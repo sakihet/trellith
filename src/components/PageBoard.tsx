@@ -169,7 +169,7 @@ export function PageBoard(props: PageBoardProps) {
   })
 
   return (
-    <div class="flex-column h-full">
+    <div class="flex-column h-full px-3">
       {found &&
         <BoardHeader
           id={found.id}
@@ -178,11 +178,11 @@ export function PageBoard(props: PageBoardProps) {
           deleteBoard={deleteBoard}
         />
       }
-      <div class="f-1 flex-row layout-stack-horizontal px-3 overflow-x-auto">
+      <div class="f-1 flex-row layout-stack-horizontal overflow-x-auto">
         {found && found.lists.map((list, idx) =>
           <div class="flex-column">
             <div
-              class="w-64 p-4 bg-secondary rounded-2 layout-stack-4 drop-shadow"
+              class="w-64 p-3 bg-secondary rounded-2 layout-stack-4 drop-shadow"
               draggable
               onDrop={handleDropOnList}
               onDragOver={handleDragOver}
@@ -197,28 +197,23 @@ export function PageBoard(props: PageBoardProps) {
                 updateListName={updateListName}
                 handleClickDeleteList={handleClickDeleteList}
               />
-              <div>
-                <CardForm
-                  listId={list.id}
-                  addCard={addCard}
-                />
-              </div>
-              <div class="overflow-y-auto">
-                <CardList
-                  cards={list.cards}
-                  listId={list.id}
-                  isDragEnterCardFromTheOther={!!draggingCardListId && (list.id !== draggingCardListId) && (list.id === dragEnteredListId)}
-                  updateCardName={updateCardName}
-                  handleClickDeleteCard={handleClickDeleteCard}
-                  handleDragEndCard={handleDragEndCard}
-                  handleDragEnterCard={handleDragEnterCard}
-                  handleDragStartCard={handleDragStartCard}
-                  handleDropOnCard={handleDropOnCard}
-                  handleDropOnSpacer={handleDropOnSpacer}
-                />
-              </div>
+              <CardForm
+                listId={list.id}
+                addCard={addCard}
+              />
+              <CardList
+                cards={list.cards}
+                listId={list.id}
+                isDragEnterCardFromTheOther={!!draggingCardListId && (list.id !== draggingCardListId) && (list.id === dragEnteredListId)}
+                updateCardName={updateCardName}
+                handleClickDeleteCard={handleClickDeleteCard}
+                handleDragEndCard={handleDragEndCard}
+                handleDragEnterCard={handleDragEnterCard}
+                handleDragStartCard={handleDragStartCard}
+                handleDropOnCard={handleDropOnCard}
+                handleDropOnSpacer={handleDropOnSpacer}
+              />
             </div>
-            <div class="f-1"></div>
           </div>
         )}
         <div class="p-4">

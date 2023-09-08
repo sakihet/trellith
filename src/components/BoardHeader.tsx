@@ -39,7 +39,7 @@ export function BoardHeader(props: BoardHeaderProps) {
   }
 
   return (
-    <div class="flex-row h-12 p-3">
+    <div class="flex-row h-12 py-3">
       <h2
         class="f-1 text-medium m-0"
         onClick={handleClick}

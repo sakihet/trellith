@@ -31,7 +31,7 @@ export function CardList(props: CardListProps) {
 
   return (
     <div
-      class="layout-stack-2 height-card-list"
+      class="layout-stack-2 height-card-list overflow-y-auto"
       onDragEnter={handleDragEnterCard}
       data-list-id={listId}
     >
