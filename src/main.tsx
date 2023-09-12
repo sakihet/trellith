@@ -34,7 +34,7 @@ function Main() {
   return (
     <>
       <TheNavBar />
-      <div class="f-1 overflow-y-auto">
+      <div class="f-1 overflow-y-auto pattern-scrollbar-thick">
         <Router>
           <PageIndex
             path="/"

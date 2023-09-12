@@ -179,7 +179,7 @@ export function PageBoard(props: PageBoardProps) {
           />
         </div>
       }
-      <div class="f-1 flex-row layout-stack-horizontal overflow-x-auto px-3">
+      <div class="f-1 flex-row layout-stack-horizontal overflow-x-auto px-3 pattern-scrollbar-thick">
         {found && found.lists.map((list, idx) =>
           <div class="flex-column">
             <div
