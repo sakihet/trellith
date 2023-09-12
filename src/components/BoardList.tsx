@@ -14,7 +14,7 @@ export function BoardList(props: BoardListProps) {
   const {boards, handleDragEnd, handleDragOver, handleDragStart, handleDrop} = props
 
   return (
-    <div class="layout-stack-2 overflow-y-auto height-board-list py-2 pr-2">
+    <div class="layout-stack-2 overflow-y-auto height-board-list py-2 pr-2 pattern-scrollbar-thick">
       {boards.map((board, idx) =>
         <BoardItem
           key={board.id}
