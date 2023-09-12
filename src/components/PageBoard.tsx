@@ -168,16 +168,18 @@ export function PageBoard(props: PageBoardProps) {
   })
 
   return (
-    <div class="flex-column h-full px-3">
+    <div class="flex-column h-full">
       {found &&
-        <BoardHeader
-          id={found.id}
-          name={found.name}
-          updateBoardName={updateBoardName}
-          deleteBoard={deleteBoard}
-        />
+        <div class="px-3">
+          <BoardHeader
+            id={found.id}
+            name={found.name}
+            updateBoardName={updateBoardName}
+            deleteBoard={deleteBoard}
+          />
+        </div>
       }
-      <div class="f-1 flex-row layout-stack-horizontal overflow-x-auto">
+      <div class="f-1 flex-row layout-stack-horizontal overflow-x-auto px-3">
         {found && found.lists.map((list, idx) =>
           <div class="flex-column">
             <div
