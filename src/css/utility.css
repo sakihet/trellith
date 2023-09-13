@@ -288,16 +288,16 @@
 }
 /* hover */
 .hover:hover {
-  background-color: var(--color-gray-100);
+  background-color: var(--color-bg-hover);
 }
 .hover-bg-board-item:hover {
-  background-color: var(--color-gray-50);
+  background-color: var(--color-bg-hover);
 }
 .hover-bg-card-item:hover {
-  background-color: var(--color-gray-50);
+  background-color: var(--color-bg-hover);
 }
 .hover-bg-link:hover {
-  background-color: var(--color-gray-100);
+  background-color: var(--color-bg-hover);
 }
 /* pattern */
 .parent-hiding-child:hover > .hidden-child {

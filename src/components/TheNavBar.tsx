@@ -1,6 +1,24 @@
 import { Link } from "preact-router/match";
+import { Theme } from "../types/theme";
+import { Signal } from "@preact/signals";
+import { applyTheme, setTheme } from "../utils";
 
-export function TheNavBar() {
+type TheNavBarProps = {
+  theme: Signal<Theme>
+}
+
+export function TheNavBar(props: TheNavBarProps) {
+  const {theme} = props
+  const handleClick = () => {
+    if (theme.value === 'light') {
+      theme.value = 'dark'
+    } else {
+      theme.value = 'light'
+    }
+    applyTheme(theme.value)
+    setTheme(theme.value)
+  }
+
   return (
     <div class="h-12 p-3 flex-row bg-primary border-0 border-b-1 border-solid border-color-primary">
       <div class="f-1 h-6"></div>
@@ -15,7 +33,14 @@ export function TheNavBar() {
         </Link>
       </div>
       <div class="f-1 h-6 text-right">
-        <div>
+        <div class="layout-stack-horizontal-1">
+          <button
+            class="px-2 py-1 border-none text-secondary cursor-pointer"
+            type="button"
+            onClick={handleClick}
+          >
+            {theme.value === 'light' ? 'Light' : 'Dark'}
+          </button>
           <Link
             href="/about"
             class="text-decoration-none text-secondary text-small hover px-2 py-1"

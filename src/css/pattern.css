@@ -23,17 +23,17 @@ details[open].pattern-dropdown > summary:before {
 .pattern-scrollbar-thick::-webkit-scrollbar {
   width: 8px;
   height: 8px;
-  background-color: var(--color-gray-200);
+  background-color: var(--color-bg-scrollbar);
 }
 .pattern-scrollbar-thick::-webkit-scrollbar-thumb {
-  background-color: var(--color-gray-400);
+  background-color: var(--color-bg-scrollbar-thumb);
 }
 /* scrollbar-thin */
 .pattern-scrollbar-thin::-webkit-scrollbar {
   width: 4px;
   height: 4px;
-  background-color: var(--color-gray-200);
+  background-color: var(--color-bg-scrollbar);
 }
 .pattern-scrollbar-thin::-webkit-scrollbar-thumb {
-  background-color: var(--color-gray-400);
+  background-color: var(--color-bg-scrollbar-thumb);
 }
