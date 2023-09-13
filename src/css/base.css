@@ -1,5 +1,6 @@
 body {
   color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
   font-family: sans-serif;
   line-height: 1.5rem;
 }

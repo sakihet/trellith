@@ -11,6 +11,7 @@ import { TheFooter } from './TheFooter'
 import { Card } from '../types/card'
 import { List } from '../types/list'
 import { BoardHeader } from './BoardHeader'
+import { signal } from '@preact/signals'
 
 type PageComponentsProps = {
   path: string
@@ -151,7 +152,7 @@ export function PageComponents(props: PageComponentsProps) {
         <div class="layout-stack-2">
           <h3>TheNavBar</h3>
           <div>
-            <TheNavBar />
+            <TheNavBar theme={signal("light")} />
           </div>
         </div>
         <div class="layout-stack-2">

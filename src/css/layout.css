@@ -18,6 +18,9 @@
 .layout-stack-8 > * + * {
   margin-top: 2rem;
 }
+.layout-stack-horizontal-1 > * + * {
+  margin-left: 0.25rem;
+}
 .layout-stack-horizontal > * + * {
   margin-left: 1rem;
 }

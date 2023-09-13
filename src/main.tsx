@@ -17,8 +17,9 @@ import './css/base.css'
 import './css/utility.css'
 import './css/layout.css'
 import './css/pattern.css'
+import { applyTheme } from './utils.ts'
 
-const {appState} = createAppState()
+const {appState, appTheme} = createAppState()
 
 function Main() {
   const repository = new RepositoryLocalStorage()
@@ -29,12 +30,13 @@ function Main() {
     if (result) {
       appState.value = result
     }
+    applyTheme(appTheme.value)
   }, [])
 
   return (
     <>
-      <TheNavBar />
-      <div class="f-1 overflow-y-auto pattern-scrollbar-thick">
+      <TheNavBar theme={appTheme} />
+      <div class="f-1 overflow-y-auto pattern-scrollbar-thick bg-primary">
         <Router>
           <PageIndex
             path="/"
