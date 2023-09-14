@@ -22,7 +22,6 @@ export type AddCardParams = {
 
 export function PageBoard(props: PageBoardProps) {
   const {appState, boardId} = props
-  console.log(appState, boardId)
   const [draggingCardId, setDraggingCardId] = useState<string | undefined>(undefined)
   const [draggingCardListId, setDraggingCardListId] = useState<string | undefined>(undefined)
   const [draggingListId, setDraggingListId] = useState<string | undefined>(undefined)
@@ -142,7 +141,6 @@ export function PageBoard(props: PageBoardProps) {
   }
 
   const handleSubmitList = (e: JSX.TargetedEvent<HTMLFormElement>) => {
-    console.log('submit', inputElement.current?.value)
     e.preventDefault()
     if (inputElement.current) {
       const updated = service.createList(appState.value, inputElement.current.value, boardId)
