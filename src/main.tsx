@@ -1,5 +1,5 @@
 import { render } from 'preact'
-import Router from 'preact-router'
+import { Route } from 'wouter-preact'
 import { PageIndex } from './components/PageIndex.tsx'
 import { PageAbout } from './components/PageAbout.tsx'
 import { PageBoard } from './components/PageBoard.tsx'
@@ -37,25 +37,28 @@ function Main() {
     <>
       <TheNavBar theme={appTheme} />
       <div class="f-1 overflow-y-auto pattern-scrollbar-thick bg-primary">
-        <Router>
+        <Route path="/">
           <PageIndex
-            path="/"
             appState={appState}
           />
-          <PageAbout
-            path="/about"
-          />
-          <PageBoard
-            path="/board/:board_id"
-            appState={appState}
-          />
-          <PageComponents
-            path="/components"
-          />
-          <PageDebug
-            path="/debug"
-          />
-        </Router>
+        </Route>
+        <Route path="/about">
+          <PageAbout />
+        </Route>
+        <Route path="/board/:boardId">
+          {params => 
+            <PageBoard
+              appState={appState}
+              boardId={params.boardId}
+            />
+          }
+        </Route>
+        <Route path="/components">
+          <PageComponents />
+        </Route>
+        <Route path="/debug">
+          <PageDebug />
+        </Route>
       </div>
       <TheFooter />
     </>

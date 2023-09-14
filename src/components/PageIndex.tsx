@@ -9,7 +9,6 @@ import { State } from '../types/state'
 import { BoardList } from './BoardList'
 
 type PageIndexProps = {
-  path: string
   appState: Signal<State>
 }
 

@@ -1,6 +1,4 @@
-type PageAboutProps = {
-  path: string
-}
+type PageAboutProps = {}
 
 export function PageAbout(props: PageAboutProps) {
   console.log(props)

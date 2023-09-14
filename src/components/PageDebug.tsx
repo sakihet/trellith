@@ -1,5 +1,4 @@
 type PageDebugProps = {
-  path: string
 }
 
 export function PageDebug(props: PageDebugProps) {

@@ -14,7 +14,6 @@ import { BoardHeader } from './BoardHeader'
 import { signal } from '@preact/signals'
 
 type PageComponentsProps = {
-  path: string
 }
 
 export function PageComponents(props: PageComponentsProps) {
