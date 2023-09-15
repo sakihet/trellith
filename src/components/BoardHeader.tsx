@@ -1,6 +1,6 @@
-import { route } from "preact-router"
 import { useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
+import { navigate } from "wouter-preact/use-location"
 
 type BoardHeaderProps = {
   id: string
@@ -27,7 +27,7 @@ export function BoardHeader(props: BoardHeaderProps) {
 
   const handleClickDelete = () => {
     deleteBoard(id)
-    route('/')
+    navigate('/')
   }
 
   const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {

@@ -11,9 +11,8 @@ import { State } from '../types/state'
 import { CardList } from './CardList'
 
 type PageBoardProps = {
-  board_id?: string
-  path: string
   appState: Signal<State>
+  boardId: string
 }
 
 export type AddCardParams = {
@@ -22,7 +21,7 @@ export type AddCardParams = {
 }
 
 export function PageBoard(props: PageBoardProps) {
-  const {appState} = props
+  const {appState, boardId} = props
   const [draggingCardId, setDraggingCardId] = useState<string | undefined>(undefined)
   const [draggingCardListId, setDraggingCardListId] = useState<string | undefined>(undefined)
   const [draggingListId, setDraggingListId] = useState<string | undefined>(undefined)
@@ -37,16 +36,16 @@ export function PageBoard(props: PageBoardProps) {
 
   const handleClickDeleteCard = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
     const {cardId, listId} = e.currentTarget.dataset
-    if (cardId && listId && props.board_id) {
-      const updated = service.deleteCard(appState.value, cardId, props.board_id, listId)
+    if (cardId && listId && boardId) {
+      const updated = service.deleteCard(appState.value, cardId, boardId, listId)
       updateState(updated)
     }
   }
 
   const handleClickDeleteList = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
     const {listId} = e.currentTarget.dataset
-    if (listId && props.board_id) {
-      const updated = service.deleteList(appState.value, listId, props.board_id)
+    if (listId && boardId) {
+      const updated = service.deleteList(appState.value, listId, boardId)
       updateState(updated)
     }
   }
@@ -69,19 +68,19 @@ export function PageBoard(props: PageBoardProps) {
 
   const handleDropOnCard = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
     const {cardId, listId, pos} = e.currentTarget.dataset
-    if (pos && cardId && listId && props.board_id) {
-      moveCard(pos as Pos, cardId, props.board_id, listId)
+    if (pos && cardId && listId && boardId) {
+      moveCard(pos as Pos, cardId, boardId, listId)
     }
   }
 
   const handleDropOnList = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
     const {listId, listPos} = e.currentTarget.dataset
-    if (props.board_id) {
+    if (boardId) {
       if (draggingCardId && draggingCardListId && listId) {
-        const updated = service.moveCardToAnotherList(appState.value, draggingCardId, props.board_id, draggingCardListId, listId)
+        const updated = service.moveCardToAnotherList(appState.value, draggingCardId, boardId, draggingCardListId, listId)
         updateState(updated)
       } else if (!draggingCardId && draggingListId && listId) {
-        const updated = service.moveList(appState.value, draggingListId, props.board_id, listId, listPos as Pos)
+        const updated = service.moveList(appState.value, draggingListId, boardId, listId, listPos as Pos)
         updateState(updated)
       }
     }
@@ -89,8 +88,8 @@ export function PageBoard(props: PageBoardProps) {
 
   const handleDropOnSpacer = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
     const {listId, spacer} = e.currentTarget.dataset
-    if (listId && spacer && draggingCardId && props.board_id && draggingCardListId) {
-      const updated = service.moveCardToLastOfAnotherList(appState.value, draggingCardId, props.board_id, draggingCardListId, listId)
+    if (listId && spacer && draggingCardId && boardId && draggingCardListId) {
+      const updated = service.moveCardToLastOfAnotherList(appState.value, draggingCardId, boardId, draggingCardListId, listId)
       updateState(updated)
     }
   }
@@ -110,17 +109,13 @@ export function PageBoard(props: PageBoardProps) {
   }
 
   const updateListName = (id: string, name: string) => {
-    if (props.board_id) {
-      const updated = service.updateListName(appState.value, name, props.board_id, id)
-      updateState(updated)
-    }
+    const updated = service.updateListName(appState.value, name, boardId, id)
+    updateState(updated)
   }
 
   const addCard = (params: AddCardParams) => {
-    if (props.board_id) {
-      const updated = service.createCard(appState.value, params.cardName, props.board_id, params.listId)
-      updateState(updated)
-    }
+    const updated = service.createCard(appState.value, params.cardName, boardId, params.listId)
+    updateState(updated)
   }
 
   const moveCard = (pos: Pos, dropTargetCardId: string, dropTargetBoardId: string, dropTargetListId: string) => {
@@ -131,10 +126,8 @@ export function PageBoard(props: PageBoardProps) {
   }
 
   const updateCardName = (id: string, name: string, listId: string) => {
-    if (props.board_id) {
-      const updated = service.updateCardName(appState.value, id, name, props.board_id, listId)
-      updateState(updated)
-    }
+    const updated = service.updateCardName(appState.value, id, name, boardId, listId)
+    updateState(updated)
   }
 
   const deleteBoard = (id: string) => {
@@ -150,11 +143,9 @@ export function PageBoard(props: PageBoardProps) {
   const handleSubmitList = (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputElement.current) {
-      if (props.board_id) {
-        const updated = service.createList(appState.value, inputElement.current.value, props.board_id)
-        updateState(updated)
-        inputElement.current.value = ''
-      }
+      const updated = service.createList(appState.value, inputElement.current.value, boardId)
+      updateState(updated)
+      inputElement.current.value = ''
     }
   }
 
@@ -164,7 +155,7 @@ export function PageBoard(props: PageBoardProps) {
   }
 
   const found = appState.value.boards.find(b => {
-    return b.id === props.board_id
+    return b.id === boardId
   })
 
   return (

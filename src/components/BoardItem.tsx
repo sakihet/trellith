@@ -1,4 +1,4 @@
-import { Link } from "preact-router/match"
+import { Link } from "wouter-preact"
 import { JSX } from "preact/jsx-runtime"
 import { Pos } from "../types/pos"
 import { Board } from "../types/board"

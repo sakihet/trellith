@@ -30,7 +30,7 @@ Trellith includes the core features of Trello:
 ## Tech
 
 - [Preact](https://preactjs.com/)
-- [preact-router](https://github.com/preactjs/preact-router)
+- [wouter](https://github.com/molefrog/wouter)
 - [TypeScript](https://www.typescriptlang.org/)
 - [uuid](https://github.com/uuidjs/uuid)
 - [Vite](https://vitejs.dev/)
