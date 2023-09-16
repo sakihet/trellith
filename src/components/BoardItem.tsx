@@ -6,6 +6,7 @@ import { Board } from "../types/board"
 type BoardItemProps = {
   board: Omit<Board, 'lists'>
   pos: Pos
+  cardsNum: number
   handleDragEnd: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
   handleDragOver: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
   handleDragStart: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
@@ -13,7 +14,7 @@ type BoardItemProps = {
 }
 
 export function BoardItem(props: BoardItemProps) {
-  const { board, pos, handleDragEnd, handleDragOver, handleDragStart, handleDrop } = props
+  const { board, pos, cardsNum, handleDragEnd, handleDragOver, handleDragStart, handleDrop } = props
 
   return (
     <div
@@ -31,8 +32,13 @@ export function BoardItem(props: BoardItemProps) {
         href={`/board/${board.id}`}
         draggable={false}
       >
-        <div class="h-4">
-          {board.name}
+        <div class="h-4 flex-row">
+          <div class="f-1">
+            {board.name}
+          </div>
+          <div class="text-secondary font-mono">
+            {cardsNum}
+          </div>
         </div>
         <div class="h-4"></div>
       </Link>

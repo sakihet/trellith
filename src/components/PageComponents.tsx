@@ -76,6 +76,7 @@ export function PageComponents(props: PageComponentsProps) {
             <BoardItem
               board={board1}
               pos="first"
+              cardsNum={8}
               handleDragEnd={() => {}}
               handleDragOver={() => {}}
               handleDragStart={() => {}}

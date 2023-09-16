@@ -186,6 +186,7 @@ export function PageBoard(props: PageBoardProps) {
               <ListHeader
                 id={list.id}
                 name={list.name}
+                cardsNum={list.cards.length}
                 updateListName={updateListName}
                 handleClickDeleteList={handleClickDeleteList}
               />

@@ -20,6 +20,7 @@ export function BoardList(props: BoardListProps) {
           key={board.id}
           board={board}
           pos={idx === 0 ? "first" : (idx === (boards.length - 1) ? "last" : "middle")}
+          cardsNum={board.lists.map(l => l.cards.length).reduce((accumulator, value) => {return accumulator + value}, 0)}
           handleDragEnd={handleDragEnd}
           handleDragOver={handleDragOver}
           handleDragStart={handleDragStart}
