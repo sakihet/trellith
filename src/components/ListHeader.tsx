@@ -4,12 +4,13 @@ import { JSX } from "preact/jsx-runtime"
 type ListHeaderProps = {
   id: string
   name: string
+  cardsNum: number
   updateListName: (id: string, name: string) => void
   handleClickDeleteList: (e: JSX.TargetedEvent<HTMLButtonElement>) => void
 }
 
 export function ListHeader(props: ListHeaderProps) {
-  const {id, name, updateListName, handleClickDeleteList} = props
+  const {id, name, cardsNum, updateListName, handleClickDeleteList} = props
   const [editing, setEditing] = useState(false)
   const inputElement = useRef<HTMLInputElement>(null)
 
@@ -42,8 +43,16 @@ export function ListHeader(props: ListHeaderProps) {
                 ref={inputElement}
               />
             </form>
-          : <div onClick={handleClickEdit}>
-              {name}
+          : <div class="flex-row">
+              <div
+                class="f-1"
+                onClick={handleClickEdit}
+              >
+                {name}
+              </div>
+              <div class="px-2 text-secondary font-mono">
+                {cardsNum}
+              </div>
             </div>
         }
       </div>
