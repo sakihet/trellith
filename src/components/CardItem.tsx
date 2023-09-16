@@ -57,7 +57,7 @@ export function CardItem(props: CardItemProps) {
       data-list-id={listId}
       data-pos={pos}
     >
-      <div class="f-1">
+      <div class="f-1 overflow-x-hidden">
         {editing
           ? <form onSubmit={handleSubmit}>
               <input
@@ -67,7 +67,13 @@ export function CardItem(props: CardItemProps) {
                 ref={inputElement}
               />
             </form>
-          : <div onClick={handleClickEdit}>{name}</div>
+          :
+            <div
+              class="overflow-wrap-break-word"
+              onClick={handleClickEdit}
+            >
+              {name}
+            </div>
         }
       </div>
       <div class="hidden-child">

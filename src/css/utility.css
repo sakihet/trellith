@@ -356,3 +356,7 @@
 .unset {
   all: unset;
 }
+/* overflow-wrap */
+.overflow-wrap-break-word {
+  overflow-wrap: break-word;
+}
