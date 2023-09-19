@@ -32,8 +32,8 @@ export function ListHeader(props: ListHeaderProps) {
   }
 
   return (
-    <div class="flex-row h-4 cursor-grab parent-hiding-child">
-      <div class="f-1">
+    <div class="flex-row h-6 cursor-grab parent-hiding-child">
+      <div class="f-1 overflow-hidden">
         {editing
           ? <form onSubmit={handleSubmit}>
               <input
@@ -45,7 +45,7 @@ export function ListHeader(props: ListHeaderProps) {
             </form>
           : <div class="flex-row">
               <div
-                class="f-1"
+                class="f-1 nowrap overflow-x-hidden text-overflow-ellipsis"
                 onClick={handleClickEdit}
               >
                 {name}
@@ -57,7 +57,7 @@ export function ListHeader(props: ListHeaderProps) {
         }
       </div>
       <button
-        class="border-none text-secondary hidden-child h-4 px-1"
+        class="border-none text-secondary hidden-child h-6 px-1"
         type="button"
         onClick={handleClickDeleteList}
         data-list-id={id}
