@@ -360,3 +360,11 @@
 .overflow-wrap-break-word {
   overflow-wrap: break-word;
 }
+/* text-overflow */
+.text-overflow-ellipsis {
+  text-overflow: ellipsis;
+}
+/* white-space */
+.nowrap {
+  white-space: nowrap;
+}
