@@ -37,6 +37,7 @@ export function ListHeader(props: ListHeaderProps) {
         {editing
           ? <form onSubmit={handleSubmit}>
               <input
+                class="h-6 px-1 w-full"
                 type="text"
                 onBlur={handleBlur}
                 value={name}

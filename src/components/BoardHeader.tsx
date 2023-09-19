@@ -49,6 +49,7 @@ export function BoardHeader(props: BoardHeaderProps) {
               onSubmit={handleSubmit}
             >
               <input
+                class="h-6 w-64 px-1"
                 type="text"
                 value={name}
                 onBlur={handleBlur}

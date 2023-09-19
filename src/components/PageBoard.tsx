@@ -174,7 +174,7 @@ export function PageBoard(props: PageBoardProps) {
         {found && found.lists.map((list, idx) =>
           <div class="flex-column">
             <div
-              class="w-64 p-3 bg-secondary rounded-2 layout-stack-4 drop-shadow"
+              class="w-64 p-3 bg-secondary rounded-2 layout-stack-3 drop-shadow"
               draggable
               onDrop={handleDropOnList}
               onDragOver={handleDragOver}
@@ -209,10 +209,10 @@ export function PageBoard(props: PageBoardProps) {
             </div>
           </div>
         )}
-        <div class="p-4">
+        <div class="py-3">
           <form onSubmit={handleSubmitList}>
             <input
-              class="h-6 px-2 rounded-2 border-solid border-1 border-color-primary"
+              class="h-6 px-1 border-solid border-1 border-color-primary"
               type="text"
               placeholder="Enter list title..."
               ref={inputElement}

@@ -22,7 +22,7 @@ export function CardForm(props: CardFormProps) {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        class="h-6 px-2 rounded-2 border-0"
+        class="h-6 px-2 rounded-1 border-0"
         type="text"
         placeholder="Add a card"
         ref={inputElementCard}
