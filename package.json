@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "dependencies": {
     "@preact/signals": "^1.2.1",
