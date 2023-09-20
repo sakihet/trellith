@@ -24,7 +24,7 @@ class RepositoryObject implements Repository {
 }
 
 describe('ApplicationService', () => {
-  let service
+  let service: ApplicationService
   const boardId1 = uuidv4()
   const listId1 = uuidv4()
   const cardId1 = uuidv4()
@@ -63,18 +63,18 @@ describe('ApplicationService', () => {
   })
   it('createList', () => {
     const updated = service.createList(state, 'list2', boardId1)
-    expect(updated.boards.find(b => b.id === boardId1).lists.length).toEqual(2)
+    expect(updated.boards.find(b => b.id === boardId1)?.lists.length).toEqual(2)
   })
   it('deleteList', () => {
     const updated = service.deleteList(state, listId1, boardId1)
-    expect(updated.boards.find(b => b.id === boardId1).lists.length).toEqual(0)
+    expect(updated.boards.find(b => b.id === boardId1)?.lists.length).toEqual(0)
   })
   it('createCard', () => {
     const updated = service.createCard(state, 'card2', boardId1, listId1)
-    expect(updated.boards.find(b => b.id === boardId1).lists.find(l => l.id === listId1).cards.length).toEqual(2)
+    expect(updated.boards.find(b => b.id === boardId1)?.lists.find(l => l.id === listId1)?.cards.length).toEqual(2)
   })
   it('deleteCard', () => {
     const updated = service.deleteCard(state, cardId1, boardId1, listId1)
-    expect(updated.boards.find(b => b.id === boardId1).lists.find(l => l.id === listId1).cards.length).toEqual(0)
+    expect(updated.boards.find(b => b.id === boardId1)?.lists.find(l => l.id === listId1)?.cards.length).toEqual(0)
   })
 })
