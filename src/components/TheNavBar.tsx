@@ -1,7 +1,7 @@
-import { Link } from "wouter-preact";
-import { Theme } from "../types/theme";
-import { Signal } from "@preact/signals";
-import { applyTheme, setTheme } from "../utils";
+import { Link } from "wouter-preact"
+import { Theme } from "../types/theme"
+import { Signal } from "@preact/signals"
+import { applyTheme, setTheme } from "../utils"
 
 type TheNavBarProps = {
   theme: Signal<Theme>
