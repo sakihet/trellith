@@ -7,13 +7,14 @@ import { RepositoryLocalStorage } from '../repositories/repository'
 import { Pos } from '../types/pos'
 import { State } from '../types/state'
 import { BoardList } from './BoardList'
+import { AppButton } from './AppButton'
 
 type PageIndexProps = {
   appState: Signal<State>
 }
 
 export function PageIndex(props: PageIndexProps) {
-  const {appState} = props
+  const { appState } = props
   const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
   const detailsElement = useRef<HTMLDetailsElement>(null)
 
@@ -39,14 +40,14 @@ export function PageIndex(props: PageIndexProps) {
     if (e.dataTransfer) {
       e.dataTransfer.effectAllowed = 'move'
     }
-    const {boardId} = e.currentTarget.dataset
+    const { boardId } = e.currentTarget.dataset
     if (boardId) {
-      setTimeout(() => {setDraggingBoardId(boardId)}, 100)
+      setTimeout(() => { setDraggingBoardId(boardId) }, 100)
     }
   }
 
   const handleDrop = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
-    const {boardId, pos} = e.currentTarget.dataset
+    const { boardId, pos } = e.currentTarget.dataset
     if (boardId && pos && draggingBoardId) {
       appState.value = service.moveBoard(appState.value, draggingBoardId, pos as Pos, boardId)
     }
@@ -68,14 +69,13 @@ export function PageIndex(props: PageIndexProps) {
         <div class="overflow-hidden layout-stack-4">
           <div class="flex-row h-12 py-3 overflow-hidden">
             <h2 class="text-medium text-primary f-1 m-0">Boards</h2>
-            <button
-              class="px-2 border-none text-secondary"
-              type="button"
+            <AppButton
+              text={'Clear'}
               onClick={handleClickClear}
-            >Clear</button>
+            />
           </div>
           <div>
-            <BoardForm addBoard={addBoard}/>
+            <BoardForm addBoard={addBoard} />
           </div>
           <div class="overflow-y-auto">
             <BoardList
@@ -88,7 +88,7 @@ export function PageIndex(props: PageIndexProps) {
           </div>
           <div>
             <h2 class="text-medium">Storage</h2>
-            {storageDataSize >=0 &&
+            {storageDataSize >= 0 &&
               <div class="px-4 py-1">
                 <span class="text-secondary font-mono">
                   {storageDataSize} / {STORAGE_LIMIT} bytes used on localStorage

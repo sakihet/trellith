@@ -2,13 +2,14 @@ import { Link } from "wouter-preact"
 import { Theme } from "../types/theme"
 import { Signal } from "@preact/signals"
 import { applyTheme, setTheme } from "../utils"
+import { AppButton } from "./AppButton"
 
 type TheNavBarProps = {
   theme: Signal<Theme>
 }
 
 export function TheNavBar(props: TheNavBarProps) {
-  const {theme} = props
+  const { theme } = props
   const handleClick = () => {
     if (theme.value === 'light') {
       theme.value = 'dark'
@@ -34,13 +35,10 @@ export function TheNavBar(props: TheNavBarProps) {
       </div>
       <div class="f-1 h-6 text-right">
         <div class="layout-stack-horizontal-1">
-          <button
-            class="px-2 py-1 border-none text-secondary cursor-pointer"
-            type="button"
+          <AppButton
+            text={theme.value === 'light' ? 'Light' : 'Dark'}
             onClick={handleClick}
-          >
-            {theme.value === 'light' ? 'Light' : 'Dark'}
-          </button>
+          />
           <Link
             href="/about"
             class="text-decoration-none text-secondary text-small hover px-2 py-1"
