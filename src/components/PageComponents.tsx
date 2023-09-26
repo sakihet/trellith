@@ -37,17 +37,27 @@ export function PageComponents(props: PageComponentsProps) {
   const boards: Board[] = [
     board1, board2, board3
   ]
+  const now = new Date()
   const card1: Card = {
     id: uuidv4(),
     name: 'Card 1',
+    description: '',
+    createdAt: now,
+    updatedAt: now
   }
   const card2: Card = {
     id: uuidv4(),
-    name: 'Card 2'
+    name: 'Card 2',
+    description: '',
+    createdAt: now,
+    updatedAt: now
   }
   const card3: Card = {
     id: uuidv4(),
-    name: 'Card 3'
+    name: 'Card 3',
+    description: '',
+    createdAt: now,
+    updatedAt: now
   }
   const cards = [card1, card2, card3]
   const list1: List = {
@@ -66,7 +76,7 @@ export function PageComponents(props: PageComponentsProps) {
           <h3>BoardForm</h3>
           <div>
             <BoardForm
-              addBoard={() => {}}
+              addBoard={() => { }}
             />
           </div>
         </div>
@@ -77,10 +87,10 @@ export function PageComponents(props: PageComponentsProps) {
               board={board1}
               pos="first"
               cardsNum={8}
-              handleDragEnd={() => {}}
-              handleDragOver={() => {}}
-              handleDragStart={() => {}}
-              handleDrop={() => {}}
+              handleDragEnd={() => { }}
+              handleDragOver={() => { }}
+              handleDragStart={() => { }}
+              handleDrop={() => { }}
             />
           </div>
         </div>
@@ -89,10 +99,10 @@ export function PageComponents(props: PageComponentsProps) {
           <div>
             <BoardList
               boards={boards}
-              handleDragEnd={() => {}}
-              handleDragOver={() => {}}
-              handleDragStart={() => {}}
-              handleDrop={() => {}}
+              handleDragEnd={() => { }}
+              handleDragOver={() => { }}
+              handleDragStart={() => { }}
+              handleDrop={() => { }}
             />
           </div>
         </div>
@@ -102,8 +112,8 @@ export function PageComponents(props: PageComponentsProps) {
             <BoardHeader
               id={board1.id}
               name={board1.name}
-              updateBoardName={() => {}}
-              deleteBoard={() => {}}
+              updateBoardName={() => { }}
+              deleteBoard={() => { }}
             />
           </div>
         </div>
@@ -112,7 +122,7 @@ export function PageComponents(props: PageComponentsProps) {
           <div>
             <CardForm
               listId={'list1'}
-              addCard={() => {}}
+              addCard={() => { }}
             />
           </div>
         </div>
@@ -124,11 +134,11 @@ export function PageComponents(props: PageComponentsProps) {
               listId={'list1'}
               name={'Card 1'}
               pos={'first'}
-              updateCardName={() => {}}
-              handleClickDelete={() => {}}
-              handleDragEnd={() => {}}
-              handleDragStart={() => {}}
-              handleDrop={() => {}}
+              updateCardName={() => { }}
+              handleClickDelete={() => { }}
+              handleDragEnd={() => { }}
+              handleDragStart={() => { }}
+              handleDrop={() => { }}
             />
           </div>
         </div>
@@ -139,13 +149,13 @@ export function PageComponents(props: PageComponentsProps) {
               cards={cards}
               listId={list1.id}
               isDragEnterCardFromTheOther={false}
-              updateCardName={() => {}}
-              handleClickDeleteCard={() => {}}
-              handleDragEndCard={() => {}}
-              handleDragEnterCard={() => {}}
-              handleDragStartCard={() => {}}
-              handleDropOnCard={() => {}}
-              handleDropOnSpacer={()=> {}}
+              updateCardName={() => { }}
+              handleClickDeleteCard={() => { }}
+              handleDragEndCard={() => { }}
+              handleDragEnterCard={() => { }}
+              handleDragStartCard={() => { }}
+              handleDropOnCard={() => { }}
+              handleDropOnSpacer={() => { }}
             />
           </div>
         </div>
