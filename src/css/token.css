@@ -31,12 +31,14 @@ body {
   --color-border-primary: var(--color-gray-300);
   --color-bg-scrollbar: var(--color-gray-300);
   --color-bg-scrollbar-thumb: var(--color-gray-500);
+  --color-bg-mask: var(--color-gray-300);
   --color-text-primary: var(--color-gray-900);
   --color-text-secondary: var(--color-gray-600);
+  --color-text-tertiary: var(--color-gray-400);
 }
 
 /* dark */
-.dark > * {
+.dark>* {
   color-scheme: dark;
   --color-bg-hover: var(--color-gray-700);
   --color-bg-link: var(--color-gray-700);
@@ -45,6 +47,8 @@ body {
   --color-border-primary: var(--color-gray-600);
   --color-bg-scrollbar: var(--color-gray-700);
   --color-bg-scrollbar-thumb: var(--color-gray-500);
+  --color-bg-mask: var(--color-gray-600);
   --color-text-primary: var(--color-gray-50);
   --color-text-secondary: var(--color-gray-200);
+  --color-text-tertiary: var(--color-gray-400);
 }

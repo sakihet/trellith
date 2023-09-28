@@ -37,7 +37,7 @@ export function PageComponents(props: PageComponentsProps) {
   const boards: Board[] = [
     board1, board2, board3
   ]
-  const now = new Date()
+  const now = new Date().toISOString()
   const card1: Card = {
     id: uuidv4(),
     name: 'Card 1',
@@ -135,7 +135,6 @@ export function PageComponents(props: PageComponentsProps) {
               name={'Card 1'}
               pos={'first'}
               updateCardName={() => { }}
-              handleClickDelete={() => { }}
               handleDragEnd={() => { }}
               handleDragStart={() => { }}
               handleDrop={() => { }}
@@ -150,7 +149,6 @@ export function PageComponents(props: PageComponentsProps) {
               listId={list1.id}
               isDragEnterCardFromTheOther={false}
               updateCardName={() => { }}
-              handleClickDeleteCard={() => { }}
               handleDragEndCard={() => { }}
               handleDragEnterCard={() => { }}
               handleDragStartCard={() => { }}

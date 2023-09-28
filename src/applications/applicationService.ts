@@ -6,6 +6,29 @@ import { State } from "../types/state"
 import { Card } from '../types/card'
 import { Pos } from '../types/pos'
 
+const migrateState = (state: State): State => {
+  const boardsUpdaetd = state.boards.map(b => {
+    const listsUpdated = b.lists.map(l => {
+      const cardsUpdated = l.cards.map(c => {
+        const nowStr = new Date().toISOString()
+        if (!c.description) {
+          c.description = ''
+        }
+        if (!c.createdAt) {
+          c.createdAt = nowStr
+        }
+        if (!c.updatedAt) {
+          c.updatedAt = nowStr
+        }
+        return c
+      })
+      return { ...l, cards: cardsUpdated }
+    })
+    return { ...b, lists: listsUpdated }
+  })
+  return { boards: boardsUpdaetd }
+}
+
 export class ApplicationService {
   repository: Repository
 
@@ -21,7 +44,9 @@ export class ApplicationService {
     return { boards: [] }
   }
   load(): State {
-    return this.repository.get()
+    const result = this.repository.get()
+    const resultUpdated = migrateState(result)
+    return resultUpdated
   }
   // Board
   createBoard(state: State, name: string): State {
@@ -176,8 +201,8 @@ export class ApplicationService {
       id: uuidv4(),
       name: name,
       description: '',
-      createdAt: now,
-      updatedAt: now
+      createdAt: now.toISOString(),
+      updatedAt: now.toISOString()
     }
     const board = state.boards.find(b => b.id === boardId)
     if (board) {
@@ -334,6 +359,23 @@ export class ApplicationService {
   findCard(state: State, id: string, boardId: string, listId: string) {
     return state.boards.find(b => b.id === boardId)?.lists.find(l => l.id === listId)?.cards.find(b => b.id === id)
   }
+  findCardFromBoard(state: State, id: string, boardId: string) {
+    return state.boards.find(b => b.id === boardId)?.lists.map(l => l.cards.find(b => b.id === id)).filter(c => c)[0]
+  }
+  findCardListIdFromBoard(state: State, id: string, boardId: string) {
+    let listId
+    state.boards.map(b => {
+      if (b.id === boardId) {
+        b.lists.map(l => {
+          const found = l.cards.find(c => c.id === id)
+          if (found) {
+            listId = l.id
+          }
+        })
+      }
+    })
+    return listId
+  }
   moveCardToAnotherList(state: State, id: string, boardId: string, listIdSrc: string, listIdDst: string) {
     const found = this.findCard(state, id, boardId, listIdSrc)
     if (found && (listIdSrc !== listIdDst)) {
@@ -389,7 +431,34 @@ export class ApplicationService {
                 ? {
                   ...l, cards: l.cards.map(c => {
                     return ((c.id === cardId)
-                      ? { ...c, name: name, updatedAt: now }
+                      ? { ...c, name: name, updatedAt: now.toISOString() }
+                      : c)
+                  }
+                  )
+                }
+                : l
+              )
+            })
+          }
+          : b
+        )
+      })
+    }
+    this.repository.set(updated)
+    return updated
+  }
+  updateCardDescription(state: State, cardId: string, description: string, boardId: string, listId: string): State {
+    const now = new Date()
+    const updated = {
+      boards: state.boards.map(b => {
+        return ((b.id === boardId)
+          ? {
+            ...b, lists: b.lists.map(l => {
+              return ((l.id === listId)
+                ? {
+                  ...l, cards: l.cards.map(c => {
+                    return ((c.id === cardId)
+                      ? { ...c, description: description, updatedAt: now.toISOString() }
                       : c)
                   }
                   )

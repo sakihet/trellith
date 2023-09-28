@@ -1,5 +1,6 @@
 import { useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
+import { useLocation } from "wouter-preact"
 import { Pos } from "../types/pos"
 
 type CardItemProps = {
@@ -8,7 +9,6 @@ type CardItemProps = {
   name: string
   pos: Pos
   updateCardName: (id: string, name: string, listId: string) => void
-  handleClickDelete: (e: JSX.TargetedEvent<HTMLButtonElement>) => void
   handleDragEnd: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
   handleDragStart: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
   handleDrop: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
@@ -21,13 +21,13 @@ export function CardItem(props: CardItemProps) {
     name,
     pos,
     updateCardName,
-    handleClickDelete,
     handleDragEnd,
     handleDragStart,
     handleDrop
   } = props
   const [editing, setEditing] = useState(false)
   const inputElement = useRef<HTMLInputElement>(null)
+  const [location, setLocation] = useLocation()
 
   const handleBlur = () => {
     setEditing(false)
@@ -37,6 +37,9 @@ export function CardItem(props: CardItemProps) {
     setTimeout(() => {
       inputElement.current?.focus()
     }, 100)
+  }
+  const handleClickOpenDialog = () => {
+    setLocation(`${location}/card/${id}`)
   }
   const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -60,31 +63,29 @@ export function CardItem(props: CardItemProps) {
       <div class="f-1 overflow-x-hidden">
         {editing
           ? <form onSubmit={handleSubmit}>
-              <input
-                class="h-6 w-full px-1"
-                type="text"
-                onBlur={handleBlur}
-                value={name}
-                ref={inputElement}
-              />
-            </form>
+            <input
+              class="h-6 w-full px-1"
+              type="text"
+              onBlur={handleBlur}
+              value={name}
+              ref={inputElement}
+            />
+          </form>
           :
-            <div
-              class="overflow-wrap-break-word"
-              onClick={handleClickEdit}
-            >
-              {name}
-            </div>
+          <div
+            class="overflow-wrap-break-word"
+            onClick={handleClickEdit}
+          >
+            {name}
+          </div>
         }
       </div>
       <div class="hidden-child">
         <button
-          class="border-none text-secondary px-1"
+          class="h-6 w-6 border-none text-secondary px-1"
           type="button"
-          data-card-id={id}
-          data-list-id={listId}
-          onClick={handleClickDelete}
-        >x</button>
+          onClick={handleClickOpenDialog}
+        >○</button>
       </div>
     </div>
   )

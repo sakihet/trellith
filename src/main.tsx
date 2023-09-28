@@ -18,15 +18,16 @@ import './css/utility.css'
 import './css/layout.css'
 import './css/pattern.css'
 import { applyTheme } from './utils.ts'
+import { State } from './types/state.ts'
 
-const {appState, appTheme} = createAppState()
+const { appState, appTheme } = createAppState()
 
 function Main() {
   const repository = new RepositoryLocalStorage()
   const service = new ApplicationService(repository)
 
   useEffect(() => {
-    const result = service.load()
+    const result: State = service.load()
     if (result) {
       appState.value = result
     }
@@ -46,10 +47,19 @@ function Main() {
           <PageAbout />
         </Route>
         <Route path="/board/:boardId">
-          {params => 
+          {params =>
             <PageBoard
               appState={appState}
               boardId={params.boardId}
+            />
+          }
+        </Route>
+        <Route path="/board/:boardId/card/:cardId">
+          {params =>
+            <PageBoard
+              appState={appState}
+              boardId={params.boardId}
+              cardId={params.cardId}
             />
           }
         </Route>

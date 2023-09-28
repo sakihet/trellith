@@ -43,8 +43,8 @@ describe('ApplicationService', () => {
                 id: cardId1,
                 name: 'card 1',
                 description: '',
-                createdAt: now,
-                updatedAt: now
+                createdAt: now.toISOString(),
+                updatedAt: now.toISOString()
               }
             ]
           }
@@ -87,7 +87,7 @@ describe('ApplicationService', () => {
     const cardAfter = updated.boards.find(b => b.id === boardId1)?.lists.find(l => l.id === listId1)?.cards.find(c => c.id === cardId1)
     if (cardAfter && cardBefore) {
       expect(cardAfter.name).toEqual('updated')
-      expect(cardAfter.updatedAt.getTime()).toBeGreaterThan(cardBefore.updatedAt.getTime())
+      expect(new Date(cardAfter.updatedAt).getTime()).toBeGreaterThan(new Date(cardBefore.updatedAt).getTime())
     }
   })
 })

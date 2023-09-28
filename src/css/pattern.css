@@ -1,15 +1,18 @@
 /* dropdown */
-.pattern-dropdown > summary {
+.pattern-dropdown>summary {
   list-style: none;
 }
-.pattern-dropdown > summary::-webkit-details-marker {
+
+.pattern-dropdown>summary::-webkit-details-marker {
   display: none;
 }
-.pattern-dropdown > div {
+
+.pattern-dropdown>div {
   position: absolute;
   z-index: 100;
 }
-details[open].pattern-dropdown > summary:before {
+
+details[open].pattern-dropdown>summary:before {
   content: " ";
   display: block;
   position: fixed;
@@ -19,21 +22,36 @@ details[open].pattern-dropdown > summary:before {
   bottom: 0;
   z-index: 50;
 }
+
 /* scrollbar-thick */
 .pattern-scrollbar-thick::-webkit-scrollbar {
   width: 8px;
   height: 8px;
   background-color: var(--color-bg-scrollbar);
 }
+
 .pattern-scrollbar-thick::-webkit-scrollbar-thumb {
   background-color: var(--color-bg-scrollbar-thumb);
 }
+
 /* scrollbar-thin */
 .pattern-scrollbar-thin::-webkit-scrollbar {
   width: 4px;
   height: 4px;
   background-color: var(--color-bg-scrollbar);
 }
+
 .pattern-scrollbar-thin::-webkit-scrollbar-thumb {
   background-color: var(--color-bg-scrollbar-thumb);
+}
+
+/* mask */
+.pattern-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg-mask);
+  opacity: 0.5;
 }
