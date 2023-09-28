@@ -7,7 +7,6 @@ type CardListProps = {
   listId: string
   isDragEnterCardFromTheOther: boolean
   updateCardName: (id: string, name: string, listId: string) => void
-  handleClickDeleteCard: (e: JSX.TargetedEvent<HTMLButtonElement>) => void
   handleDragEndCard: () => void
   handleDragEnterCard: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
   handleDragStartCard: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
@@ -21,7 +20,6 @@ export function CardList(props: CardListProps) {
     listId,
     isDragEnterCardFromTheOther,
     updateCardName,
-    handleClickDeleteCard,
     handleDragEndCard,
     handleDragEnterCard,
     handleDragStartCard,
@@ -45,20 +43,19 @@ export function CardList(props: CardListProps) {
             name={card.name}
             pos={idx === 0 ? "first" : (idx === (cards.length - 1) ? "last" : "middle")}
             updateCardName={updateCardName}
-            handleClickDelete={handleClickDeleteCard}
             handleDragEnd={handleDragEndCard}
             handleDragStart={handleDragStartCard}
             handleDrop={handleDropOnCard}
           />
-      )}
+        )}
       {isDragEnterCardFromTheOther
         &&
-          <div
-            class="h-8"
-            data-list-id={listId}
-            data-spacer
-            onDrop={handleDropOnSpacer}
-          />
+        <div
+          class="h-8"
+          data-list-id={listId}
+          data-spacer
+          onDrop={handleDropOnSpacer}
+        />
       }
     </div>
   )
