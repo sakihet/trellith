@@ -17,7 +17,7 @@ export function BoardHeader(props: BoardHeaderProps) {
   const handleBlur = () => {
     setIsEditing(false)
   }
-  
+
   const handleClick = () => {
     setIsEditing(true)
     setTimeout(() => {
@@ -46,16 +46,16 @@ export function BoardHeader(props: BoardHeaderProps) {
       >
         {isEditing
           ? <form
-              onSubmit={handleSubmit}
-            >
-              <input
-                class="h-6 w-64 px-1"
-                type="text"
-                value={name}
-                onBlur={handleBlur}
-                ref={inputElement}
-              />
-            </form>
+            onSubmit={handleSubmit}
+          >
+            <input
+              class="h-6 w-64 text-medium"
+              type="text"
+              value={name}
+              onBlur={handleBlur}
+              ref={inputElement}
+            />
+          </form>
           : <div>{name}</div>
         }
       </h2>
@@ -66,7 +66,7 @@ export function BoardHeader(props: BoardHeaderProps) {
           </summary>
           <div class="border-solid border-1 border-color-primary py-1 r-3 bg-primary">
             <ul class="list-style-none pl-0 py-0 m-0 text-secondary">
-              <li class="h-8 px-4 py-2 hover cursor-pointer">
+              <li class="h-8 px-4 py-1 hover cursor-pointer">
                 <button
                   class="unset px-4"
                   type="button"

@@ -64,7 +64,7 @@ export function CardItem(props: CardItemProps) {
         {editing
           ? <form onSubmit={handleSubmit}>
             <input
-              class="h-6 w-full px-1"
+              class="h-6 w-full text-medium"
               type="text"
               onBlur={handleBlur}
               value={name}
