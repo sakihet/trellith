@@ -344,7 +344,7 @@ export function PageBoard(props: PageBoardProps) {
               >
                 {dialogCard.description === ""
                   ? <div class="text-tertiary">No description</div>
-                  : <div class="text-secondary">{dialogCard.description}</div>
+                  : <div class="text-secondary overflow-x-hidden">{dialogCard.description}</div>
                 }
               </pre>
             }

@@ -8,13 +8,13 @@ type CardFormProps = {
 }
 
 export function CardForm(props: CardFormProps) {
-  const {listId, addCard} = props
+  const { listId, addCard } = props
   const inputElementCard = useRef<HTMLInputElement>(null)
 
   const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputElementCard.current?.value) {
-      addCard({listId: listId, cardName: inputElementCard.current?.value})
+      addCard({ listId: listId, cardName: inputElementCard.current?.value })
       inputElementCard.current.value = ''
     }
   }

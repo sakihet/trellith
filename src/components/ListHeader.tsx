@@ -10,7 +10,7 @@ type ListHeaderProps = {
 }
 
 export function ListHeader(props: ListHeaderProps) {
-  const {id, name, cardsNum, updateListName, handleClickDeleteList} = props
+  const { id, name, cardsNum, updateListName, handleClickDeleteList } = props
   const [editing, setEditing] = useState(false)
   const inputElement = useRef<HTMLInputElement>(null)
 
@@ -36,29 +36,29 @@ export function ListHeader(props: ListHeaderProps) {
       <div class="f-1 overflow-hidden">
         {editing
           ? <form onSubmit={handleSubmit}>
-              <input
-                class="h-6 px-1 w-full"
-                type="text"
-                onBlur={handleBlur}
-                value={name}
-                ref={inputElement}
-              />
-            </form>
+            <input
+              class="h-6 px-1 w-full"
+              type="text"
+              onBlur={handleBlur}
+              value={name}
+              ref={inputElement}
+            />
+          </form>
           : <div class="flex-row">
-              <div
-                class="f-1 nowrap overflow-x-hidden text-overflow-ellipsis"
-                onClick={handleClickEdit}
-              >
-                {name}
-              </div>
-              <div class="px-2 text-secondary font-mono">
-                {cardsNum}
-              </div>
+            <div
+              class="f-1 nowrap overflow-x-hidden text-overflow-ellipsis"
+              onClick={handleClickEdit}
+            >
+              {name}
             </div>
+            <div class="px-2 text-secondary font-mono">
+              {cardsNum}
+            </div>
+          </div>
         }
       </div>
       <button
-        class="border-none text-secondary hidden-child h-6 px-1"
+        class="border-none text-secondary hidden-child h-6 px-2"
         type="button"
         onClick={handleClickDeleteList}
         data-list-id={id}

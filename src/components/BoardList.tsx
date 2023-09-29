@@ -11,7 +11,7 @@ type BoardListProps = {
 }
 
 export function BoardList(props: BoardListProps) {
-  const {boards, handleDragEnd, handleDragOver, handleDragStart, handleDrop} = props
+  const { boards, handleDragEnd, handleDragOver, handleDragStart, handleDrop } = props
 
   return (
     <div class="layout-stack-2 overflow-y-auto height-board-list py-2 pr-2 pattern-scrollbar-thick">
@@ -20,7 +20,7 @@ export function BoardList(props: BoardListProps) {
           key={board.id}
           board={board}
           pos={idx === 0 ? "first" : (idx === (boards.length - 1) ? "last" : "middle")}
-          cardsNum={board.lists.map(l => l.cards.length).reduce((accumulator, value) => {return accumulator + value}, 0)}
+          cardsNum={board.lists.map(l => l.cards.length).reduce((accumulator, value) => { return accumulator + value }, 0)}
           handleDragEnd={handleDragEnd}
           handleDragOver={handleDragOver}
           handleDragStart={handleDragStart}
