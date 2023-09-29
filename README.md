@@ -14,8 +14,11 @@ Since data is stored in localStorage, the main thread gets blocked, and there is
 
 ## Screenshots
 
-![trellith-board](screenshots/trellith-board.png)
-![trellith-index](screenshots/trellith-index.png)
+||light|dark|
+| - | - | - |
+|board|![board-light](screenshots/trellith-board-light.png)|![board-dark](screenshots/trellith-board-dark.png)|
+|card |![card-light](screenshots/trellith-card-light.png)|![card-dark](screenshots/trellith-card-dark.png)|
+|index|![index-light](screenshots/trellith-index-light.png)|![index-dark](screenshots/trellith-index-dark.png)|
 
 ## Features
 
