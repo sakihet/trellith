@@ -305,13 +305,13 @@ export function PageBoard(
           open
           class="layout-center w-full h-32 flex-column p-8 border-solid border-1 border-color-primary layout-stack-4 bg-primary"
         >
-          <div class="h-6 flex-row">
+          <div class="flex-row">
             <div class="text-large f-1">
               {dialogCardEditingName
                 ?
                 <form onSubmit={handleSubmitDialogCardName}>
                   <input
-                    class="h-6 w-64 border-solid border-1 border-color-primary text-large"
+                    class="h-8 w-full border-solid border-1 border-color-primary text-large"
                     type="text"
                     ref={refDialogCardNameInput}
                     onBlur={handleBlurDialogCardName}
