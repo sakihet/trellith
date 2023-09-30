@@ -129,6 +129,7 @@ export function PageComponents() {
               listId={'list1'}
               name={'Card 1'}
               pos={'first'}
+              hasDescription={true}
               updateCardName={() => { }}
               handleDragEnd={() => { }}
               handleDragStart={() => { }}

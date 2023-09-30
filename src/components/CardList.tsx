@@ -42,6 +42,7 @@ export function CardList(props: CardListProps) {
             listId={listId}
             name={card.name}
             pos={idx === 0 ? "first" : (idx === (cards.length - 1) ? "last" : "middle")}
+            hasDescription={card.description !== ''}
             updateCardName={updateCardName}
             handleDragEnd={handleDragEndCard}
             handleDragStart={handleDragStartCard}
