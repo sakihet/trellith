@@ -9,15 +9,9 @@ import { State } from '../types/state'
 import { BoardList } from './BoardList'
 import { AppButton } from './AppButton'
 
-type PageIndexProps = {
-  appState: Signal<State>
-}
-
-export function PageIndex(props: PageIndexProps) {
-  const { appState } = props
+export function PageIndex({ appState }: { appState: Signal<State> }) {
   const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
   const detailsElement = useRef<HTMLDetailsElement>(null)
-
   const repository = new RepositoryLocalStorage()
   const service = new ApplicationService(repository)
 

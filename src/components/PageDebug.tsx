@@ -1,9 +1,4 @@
-type PageDebugProps = {
-}
-
-export function PageDebug(props: PageDebugProps) {
-  console.log(props)
-
+export function PageDebug() {
   return (
     <div class="layout-center">
       <div>

@@ -9,19 +9,19 @@ export interface Repository {
 }
 
 export class RepositoryLocalStorage implements Repository {
-  set (state: State) {
+  set(state: State) {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state))
     return
   }
-  get (): State {
+  get(): State {
     const value = localStorage.getItem(LOCAL_STORAGE_KEY)
     if (value) {
       return JSON.parse(value)
     } else {
-      return {boards: []}
+      return { boards: [] }
     }
   }
-  remove () {
+  remove() {
     localStorage.removeItem(LOCAL_STORAGE_KEY)
     return
   }

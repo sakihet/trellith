@@ -12,19 +12,22 @@ import { State } from '../types/state'
 import { CardList } from './CardList'
 import { Card } from '../types/card'
 
-type PageBoardProps = {
-  appState: Signal<State>
-  boardId: string
-  cardId?: string
-}
-
 export type AddCardParams = {
   listId: string
   cardName: string
 }
 
-export function PageBoard(props: PageBoardProps) {
-  const { appState, boardId, cardId } = props
+export function PageBoard(
+  {
+    appState,
+    boardId,
+    cardId
+  }: {
+    appState: Signal<State>,
+    boardId: string,
+    cardId?: string
+  }
+) {
   const [draggingCardId, setDraggingCardId] = useState<string | undefined>(undefined)
   const [draggingCardListId, setDraggingCardListId] = useState<string | undefined>(undefined)
   const [draggingListId, setDraggingListId] = useState<string | undefined>(undefined)

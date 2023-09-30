@@ -13,12 +13,7 @@ import { List } from '../types/list'
 import { BoardHeader } from './BoardHeader'
 import { signal } from '@preact/signals'
 
-type PageComponentsProps = {
-}
-
-export function PageComponents(props: PageComponentsProps) {
-  console.log(props)
-
+export function PageComponents() {
   const board1: Board = {
     id: uuidv4(),
     name: 'Board 1',
@@ -26,12 +21,12 @@ export function PageComponents(props: PageComponentsProps) {
   }
   const board2: Board = {
     id: uuidv4(),
-    name: 'Board 1',
+    name: 'Board 2',
     lists: []
   }
   const board3: Board = {
     id: uuidv4(),
-    name: 'Board 1',
+    name: 'Board 3',
     lists: []
   }
   const boards: Board[] = [

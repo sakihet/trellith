@@ -1,8 +1,4 @@
-type PageAboutProps = {}
-
-export function PageAbout(props: PageAboutProps) {
-  console.log(props)
-
+export function PageAbout() {
   return (
     <div class="px-4">
       <div class="layout-center">
