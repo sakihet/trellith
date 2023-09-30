@@ -403,11 +403,11 @@
 }
 
 /* pattern */
-.parent-hiding-child:hover>.hidden-child {
+.parent-hiding-child:hover>*>.hidden-child {
   visibility: visible;
 }
 
-.parent-hiding-child>.hidden-child {
+.parent-hiding-child>*>.hidden-child {
   visibility: hidden;
 }
 
