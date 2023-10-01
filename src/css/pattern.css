@@ -53,5 +53,5 @@ details[open].pattern-dropdown>summary:before {
   width: 100%;
   height: 100%;
   background-color: var(--color-bg-mask);
-  opacity: 0.5;
+  opacity: 0.75;
 }
