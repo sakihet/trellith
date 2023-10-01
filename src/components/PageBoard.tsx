@@ -11,6 +11,7 @@ import { Pos } from '../types/pos'
 import { State } from '../types/state'
 import { CardList } from './CardList'
 import { Card } from '../types/card'
+import { relativeTime } from '../utils'
 
 export type AddCardParams = {
   listId: string
@@ -354,10 +355,10 @@ export function PageBoard(
           </div>
           <div class="text-right layout-stack-2">
             <div class="text-tertiary text-small">
-              <span>Created: {dialogCard.createdAt}</span>
+              <span>Created: {relativeTime(dialogCard.createdAt)}</span>
             </div>
             <div class="text-tertiary text-small">
-              <span>Updated: {dialogCard.updatedAt}</span>
+              <span>Updated: {relativeTime(dialogCard.updatedAt)}</span>
             </div>
           </div>
         </dialog>
