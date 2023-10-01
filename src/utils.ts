@@ -21,3 +21,22 @@ export const getTheme = (): Theme => {
 export const setTheme = (theme: Theme) => {
   localStorage.setItem('theme', theme)
 }
+
+export const relativeTime = (dateStr: string): string => {
+  const now = new Date().getTime()
+  const diff = now - new Date(dateStr).getTime()
+  const formatter = new Intl.RelativeTimeFormat('en')
+  let formatted
+  if (diff < 1000 * 10) {
+    formatted = 'now'
+  } else if (diff < 1000 * 60) {
+    formatted = formatter.format(-(Math.floor(diff / 1000)), 'second')
+  } else if (diff < 1000 * 60 * 60) {
+    formatted = formatter.format(-(Math.floor(diff / (1000 * 60))), 'minute')
+  } else if (diff < 1000 * 60 * 60 * 24) {
+    formatted = formatter.format(-(Math.floor(diff / (1000 * 60 * 60))), 'hour')
+  } else {
+    formatted = formatter.format(-(Math.floor(diff / (1000 * 60 * 60 * 24))), 'day')
+  }
+  return formatted
+}
