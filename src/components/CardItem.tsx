@@ -51,7 +51,7 @@ export function CardItem(
 
   return (
     <div
-      class="rounded-1 p-2 bg-primary flex-column cursor-grab drop-shadow parent-hiding-child hover-bg-card-item"
+      class="rounded-1 p-2 bg-primary flex-column cursor-grab drop-shadow pattern-hiding-child hover-bg-card-item"
       draggable
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
@@ -81,7 +81,7 @@ export function CardItem(
             </div>
           }
         </div>
-        <div class="hidden-child">
+        <div class="pattern-hidden-child">
           <button
             class="h-6 w-6 border-none text-secondary px-1"
             type="button"
