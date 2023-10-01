@@ -297,6 +297,10 @@
   border-width: 1px;
 }
 
+.border-2 {
+  border-width: 2px;
+}
+
 .border-color-primary {
   border-color: var(--color-border-primary);
 }
@@ -490,4 +494,12 @@
 /* white-space */
 .nowrap {
   white-space: nowrap;
+}
+
+.wrap {
+  white-space: wrap;
+}
+
+.pre-wrap {
+  white-space: pre-wrap;
 }

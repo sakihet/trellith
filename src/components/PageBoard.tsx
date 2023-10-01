@@ -337,20 +337,20 @@ export function PageBoard(
               ?
               <textarea
                 class="border-solid border-1 border-color-primary w-full text-medium font-sans-serif"
-                rows={8}
+                rows={4}
                 ref={refDialogCardDescriptionTextarea}
                 onBlur={handleBlurDialogCardDescription}
               >{dialogCard.description}</textarea>
               :
-              <pre
+              <div
                 onClick={handleClickDialogCardDescription}
-                class="font-sans-serif"
+                class="font-sans-serif overflow-x-hidden overflow-wrap-break-word pre-wrap text-secondary"
               >
                 {dialogCard.description === ""
-                  ? <div class="text-tertiary">No description</div>
-                  : <div class="text-secondary overflow-x-hidden">{dialogCard.description}</div>
+                  ? "No description"
+                  : dialogCard.description
                 }
-              </pre>
+              </div>
             }
           </div>
           <div class="text-right layout-stack-2">
