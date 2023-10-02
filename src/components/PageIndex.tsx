@@ -63,10 +63,17 @@ export function PageIndex({ appState }: { appState: Signal<State> }) {
         <div class="overflow-hidden layout-stack-4">
           <div class="flex-row h-12 py-3 overflow-hidden">
             <h2 class="text-medium text-primary f-1 m-0">Boards</h2>
-            <AppButton
-              text={'Clear'}
-              onClick={handleClickClear}
-            />
+            <div class="layout-stack-horizontal-1">
+              <AppButton
+                text={'Clear'}
+                onClick={handleClickClear}
+              />
+              <a
+                class="px-2 py-1 text-secondary cursor-pointer text-small"
+                download={"trellith.json"}
+                href={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState.value))}
+              >Export</a>
+            </div>
           </div>
           <div>
             <BoardForm addBoard={addBoard} />
