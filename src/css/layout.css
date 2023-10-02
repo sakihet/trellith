@@ -3,24 +3,35 @@
   margin-right: auto;
   max-width: 60ch;
 }
-.layout-stack-1 > * + * {
+
+.layout-stack-1>*+* {
   margin-top: 0.25rem;
 }
-.layout-stack-2 > * + * {
+
+.layout-stack-2>*+* {
   margin-top: 0.5rem;
 }
-.layout-stack-3 > * + * {
+
+.layout-stack-3>*+* {
   margin-top: 0.75rem;
 }
-.layout-stack-4 > * + * {
+
+.layout-stack-4>*+* {
   margin-top: 1rem;
 }
-.layout-stack-8 > * + * {
+
+.layout-stack-8>*+* {
   margin-top: 2rem;
 }
-.layout-stack-horizontal-1 > * + * {
+
+.layout-stack-horizontal-1>*+* {
   margin-left: 0.25rem;
 }
-.layout-stack-horizontal > * + * {
+
+.layout-stack-horizontal-2>*+* {
+  margin-left: 0.5rem;
+}
+
+.layout-stack-horizontal>*+* {
   margin-left: 1rem;
 }
