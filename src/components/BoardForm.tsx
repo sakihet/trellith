@@ -1,12 +1,7 @@
 import { useRef } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 
-type BoardFormProps = {
-  addBoard: (name: string) => void
-}
-
-export function BoardForm(props: BoardFormProps) {
-  const { addBoard } = props
+export default function BoardForm({ addBoard }: { addBoard: (name: string) => void }) {
   const inputElement = useRef<HTMLInputElement>(null)
 
   const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {

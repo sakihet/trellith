@@ -2,15 +2,19 @@ import { useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 import { navigate } from "wouter-preact/use-location"
 
-type BoardHeaderProps = {
-  id: string
-  name: string
-  updateBoardName: (id: string, name: string) => void
-  deleteBoard: (id: string) => void
-}
-
-export function BoardHeader(props: BoardHeaderProps) {
-  const { id, name, updateBoardName, deleteBoard } = props
+export default function BoardHeader(
+  {
+    id,
+    name,
+    updateBoardName,
+    deleteBoard
+  }: {
+    id: string
+    name: string
+    updateBoardName: (id: string, name: string) => void
+    deleteBoard: (id: string) => void
+  }
+) {
   const [isEditing, setIsEditing] = useState(false)
   const inputElement = useRef<HTMLInputElement>(null)
 

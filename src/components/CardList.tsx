@@ -1,21 +1,9 @@
 import { JSX } from "preact/jsx-runtime"
 import { Card } from "../types/card"
-import { CardItem } from "./CardItem"
+import CardItem from "./CardItem"
 
-type CardListProps = {
-  cards: Card[]
-  listId: string
-  isDragEnterCardFromTheOther: boolean
-  updateCardName: (id: string, name: string, listId: string) => void
-  handleDragEndCard: () => void
-  handleDragEnterCard: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-  handleDragStartCard: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-  handleDropOnCard: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-  handleDropOnSpacer: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-}
-
-export function CardList(props: CardListProps) {
-  const {
+export default function CardList(
+  {
     cards,
     listId,
     isDragEnterCardFromTheOther,
@@ -25,8 +13,18 @@ export function CardList(props: CardListProps) {
     handleDragStartCard,
     handleDropOnCard,
     handleDropOnSpacer
-  } = props
-
+  }: {
+    cards: Card[]
+    listId: string
+    isDragEnterCardFromTheOther: boolean
+    updateCardName: (id: string, name: string, listId: string) => void
+    handleDragEndCard: () => void
+    handleDragEnterCard: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+    handleDragStartCard: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+    handleDropOnCard: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+    handleDropOnSpacer: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+  }
+) {
   return (
     <div
       class="layout-stack-2 height-card-list overflow-y-auto pattern-scrollbar-thin"

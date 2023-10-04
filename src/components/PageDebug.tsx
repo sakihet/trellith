@@ -1,4 +1,4 @@
-export function PageDebug() {
+export default function PageDebug() {
   return (
     <div class="layout-center">
       <div>

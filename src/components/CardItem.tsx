@@ -3,7 +3,7 @@ import { JSX } from "preact/jsx-runtime"
 import { useLocation } from "wouter-preact"
 import { Pos } from "../types/pos"
 
-export function CardItem(
+export default function CardItem(
   {
     id,
     listId,

@@ -1,19 +1,19 @@
 import { v4 as uuidv4 } from 'uuid'
 import { Board } from '../types/board'
-import { BoardForm } from './BoardForm'
-import { BoardItem } from './BoardItem'
-import { CardForm } from './CardForm'
-import { CardItem } from './CardItem'
-import { BoardList } from './BoardList'
-import { CardList } from './CardList'
-import { TheNavBar } from './TheNavBar'
-import { TheFooter } from './TheFooter'
+import BoardForm from './BoardForm'
+import BoardItem from './BoardItem'
+import CardForm from './CardForm'
+import CardItem from './CardItem'
+import BoardList from './BoardList'
+import CardList from './CardList'
+import TheNavBar from './TheNavBar'
+import TheFooter from './TheFooter'
 import { Card } from '../types/card'
 import { List } from '../types/list'
-import { BoardHeader } from './BoardHeader'
+import BoardHeader from './BoardHeader'
 import { signal } from '@preact/signals'
 
-export function PageComponents() {
+export default function PageComponents() {
   const board1: Board = {
     id: uuidv4(),
     name: 'Board 1',

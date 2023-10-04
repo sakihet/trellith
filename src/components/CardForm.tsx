@@ -2,13 +2,15 @@ import { useRef } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 import { AddCardParams } from "./PageBoard"
 
-type CardFormProps = {
-  listId: string
-  addCard: (params: AddCardParams) => void
-}
-
-export function CardForm(props: CardFormProps) {
-  const { listId, addCard } = props
+export default function CardForm(
+  {
+    listId,
+    addCard
+  }: {
+    listId: string
+    addCard: (params: AddCardParams) => void
+  }
+) {
   const inputElementCard = useRef<HTMLInputElement>(null)
 
   const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {

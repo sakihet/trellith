@@ -1,16 +1,21 @@
 import { useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 
-type ListHeaderProps = {
-  id: string
-  name: string
-  cardsNum: number
-  updateListName: (id: string, name: string) => void
-  handleClickDeleteList: (e: JSX.TargetedEvent<HTMLButtonElement>) => void
-}
-
-export function ListHeader(props: ListHeaderProps) {
-  const { id, name, cardsNum, updateListName, handleClickDeleteList } = props
+export default function ListHeader(
+  {
+    id,
+    name,
+    cardsNum,
+    updateListName,
+    handleClickDeleteList
+  }: {
+    id: string
+    name: string
+    cardsNum: number
+    updateListName: (id: string, name: string) => void
+    handleClickDeleteList: (e: JSX.TargetedEvent<HTMLButtonElement>) => void
+  }
+) {
   const [editing, setEditing] = useState(false)
   const inputElement = useRef<HTMLInputElement>(null)
 

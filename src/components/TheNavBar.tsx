@@ -2,14 +2,9 @@ import { Link } from "wouter-preact"
 import { Theme } from "../types/theme"
 import { Signal } from "@preact/signals"
 import { applyTheme, setTheme } from "../utils"
-import { AppButton } from "./AppButton"
+import AppButton from "./AppButton"
 
-type TheNavBarProps = {
-  theme: Signal<Theme>
-}
-
-export function TheNavBar(props: TheNavBarProps) {
-  const { theme } = props
+export default function TheNavBar({ theme }: { theme: Signal<Theme> }) {
   const handleClick = () => {
     if (theme.value === 'light') {
       theme.value = 'dark'

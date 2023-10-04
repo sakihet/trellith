@@ -1,4 +1,4 @@
-export function PageAbout() {
+export default function PageAbout() {
   return (
     <div class="px-4">
       <div class="layout-center">

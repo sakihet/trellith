@@ -3,19 +3,25 @@ import { JSX } from "preact/jsx-runtime"
 import { Pos } from "../types/pos"
 import { Board } from "../types/board"
 
-type BoardItemProps = {
-  board: Omit<Board, 'lists'>
-  pos: Pos
-  cardsNum: number
-  handleDragEnd: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-  handleDragOver: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-  handleDragStart: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-  handleDrop: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-}
-
-export function BoardItem(props: BoardItemProps) {
-  const { board, pos, cardsNum, handleDragEnd, handleDragOver, handleDragStart, handleDrop } = props
-
+export default function BoardItem(
+  {
+    board,
+    pos,
+    cardsNum,
+    handleDragEnd,
+    handleDragOver,
+    handleDragStart,
+    handleDrop
+  }: {
+    board: Omit<Board, 'lists'>
+    pos: Pos
+    cardsNum: number
+    handleDragEnd: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+    handleDragOver: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+    handleDragStart: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+    handleDrop: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+  }
+) {
   return (
     <div
       class="flex-column h-18 bg-primary parent-hiding-child border-solid border-2 border-color-primary hover-bg-board-item"

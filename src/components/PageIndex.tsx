@@ -1,15 +1,15 @@
 import { useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { Signal } from '@preact/signals'
-import { BoardForm } from './BoardForm'
+import BoardForm from './BoardForm'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
 import { Pos } from '../types/pos'
 import { State } from '../types/state'
-import { BoardList } from './BoardList'
-import { AppButton } from './AppButton'
+import BoardList from './BoardList'
+import AppButton from './AppButton'
 
-export function PageIndex({ appState }: { appState: Signal<State> }) {
+export default function PageIndex({ appState }: { appState: Signal<State> }) {
   const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
   const detailsElement = useRef<HTMLDetailsElement>(null)
   const repository = new RepositoryLocalStorage()

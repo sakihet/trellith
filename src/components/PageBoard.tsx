@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { Signal } from '@preact/signals'
 import { useLocation } from 'wouter-preact'
-import { CardForm } from './CardForm'
-import { BoardHeader } from './BoardHeader'
-import { ListHeader } from './ListHeader'
+import CardForm from './CardForm'
+import BoardHeader from './BoardHeader'
+import ListHeader from './ListHeader'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
 import { Pos } from '../types/pos'
 import { State } from '../types/state'
-import { CardList } from './CardList'
+import CardList from './CardList'
 import { Card } from '../types/card'
 import { relativeTime } from '../utils'
 
@@ -18,7 +18,7 @@ export type AddCardParams = {
   cardName: string
 }
 
-export function PageBoard(
+export default function PageBoard(
   {
     appState,
     boardId,
