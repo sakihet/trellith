@@ -8,15 +8,42 @@ import { Pos } from '../types/pos'
 import { State } from '../types/state'
 import BoardList from './BoardList'
 import AppButton from './AppButton'
+import { Board } from '../types/board'
 
 export default function PageIndex({ appState }: { appState: Signal<State> }) {
   const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
   const detailsElement = useRef<HTMLDetailsElement>(null)
   const repository = new RepositoryLocalStorage()
   const service = new ApplicationService(repository)
+  const inputFileElement = useRef<HTMLInputElement>(null)
 
   const addBoard = (name: string) => {
     appState.value = service.createBoard(appState.value, name)
+  }
+
+  const handleChangeImport = () => {
+    if (inputFileElement.current && inputFileElement.current.files) {
+      const file = inputFileElement.current?.files[0]
+      const reader = new FileReader()
+      reader.addEventListener(
+        "load",
+        () => {
+          if (typeof (reader.result) === 'string') {
+            const result = JSON.parse(reader.result)
+            const boardIdsImport: string[] = result.boards.map((b: Board) => b.id)
+            const boardIdsCurrent: string[] = appState.value.boards.map((b: Board) => b.id)
+            const canImport = boardIdsImport.every(id => !boardIdsCurrent.includes(id))
+            if (canImport) {
+              appState.value = service.import(appState.value, result)
+            } else {
+              console.log('Duplication error.')
+            }
+          }
+        },
+        false
+      )
+      reader.readAsText(file)
+    }
   }
 
   const handleClickClear = () => {
@@ -61,18 +88,15 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
     <div class="px-3">
       <div class="layout-center overflow-hidden w-full layout-stack-8">
         <div class="overflow-hidden layout-stack-4">
-          <div class="flex-row h-12 py-3 overflow-hidden">
-            <h2 class="text-medium text-primary f-1 m-0">Boards</h2>
-            <div class="layout-stack-horizontal-1">
-              <AppButton
-                text={'Clear'}
-                onClick={handleClickClear}
-              />
-              <a
-                class="px-2 py-1 text-secondary cursor-pointer text-small"
-                download={"trellith.json"}
-                href={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState.value))}
-              >Export</a>
+          <div class="layout-stack-2">
+            <div class="flex-row h-12 py-3 overflow-hidden">
+              <h2 class="text-medium text-primary f-1 m-0">Boards</h2>
+              <div class="layout-stack-horizontal-1">
+                <AppButton
+                  text={'Clear'}
+                  onClick={handleClickClear}
+                />
+              </div>
             </div>
           </div>
           <div>
@@ -86,6 +110,23 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
               handleDragStart={handleDragStart}
               handleDrop={handleDrop}
             />
+          </div>
+          <div class="flex-row border-dotted border-2 border-color-primary p-1">
+            <div class="f-1 text-secondary font-mono">Import/Export</div>
+            <div class="text-right">
+              <input
+                class="pattern-file"
+                type="file"
+                accept=".json"
+                ref={inputFileElement}
+                onChange={handleChangeImport}
+              />
+              <a
+                class="px-2 py-1 text-secondary cursor-pointer text-small"
+                download={"trellith.json"}
+                href={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState.value))}
+              >Export</a>
+            </div>
           </div>
           <div>
             <h2 class="text-medium">Storage</h2>

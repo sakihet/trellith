@@ -48,6 +48,12 @@ export class ApplicationService {
     const resultUpdated = migrateState(result)
     return resultUpdated
   }
+  // import
+  import(state: State, stateImport: State): State {
+    const updated = { boards: [...stateImport.boards, ...state.boards] }
+    this.repository.set(updated)
+    return updated
+  }
   // Board
   createBoard(state: State, name: string): State {
     const board: Board = {
