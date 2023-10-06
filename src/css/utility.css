@@ -172,6 +172,11 @@
   padding-right: 1rem;
 }
 
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .py-05 {
   padding-top: 0.125rem;
   padding-bottom: 0.125rem;
@@ -299,6 +304,10 @@
 /* board */
 .border-solid {
   border-style: solid;
+}
+
+.border-dotted {
+  border-style: dotted;
 }
 
 .border-none {

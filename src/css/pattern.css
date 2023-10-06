@@ -72,3 +72,13 @@ details[open].pattern-dropdown>summary:before {
 .pattern-hiding-child>*>.pattern-hidden-child {
   visibility: hidden;
 }
+
+/* file */
+.pattern-file::file-selector-button {
+  border-style: none;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  color: var(--color-text-secondary);
+}
