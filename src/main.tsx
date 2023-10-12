@@ -67,7 +67,7 @@ function Main() {
           <PageComponents />
         </Route>
         <Route path="/debug">
-          <PageDebug />
+          <PageDebug appState={appState} />
         </Route>
       </div>
       <TheFooter />
