@@ -68,11 +68,11 @@ export default function BoardHeader(
           <summary class="w-6 h-6 border-solid border-1 border-color-primary flex-column cursor-pointer">
             <div class="m-auto text-secondary">...</div>
           </summary>
-          <div class="border-solid border-1 border-color-primary py-1 r-3 bg-primary">
-            <ul class="list-style-none pl-0 py-0 m-0 text-secondary">
-              <li class="h-8 px-4 py-1 hover cursor-pointer">
+          <div class="border-solid border-1 border-color-primary py-2 bg-primary drop-shadow">
+            <ul class="list-style-none p-0 m-0 text-secondary">
+              <li class="h-8">
                 <button
-                  class="unset px-4"
+                  class="px-4 py-2 cursor-pointer border-none bg-primary hover"
                   type="button"
                   onClick={handleClickDelete}
                 >
