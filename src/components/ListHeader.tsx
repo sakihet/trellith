@@ -62,12 +62,27 @@ export default function ListHeader(
           </div>
         }
       </div>
-      <button
-        class="border-none text-secondary pattern-hidden-child h-6 px-2"
-        type="button"
-        onClick={handleClickDeleteList}
-        data-list-id={id}
-      >x</button>
+      <div class="w-6 pattern-hidden-child">
+        <details class="pattern-dropdown">
+          <summary class="w-6 h-6 border-solid border-1 border-color-primary flex-column cursor-pointer">
+            <div class="m-auto text-secondary">...</div>
+          </summary>
+          <div class="py-2 border-solid border-1 border-color-primary bg-primary drop-shadow">
+            <ul class="list-style-none p-0 m-0 text-secondary">
+              <li class="h-8">
+                <button
+                  class="px-4 py-2 cursor-pointer border-none bg-primary hover"
+                  type="button"
+                  data-list-id={id}
+                  onClick={handleClickDeleteList}
+                >
+                  Delete
+                </button>
+              </li>
+            </ul>
+          </div>
+        </details>
+      </div>
     </div>
   )
 }

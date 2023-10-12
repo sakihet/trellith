@@ -11,13 +11,6 @@
   display: none;
 }
 
-.pattern-dropdown>div {
-  position: absolute;
-  top: 2rem;
-  right: 0;
-  z-index: 100;
-}
-
 details[open].pattern-dropdown>summary:before {
   content: " ";
   display: block;
@@ -27,6 +20,13 @@ details[open].pattern-dropdown>summary:before {
   right: 0;
   bottom: 0;
   z-index: 50;
+}
+
+.pattern-dropdown>div {
+  position: absolute;
+  top: 2rem;
+  right: 0;
+  z-index: 100;
 }
 
 /* scrollbar-thick */
