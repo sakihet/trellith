@@ -71,12 +71,12 @@ export default function ListHeader(
             <ul class="list-style-none p-0 m-0 text-secondary">
               <li class="h-8">
                 <button
-                  class="px-4 py-2 cursor-pointer border-none bg-primary hover"
+                  class="px-4 py-2 cursor-pointer border-none bg-primary hover nowrap"
                   type="button"
                   data-list-id={id}
                   onClick={handleClickDeleteList}
                 >
-                  Delete
+                  Delete this list
                 </button>
               </li>
             </ul>
