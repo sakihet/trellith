@@ -23,7 +23,7 @@ export default function TheNavBar({ theme }: { theme: Signal<Theme> }) {
           href="/"
           class="text-decoration-none h-6"
         >
-          <h1 class="m-0 h-6 text-center text-medium text-primary font-weight-600 hover-bg-link">
+          <h1 class="m-0 h-6 text-center text-medium text-primary font-weight-600 hover-bg-link cursor-pointer">
             Trellith
           </h1>
         </Link>

@@ -37,7 +37,7 @@ export default function ListHeader(
   }
 
   return (
-    <div class="flex-row h-6 cursor-grab pattern-hiding-child">
+    <div class="flex-row h-6 cursor-grab">
       <div class="f-1 overflow-hidden">
         {editing
           ? <form onSubmit={handleSubmit}>
@@ -62,9 +62,9 @@ export default function ListHeader(
           </div>
         }
       </div>
-      <div class="w-6 pattern-hidden-child">
+      <div class="w-6">
         <details class="pattern-dropdown">
-          <summary class="w-6 h-6 border-solid border-1 border-color-primary flex-column cursor-pointer">
+          <summary class="w-6 h-6 flex-column cursor-pointer hover">
             <div class="m-auto text-secondary">...</div>
           </summary>
           <div class="py-2 border-solid border-1 border-color-primary bg-primary drop-shadow">
