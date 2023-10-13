@@ -7,7 +7,6 @@ import { RepositoryLocalStorage } from '../repositories/repository'
 import { Pos } from '../types/pos'
 import { State } from '../types/state'
 import BoardList from './BoardList'
-import AppButton from './AppButton'
 import { Board } from '../types/board'
 
 export default function PageIndex({ appState }: { appState: Signal<State> }) {
@@ -89,13 +88,44 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
       <div class="layout-center overflow-hidden w-full layout-stack-8">
         <div class="overflow-hidden layout-stack-4">
           <div class="layout-stack-2">
-            <div class="flex-row h-12 py-3 overflow-hidden">
+            <div class="flex-row h-12 py-3">
               <h2 class="text-medium text-primary f-1 m-0">Boards</h2>
-              <div class="layout-stack-horizontal-1">
-                <AppButton
-                  text={'Clear'}
-                  onClick={handleClickClear}
-                />
+              <div>
+                <details class="pattern-dropdown">
+                  <summary class="w-6 h-6 border-solid border-1 border-color-primary flex-column cursor-pointer hover">
+                    <div class="m-auto text-secondary">...</div>
+                  </summary>
+                  <div class="border-solid border-1 border-color-primary py-2 bg-primary drop-shadow">
+                    <ul class="list-style-none p-0 m-0 text-secondary">
+                      <li class="h-8">
+                        <button
+                          class="w-full text-left px-4 py-2 cursor-pointer border-none bg-primary hover nowrap text-secondary"
+                          type="button"
+                          onClick={handleClickClear}
+                        >Delete boards</button>
+                      </li>
+                      <li class="h-8">
+                        <a
+                          class="px-4 py-2 text-secondary cursor-pointer text-small text-decoration-none block hover"
+                          download={"trellith.json"}
+                          href={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState.value))}
+                        >Export</a>
+                      </li>
+                      <li class="h-8">
+                        <label>
+                          <span class="px-4 py-2 text-secondary cursor-pointer text-small block hover">Import</span>
+                          <input
+                            class="pattern-file display-none"
+                            type="file"
+                            accept=".json"
+                            ref={inputFileElement}
+                            onChange={handleChangeImport}
+                          />
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </details>
               </div>
             </div>
           </div>
@@ -110,23 +140,6 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
               handleDragStart={handleDragStart}
               handleDrop={handleDrop}
             />
-          </div>
-          <div class="flex-row border-dotted border-2 border-color-primary p-1">
-            <div class="f-1 text-secondary font-mono">Import/Export</div>
-            <div class="text-right">
-              <input
-                class="pattern-file"
-                type="file"
-                accept=".json"
-                ref={inputFileElement}
-                onChange={handleChangeImport}
-              />
-              <a
-                class="px-2 py-1 text-secondary cursor-pointer text-small"
-                download={"trellith.json"}
-                href={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState.value))}
-              >Export</a>
-            </div>
           </div>
           <div>
             <h2 class="text-medium">Storage</h2>
