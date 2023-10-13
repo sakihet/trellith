@@ -17,6 +17,14 @@
   display: inline;
 }
 
+.block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
 /* size */
 .h-4 {
   height: 1rem;

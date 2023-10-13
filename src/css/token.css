@@ -24,7 +24,7 @@
 
 /* light */
 body {
-  --color-bg-hover: var(--color-gray-50);
+  --color-bg-hover: var(--color-gray-100);
   --color-bg-link: var(--color-gray-100);
   --color-bg-primary: var(--color-white);
   --color-bg-secondary: var(--color-gray-100);
