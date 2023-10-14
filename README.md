@@ -1,4 +1,5 @@
 # Trellith
+[![test](https://github.com/sakihet/trellith/actions/workflows/test.yaml/badge.svg)](https://github.com/sakihet/trellith/actions/workflows/test.yaml)
 
 [Trellith](https://trellith.vercel.app/) is an open source, tiny Trello clone PWA built with TypeScript and Preact. It's a personal tool that organizes your projects into boards. You can start using it by just opening the URL. There is no need to create any accounts. Data is only stored in your browser's localStorage. It's secure because the data isn't saved on the cloud.
 
@@ -30,15 +31,22 @@ Trellith includes the core features of Trello:
 - Rename items
 - Sort items by Drag and Drop
 
+Additional features:
+
+- Light Mode / Dark Mode
+- Import / Export
+- Work offline
+
 ## Tech
 
 - [Preact](https://preactjs.com/)
-- [wouter](https://github.com/molefrog/wouter)
+- [Preact Signals](https://preactjs.com/guide/v10/signals/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [uuid](https://github.com/uuidjs/uuid)
 - [Vite](https://vitejs.dev/)
 - [Vitest](https://vitest.dev/)
 - [vite-plugin-pwa](https://vite-pwa-org.netlify.app/)
+- [wouter](https://github.com/molefrog/wouter)
 
 ## Contributing
 
