@@ -13,18 +13,18 @@
   },
   "dependencies": {
     "@preact/signals": "^1.2.1",
-    "preact": "^10.18.0",
+    "preact": "^10.18.1",
     "uuid": "^9.0.1",
-    "wouter-preact": "^2.11.0"
+    "wouter-preact": "^2.12.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
-    "@types/uuid": "^9.0.4",
-    "@typescript-eslint/eslint-plugin": "^6.7.3",
-    "@typescript-eslint/parser": "^6.7.3",
-    "eslint": "^8.50.0",
+    "@types/uuid": "^9.0.5",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
+    "eslint": "^8.51.0",
     "typescript": "^5.2.2",
-    "vite": "^4.4.9",
+    "vite": "^4.4.11",
     "vite-plugin-pwa": "^0.16.5",
     "vitest": "^0.33.0"
   }
