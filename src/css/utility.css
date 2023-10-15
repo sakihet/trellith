@@ -17,6 +17,10 @@
   display: inline;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .block {
   display: block;
 }
@@ -344,6 +348,28 @@
 
 .border-t-1 {
   border-top-width: 1px;
+}
+
+.divide-solid>*+* {
+  border-style: solid;
+}
+
+.divide-x-1>*+* {
+  border-top-width: 0;
+  border-left-width: 1px;
+  border-right-width: 0;
+  border-bottom-width: 0;
+}
+
+.divide-y-1>*+* {
+  border-top-width: 1px;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+}
+
+.divide-color-primary>*+* {
+  border-color: var(--color-border-primary);
 }
 
 .rounded-1 {
