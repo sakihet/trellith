@@ -323,13 +323,25 @@ export default function PageBoard(
               }
             </div>
             <div class="">
-              <button
-                type="button"
-                class="px-1 py-05 border-solid border-1 border-color-primary text-secondary bg-primary hover"
-                onClick={handleClickDeleteCard}
-                data-card-id={dialogCard.id}
-                data-list-id={dialogCardListId}
-              >Delete</button>
+              <details class="pattern-dropdown">
+                <summary class="w-6 h-6 flex-column cursor-pointer hover">
+                  <div class="m-auto text-secondary">...</div>
+                </summary>
+                <div class="border-solid border-1 border-color-primary py-2 bg-primary drop-shadow">
+                  <ul class="list-style-none p-0 m-0 text-secondary">
+                    <li class="h-8">
+                      <button
+                        class="w-full text-left px-4 py-2 cursor-pointer border-none bg-primary hover nowrap text-secondary"
+                        type="button"
+                        onClick={handleClickDeleteCard}
+                        data-card-id={dialogCard.id}
+                        data-list-id={dialogCardListId}
+                      >Delete</button>
+                    </li>
+                  </ul>
+                </div>
+              </details>
+
             </div>
           </div>
           <div class="f-1">
