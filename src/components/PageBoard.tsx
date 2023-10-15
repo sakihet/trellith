@@ -89,6 +89,14 @@ export default function PageBoard(
     }
   }
 
+  const handleClickDeleteCards = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
+    const { listId } = e.currentTarget.dataset
+    if (listId && boardId) {
+      const updated = service.deleteCardsByList(appState.value, listId, boardId)
+      updateState(updated)
+    }
+  }
+
   const handleClickDeleteList = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
     const { listId } = e.currentTarget.dataset
     if (listId && boardId) {
@@ -264,6 +272,7 @@ export default function PageBoard(
                 name={list.name}
                 cardsNum={list.cards.length}
                 updateListName={updateListName}
+                handleClickDeleteCards={handleClickDeleteCards}
                 handleClickDeleteList={handleClickDeleteList}
               />
               <CardForm

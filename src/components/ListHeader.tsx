@@ -7,13 +7,15 @@ export default function ListHeader(
     name,
     cardsNum,
     updateListName,
-    handleClickDeleteList
+    handleClickDeleteList,
+    handleClickDeleteCards
   }: {
     id: string
     name: string
     cardsNum: number
     updateListName: (id: string, name: string) => void
     handleClickDeleteList: (e: JSX.TargetedEvent<HTMLButtonElement>) => void
+    handleClickDeleteCards: (e: JSX.TargetedEvent<HTMLButtonElement>) => void
   }
 ) {
   const [editing, setEditing] = useState(false)
@@ -71,7 +73,17 @@ export default function ListHeader(
             <ul class="list-style-none p-0 m-0 text-secondary">
               <li class="h-8">
                 <button
-                  class="px-4 py-2 cursor-pointer border-none bg-primary hover nowrap"
+                  class="px-4 py-2 cursor-pointer border-none bg-primary hover nowrap w-full text-left text-small"
+                  type="button"
+                  data-list-id={id}
+                  onClick={handleClickDeleteCards}
+                >
+                  Delete all cards in this list
+                </button>
+              </li>
+              <li class="h-8">
+                <button
+                  class="px-4 py-2 cursor-pointer border-none bg-primary hover nowrap w-full text-left text-small"
                   type="button"
                   data-list-id={id}
                   onClick={handleClickDeleteList}
