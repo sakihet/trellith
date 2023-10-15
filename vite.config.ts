@@ -12,7 +12,7 @@ export default defineConfig({
       manifest: {
         name: 'Trellith',
         short_name: 'Trellith',
-        description : '',
+        description: '',
         theme_color: '',
         icons: [
           {
@@ -29,4 +29,7 @@ export default defineConfig({
       }
     })
   ],
+  assetsInclude: [
+    "robots.txt"
+  ]
 })
