@@ -241,6 +241,22 @@ export class ApplicationService {
     }
     return state
   }
+  deleteCardsByList(state: State, listId: string, boardId: string): State {
+    const board = state.boards.find(b => b.id === boardId)
+    if (board) {
+      const updatedLists = board.lists.map(l => {
+        return (l.id === listId) ? { ...l, cards: [] } : l
+      })
+      const updated = {
+        boards: state.boards.map(b => {
+          return (b.id === boardId) ? { ...b, lists: updatedLists } : b
+        })
+      }
+      this.repository.set(updated)
+      return updated
+    }
+    return state
+  }
   moveCard(
     state: State,
     draggingCardId: string,
