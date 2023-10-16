@@ -144,14 +144,14 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
           <div>
             <h2 class="text-medium">Storage</h2>
             {storageDataSize >= 0 &&
-              <div class="px-4 py-1">
+              <div class="py-2">
                 <span class="text-secondary font-mono">
                   {storageDataSize} / {STORAGE_LIMIT} bytes used on localStorage
                 </span>
                 <progress
                   max={STORAGE_LIMIT}
                   value={storageDataSize}
-                  class="w-full"
+                  class="pattern-progress w-full h-4"
                 ></progress>
               </div>
             }

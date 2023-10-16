@@ -88,3 +88,16 @@ details[open].pattern-dropdown>summary:before {
   padding-bottom: 0.25rem;
   color: var(--color-text-secondary);
 }
+
+/* progress */
+.pattern-progress {
+  appearance: none;
+}
+
+progress[value].pattern-progress::-webkit-progress-bar {
+  background-color: var(--color-bg-progress-bar);
+}
+
+progress[value].pattern-progress::-webkit-progress-value {
+  background-color: var(--color-bg-progress-value);
+}

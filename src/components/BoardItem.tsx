@@ -38,11 +38,11 @@ export default function BoardItem(
         href={`/board/${board.id}`}
         draggable={false}
       >
-        <div class="h-4 flex-row">
+        <div class="h-6 flex-row">
           <div class="f-1">
             {board.name}
           </div>
-          <div class="text-secondary font-mono">
+          <div class="text-secondary font-mono px-1">
             {cardsNum}
           </div>
         </div>

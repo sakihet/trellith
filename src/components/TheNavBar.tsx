@@ -30,16 +30,16 @@ export default function TheNavBar({ theme }: { theme: Signal<Theme> }) {
       </div>
       <div class="f-1 h-6 text-right">
         <div class="layout-stack-horizontal-1">
-          <AppButton
-            text={theme.value === 'light' ? 'Light' : 'Dark'}
-            onClick={handleClick}
-          />
           <Link
             href="/about"
             class="text-decoration-none text-secondary text-small hover px-2 py-1"
           >
             About
           </Link>
+          <AppButton
+            text={theme.value === 'light' ? 'Light' : 'Dark'}
+            onClick={handleClick}
+          />
         </div>
       </div>
     </div>
