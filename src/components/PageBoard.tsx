@@ -313,7 +313,7 @@ export default function PageBoard(
       {isDialogOpen && dialogCard && dialogCardListId &&
         <dialog
           open
-          class="layout-center w-full flex-column p-8 border-solid border-1 border-color-primary layout-stack-4 bg-primary"
+          class="layout-center w-full flex-column p-8 border-solid border-1 border-color-primary layout-stack-4 bg-primary mt-24"
         >
           <div class="flex-row">
             <div class="text-large f-1">
