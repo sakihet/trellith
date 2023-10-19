@@ -3,7 +3,7 @@
 
 [Trellith](https://trellith.sakih.net/) is an open source, tiny Trello clone PWA built with TypeScript and Preact. It's a personal tool that organizes your projects into boards. You can start using it by just opening the URL. There is no need to create any accounts. Data is only stored in your browser's localStorage. It's secure because the data isn't saved on the cloud.
 
-![trellith-logo](public/pwa-192x192.png)
+![trellith-logo](public/icon-192.png)
 
 ## Motivation
 
