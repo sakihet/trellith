@@ -12,16 +12,16 @@ export default defineConfig({
       manifest: {
         name: 'Trellith',
         short_name: 'Trellith',
-        description: '',
+        description: '🧱 Tiny Trello clone PWA built with Preact and TypeScript, not storing data in cloud storage',
         theme_color: '',
         icons: [
           {
-            src: 'pwa-192x192.png',
+            src: 'icon-192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'pwa-512x512.png',
+            src: 'icon-512.png',
             sizes: '512x512',
             type: 'image/png'
           }
