@@ -295,12 +295,19 @@ export default function PageBoard(
         )}
         <div class="py-3">
           <form onSubmit={handleSubmitList}>
-            <input
-              class="h-6 px-1 border-solid border-1 border-color-primary"
-              type="text"
-              placeholder="Enter list title..."
-              ref={inputElement}
-            />
+            <div class="border-1 border-solid border-color-primary inline-block">
+              <label class="flex-row divide-solid divide-x-1 divide-color-primary">
+                <div class="w-6 text-center text-secondary flex-column">
+                  <span class="m-auto">+</span>
+                </div>
+                <input
+                  class="h-6 px-2 border-none"
+                  type="text"
+                  placeholder="Enter list title..."
+                  ref={inputElement}
+                />
+              </label>
+            </div>
           </form>
         </div>
       </div>
