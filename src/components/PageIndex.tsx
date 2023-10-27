@@ -99,21 +99,21 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
                     <ul class="list-style-none p-0 m-0 text-secondary">
                       <li class="h-8">
                         <button
-                          class="w-full text-left px-4 py-2 cursor-pointer border-none bg-primary hover nowrap text-secondary"
+                          class="w-full text-left px-4 py-2 cursor-pointer border-none bg-primary hover nowrap text-primary"
                           type="button"
                           onClick={handleClickClear}
                         >Delete boards</button>
                       </li>
                       <li class="h-8">
                         <a
-                          class="px-4 py-2 text-secondary cursor-pointer text-small text-decoration-none block hover"
+                          class="px-4 py-2 text-primary cursor-pointer text-small text-decoration-none block hover"
                           download={"trellith.json"}
                           href={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState.value))}
                         >Export</a>
                       </li>
                       <li class="h-8">
                         <label>
-                          <span class="px-4 py-2 text-secondary cursor-pointer text-small block hover">Import</span>
+                          <span class="px-4 py-2 text-primary cursor-pointer text-small block hover">Import</span>
                           <input
                             class="pattern-file display-none"
                             type="file"
