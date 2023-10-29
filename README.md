@@ -1,9 +1,9 @@
 # Trellith
 [![test](https://github.com/sakihet/trellith/actions/workflows/test.yaml/badge.svg)](https://github.com/sakihet/trellith/actions/workflows/test.yaml)
 
-[Trellith](https://trellith.sakih.net/) is an open source, tiny Trello clone PWA built with TypeScript and Preact. It's a personal tool that organizes your projects into boards. You can start using it by just opening the URL. There is no need to create any accounts. Data is only stored in your browser's localStorage. It's secure because the data isn't saved on the cloud.
+![board-light](screenshots/trellith-board-light.png)
 
-![trellith-logo](public/icon-192.png)
+[Trellith](https://trellith.sakih.net/) is an open source, tiny Trello clone PWA built with TypeScript and Preact. It's a personal tool that organizes your projects into boards. You can start using it by just opening the URL. There is no need to create any accounts. Data is only stored in your browser's localStorage. It's secure because the data isn't saved on the cloud.
 
 ## Motivation
 
@@ -51,6 +51,13 @@ Additional features:
 ## Contributing
 
 If you find any bugs or have feature requests, please create an issue and let me know.
+
+## Development
+
+```
+npm install
+npm run dev
+```
 
 ## License
 
