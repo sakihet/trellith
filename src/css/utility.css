@@ -294,6 +294,10 @@
   color: var(--color-text-tertiary);
 }
 
+.text-link {
+  color: var(--color-fg-link);
+}
+
 .text-decoration-none {
   text-decoration: none;
 }
