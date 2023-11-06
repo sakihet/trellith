@@ -53,6 +53,7 @@ export default function CardForm(
         <textarea
           class="w-full border-none rounded-1 p-2 resize-none"
           onBlur={handleBlur}
+          // @ts-ignore
           oncompositionstart={handleCompositionStart}
           oncompositionend={handleCompositionEnd}
           onKeyDown={handleKeyDown}
