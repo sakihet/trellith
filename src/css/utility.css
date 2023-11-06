@@ -573,3 +573,8 @@
 .pre-wrap {
   white-space: pre-wrap;
 }
+
+/* resize */
+.resize-none {
+  resize: none;
+}

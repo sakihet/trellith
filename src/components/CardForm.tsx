@@ -1,4 +1,4 @@
-import { useRef } from "preact/hooks"
+import { useEffect, useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 import { AddCardParams } from "./PageBoard"
 
@@ -11,24 +11,56 @@ export default function CardForm(
     addCard: (params: AddCardParams) => void
   }
 ) {
-  const inputElementCard = useRef<HTMLInputElement>(null)
+  const [editing, setEditing] = useState<boolean>(false)
+  const [composing, setComposing] = useState<boolean>(false)
+  const ref = useRef<HTMLTextAreaElement>(null)
 
-  const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (inputElementCard.current?.value) {
-      addCard({ listId: listId, cardName: inputElementCard.current?.value })
-      inputElementCard.current.value = ''
+  useEffect(() => {
+    if (editing) {
+      ref.current?.focus()
     }
+  }, [editing])
+
+  const handleBlur = () => {
+    setEditing(false)
+  }
+  const handleClick = () => {
+    setEditing(true)
+  }
+  const handleKeyDown = (e: JSX.TargetedKeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !composing) {
+      e.preventDefault()
+      if (ref.current?.value) {
+        addCard({ listId: listId, cardName: ref.current?.value })
+        ref.current.value = ''
+      }
+    }
+  }
+  const handleCompositionStart = () => {
+    setComposing(true)
+  }
+  const handleCompositionEnd = () => {
+    setComposing(false)
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        class="h-6 px-2 rounded-1 border-0"
-        type="text"
-        placeholder="Add a card"
-        ref={inputElementCard}
-      />
-    </form>
+    <button
+      class="h-8 w-full border-none text-left cursor-pointer"
+      onClick={handleClick}
+    >
+      {editing
+        ?
+        <textarea
+          class="w-full border-none rounded-1 p-2 resize-none"
+          onBlur={handleBlur}
+          oncompositionstart={handleCompositionStart}
+          oncompositionend={handleCompositionEnd}
+          onKeyDown={handleKeyDown}
+          ref={ref}
+        />
+        :
+        <div class="px-2">+ Add a card</div>
+      }
+    </button>
   )
 }
