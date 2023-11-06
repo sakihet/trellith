@@ -51,7 +51,7 @@ export default function CardForm(
       {editing
         ?
         <textarea
-          class="w-full border-none rounded-1 p-2 resize-none"
+          class="w-full border-none rounded-1 p-2 resize-none text-medium font-sans-serif"
           onBlur={handleBlur}
           // @ts-ignore
           oncompositionstart={handleCompositionStart}
