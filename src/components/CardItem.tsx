@@ -1,4 +1,4 @@
-import { useRef, useState } from "preact/hooks"
+import { useEffect, useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 import { useLocation } from "wouter-preact"
 import { Pos } from "../types/pos"
@@ -26,27 +26,39 @@ export default function CardItem(
     handleDrop: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void,
   }) {
   const [editing, setEditing] = useState(false)
-  const inputElement = useRef<HTMLInputElement>(null)
+  const [composing, setComposing] = useState<boolean>(false)
+  const ref = useRef<HTMLTextAreaElement>(null)
   const [location, setLocation] = useLocation()
+
+  useEffect(() => {
+    if (editing) {
+      ref.current?.focus()
+    }
+  }, [editing])
 
   const handleBlur = () => {
     setEditing(false)
   }
   const handleClickEdit = () => {
     setEditing(true)
-    setTimeout(() => {
-      inputElement.current?.focus()
-    }, 100)
   }
   const handleClickOpenDialog = () => {
     setLocation(`${location}/card/${id}`)
   }
-  const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (inputElement.current?.value) {
-      updateCardName(id, inputElement.current?.value, listId)
+  const handleCompositionStart = () => {
+    setComposing(true)
+  }
+  const handleCompositionEnd = () => {
+    setComposing(false)
+  }
+  const handleKeyDown = (e: JSX.TargetedKeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !composing) {
+      e.preventDefault()
+      if (ref.current?.value) {
+        updateCardName(id, ref.current?.value, listId)
+        setEditing(false)
+      }
     }
-    setEditing(false)
   }
 
   return (
@@ -63,15 +75,16 @@ export default function CardItem(
       <div class="flex-row">
         <div class="f-1 overflow-x-hidden">
           {editing
-            ? <form onSubmit={handleSubmit}>
-              <input
-                class="h-6 w-full text-medium"
-                type="text"
-                onBlur={handleBlur}
-                value={name}
-                ref={inputElement}
-              />
-            </form>
+            ?
+            <textarea
+              class="w-full borader-none rounded-1 p-2 resize-none text-medium font-sans-serif"
+              onBlur={handleBlur}
+              // @ts-ignore
+              oncompositionstart={handleCompositionStart}
+              oncompositionend={handleCompositionEnd}
+              onKeyDown={handleKeyDown}
+              ref={ref}
+            >{name}</textarea>
             :
             <div
               class="overflow-wrap-break-word"
@@ -81,13 +94,15 @@ export default function CardItem(
             </div>
           }
         </div>
-        <div class="pattern-hidden-child">
-          <button
-            class="h-6 w-6 border-none text-secondary px-1"
-            type="button"
-            onClick={handleClickOpenDialog}
-          >○</button>
-        </div>
+        {!editing &&
+          <div class="pattern-hidden-child">
+            <button
+              class="h-6 w-6 border-none text-secondary px-1"
+              type="button"
+              onClick={handleClickOpenDialog}
+            >○</button>
+          </div>
+        }
       </div>
       {hasDescription && <div
         class="h-6 text-secondary"
