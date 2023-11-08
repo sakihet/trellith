@@ -19,6 +19,7 @@ import './css/layout.css'
 import './css/pattern.css'
 import { applyTheme } from './utils.ts'
 import { State } from './types/state.ts'
+import PageSandbox from './components/PageSandbox.tsx'
 
 const { appState, appTheme } = createAppState()
 
@@ -68,6 +69,9 @@ function Main() {
         </Route>
         <Route path="/debug">
           <PageDebug appState={appState} />
+        </Route>
+        <Route path="/sandbox">
+          <PageSandbox />
         </Route>
       </div>
       <TheFooter />
