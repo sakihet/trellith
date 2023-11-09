@@ -12,6 +12,8 @@ import { Card } from '../types/card'
 import { List } from '../types/list'
 import BoardHeader from './BoardHeader'
 import { signal } from '@preact/signals'
+import AppButton from './AppButton'
+import ListHeader from './ListHeader'
 
 export default function PageComponents() {
   const board1: Board = {
@@ -68,10 +70,30 @@ export default function PageComponents() {
       </div>
       <div class="layout-stack-4">
         <div class="layout-stack-2">
+          <h3>AppButton</h3>
+          <div>
+            <AppButton
+              text="Button"
+              onClick={() => { }}
+            />
+          </div>
+        </div>
+        <div class="layout-stack-2">
           <h3>BoardForm</h3>
           <div>
             <BoardForm
               addBoard={() => { }}
+            />
+          </div>
+        </div>
+        <div class="layout-stack-2">
+          <h3>BoardHeader</h3>
+          <div>
+            <BoardHeader
+              id={board1.id}
+              name={board1.name}
+              updateBoardName={() => { }}
+              deleteBoard={() => { }}
             />
           </div>
         </div>
@@ -154,6 +176,19 @@ export default function PageComponents() {
           </div>
         </div>
         <div class="layout-stack-2">
+          <h3>ListHeader</h3>
+          <div>
+            <ListHeader
+              id={list1.id}
+              name={list1.name}
+              cardsNum={0}
+              updateListName={() => { }}
+              handleClickDeleteList={() => { }}
+              handleClickDeleteCards={() => { }}
+            />
+          </div>
+        </div>
+        <div class="layout-stack-2">
           <h3>TheNavBar</h3>
           <div>
             <TheNavBar theme={signal("light")} />
@@ -163,44 +198,6 @@ export default function PageComponents() {
           <h3>TheFooter</h3>
           <div>
             <TheFooter />
-          </div>
-        </div>
-      </div>
-      <hr />
-      <div>
-        <h2>Sandbox</h2>
-      </div>
-      <div>
-        <details class="pattern-dropdown">
-          <summary class="w-8 h-8 border-solid border-1 border-color-primary flex-column rounded-2 cursor-pointer">
-            <div class="m-auto">...</div>
-          </summary>
-          <div class="border-solid border-1 border-color-primary rounded-2 py-2">
-            <ul class="list-style-none pl-0 py-0 m-0 text-secondary">
-              <li class="h-8 px-4 py-2 hover cursor-pointer">Item 1</li>
-              <li class="h-8 px-4 py-2 hover cursor-pointer">Item 2</li>
-              <li class="h-8 px-4 py-2 hover cursor-pointer">Item 3</li>
-            </ul>
-          </div>
-        </details>
-      </div>
-      <div>
-        <div class="flex-row h-8">
-          <div class="f-1">
-          </div>
-          <div class="w-8 overflow-hidden">
-            <details class="pattern-dropdown">
-              <summary class="w-8 h-8 border-solid border-1 border-color-primary flex-column rounded-2 cursor-pointer">
-                <div class="m-auto">...</div>
-              </summary>
-              <div class="border-solid border-1 border-color-primary rounded-2 py-2 r-3 t-1">
-                <ul class="list-style-none pl-0 py-0 m-0 text-secondary">
-                  <li class="h-8 px-4 py-2 hover cursor-pointer">Item 1</li>
-                  <li class="h-8 px-4 py-2 hover cursor-pointer">Item 2</li>
-                  <li class="h-8 px-4 py-2 hover cursor-pointer">Item 3</li>
-                </ul>
-              </div>
-            </details>
           </div>
         </div>
       </div>
