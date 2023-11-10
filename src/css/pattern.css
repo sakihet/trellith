@@ -63,20 +63,20 @@ details[open].pattern-dropdown>summary:before {
 }
 
 /* parent-hiding-child */
-.pattern-hiding-child:hover>.pattern-hidden-child {
-  visibility: visible;
-}
-
-.pattern-hiding-child:hover>*>.pattern-hidden-child {
-  visibility: visible;
-}
-
 .pattern-hiding-child>.pattern-hidden-child {
-  visibility: hidden;
+  display: none;
 }
 
 .pattern-hiding-child>*>.pattern-hidden-child {
-  visibility: hidden;
+  display: none;
+}
+
+.pattern-hiding-child:hover>.pattern-hidden-child {
+  display: inline-block;
+}
+
+.pattern-hiding-child:hover>*>.pattern-hidden-child {
+  display: inline-block;
 }
 
 /* file */
