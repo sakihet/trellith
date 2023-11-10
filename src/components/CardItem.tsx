@@ -72,7 +72,7 @@ export default function CardItem(
       data-list-id={listId}
       data-pos={pos}
     >
-      <div class="flex-row">
+      <div class="flex-row relative">
         <div class="f-1 overflow-x-hidden">
           {editing
             ?
@@ -95,7 +95,7 @@ export default function CardItem(
           }
         </div>
         {!editing &&
-          <div class="pattern-hidden-child">
+          <div class="pattern-hidden-child absolute r-0">
             <button
               class="h-6 w-6 border-none text-secondary px-1"
               type="button"
