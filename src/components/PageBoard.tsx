@@ -297,7 +297,7 @@ export default function PageBoard(
           <form onSubmit={handleSubmitList}>
             <div class="border-1 border-solid border-color-primary inline-block">
               <label class="flex-row divide-solid divide-x-1 divide-color-primary">
-                <div class="w-6 text-center text-secondary flex-column">
+                <div class="w-6 text-center text-secondary flex-column bg-primary">
                   <span class="m-auto">+</span>
                 </div>
                 <input

@@ -45,7 +45,7 @@ export default function CardForm(
 
   return (
     <button
-      class="h-8 w-full border-none text-left cursor-pointer"
+      class="h-8 w-full border-none text-left cursor-pointer bg-primary"
       onClick={handleClick}
     >
       {editing
