@@ -417,6 +417,10 @@
   background-color: var(--color-bg-secondary);
 }
 
+.bg-blue {
+  background-color: var(--color-bg-blue);
+}
+
 /* cursor */
 .cursor-grab {
   cursor: grab;
