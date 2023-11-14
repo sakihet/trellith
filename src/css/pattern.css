@@ -1,3 +1,12 @@
+/* height specific */
+.pattern-height-board-list {
+  max-height: calc(100vh - 18rem);
+}
+
+.pattern-height-card-list {
+  max-height: calc(100vh - 15.5rem);
+}
+
 /* dropdown */
 .pattern-dropdown {
   position: relative;

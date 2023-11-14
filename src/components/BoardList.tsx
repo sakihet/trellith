@@ -18,7 +18,7 @@ export default function BoardList(
   }
 ) {
   return (
-    <div class="layout-stack-2 overflow-y-auto height-board-list py-2 pr-2 pattern-scrollbar-thick">
+    <div class="layout-stack-2 overflow-y-auto pattern-height-board-list py-2 pr-2 pattern-scrollbar-thick">
       {boards.map((board, idx) =>
         <BoardItem
           key={board.id}

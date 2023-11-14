@@ -254,7 +254,7 @@ export default function PageBoard(
           />
         </div>
       }
-      <div class="f-1 flex-row layout-stack-horizontal overflow-x-auto px-3 pattern-scrollbar-thick">
+      <div class="f-1 flex-row layout-stack-horizontal-4 overflow-x-auto px-3 pattern-scrollbar-thick">
         {found && found.lists.map((list, idx) =>
           <div class="flex-column">
             <div

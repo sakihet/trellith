@@ -1,4 +1,4 @@
-/* utility */
+/* display */
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -323,17 +323,12 @@
   font-family: sans-serif;
 }
 
-/* line-height */
-.line-height-2 {
-  line-height: 2rem;
-}
-
 /* list */
 .list-style-none {
   list-style: none;
 }
 
-/* board */
+/* boarder */
 .border-solid {
   border-style: solid;
 }
@@ -493,19 +488,6 @@
   background-color: var(--color-bg-hover);
 }
 
-/* height specific */
-.height-board-list {
-  max-height: calc(100vh - 18rem);
-}
-
-.height-card-list {
-  max-height: calc(100vh - 15.5rem);
-}
-
-.height-page-about {
-  max-height: calc(100vh - 7.5rem);
-}
-
 /* etc */
 .r-0 {
   right: 0;
@@ -527,34 +509,7 @@
   right: 1rem;
 }
 
-.r-5 {
-  right: 1.25rem;
-}
-
-.r-6 {
-  right: 1.5rem;
-}
-
-.r-8 {
-  right: 2rem;
-}
-
-.l-4 {
-  left: 1rem;
-}
-
-.t-1 {
-  top: 0.25rem;
-}
-
-.t-8 {
-  top: 2rem;
-}
-
-.b-8 {
-  bottom: 2rem;
-}
-
+/* unset */
 .unset {
   all: unset;
 }

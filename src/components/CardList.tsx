@@ -27,7 +27,7 @@ export default function CardList(
 ) {
   return (
     <div
-      class="layout-stack-2 height-card-list overflow-y-auto pattern-scrollbar-thin"
+      class="layout-stack-2 pattern-height-card-list overflow-y-auto pattern-scrollbar-thin"
       onDragEnter={handleDragEnterCard}
       data-list-id={listId}
     >
