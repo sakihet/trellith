@@ -61,6 +61,10 @@ export default function CardItem(
     }
   }
 
+  const isSeparator = (name: string): boolean => {
+    return name === '---'
+  }
+
   return (
     <div
       class="rounded-1 p-2 bg-primary flex-column cursor-grab drop-shadow pattern-hiding-child hover-bg-card-item"
@@ -86,15 +90,25 @@ export default function CardItem(
               ref={ref}
             >{name}</textarea>
             :
-            <div
-              class="overflow-wrap-break-word"
-              onClick={handleClickEdit}
-            >
-              {name}
-            </div>
+            <>
+              {!isSeparator(name)
+                ? <div
+                  class="overflow-wrap-break-word"
+                  onClick={handleClickEdit}
+                >
+                  {name}
+                </div>
+                : <button
+                  class="w-full h-4 bg-transparent border-none px-2"
+                  onClick={handleClickEdit}
+                >
+                  <hr class="border-solid border-1 border-color-primary" />
+                </button>
+              }
+            </>
           }
         </div>
-        {!editing &&
+        {!isSeparator(name) && !editing &&
           <div class="pattern-hidden-child absolute r-0">
             <button
               class="h-6 w-6 border-none text-secondary px-1"

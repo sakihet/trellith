@@ -417,6 +417,10 @@
   background-color: var(--color-bg-secondary);
 }
 
+.bg-transparent {
+  background-color: transparent;
+}
+
 .bg-blue {
   background-color: var(--color-bg-blue);
 }
