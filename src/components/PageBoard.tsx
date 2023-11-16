@@ -89,6 +89,11 @@ export default function PageBoard(
     }
   }
 
+  const deleteCard = (cardId: string, listId: string) => {
+    const updated = service.deleteCard(appState.value, cardId, boardId, listId)
+    updateState(updated)
+  }
+
   const handleClickDeleteCards = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
     const { listId } = e.currentTarget.dataset
     if (listId && boardId) {
@@ -284,6 +289,7 @@ export default function PageBoard(
                 listId={list.id}
                 isDragEnterCardFromTheOther={!!draggingCardListId && (list.id !== draggingCardListId) && (list.id === dragEnteredListId)}
                 updateCardName={updateCardName}
+                deleteCard={deleteCard}
                 handleDragEndCard={handleDragEndCard}
                 handleDragEnterCard={handleDragEnterCard}
                 handleDragStartCard={handleDragStartCard}

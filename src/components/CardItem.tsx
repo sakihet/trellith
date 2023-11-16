@@ -10,6 +10,7 @@ export default function CardItem(
     name,
     pos,
     hasDescription,
+    deleteCard,
     updateCardName,
     handleDragEnd,
     handleDragStart,
@@ -20,6 +21,7 @@ export default function CardItem(
     name: string,
     pos: Pos,
     hasDescription: boolean,
+    deleteCard: (cardId: string, listId: string) => void,
     updateCardName: (id: string, name: string, listId: string) => void,
     handleDragEnd: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void,
     handleDragStart: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void,
@@ -57,6 +59,8 @@ export default function CardItem(
       if (ref.current?.value) {
         updateCardName(id, ref.current?.value, listId)
         setEditing(false)
+      } else if (ref.current?.value === '') {
+        deleteCard(id, listId)
       }
     }
   }
