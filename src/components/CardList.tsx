@@ -8,6 +8,7 @@ export default function CardList(
     listId,
     isDragEnterCardFromTheOther,
     updateCardName,
+    deleteCard,
     handleDragEndCard,
     handleDragEnterCard,
     handleDragStartCard,
@@ -17,6 +18,7 @@ export default function CardList(
     cards: Card[]
     listId: string
     isDragEnterCardFromTheOther: boolean
+    deleteCard: (cardId: string, listId: string) => void
     updateCardName: (id: string, name: string, listId: string) => void
     handleDragEndCard: () => void
     handleDragEnterCard: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
@@ -41,6 +43,7 @@ export default function CardList(
             name={card.name}
             pos={idx === 0 ? "first" : (idx === (cards.length - 1) ? "last" : "middle")}
             hasDescription={card.description !== ''}
+            deleteCard={deleteCard}
             updateCardName={updateCardName}
             handleDragEnd={handleDragEndCard}
             handleDragStart={handleDragStartCard}

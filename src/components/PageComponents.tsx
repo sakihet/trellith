@@ -152,6 +152,7 @@ export default function PageComponents() {
               name={'Card 1'}
               pos={'first'}
               hasDescription={true}
+              deleteCard={() => { }}
               updateCardName={() => { }}
               handleDragEnd={() => { }}
               handleDragStart={() => { }}
@@ -166,6 +167,7 @@ export default function PageComponents() {
               cards={cards}
               listId={list1.id}
               isDragEnterCardFromTheOther={false}
+              deleteCard={() => { }}
               updateCardName={() => { }}
               handleDragEndCard={() => { }}
               handleDragEnterCard={() => { }}
