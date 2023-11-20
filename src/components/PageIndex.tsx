@@ -1,16 +1,17 @@
 import { useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { Signal } from '@preact/signals'
-import BoardForm from './BoardForm'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
 import { Pos } from '../types/pos'
 import { State } from '../types/state'
 import BoardList from './BoardList'
 import { Board } from '../types/board'
+import { BoardFormDialog } from './BoardFormDialog'
 
 export default function PageIndex({ appState }: { appState: Signal<State> }) {
   const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false)
   const detailsElement = useRef<HTMLDetailsElement>(null)
   const repository = new RepositoryLocalStorage()
   const service = new ApplicationService(repository)
@@ -83,14 +84,27 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
   }
   const storageDataSize = getSize()
 
+  const handleToggleDialog = () => {
+    setDialogOpen(true)
+  }
+
+  const handleClickMouse = () => {
+    setDialogOpen(false)
+  }
+
   return (
     <div class="px-3">
       <div class="layout-center overflow-hidden w-full layout-stack-8">
-        <div class="overflow-hidden layout-stack-4">
+        <div class="overflow-hidden">
           <div class="layout-stack-2">
-            <div class="flex-row h-12 py-3">
+            <div class="flex-row h-10 py-3">
               <h2 class="text-medium text-primary f-1 m-0">Boards</h2>
-              <div>
+              <div class="flex-row layout-stack-horizontal-1">
+                <button
+                  class="w-6 h-6 border-1 border-solid border-color-primary bg-transparent cursor-pointer hover"
+                  type="button"
+                  onClick={handleToggleDialog}
+                >+</button>
                 <details class="pattern-dropdown">
                   <summary class="w-6 h-6 border-solid border-1 border-color-primary flex-column cursor-pointer hover">
                     <div class="m-auto text-secondary">...</div>
@@ -130,7 +144,11 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
             </div>
           </div>
           <div>
-            <BoardForm addBoard={addBoard} />
+            <BoardFormDialog
+              open={dialogOpen}
+              handleClickMask={handleClickMouse}
+              addBoard={addBoard}
+            />
           </div>
           <div class="overflow-y-auto">
             <BoardList
