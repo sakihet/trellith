@@ -30,6 +30,7 @@ Trellith includes the core features of Trello:
 - Create cards
 - Rename items
 - Sort items by Drag and Drop
+- Separator cards
 
 Additional features:
 
