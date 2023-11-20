@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
 import { Board } from '../types/board'
-import BoardForm from './BoardForm'
 import BoardItem from './BoardItem'
 import CardForm from './CardForm'
 import CardItem from './CardItem'
@@ -75,14 +74,6 @@ export default function PageComponents() {
             <AppButton
               text="Button"
               onClick={() => { }}
-            />
-          </div>
-        </div>
-        <div class="layout-stack-2">
-          <h3>BoardForm</h3>
-          <div>
-            <BoardForm
-              addBoard={() => { }}
             />
           </div>
         </div>
