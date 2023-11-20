@@ -1,7 +1,6 @@
 import { useRef, useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { Signal } from '@preact/signals'
-import BoardForm from './BoardForm'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
 import { Pos } from '../types/pos'
