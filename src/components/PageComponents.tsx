@@ -111,6 +111,7 @@ export default function PageComponents() {
               handleDragOver={() => { }}
               handleDragStart={() => { }}
               handleDrop={() => { }}
+              handleToggleDialog={() => { }}
             />
           </div>
         </div>

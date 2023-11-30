@@ -157,6 +157,7 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
               handleDragOver={handleDragOver}
               handleDragStart={handleDragStart}
               handleDrop={handleDrop}
+              handleToggleDialog={handleToggleDialog}
             />
           </div>
           <div>
