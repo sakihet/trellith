@@ -213,7 +213,7 @@ export class ApplicationService {
     const board = state.boards.find(b => b.id === boardId)
     if (board) {
       const updatedLists = board.lists.map(l => {
-        return (l.id === listId) ? { ...l, cards: [...l.cards, card] } : l
+        return (l.id === listId) ? { ...l, cards: [card, ...l.cards] } : l
       })
       const updated = {
         boards: state.boards.map(b => {
