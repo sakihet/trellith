@@ -58,7 +58,7 @@ describe('ApplicationService', () => {
     service = new ApplicationService(repository)
   })
   it('createBoard', () => {
-    const updated = service.createBoard(state, 'board2')
+    const updated = service.createBoard(state, 'board2', [])
     expect(updated.boards.length).toEqual(2)
   })
   it('deleteBoard', () => {

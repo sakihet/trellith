@@ -55,11 +55,18 @@ export class ApplicationService {
     return updated
   }
   // Board
-  createBoard(state: State, name: string): State {
+  createBoard(state: State, name: string, listNames: string[]): State {
+    const lists: List[] = listNames.map((listName) => {
+      return {
+        id: uuidv4(),
+        name: listName,
+        cards: []
+      }
+    })
     const board: Board = {
       id: uuidv4(),
       name: name,
-      lists: []
+      lists: lists
     }
     const updated = { boards: [board, ...state.boards] }
     this.repository.set(updated)

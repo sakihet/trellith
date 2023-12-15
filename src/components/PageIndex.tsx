@@ -17,8 +17,8 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
   const service = new ApplicationService(repository)
   const inputFileElement = useRef<HTMLInputElement>(null)
 
-  const addBoard = (name: string) => {
-    appState.value = service.createBoard(appState.value, name)
+  const addBoard = (name: string, listNames: string[]) => {
+    appState.value = service.createBoard(appState.value, name, listNames)
   }
 
   const handleChangeImport = () => {
