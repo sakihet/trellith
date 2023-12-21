@@ -22,6 +22,10 @@
   margin-top: 1rem;
 }
 
+.layout-stack-6>*+* {
+  margin-top: 1.5rem;
+}
+
 .layout-stack-8>*+* {
   margin-top: 2rem;
 }

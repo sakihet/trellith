@@ -5,6 +5,7 @@ import { List } from "../types/list"
 import { State } from "../types/state"
 import { Card } from '../types/card'
 import { Pos } from '../types/pos'
+import { BgColor } from '../types/bgColor'
 
 const migrateState = (state: State): State => {
   const boardsUpdaetd = state.boards.map(b => {
@@ -24,6 +25,9 @@ const migrateState = (state: State): State => {
       })
       return { ...l, cards: cardsUpdated }
     })
+    if (!b.bgColor) {
+      b.bgColor = null
+    }
     return { ...b, lists: listsUpdated }
   })
   return { boards: boardsUpdaetd }
@@ -55,7 +59,7 @@ export class ApplicationService {
     return updated
   }
   // Board
-  createBoard(state: State, name: string, listNames: string[]): State {
+  createBoard(state: State, name: string, listNames: string[], bgColor: BgColor | null): State {
     const lists: List[] = listNames.map((listName) => {
       return {
         id: uuidv4(),
@@ -66,7 +70,8 @@ export class ApplicationService {
     const board: Board = {
       id: uuidv4(),
       name: name,
-      lists: lists
+      lists: lists,
+      bgColor: bgColor
     }
     const updated = { boards: [board, ...state.boards] }
     this.repository.set(updated)

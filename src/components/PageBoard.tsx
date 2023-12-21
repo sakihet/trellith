@@ -248,7 +248,7 @@ export default function PageBoard(
   })
 
   return (
-    <div class="flex-column h-full">
+    <div class={`flex-column h-full bg-${found?.bgColor ? found.bgColor : 'primary'}`}>
       {found &&
         <div class="px-3">
           <BoardHeader
