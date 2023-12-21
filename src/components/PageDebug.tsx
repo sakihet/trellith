@@ -49,7 +49,8 @@ export default function PageDebug({ appState }: { appState: Signal<State> }) {
               name: 'List 4',
               cards: createCards(46, 52)
             },
-          ]
+          ],
+          bgColor: null
         }
       ]
     }

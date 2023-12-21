@@ -63,7 +63,7 @@ export default function BoardHeader(
           : <div>{name}</div>
         }
       </h2>
-      <div class="w-6 h-6">
+      <div class="w-6 h-6 bg-primary">
         <details class="pattern-dropdown">
           <summary class="w-6 h-6 border-solid border-1 border-color-primary flex-column cursor-pointer">
             <div class="m-auto text-secondary">...</div>

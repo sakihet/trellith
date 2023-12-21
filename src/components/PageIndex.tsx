@@ -8,6 +8,7 @@ import { State } from '../types/state'
 import BoardList from './BoardList'
 import { Board } from '../types/board'
 import { BoardFormDialog } from './BoardFormDialog'
+import { BgColor } from '../types/bgColor'
 
 export default function PageIndex({ appState }: { appState: Signal<State> }) {
   const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
@@ -17,8 +18,8 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
   const service = new ApplicationService(repository)
   const inputFileElement = useRef<HTMLInputElement>(null)
 
-  const addBoard = (name: string, listNames: string[]) => {
-    appState.value = service.createBoard(appState.value, name, listNames)
+  const addBoard = (name: string, listNames: string[], bgColor: BgColor | null) => {
+    appState.value = service.createBoard(appState.value, name, listNames, bgColor)
   }
 
   const handleChangeImport = () => {

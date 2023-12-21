@@ -10,6 +10,14 @@
   --color-gray-700: #616161;
   --color-gray-800: #424242;
   --color-gray-900: #212121;
+  --color-red-light: rgba(255, 59, 48, 50%);
+  --color-red-dark: rgba(255, 69, 58, 50%);
+  --color-yellow-light: rgba(255, 204, 0, 50%);
+  --color-yellow-dark: rgba(255, 214, 10, 50%);
+  --color-green-light: rgba(40, 205, 65, 50%);
+  --color-green-dark: rgba(50, 215, 75, 50%);
+  --color-blue-light: rgba(0, 122, 255, 50%);
+  --color-blue-dark: rgba(10, 132, 255, 50%);
   --color-blue-50: #e3f2fd;
   --color-blue-100: #bbdefb;
   --color-blue-200: #90caf9;
@@ -20,6 +28,10 @@
   --color-blue-700: #1976d2;
   --color-blue-800: #1565c0;
   --color-blue-900: #0d47a1;
+  --color-cyan-light: rgba(85, 190, 240, 50%);
+  --color-cyan-dark: rgba(90, 200, 245, 50%);
+  --color-magenta-light: rgba(175, 82, 222, 50%);
+  --color-magenta-dark: rgba(191, 90, 242, 50%);
 }
 
 /* light */
@@ -28,7 +40,12 @@ body {
   --color-bg-link: var(--color-gray-100);
   --color-bg-primary: var(--color-white);
   --color-bg-secondary: var(--color-gray-100);
-  --color-bg-blue: var(--color-blue-200);
+  --color-bg-red: var(--color-red-light);
+  --color-bg-yellow: var(--color-yellow-light);
+  --color-bg-green: var(--color-green-light);
+  --color-bg-blue: var(--color-blue-light);
+  --color-bg-cyan: var(--color-cyan-light);
+  --color-bg-magenta: var(--color-magenta-light);
   --color-border-primary: var(--color-gray-300);
   --color-bg-scrollbar: var(--color-gray-300);
   --color-bg-scrollbar-thumb: var(--color-gray-500);
@@ -48,7 +65,12 @@ body {
   --color-bg-link: var(--color-gray-700);
   --color-bg-primary: var(--color-gray-800);
   --color-bg-secondary: var(--color-gray-900);
-  --color-bg-blue: var(--color-blue-700);
+  --color-bg-red: var(--color-red-dark);
+  --color-bg-yellow: var(--color-yellow-dark);
+  --color-bg-green: var(--color-green-dark);
+  --color-bg-blue: var(--color-blue-dark);
+  --color-bg-cyan: var(--color-cyan-dark);
+  --color-bg-magenta: var(--color-magenta-dark);
   --color-border-primary: var(--color-gray-600);
   --color-bg-scrollbar: var(--color-gray-700);
   --color-bg-scrollbar-thumb: var(--color-gray-500);

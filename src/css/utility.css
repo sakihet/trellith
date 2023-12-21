@@ -234,6 +234,14 @@
   padding: 0;
 }
 
+.pl-1 {
+  padding-left: 0.25rem;
+}
+
+.pl-2 {
+  padding-left: 0.5rem;
+}
+
 .pl-4 {
   padding-left: 1rem;
 }
@@ -416,8 +424,28 @@
   background-color: transparent;
 }
 
+.bg-red {
+  background-color: var(--color-bg-red);
+}
+
+.bg-yellow {
+  background-color: var(--color-bg-yellow);
+}
+
+.bg-green {
+  background-color: var(--color-bg-green);
+}
+
 .bg-blue {
   background-color: var(--color-bg-blue);
+}
+
+.bg-cyan {
+  background-color: var(--color-bg-cyan);
+}
+
+.bg-magenta {
+  background-color: var(--color-bg-magenta);
 }
 
 /* cursor */

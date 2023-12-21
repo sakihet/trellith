@@ -18,17 +18,20 @@ export default function PageComponents() {
   const board1: Board = {
     id: uuidv4(),
     name: 'Board 1',
-    lists: []
+    lists: [],
+    bgColor: null
   }
   const board2: Board = {
     id: uuidv4(),
     name: 'Board 2',
-    lists: []
+    lists: [],
+    bgColor: null
   }
   const board3: Board = {
     id: uuidv4(),
     name: 'Board 3',
-    lists: []
+    lists: [],
+    bgColor: null
   }
   const boards: Board[] = [
     board1, board2, board3
