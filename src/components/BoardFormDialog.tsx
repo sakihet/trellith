@@ -62,77 +62,79 @@ export function BoardFormDialog(
         >
           <form
             onSubmit={handleSubmit}
-            class="layout-stack-4"
+            class="layout-stack-8"
           >
-            <label class="flex-column layout-stack-2">
-              <span class="text-secondary text-small">
-                Board title
-              </span>
-              <input
-                class="h-8 w-64 px-2 border-solid border-1 border-color-primary"
-                type="text"
-                maxLength={24}
-                ref={refName}
-              />
-            </label>
-            <div class="layout-stack-2">
-              <div class="text-secondary text-small">Default lists</div>
-              <div class="flex-column border-none text-secondary text-small layout-stack-1 pl-2">
-                <label>
-                  <input
-                    type="radio"
-                    value="None"
-                    name="lists"
-                    class=""
-                    checked={listsType === 'None'}
-                    onClick={handleChageLists}
-                  />
-                  <span class="px-1">None</span>
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="Preset"
-                    name="lists"
-                    class=""
-                    checked={listsType === 'Preset'}
-                    onClick={handleChageLists}
-                  />
-                  <span class="px-1">Todo, Doing, Done</span>
-                </label>
+            <div class="layout-stack-4">
+              <label class="flex-column layout-stack-2">
+                <span class="text-secondary text-small">
+                  Board title
+                </span>
+                <input
+                  class="h-8 w-64 px-2 border-solid border-1 border-color-primary"
+                  type="text"
+                  maxLength={24}
+                  ref={refName}
+                />
+              </label>
+              <div class="layout-stack-2">
+                <div class="text-secondary text-small">Default lists</div>
+                <div class="flex-column border-none text-secondary text-small layout-stack-1 pl-2">
+                  <label>
+                    <input
+                      type="radio"
+                      value="None"
+                      name="lists"
+                      class=""
+                      checked={listsType === 'None'}
+                      onClick={handleChageLists}
+                    />
+                    <span class="px-1">None</span>
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      value="Preset"
+                      name="lists"
+                      class=""
+                      checked={listsType === 'Preset'}
+                      onClick={handleChageLists}
+                    />
+                    <span class="px-1">Todo, Doing, Done</span>
+                  </label>
+                </div>
               </div>
-            </div>
-            <div class="layout-stack-2">
-              <div class="text-secondary text-small">Color</div>
-              <div class="text-secondary text-small">
-                <label class="px-2 py-1">
-                  <input type="radio" name="bgColor" value="none" checked={!bgColor} onClick={handleChangeBgColor} />
-                  <span class="">None</span>
-                </label>
-                <label class="px-2 py-1 bg-red">
-                  <input type="radio" name="bgColor" value="red" checked={bgColor === 'red'} onClick={handleChangeBgColor} />
-                  <span class="">Red</span>
-                </label>
-                <label class="px-2 py-1 bg-yellow">
-                  <input type="radio" name="bgColor" value="yellow" checked={bgColor === 'yellow'} onClick={handleChangeBgColor} />
-                  <span class="">Yellow</span>
-                </label>
-                <label class="px-2 py-1 bg-green">
-                  <input type="radio" name="bgColor" value="green" checked={bgColor === 'green'} onClick={handleChangeBgColor} />
-                  <span class="">Green</span>
-                </label>
-                <label class="px-2 py-1 bg-blue">
-                  <input type="radio" name="bgColor" value="blue" checked={bgColor === 'blue'} onClick={handleChangeBgColor} />
-                  <span class="">Blue</span>
-                </label>
-                <label class="px-2 py-1 bg-cyan">
-                  <input type="radio" name="bgColor" value="cyan" checked={bgColor === 'cyan'} onClick={handleChangeBgColor} />
-                  <span class="">Cyan</span>
-                </label>
-                <label class="px-2 py-1 bg-magenta">
-                  <input type="radio" name="bgColor" value="magenta" checked={bgColor === 'magenta'} onClick={handleChangeBgColor} />
-                  <span class="">Magenta</span>
-                </label>
+              <div class="layout-stack-2">
+                <div class="text-secondary text-small">Color</div>
+                <div class="text-secondary text-small">
+                  <label class="px-2 py-1">
+                    <input type="radio" name="bgColor" value="none" checked={!bgColor} onClick={handleChangeBgColor} />
+                    <span class="">None</span>
+                  </label>
+                  <label class="px-2 py-1 bg-red">
+                    <input type="radio" name="bgColor" value="red" checked={bgColor === 'red'} onClick={handleChangeBgColor} />
+                    <span class="">Red</span>
+                  </label>
+                  <label class="px-2 py-1 bg-yellow">
+                    <input type="radio" name="bgColor" value="yellow" checked={bgColor === 'yellow'} onClick={handleChangeBgColor} />
+                    <span class="">Yellow</span>
+                  </label>
+                  <label class="px-2 py-1 bg-green">
+                    <input type="radio" name="bgColor" value="green" checked={bgColor === 'green'} onClick={handleChangeBgColor} />
+                    <span class="">Green</span>
+                  </label>
+                  <label class="px-2 py-1 bg-blue">
+                    <input type="radio" name="bgColor" value="blue" checked={bgColor === 'blue'} onClick={handleChangeBgColor} />
+                    <span class="">Blue</span>
+                  </label>
+                  <label class="px-2 py-1 bg-cyan">
+                    <input type="radio" name="bgColor" value="cyan" checked={bgColor === 'cyan'} onClick={handleChangeBgColor} />
+                    <span class="">Cyan</span>
+                  </label>
+                  <label class="px-2 py-1 bg-magenta">
+                    <input type="radio" name="bgColor" value="magenta" checked={bgColor === 'magenta'} onClick={handleChangeBgColor} />
+                    <span class="">Magenta</span>
+                  </label>
+                </div>
               </div>
             </div>
             <div class="">
