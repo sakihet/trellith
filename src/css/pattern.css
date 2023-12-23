@@ -110,3 +110,8 @@ progress[value].pattern-progress::-webkit-progress-bar {
 progress[value].pattern-progress::-webkit-progress-value {
   background-color: var(--color-bg-progress-value);
 }
+
+/* color palette */
+input:checked+.pattern-color-palette {
+  outline: var(--color-focus) solid 1px;
+}
