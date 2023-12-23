@@ -104,35 +104,35 @@ export function BoardFormDialog(
                 </div>
               </div>
               <div class="layout-stack-2">
-                <div class="text-secondary text-small">Color</div>
-                <div class="text-secondary text-small">
-                  <label class="px-2 py-1">
-                    <input type="radio" name="bgColor" value="none" checked={!bgColor} onClick={handleChangeBgColor} />
-                    <span class="">None</span>
+                <div class="text-secondary text-small">Background color</div>
+                <div class="text-secondary text-small layout-stack-horizontal-1">
+                  <label class="">
+                    <input class="unset" type="radio" name="bgColor" value="none" checked={!bgColor} onClick={handleChangeBgColor} />
+                    <div class="w-6 h-6 bg-primary inline-block border-solid border-1 border-color-primary pattern-color-palette" />
                   </label>
-                  <label class="px-2 py-1 bg-red">
-                    <input type="radio" name="bgColor" value="red" checked={bgColor === 'red'} onClick={handleChangeBgColor} />
-                    <span class="">Red</span>
+                  <label class="">
+                    <input class="unset" type="radio" name="bgColor" value="red" checked={bgColor === 'red'} onClick={handleChangeBgColor} />
+                    <div class="w-6 h-6 bg-red inline-block border-solid border-1 border-color-primary pattern-color-palette" />
                   </label>
-                  <label class="px-2 py-1 bg-yellow">
-                    <input type="radio" name="bgColor" value="yellow" checked={bgColor === 'yellow'} onClick={handleChangeBgColor} />
-                    <span class="">Yellow</span>
+                  <label class="">
+                    <input class="unset" type="radio" name="bgColor" value="yellow" checked={bgColor === 'yellow'} onClick={handleChangeBgColor} />
+                    <div class="w-6 h-6 bg-yellow inline-block border-solid border-1 border-color-primary pattern-color-palette" />
                   </label>
-                  <label class="px-2 py-1 bg-green">
-                    <input type="radio" name="bgColor" value="green" checked={bgColor === 'green'} onClick={handleChangeBgColor} />
-                    <span class="">Green</span>
+                  <label class="">
+                    <input class="unset" type="radio" name="bgColor" value="green" checked={bgColor === 'green'} onClick={handleChangeBgColor} />
+                    <div class="w-6 h-6 bg-green inline-block border-solid border-1 border-color-primary pattern-color-palette" />
                   </label>
-                  <label class="px-2 py-1 bg-blue">
-                    <input type="radio" name="bgColor" value="blue" checked={bgColor === 'blue'} onClick={handleChangeBgColor} />
-                    <span class="">Blue</span>
+                  <label class="">
+                    <input class="unset" type="radio" name="bgColor" value="blue" checked={bgColor === 'blue'} onClick={handleChangeBgColor} />
+                    <div class="w-6 h-6 bg-blue inline-block border-solid border-1 border-color-primary pattern-color-palette" />
                   </label>
-                  <label class="px-2 py-1 bg-cyan">
-                    <input type="radio" name="bgColor" value="cyan" checked={bgColor === 'cyan'} onClick={handleChangeBgColor} />
-                    <span class="">Cyan</span>
+                  <label class="">
+                    <input class="unset" type="radio" name="bgColor" value="cyan" checked={bgColor === 'cyan'} onClick={handleChangeBgColor} />
+                    <div class="w-6 h-6 bg-cyan inline-block border-solid border-1 border-color-primary pattern-color-palette" />
                   </label>
-                  <label class="px-2 py-1 bg-magenta">
-                    <input type="radio" name="bgColor" value="magenta" checked={bgColor === 'magenta'} onClick={handleChangeBgColor} />
-                    <span class="">Magenta</span>
+                  <label class="">
+                    <input class="unset" type="radio" name="bgColor" value="magenta" checked={bgColor === 'magenta'} onClick={handleChangeBgColor} />
+                    <div class="w-6 h-6 bg-magenta inline-block border-solid border-1 border-color-primary pattern-color-palette" />
                   </label>
                 </div>
               </div>

@@ -56,6 +56,7 @@ body {
   --color-text-secondary: var(--color-gray-600);
   --color-text-tertiary: var(--color-gray-400);
   --color-fg-link: var(--color-blue-800);
+  --color-focus: var(--color-blue-800);
 }
 
 /* dark */
@@ -81,4 +82,5 @@ body {
   --color-text-secondary: var(--color-gray-200);
   --color-text-tertiary: var(--color-gray-400);
   --color-fg-link: var(--color-blue-200);
+  --color-focus: var(--color-blue-200);
 }
