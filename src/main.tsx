@@ -38,7 +38,7 @@ function Main() {
   return (
     <>
       <TheNavBar theme={appTheme} />
-      <div class="f-1 overflow-y-auto pattern-scrollbar-thick bg-primary">
+      <main class="f-1 overflow-y-auto pattern-scrollbar-thick bg-primary">
         <Route path="/">
           <PageIndex
             appState={appState}
@@ -73,7 +73,7 @@ function Main() {
         <Route path="/sandbox">
           <PageSandbox />
         </Route>
-      </div>
+      </main>
       <TheFooter />
     </>
   )
