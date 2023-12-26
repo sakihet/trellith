@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@preact/signals": "^1.2.2",
+    "colorjs.io": "^0.4.5",
     "preact": "^10.19.3",
     "uuid": "^9.0.1",
     "wouter-preact": "^2.12.2"
