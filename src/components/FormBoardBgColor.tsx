@@ -10,7 +10,7 @@ export default function FormBoardBgColor(
     selectBgColor: (e: JSX.TargetedMouseEvent<HTMLInputElement>) => void
   }) {
   return (
-    <>
+    <div class="nowrap layout-stack-horizontal-1">
       <label>
         <input class="unset" type="radio" name="bgColor" value="none" checked={!selectedBgColor} onClick={selectBgColor} />
         <div class="w-6 h-6 bg-primary inline-block border-solid border-1 border-color-primary pattern-color-palette" />
@@ -39,6 +39,6 @@ export default function FormBoardBgColor(
         <input class="unset" type="radio" name="bgColor" value="magenta" checked={selectedBgColor === 'magenta'} onClick={selectBgColor} />
         <div class="w-6 h-6 bg-magenta inline-block border-solid border-1 border-color-primary pattern-color-palette" />
       </label>
-    </>
+    </div>
   )
 }
