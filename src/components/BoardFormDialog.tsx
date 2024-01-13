@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 import { BgColor } from "../types/bgColor"
+import FormBoardBgColor from "./FormBoardBgColor"
 
 type ListsType = 'None' | 'Preset'
 
@@ -19,7 +20,7 @@ export function BoardFormDialog(
   const [bgColor, setBgColor] = useState<BgColor | null>(null)
   const [listsType, setListsType] = useState<ListsType>("None")
 
-  const handleChangeBgColor = (e: JSX.TargetedMouseEvent<HTMLInputElement>) => {
+  const selectBgColor = (e: JSX.TargetedMouseEvent<HTMLInputElement>) => {
     if (e.currentTarget.value !== 'none') {
       setBgColor(e.currentTarget.value as BgColor)
     } else {
@@ -106,34 +107,10 @@ export function BoardFormDialog(
               <div class="layout-stack-2">
                 <div class="text-secondary text-small">Background color</div>
                 <div class="text-secondary text-small layout-stack-horizontal-1">
-                  <label class="">
-                    <input class="unset" type="radio" name="bgColor" value="none" checked={!bgColor} onClick={handleChangeBgColor} />
-                    <div class="w-6 h-6 bg-primary inline-block border-solid border-1 border-color-primary pattern-color-palette" />
-                  </label>
-                  <label class="">
-                    <input class="unset" type="radio" name="bgColor" value="red" checked={bgColor === 'red'} onClick={handleChangeBgColor} />
-                    <div class="w-6 h-6 bg-red inline-block border-solid border-1 border-color-primary pattern-color-palette" />
-                  </label>
-                  <label class="">
-                    <input class="unset" type="radio" name="bgColor" value="yellow" checked={bgColor === 'yellow'} onClick={handleChangeBgColor} />
-                    <div class="w-6 h-6 bg-yellow inline-block border-solid border-1 border-color-primary pattern-color-palette" />
-                  </label>
-                  <label class="">
-                    <input class="unset" type="radio" name="bgColor" value="green" checked={bgColor === 'green'} onClick={handleChangeBgColor} />
-                    <div class="w-6 h-6 bg-green inline-block border-solid border-1 border-color-primary pattern-color-palette" />
-                  </label>
-                  <label class="">
-                    <input class="unset" type="radio" name="bgColor" value="blue" checked={bgColor === 'blue'} onClick={handleChangeBgColor} />
-                    <div class="w-6 h-6 bg-blue inline-block border-solid border-1 border-color-primary pattern-color-palette" />
-                  </label>
-                  <label class="">
-                    <input class="unset" type="radio" name="bgColor" value="cyan" checked={bgColor === 'cyan'} onClick={handleChangeBgColor} />
-                    <div class="w-6 h-6 bg-cyan inline-block border-solid border-1 border-color-primary pattern-color-palette" />
-                  </label>
-                  <label class="">
-                    <input class="unset" type="radio" name="bgColor" value="magenta" checked={bgColor === 'magenta'} onClick={handleChangeBgColor} />
-                    <div class="w-6 h-6 bg-magenta inline-block border-solid border-1 border-color-primary pattern-color-palette" />
-                  </label>
+                  <FormBoardBgColor
+                    selectedBgColor={bgColor}
+                    selectBgColor={selectBgColor}
+                  />
                 </div>
               </div>
             </div>
