@@ -86,6 +86,8 @@ export default function PageComponents() {
             <BoardHeader
               id={board1.id}
               name={board1.name}
+              bgColor={board1.bgColor}
+              selectBgColor={() => { }}
               updateBoardName={() => { }}
               deleteBoard={() => { }}
             />
@@ -124,6 +126,8 @@ export default function PageComponents() {
             <BoardHeader
               id={board1.id}
               name={board1.name}
+              bgColor={board1.bgColor}
+              selectBgColor={() => { }}
               updateBoardName={() => { }}
               deleteBoard={() => { }}
             />
