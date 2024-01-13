@@ -1,17 +1,23 @@
 import { useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 import { navigate } from "wouter-preact/use-location"
+import FormBoardBgColor from "./FormBoardBgColor"
+import { BgColor } from "../types/bgColor"
 
 export default function BoardHeader(
   {
     id,
     name,
+    bgColor,
     updateBoardName,
+    selectBgColor,
     deleteBoard
   }: {
     id: string
     name: string
+    bgColor: BgColor | null
     updateBoardName: (id: string, name: string) => void
+    selectBgColor: (e: JSX.TargetedMouseEvent<HTMLInputElement>) => void
     deleteBoard: (id: string) => void
   }
 ) {
@@ -70,9 +76,17 @@ export default function BoardHeader(
           </summary>
           <div class="border-solid border-1 border-color-primary py-2 bg-primary drop-shadow">
             <ul class="list-style-none p-0 m-0 text-secondary">
+              <li class="">
+                <div class="px-4">
+                  <FormBoardBgColor
+                    selectedBgColor={bgColor}
+                    selectBgColor={selectBgColor}
+                  />
+                </div>
+              </li>
               <li class="h-8">
                 <button
-                  class="px-4 py-2 cursor-pointer border-none bg-primary hover"
+                  class="w-full px-4 py-2 cursor-pointer border-none bg-primary hover"
                   type="button"
                   onClick={handleClickDelete}
                 >

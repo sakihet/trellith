@@ -123,6 +123,15 @@ export class ApplicationService {
     this.repository.set(updated)
     return updated
   }
+  updateBoardBgColor(state: State, bgColor: BgColor | null, boardId: string) {
+    const updated = {
+      boards: state.boards.map(b => {
+        return (b.id === boardId) ? { ...b, bgColor: bgColor } : b
+      })
+    }
+    this.repository.set(updated)
+    return updated
+  }
   // List
   createList(state: State, name: string, boardId: string): State {
     const list: List = {

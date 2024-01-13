@@ -12,6 +12,7 @@ import { State } from '../types/state'
 import CardList from './CardList'
 import { Card } from '../types/card'
 import { relativeTime } from '../utils'
+import { BgColor } from '../types/bgColor'
 
 export type AddCardParams = {
   listId: string
@@ -65,6 +66,17 @@ export default function PageBoard(
 
   const updateState = (state: State) => {
     appState.value = state
+  }
+
+  const selectBgColor = (e: JSX.TargetedMouseEvent<HTMLInputElement>) => {
+    if (e.currentTarget.value !== 'none') {
+      const bgColor = e.currentTarget.value as BgColor
+      const updated = service.updateBoardBgColor(appState.value, bgColor, boardId)
+      updateState(updated)
+    } else {
+      const updated = service.updateBoardBgColor(appState.value, null, boardId)
+      updateState(updated)
+    }
   }
 
   const handleBlurDialogCardDescription = () => {
@@ -254,7 +266,9 @@ export default function PageBoard(
           <BoardHeader
             id={found.id}
             name={found.name}
+            bgColor={found.bgColor}
             updateBoardName={updateBoardName}
+            selectBgColor={selectBgColor}
             deleteBoard={deleteBoard}
           />
         </div>
