@@ -505,7 +505,7 @@
 }
 
 .hover-bg-board-item:hover {
-  background-color: var(--color-bg-hover);
+  filter: brightness(var(--brightness-hover));
 }
 
 .hover-bg-card-item:hover {
