@@ -13,6 +13,10 @@ import BoardHeader from './BoardHeader'
 import { signal } from '@preact/signals'
 import AppButton from './AppButton'
 import ListHeader from './ListHeader'
+import IconAdd from './IconAdd'
+import IconDarkMode from './IconDarkMode'
+import IconLightMode from './IconLightMode'
+import IconMoreHoriz from './IconMoreHoriz'
 
 export default function PageComponents() {
   const board1: Board = {
@@ -67,6 +71,15 @@ export default function PageComponents() {
 
   return (
     <div class="layout-stack-4 p-6">
+      <div>
+        <h2>Icons</h2>
+      </div>
+      <div class="layout-stack-4">
+        <IconAdd />
+        <IconDarkMode />
+        <IconLightMode />
+        <IconMoreHoriz />
+      </div>
       <div>
         <h2>Components</h2>
       </div>
