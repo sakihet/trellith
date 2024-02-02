@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 import { AddCardParams } from "./PageBoard"
+import IconAdd from "./IconAdd"
 
 export default function CardForm(
   {
@@ -45,7 +46,7 @@ export default function CardForm(
 
   return (
     <button
-      class="h-8 w-full border-none text-left cursor-pointer bg-primary"
+      class="h-8 w-full border-none text-left cursor-pointer bg-primary text-medium"
       onClick={handleClick}
     >
       {editing
@@ -60,7 +61,9 @@ export default function CardForm(
           ref={ref}
         />
         :
-        <div class="px-2">+ Add a card</div>
+        <div class="px-2">
+          <IconAdd /> <span class="text-secondary">Add a card</span>
+        </div>
       }
     </button>
   )

@@ -80,7 +80,7 @@ body {
   --color-bg-progress-bar: var(--color-gray-600);
   --color-bg-progress-value: var(--color-gray-300);
   --color-text-primary: var(--color-gray-50);
-  --color-text-secondary: var(--color-gray-200);
+  --color-text-secondary: var(--color-gray-300);
   --color-text-tertiary: var(--color-gray-400);
   --color-fg-link: var(--color-blue-200);
   --color-focus: var(--color-blue-200);
