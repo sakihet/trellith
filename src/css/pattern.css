@@ -115,3 +115,9 @@ progress[value].pattern-progress::-webkit-progress-value {
 input:checked+.pattern-color-palette {
   outline: var(--color-focus) solid 1px;
 }
+
+.icon {
+  height: 0.75em;
+  width: 0.75em;
+  fill: currentColor
+}

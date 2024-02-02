@@ -13,6 +13,8 @@ import CardList from './CardList'
 import { Card } from '../types/card'
 import { relativeTime } from '../utils'
 import { BgColor } from '../types/bgColor'
+import IconAdd from './IconAdd'
+import IconMoreHoriz from './IconMoreHoriz'
 
 export type AddCardParams = {
   listId: string
@@ -317,8 +319,10 @@ export default function PageBoard(
           <form onSubmit={handleSubmitList}>
             <div class="border-1 border-solid border-color-primary inline-block">
               <label class="flex-row divide-solid divide-x-1 divide-color-primary">
-                <div class="w-6 text-center text-secondary flex-column bg-primary">
-                  <span class="m-auto">+</span>
+                <div class="w-6 text-center text-primary flex-column bg-primary text-medium">
+                  <span class="m-auto text-medium">
+                    <IconAdd />
+                  </span>
                 </div>
                 <input
                   class="h-6 px-2 border-none"
@@ -361,7 +365,9 @@ export default function PageBoard(
             <div class="">
               <details class="pattern-dropdown">
                 <summary class="w-6 h-6 flex-column cursor-pointer hover">
-                  <div class="m-auto text-secondary">...</div>
+                  <div class="m-auto text-secondary">
+                    <IconMoreHoriz />
+                  </div>
                 </summary>
                 <div class="border-solid border-1 border-color-primary py-2 bg-primary drop-shadow">
                   <ul class="list-style-none p-0 m-0 text-secondary">

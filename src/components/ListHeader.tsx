@@ -1,5 +1,6 @@
 import { useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
+import IconMoreHoriz from "./IconMoreHoriz"
 
 export default function ListHeader(
   {
@@ -67,7 +68,9 @@ export default function ListHeader(
       <div class="w-6">
         <details class="pattern-dropdown">
           <summary class="w-6 h-6 flex-column cursor-pointer hover">
-            <div class="m-auto text-secondary">...</div>
+            <div class="m-auto text-secondary">
+              <IconMoreHoriz />
+            </div>
           </summary>
           <div class="py-2 border-solid border-1 border-color-primary bg-primary drop-shadow">
             <ul class="list-style-none p-0 m-0 text-secondary">

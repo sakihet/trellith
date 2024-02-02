@@ -3,6 +3,7 @@ import { JSX } from "preact/jsx-runtime"
 import { navigate } from "wouter-preact/use-location"
 import FormBoardBgColor from "./FormBoardBgColor"
 import { BgColor } from "../types/bgColor"
+import IconMoreHoriz from "./IconMoreHoriz"
 
 export default function BoardHeader(
   {
@@ -72,7 +73,9 @@ export default function BoardHeader(
       <div class="w-6 h-6 bg-primary">
         <details class="pattern-dropdown">
           <summary class="w-6 h-6 border-solid border-1 border-color-primary flex-column cursor-pointer">
-            <div class="m-auto text-secondary">...</div>
+            <div class="m-auto text-secondary">
+              <IconMoreHoriz />
+            </div>
           </summary>
           <div class="border-solid border-1 border-color-primary py-2 bg-primary drop-shadow">
             <ul class="list-style-none p-0 m-0 text-secondary">

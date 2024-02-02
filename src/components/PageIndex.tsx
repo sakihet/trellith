@@ -9,6 +9,8 @@ import BoardList from './BoardList'
 import { Board } from '../types/board'
 import { BoardFormDialog } from './BoardFormDialog'
 import { BgColor } from '../types/bgColor'
+import IconAdd from './IconAdd'
+import IconMoreHoriz from './IconMoreHoriz'
 
 export default function PageIndex({ appState }: { appState: Signal<State> }) {
   const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
@@ -102,13 +104,17 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
               <h2 class="text-medium text-primary f-1 m-0">Boards</h2>
               <div class="flex-row layout-stack-horizontal-1">
                 <button
-                  class="w-6 h-6 border-1 border-solid border-color-primary bg-transparent cursor-pointer hover"
+                  class="w-6 h-6 border-1 border-solid border-color-primary bg-transparent cursor-pointer hover text-medium"
                   type="button"
                   onClick={handleToggleDialog}
-                >+</button>
+                >
+                  <IconAdd />
+                </button>
                 <details class="pattern-dropdown">
                   <summary class="w-6 h-6 border-solid border-1 border-color-primary flex-column cursor-pointer hover">
-                    <div class="m-auto text-secondary">...</div>
+                    <div class="m-auto text-secondary">
+                      <IconMoreHoriz />
+                    </div>
                   </summary>
                   <div class="border-solid border-1 border-color-primary py-2 bg-primary drop-shadow">
                     <ul class="list-style-none p-0 m-0 text-secondary">
