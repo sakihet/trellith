@@ -70,6 +70,10 @@ Trellith is designed by Plain Old CSS. It doesn't use any CSS frameworks for min
 - pattern.css
   - Reusable CSS for creating common UI
 
+## Icons
+
+[Material Symbols](https://fonts.google.com/icons)
+
 ## Contributing
 
 If you find any bugs or have feature requests, please create an issue and let me know.
