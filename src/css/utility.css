@@ -377,6 +377,10 @@
   border-top-width: 1px;
 }
 
+.border-l-none {
+  border-left-style: none;
+}
+
 .divide-solid>*+* {
   border-style: solid;
 }
