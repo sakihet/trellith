@@ -2,7 +2,8 @@ import { Link } from "wouter-preact"
 import { Theme } from "../types/theme"
 import { Signal } from "@preact/signals"
 import { applyTheme, setTheme } from "../utils"
-import AppButton from "./AppButton"
+import IconLightMode from "./IconLightMode"
+import IconDarkMode from "./IconDarkMode"
 
 export default function TheNavBar({ theme }: { theme: Signal<Theme> }) {
   const handleClick = () => {
@@ -38,10 +39,19 @@ export default function TheNavBar({ theme }: { theme: Signal<Theme> }) {
               >
                 About
               </Link>
-              <AppButton
-                text={theme.value === 'light' ? 'Light' : 'Dark'}
+              <button
+                type="button"
+                class="h-6 w-6 border-solid border-1 border-color-primary text-medium bg-transparent cursor-pointer hover text-primary"
                 onClick={handleClick}
-              />
+              >
+                {
+                  theme.value === 'light'
+                    ?
+                    <IconLightMode />
+                    :
+                    <IconDarkMode />
+                }
+              </button>
             </div>
           </div>
         </div>
