@@ -3,11 +3,13 @@
 
 ![trellith](screenshots/trellith-with-frame.png)
 
-[Trellith](https://trellith.sakih.net/) is a tiny Trello clone PWA with simplicity. It's a task management tool with a board view format, designed for individuals. You can organize your projects into boards like a kanban using lists and cards.
+[Trellith](https://trellith.sakih.net/) is a tiny Trello clone PWA pursuing simplicity. It's a task management tool with a board view format, designed for individuals. You can organize your projects into boards like a kanban using lists and cards.
 
 All you need to get started with the app is to just open the URL. There is no need to create any accounts.
 
-The Data is only stored in your browser's localStorage, not in the cloud. You can own your data.
+The data is only stored in your browser's localStorage, not in the cloud. You can own your data.
+
+Trellith works offline once you open the app. It operates normally even in unstable network conditions.
 
 ## Motivation
 
