@@ -3,6 +3,7 @@ import { Board } from "../types/board"
 import BoardItem from "./BoardItem"
 import { useState } from "preact/hooks"
 import IconFilterList from "./IconFilterList"
+import { filterBoardsByName } from "../utils"
 
 export default function BoardList(
   {
@@ -54,7 +55,7 @@ export default function BoardList(
         :
         <div class="layout-stack-2">
           {
-            boards.filter(b => b.name.includes(query)).map((board, idx) =>
+            filterBoardsByName(query, boards).map((board, idx) =>
               <BoardItem
                 key={board.id}
                 board={board}
