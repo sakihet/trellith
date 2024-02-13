@@ -1,3 +1,4 @@
+import { Board } from "./types/board"
 import { Theme } from "./types/theme"
 
 export const applyTheme = (theme: Theme) => {
@@ -39,4 +40,8 @@ export const relativeTime = (dateStr: string): string => {
     formatted = formatter.format(-(Math.floor(diff / (1000 * 60 * 60 * 24))), 'day')
   }
   return formatted
+}
+
+export const filterBoardsByName = (query: string, boards: Board[]): Board[] => {
+  return boards.filter(b => b.name.toLowerCase().includes(query.toLowerCase()))
 }
