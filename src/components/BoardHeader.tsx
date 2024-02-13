@@ -50,7 +50,7 @@ export default function BoardHeader(
   }
 
   return (
-    <div class="flex-row h-12 py-3">
+    <div class="flex-row h-6">
       <h2
         class="f-1 text-medium m-0"
         onClick={handleClick}

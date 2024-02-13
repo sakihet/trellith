@@ -1,4 +1,5 @@
 import { Board } from "./types/board"
+import { List } from "./types/list"
 import { Theme } from "./types/theme"
 
 export const applyTheme = (theme: Theme) => {
@@ -44,4 +45,13 @@ export const relativeTime = (dateStr: string): string => {
 
 export const filterBoardsByName = (query: string, boards: Board[]): Board[] => {
   return boards.filter(b => b.name.toLowerCase().includes(query.toLowerCase()))
+}
+
+export const filterListsByCardName = (query: string, lists: List[]): List[] => {
+  return lists.map(l => {
+    return {
+      ...l,
+      cards: l.cards.filter(c => c.name.toLowerCase().includes(query.toLowerCase()))
+    }
+  })
 }

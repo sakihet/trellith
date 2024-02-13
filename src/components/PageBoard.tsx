@@ -11,10 +11,11 @@ import { Pos } from '../types/pos'
 import { State } from '../types/state'
 import CardList from './CardList'
 import { Card } from '../types/card'
-import { relativeTime } from '../utils'
+import { filterListsByCardName, relativeTime } from '../utils'
 import { BgColor } from '../types/bgColor'
 import IconAdd from './IconAdd'
 import IconMoreHoriz from './IconMoreHoriz'
+import IconFilterList from './IconFilterList'
 
 export type AddCardParams = {
   listId: string
@@ -38,6 +39,7 @@ export default function PageBoard(
   const inputElement = useRef<HTMLInputElement>(null)
   const [dragEnteredListId, setDragEnteredListId] = useState<string | undefined>(undefined)
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(cardId ? true : false)
+  const [query, setQuery] = useState('')
   const repository = new RepositoryLocalStorage()
   const service = new ApplicationService(repository)
   const [dialogCard, setDialogCard] = useState<Card | undefined>(undefined)
@@ -261,10 +263,14 @@ export default function PageBoard(
     return b.id === boardId
   })
 
+  const handleSearch = (e: JSX.TargetedMouseEvent<HTMLInputElement>) => {
+    setQuery(e.currentTarget.value)
+  }
+
   return (
-    <div class={`flex-column h-full bg-${found?.bgColor ? found.bgColor : 'primary'}`}>
+    <div class={`flex-column py-3 h-full layout-stack-2 bg-${found?.bgColor ? found.bgColor : 'primary'}`}>
       {found &&
-        <div class="px-3">
+        <div class="px-3 h-6">
           <BoardHeader
             id={found.id}
             name={found.name}
@@ -275,8 +281,24 @@ export default function PageBoard(
           />
         </div>
       }
+      <div class="px-3 h-6">
+        <div class="flex-row">
+          <label for="board-filter">
+            <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary">
+              <IconFilterList />
+            </div>
+          </label>
+          <input
+            id="card-filter"
+            type="search"
+            class="w-48 h-6 px-2 bg-primary border-solid border-1 border-color-primary border-l-none"
+            placeholder="Filter"
+            onSearch={handleSearch}
+          />
+        </div>
+      </div>
       <div class="f-1 flex-row layout-stack-horizontal-4 overflow-x-auto px-3 pattern-scrollbar-thick">
-        {found && found.lists.map((list, idx) =>
+        {found && filterListsByCardName(query, found.lists).map((list, idx) =>
           <div class="flex-column">
             <div
               class="w-64 p-3 bg-secondary rounded-2 layout-stack-3 drop-shadow"
