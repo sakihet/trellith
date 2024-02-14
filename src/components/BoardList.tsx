@@ -1,7 +1,7 @@
 import { JSX } from "preact/jsx-runtime"
 import { Board } from "../types/board"
 import BoardItem from "./BoardItem"
-import { useState } from "preact/hooks"
+import { useRef, useState } from "preact/hooks"
 import IconFilterList from "./IconFilterList"
 import { filterBoardsByName } from "../utils"
 
@@ -23,28 +23,45 @@ export default function BoardList(
   }
 ) {
   const [query, setQuery] = useState('')
+  const inputElement = useRef<HTMLInputElement>(null)
 
-  const handleSearch = (e: JSX.TargetedMouseEvent<HTMLInputElement>) => {
-    setQuery(e.currentTarget.value)
+  const handleSubmit = (e: JSX.TargetedSubmitEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const query = inputElement.current?.value
+    if (query) {
+      setQuery(query)
+    } else {
+      setQuery('')
+    }
+  }
+
+  const handleReset = () => {
+    setQuery('')
   }
 
   return (
     <div class="layout-stack-4 overflow-y-auto pattern-height-board-list py-2 pr-2 pattern-scrollbar-thick">
-      <div class="flex-row">
-        <label for="board-filter">
-          <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary">
-            <IconFilterList />
-          </div>
-        </label>
-        <input
-          id="board-filter"
-          type="search"
-          class="w-48 h-6 px-2 bg-primary border-solid border-1 border-color-primary border-l-none"
-          placeholder="Filter"
-          onSearch={handleSearch}
-          disabled={boards.length === 0}
-        />
-      </div>
+      <form onSubmit={handleSubmit} onReset={handleReset}>
+        <div class="flex-row">
+          <label for="board-filter">
+            <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary">
+              <IconFilterList />
+            </div>
+          </label>
+          <input
+            id="board-filter"
+            type="text"
+            class="w-48 h-6 px-2 bg-primary border-solid border-1 border-color-primary border-l-none"
+            placeholder="Filter"
+            disabled={boards.length === 0}
+            ref={inputElement}
+          />
+          <button
+            type="reset"
+            class="h-6 border-solid border-1 border-color-primary bg-transparent px-2 text-secondary text-small"
+          >Clear</button>
+        </div>
+      </form>
       {boards.length === 0
         ?
         <button

@@ -37,6 +37,7 @@ export default function PageBoard(
   const [draggingCardListId, setDraggingCardListId] = useState<string | undefined>(undefined)
   const [draggingListId, setDraggingListId] = useState<string | undefined>(undefined)
   const inputElement = useRef<HTMLInputElement>(null)
+  const inputCardFilterElement = useRef<HTMLInputElement>(null)
   const [dragEnteredListId, setDragEnteredListId] = useState<string | undefined>(undefined)
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(cardId ? true : false)
   const [query, setQuery] = useState('')
@@ -263,8 +264,18 @@ export default function PageBoard(
     return b.id === boardId
   })
 
-  const handleSearch = (e: JSX.TargetedMouseEvent<HTMLInputElement>) => {
-    setQuery(e.currentTarget.value)
+  const handleSubmit = (e: JSX.TargetedSubmitEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const query = inputCardFilterElement.current?.value
+    if (query) {
+      setQuery(query)
+    } else {
+      setQuery('')
+    }
+  }
+
+  const handleReset = () => {
+    setQuery('')
   }
 
   return (
@@ -282,20 +293,26 @@ export default function PageBoard(
         </div>
       }
       <div class="px-3 h-6">
-        <div class="flex-row">
-          <label for="board-filter">
-            <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary">
-              <IconFilterList />
-            </div>
-          </label>
-          <input
-            id="card-filter"
-            type="search"
-            class="w-48 h-6 px-2 bg-primary border-solid border-1 border-color-primary border-l-none"
-            placeholder="Filter"
-            onSearch={handleSearch}
-          />
-        </div>
+        <form onSubmit={handleSubmit} onReset={handleReset}>
+          <div class="flex-row">
+            <label for="card-filter">
+              <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary">
+                <IconFilterList />
+              </div>
+            </label>
+            <input
+              id="card-filter"
+              type="text"
+              class="w-48 h-6 px-2 bg-primary border-solid border-1 border-color-primary border-l-none"
+              placeholder="Filter"
+              ref={inputCardFilterElement}
+            />
+            <button
+              type="reset"
+              class="h-6 border-solid border-1 border-color-primary bg-transparent px-2 text-secondary text-small"
+            >Clear</button>
+          </div>
+        </form>
       </div>
       <div class="f-1 flex-row layout-stack-horizontal-4 overflow-x-auto px-3 pattern-scrollbar-thick">
         {found && filterListsByCardName(query, found.lists).map((list, idx) =>
