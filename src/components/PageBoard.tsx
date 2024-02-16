@@ -296,7 +296,7 @@ export default function PageBoard(
         <form onSubmit={handleSubmit} onReset={handleReset}>
           <div class="flex-row">
             <label for="card-filter">
-              <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary">
+              <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary bg-primary">
                 <IconFilterList />
               </div>
             </label>
@@ -309,7 +309,7 @@ export default function PageBoard(
             />
             <button
               type="reset"
-              class="h-6 border-solid border-1 border-color-primary bg-transparent px-2 text-secondary text-small"
+              class="h-6 border-solid border-1 border-color-primary bg-primary px-2 text-secondary text-small"
             >Clear</button>
           </div>
         </form>
