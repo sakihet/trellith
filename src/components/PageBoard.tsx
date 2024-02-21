@@ -16,6 +16,7 @@ import { BgColor } from '../types/bgColor'
 import IconAdd from './IconAdd'
 import IconMoreHoriz from './IconMoreHoriz'
 import IconFilterList from './IconFilterList'
+import IconClose from './IconClose'
 
 export type AddCardParams = {
   listId: string
@@ -305,14 +306,16 @@ export default function PageBoard(
             <input
               id="card-filter"
               type="text"
-              class="w-48 h-6 px-2 bg-primary border-solid border-1 border-color-primary border-l-none"
+              class="w-48 h-6 px-2 bg-primary border-solid border-1 border-color-primary border-x-none"
               placeholder="Filter"
               ref={inputCardFilterElement}
             />
             <button
               type="reset"
-              class="h-6 border-solid border-1 border-color-primary bg-primary px-2 text-secondary text-small"
-            >Clear</button>
+              class="h-6 w-6 border-solid border-1 border-color-primary bg-primary text-secondary text-medium cursor-pointer"
+            >
+              <IconClose />
+            </button>
           </div>
         </form>
       </div>

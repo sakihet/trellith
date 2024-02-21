@@ -4,6 +4,7 @@ import BoardItem from "./BoardItem"
 import { useRef, useState } from "preact/hooks"
 import IconFilterList from "./IconFilterList"
 import { filterBoardsByName } from "../utils"
+import IconClose from "./IconClose"
 
 export default function BoardList(
   {
@@ -51,15 +52,17 @@ export default function BoardList(
           <input
             id="board-filter"
             type="text"
-            class="w-48 h-6 px-2 bg-primary border-solid border-1 border-color-primary border-l-none"
+            class="w-48 h-6 px-2 bg-primary border-solid border-1 border-color-primary border-x-none"
             placeholder="Filter"
             disabled={boards.length === 0}
             ref={inputElement}
           />
           <button
             type="reset"
-            class="h-6 border-solid border-1 border-color-primary bg-transparent px-2 text-secondary text-small"
-          >Clear</button>
+            class="h-6 w-6 border-solid border-1 border-color-primary bg-primary text-secondary text-medium cursor-pointer"
+          >
+            <IconClose />
+          </button>
         </div>
       </form>
       {boards.length === 0
