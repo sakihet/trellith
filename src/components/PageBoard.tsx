@@ -360,21 +360,20 @@ export default function PageBoard(
           </div>
         )}
         <div class="py-3">
-          <form onSubmit={handleSubmitList}>
-            <div class="border-1 border-solid border-color-primary inline-block">
-              <label class="flex-row divide-solid divide-x-1 divide-color-primary">
-                <div class="w-6 text-center text-primary flex-column bg-primary text-medium">
-                  <span class="m-auto text-medium">
-                    <IconAdd />
-                  </span>
+          <form onSubmit={handleSubmitList} autocomplete="off">
+            <div class="flex-row">
+              <label for="adding-list">
+                <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary bg-primary text-primary flex-column bg-primary">
+                  <IconAdd />
                 </div>
-                <input
-                  class="h-6 px-2 border-none"
-                  type="text"
-                  placeholder="Enter list title..."
-                  ref={inputElement}
-                />
               </label>
+              <input
+                id="adding-list"
+                class="h-6 px-2 bg-primary border-solid border-1 border-color-primary border-l-none"
+                type="text"
+                placeholder="Enter list title..."
+                ref={inputElement}
+              />
             </div>
           </form>
         </div>
