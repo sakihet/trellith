@@ -120,10 +120,12 @@ export default function PageBoard(
   }
 
   const handleClickDeleteList = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
-    const { listId } = e.currentTarget.dataset
-    if (listId && boardId) {
-      const updated = service.deleteList(appState.value, listId, boardId)
-      updateState(updated)
+    if (window.confirm("Do you really want to delete this list?")) {
+      const { listId } = e.currentTarget.dataset
+      if (listId && boardId) {
+        const updated = service.deleteList(appState.value, listId, boardId)
+        updateState(updated)
+      }
     }
   }
 

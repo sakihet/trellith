@@ -37,8 +37,10 @@ export default function BoardHeader(
   }
 
   const handleClickDelete = () => {
-    deleteBoard(id)
-    navigate('/')
+    if (window.confirm("Do you really want to delete this board?")) {
+      deleteBoard(id)
+      navigate('/')
+    }
   }
 
   const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
