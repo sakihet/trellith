@@ -295,7 +295,7 @@ export default function PageBoard(
         </div>
       }
       <div class="px-3 h-6">
-        <form onSubmit={handleSubmit} onReset={handleReset}>
+        <form onSubmit={handleSubmit} onReset={handleReset} autocomplete="off">
           <div class="flex-row">
             <label for="card-filter">
               <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary bg-primary">

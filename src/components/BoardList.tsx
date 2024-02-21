@@ -41,7 +41,7 @@ export default function BoardList(
 
   return (
     <div class="layout-stack-4 overflow-y-auto pattern-height-board-list py-2 pr-2 pattern-scrollbar-thick">
-      <form onSubmit={handleSubmit} onReset={handleReset}>
+      <form onSubmit={handleSubmit} onReset={handleReset} autocomplete="off">
         <div class="flex-row">
           <label for="board-filter">
             <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary">
