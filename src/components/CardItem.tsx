@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 import { useLocation } from "wouter-preact"
 import { Pos } from "../types/pos"
+import IconDialogs from "./IconDialogs"
 
 export default function CardItem(
   {
@@ -118,7 +119,9 @@ export default function CardItem(
               class="h-6 w-6 border-none text-secondary px-1"
               type="button"
               onClick={handleClickOpenDialog}
-            >○</button>
+            >
+              <IconDialogs />
+            </button>
           </div>
         }
       </div>

@@ -381,6 +381,11 @@
   border-left-style: none;
 }
 
+.border-x-none {
+  border-left-style: none;
+  border-right-style: none;
+}
+
 .divide-solid>*+* {
   border-style: solid;
 }

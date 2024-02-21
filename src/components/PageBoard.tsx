@@ -16,6 +16,7 @@ import { BgColor } from '../types/bgColor'
 import IconAdd from './IconAdd'
 import IconMoreHoriz from './IconMoreHoriz'
 import IconFilterList from './IconFilterList'
+import IconClose from './IconClose'
 
 export type AddCardParams = {
   listId: string
@@ -120,10 +121,12 @@ export default function PageBoard(
   }
 
   const handleClickDeleteList = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
-    const { listId } = e.currentTarget.dataset
-    if (listId && boardId) {
-      const updated = service.deleteList(appState.value, listId, boardId)
-      updateState(updated)
+    if (window.confirm("Do you really want to delete this list?")) {
+      const { listId } = e.currentTarget.dataset
+      if (listId && boardId) {
+        const updated = service.deleteList(appState.value, listId, boardId)
+        updateState(updated)
+      }
     }
   }
 
@@ -293,7 +296,7 @@ export default function PageBoard(
         </div>
       }
       <div class="px-3 h-6">
-        <form onSubmit={handleSubmit} onReset={handleReset}>
+        <form onSubmit={handleSubmit} onReset={handleReset} autocomplete="off">
           <div class="flex-row">
             <label for="card-filter">
               <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary bg-primary">
@@ -303,14 +306,16 @@ export default function PageBoard(
             <input
               id="card-filter"
               type="text"
-              class="w-48 h-6 px-2 bg-primary border-solid border-1 border-color-primary border-l-none"
+              class="w-48 h-6 px-2 bg-primary border-solid border-1 border-color-primary border-x-none"
               placeholder="Filter"
               ref={inputCardFilterElement}
             />
             <button
               type="reset"
-              class="h-6 border-solid border-1 border-color-primary bg-primary px-2 text-secondary text-small"
-            >Clear</button>
+              class="h-6 w-6 border-solid border-1 border-color-primary bg-primary text-secondary text-medium cursor-pointer"
+            >
+              <IconClose />
+            </button>
           </div>
         </form>
       </div>
@@ -355,21 +360,20 @@ export default function PageBoard(
           </div>
         )}
         <div class="py-3">
-          <form onSubmit={handleSubmitList}>
-            <div class="border-1 border-solid border-color-primary inline-block">
-              <label class="flex-row divide-solid divide-x-1 divide-color-primary">
-                <div class="w-6 text-center text-primary flex-column bg-primary text-medium">
-                  <span class="m-auto text-medium">
-                    <IconAdd />
-                  </span>
+          <form onSubmit={handleSubmitList} autocomplete="off">
+            <div class="flex-row">
+              <label for="adding-list">
+                <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary bg-primary text-primary flex-column bg-primary">
+                  <IconAdd />
                 </div>
-                <input
-                  class="h-6 px-2 border-none"
-                  type="text"
-                  placeholder="Enter list title..."
-                  ref={inputElement}
-                />
               </label>
+              <input
+                id="adding-list"
+                class="h-6 px-2 bg-primary border-solid border-1 border-color-primary border-l-none"
+                type="text"
+                placeholder="Enter list title..."
+                ref={inputElement}
+              />
             </div>
           </form>
         </div>
