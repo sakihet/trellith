@@ -11,12 +11,12 @@ import { Pos } from '../types/pos'
 import { State } from '../types/state'
 import CardList from './CardList'
 import { Card } from '../types/card'
-import { filterListsByCardName, relativeTime } from '../utils'
+import { filterListsByCardName } from '../utils'
 import { BgColor } from '../types/bgColor'
 import IconAdd from './IconAdd'
-import IconMoreHoriz from './IconMoreHoriz'
 import IconFilterList from './IconFilterList'
 import IconClose from './IconClose'
+import { CardDialog } from './CardDialog'
 
 export type AddCardParams = {
   listId: string
@@ -46,10 +46,6 @@ export default function PageBoard(
   const service = new ApplicationService(repository)
   const [dialogCard, setDialogCard] = useState<Card | undefined>(undefined)
   const [dialogCardListId, setDialogCardListId] = useState<string | undefined>(undefined)
-  const [dialogCardEditingName, setDialogCardEditingName] = useState<boolean>(false)
-  const [dialogCardEditingDescription, setDialogCardEditingDescription] = useState<boolean>(false)
-  const refDialogCardNameInput = useRef<HTMLInputElement>(null)
-  const refDialogCardDescriptionTextarea = useRef<HTMLTextAreaElement>(null)
   const [, setLocation] = useLocation()
 
   useEffect(() => {
@@ -85,17 +81,13 @@ export default function PageBoard(
     }
   }
 
-  const handleBlurDialogCardDescription = () => {
-    setDialogCardEditingDescription(false)
-    if (refDialogCardDescriptionTextarea.current?.value && dialogCard && dialogCardListId) {
-      const updated = service.updateCardDescription(appState.value, dialogCard.id, refDialogCardDescriptionTextarea.current.value, boardId, dialogCardListId)
+  const handleBlurDialogCardDescription = (e: JSX.TargetedFocusEvent<HTMLTextAreaElement>) => {
+    const value = e.currentTarget.value
+    if (dialogCard && dialogCardListId) {
+      const updated = service.updateCardDescription(appState.value, dialogCard.id, value, boardId, dialogCardListId)
       updateState(updated)
       setDialogCard(service.findCardFromBoard(appState.value, dialogCard.id, boardId))
     }
-  }
-
-  const handleBlurDialogCardName = () => {
-    setDialogCardEditingName(false)
   }
 
   const handleClickDeleteCard = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
@@ -130,21 +122,7 @@ export default function PageBoard(
     }
   }
 
-  const handleClickDialogCardDescription = () => {
-    setDialogCardEditingDescription(true)
-    setTimeout(() => {
-      refDialogCardDescriptionTextarea.current?.focus()
-    }, 100)
-  }
-
-  const handleClickDialogCardName = () => {
-    setDialogCardEditingName(true)
-    setTimeout(() => {
-      refDialogCardNameInput.current?.focus()
-    }, 100)
-  }
-
-  const handleClickMask = () => {
+  const handleClickMask = (_e: JSX.TargetedMouseEvent<HTMLDivElement>) => {
     setIsDialogOpen(false)
     setLocation(`/board/${boardId}`)
   }
@@ -255,10 +233,11 @@ export default function PageBoard(
 
   const handleSubmitDialogCardName = (e: JSX.TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (refDialogCardNameInput.current?.value && dialogCard && dialogCardListId) {
-      const updated = service.updateCardName(appState.value, dialogCard.id, refDialogCardNameInput.current.value, boardId, dialogCardListId)
+    const formData = new FormData(e.currentTarget)
+    const cardName = formData.get('cardName')?.toString()
+    if (cardName && dialogCard && dialogCardListId) {
+      const updated = service.updateCardName(appState.value, dialogCard.id, cardName, boardId, dialogCardListId)
       updateState(updated)
-      setDialogCardEditingName(false)
       setDialogCard(service.findCardFromBoard(appState.value, dialogCard.id, boardId))
     }
   }
@@ -378,87 +357,16 @@ export default function PageBoard(
           </form>
         </div>
       </div>
-      {isDialogOpen && dialogCard && dialogCardListId &&
-        <div
-          class="pattern-mask"
-          onClick={handleClickMask}
+      {dialogCardListId &&
+        <CardDialog
+          isOpen={isDialogOpen && !!dialogCard && !!dialogCardListId}
+          card={dialogCard}
+          cardListId={dialogCardListId}
+          handleBlurCardDescription={handleBlurDialogCardDescription}
+          handleClickDeleteCard={handleClickDeleteCard}
+          handleClickMask={handleClickMask}
+          handleSubmitCardName={handleSubmitDialogCardName}
         />
-      }
-      {isDialogOpen && dialogCard && dialogCardListId &&
-        <dialog
-          open
-          class="layout-center w-full flex-column p-8 border-solid border-1 border-color-primary layout-stack-4 bg-primary mt-24"
-        >
-          <div class="flex-row">
-            <div class="text-large f-1">
-              {dialogCardEditingName
-                ?
-                <form onSubmit={handleSubmitDialogCardName}>
-                  <input
-                    class="h-8 w-full border-solid border-1 border-color-primary text-large"
-                    type="text"
-                    ref={refDialogCardNameInput}
-                    onBlur={handleBlurDialogCardName}
-                    value={dialogCard.name}
-                  />
-                </form>
-                : <div onClick={handleClickDialogCardName}>{dialogCard.name}</div>
-              }
-            </div>
-            <div class="">
-              <details class="pattern-dropdown">
-                <summary class="w-6 h-6 flex-column cursor-pointer hover">
-                  <div class="m-auto text-secondary">
-                    <IconMoreHoriz />
-                  </div>
-                </summary>
-                <div class="border-solid border-1 border-color-primary py-2 bg-primary drop-shadow">
-                  <ul class="list-style-none p-0 m-0 text-secondary">
-                    <li class="h-8">
-                      <button
-                        class="w-full text-left px-4 py-2 cursor-pointer border-none bg-primary hover nowrap text-secondary"
-                        type="button"
-                        onClick={handleClickDeleteCard}
-                        data-card-id={dialogCard.id}
-                        data-list-id={dialogCardListId}
-                      >Delete</button>
-                    </li>
-                  </ul>
-                </div>
-              </details>
-
-            </div>
-          </div>
-          <div class="f-1">
-            {dialogCardEditingDescription
-              ?
-              <textarea
-                class="border-solid border-1 border-color-primary w-full text-medium font-sans-serif"
-                rows={4}
-                ref={refDialogCardDescriptionTextarea}
-                onBlur={handleBlurDialogCardDescription}
-              >{dialogCard.description}</textarea>
-              :
-              <div
-                onClick={handleClickDialogCardDescription}
-                class="font-sans-serif overflow-x-hidden overflow-wrap-break-word pre-wrap text-secondary"
-              >
-                {dialogCard.description === ""
-                  ? "No description"
-                  : dialogCard.description
-                }
-              </div>
-            }
-          </div>
-          <div class="text-right layout-stack-2">
-            <div class="text-tertiary text-small">
-              <span>Created: {relativeTime(dialogCard.createdAt)}</span>
-            </div>
-            <div class="text-tertiary text-small">
-              <span>Updated: {relativeTime(dialogCard.updatedAt)}</span>
-            </div>
-          </div>
-        </dialog>
       }
     </div>
   )
