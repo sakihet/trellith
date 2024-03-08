@@ -261,42 +261,44 @@ export default function PageBoard(
   }
 
   return (
-    <div class={`flex-column py-3 h-full layout-stack-2 bg-${found?.bgColor ? found.bgColor : 'primary'}`}>
-      {found &&
-        <div class="px-3 h-6">
-          <BoardHeader
-            id={found.id}
-            name={found.name}
-            bgColor={found.bgColor}
-            updateBoardName={updateBoardName}
-            selectBgColor={selectBgColor}
-            deleteBoard={deleteBoard}
-          />
-        </div>
-      }
-      <div class="px-3 h-6">
-        <form onSubmit={handleSubmit} onReset={handleReset} autocomplete="off">
-          <div class="flex-row">
-            <label for="card-filter">
-              <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary bg-primary">
-                <IconFilterList />
-              </div>
-            </label>
-            <input
-              id="card-filter"
-              type="text"
-              class="w-48 h-6 px-2 bg-primary border-solid border-1 border-color-primary border-x-none"
-              placeholder="Filter"
-              ref={inputCardFilterElement}
+    <div class={`flex-column h-full layout-stack-2 bg-${found?.bgColor ? found.bgColor : 'primary'}`}>
+      <div class="py-3 layout-stack-2">
+        {found &&
+          <div class="px-3 h-6">
+            <BoardHeader
+              id={found.id}
+              name={found.name}
+              bgColor={found.bgColor}
+              updateBoardName={updateBoardName}
+              selectBgColor={selectBgColor}
+              deleteBoard={deleteBoard}
             />
-            <button
-              type="reset"
-              class="h-6 w-6 border-solid border-1 border-color-primary bg-primary text-secondary text-medium cursor-pointer"
-            >
-              <IconClose />
-            </button>
           </div>
-        </form>
+        }
+        <div class="px-3 h-6">
+          <form onSubmit={handleSubmit} onReset={handleReset} autocomplete="off">
+            <div class="flex-row">
+              <label for="card-filter">
+                <div class="inline-block h-6 w-6 text-center border-solid border-1 border-color-primary bg-primary">
+                  <IconFilterList />
+                </div>
+              </label>
+              <input
+                id="card-filter"
+                type="text"
+                class="w-48 h-6 px-2 bg-primary border-solid border-1 border-color-primary border-x-none"
+                placeholder="Filter"
+                ref={inputCardFilterElement}
+              />
+              <button
+                type="reset"
+                class="h-6 w-6 border-solid border-1 border-color-primary bg-primary text-secondary text-medium cursor-pointer"
+              >
+                <IconClose />
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
       <div class="f-1 flex-row layout-stack-horizontal-4 overflow-x-auto px-3 pattern-scrollbar-thick">
         {found && filterListsByCardName(query, found.lists).map((list, idx) =>

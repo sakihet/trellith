@@ -234,6 +234,10 @@
   padding-bottom: 1rem;
 }
 
+.pt-3 {
+  padding-top: 0.75rem;
+}
+
 .pl-0 {
   padding: 0;
 }

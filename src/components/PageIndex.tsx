@@ -99,8 +99,8 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
     <div class="px-3">
       <div class="layout-center overflow-hidden w-full layout-stack-8">
         <div class="overflow-hidden">
-          <div class="layout-stack-2">
-            <div class="flex-row h-10 py-3">
+          <div class="pt-3">
+            <div class="flex-row h-6">
               <h2 class="text-medium text-primary f-1 m-0">Boards</h2>
               <div class="flex-row layout-stack-horizontal-1">
                 <button
@@ -149,13 +149,13 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
                 </details>
               </div>
             </div>
-          </div>
-          <div>
-            <BoardFormDialog
-              open={dialogOpen}
-              handleClickMask={handleClickMouse}
-              addBoard={addBoard}
-            />
+            <div>
+              <BoardFormDialog
+                open={dialogOpen}
+                handleClickMask={handleClickMouse}
+                addBoard={addBoard}
+              />
+            </div>
           </div>
           <div class="overflow-y-auto">
             <BoardList
