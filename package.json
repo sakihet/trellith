@@ -14,19 +14,19 @@
   "dependencies": {
     "@preact/signals": "^1.2.2",
     "colorjs.io": "^0.4.5",
-    "preact": "^10.19.3",
+    "preact": "^10.19.7",
     "uuid": "^9.0.1",
     "wouter-preact": "^2.12.2"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.8.1",
+    "@preact/preset-vite": "^2.8.2",
     "@types/uuid": "^9.0.8",
-    "@typescript-eslint/eslint-plugin": "^6.20.0",
-    "@typescript-eslint/parser": "^6.20.0",
-    "eslint": "^8.56.0",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.12",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.6",
     "vite-plugin-pwa": "^0.17.5",
-    "vitest": "^1.2.2"
+    "vitest": "^1.4.0"
   }
 }
