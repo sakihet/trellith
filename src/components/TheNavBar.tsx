@@ -4,6 +4,7 @@ import { Signal } from "@preact/signals"
 import { applyTheme, setTheme } from "../utils"
 import IconLightMode from "./IconLightMode"
 import IconDarkMode from "./IconDarkMode"
+import { showCommandPalette } from "../main"
 
 export default function TheNavBar({ theme }: { theme: Signal<Theme> }) {
   const handleClick = () => {
@@ -14,6 +15,10 @@ export default function TheNavBar({ theme }: { theme: Signal<Theme> }) {
     }
     applyTheme(theme.value)
     setTheme(theme.value)
+  }
+
+  const handleClickCommandPalette = () => {
+    showCommandPalette.value = true
   }
 
   return (
@@ -33,6 +38,13 @@ export default function TheNavBar({ theme }: { theme: Signal<Theme> }) {
           </div>
           <div class="f-1 h-6 text-right">
             <div class="layout-stack-horizontal-1">
+              <button
+                type="button"
+                class="bg-transparent border-solid border-1 border-color-primary px-2 py-1 text-secondary text-small cursor-pointer"
+                onClick={handleClickCommandPalette}
+              >
+                Command Palette
+              </button>
               <Link
                 href="/about"
                 class="text-decoration-none text-secondary text-small hover px-2 py-1"

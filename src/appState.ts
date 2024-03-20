@@ -4,7 +4,8 @@ import { getTheme } from "./utils"
 import { Theme } from "./types/theme"
 
 export function createAppState() {
-  const appState: Signal<State> = signal<State>({boards:[]})
+  const appState: Signal<State> = signal<State>({ boards: [] })
   const appTheme: Signal<Theme> = signal<Theme>(getTheme())
-  return {appState, appTheme}
+
+  return { appState, appTheme }
 }
