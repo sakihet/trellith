@@ -50,6 +50,8 @@ export default function PageBoard(
 
   useEffect(() => {
     if (cardId) {
+      setDialogCard(service.findCardFromBoard(appState.value, cardId, boardId))
+      setDialogCardListId(service.findCardListIdFromBoard(appState.value, cardId, boardId))
       setIsDialogOpen(true)
     } else {
       setIsDialogOpen(false)
@@ -58,8 +60,6 @@ export default function PageBoard(
 
   useEffect(() => {
     if (isDialogOpen && cardId) {
-      setDialogCard(service.findCardFromBoard(appState.value, cardId, boardId))
-      setDialogCardListId(service.findCardListIdFromBoard(appState.value, cardId, boardId))
     } else {
       setDialogCard(undefined)
       setDialogCardListId(undefined)
