@@ -51,10 +51,26 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
     })
   }
 
+  const buildCommandsForCards = (board: Board): Command[] => {
+    return board.lists.flatMap(l => {
+      return l.cards.map(c => {
+        return {
+          id: uuidv4(),
+          label: `Go to card: [${board.name}] ${c.name}`,
+          action: () => {
+            setLocation(`/board/${board.id}/card/${c.id}`)
+            showCommandPalette.value = false
+          }
+        }
+      })
+    })
+  }
+
   const buildCommands = (boards: Board[]): Command[] => {
     return [
       ...commandsDefault,
-      ...buildCommandsForBoards(boards)
+      ...buildCommandsForBoards(boards),
+      ...boards.flatMap(b => buildCommandsForCards(b))
     ]
   }
 
@@ -135,8 +151,8 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
               ref={ref}
             />
           </div>
-          <div>
-            <ul class="list-style-none layout-stack-1">
+          <div class="pattern-scrollbar-thin overflow-y-auto">
+            <ul class="pattern-height-command-menu-list list-style-none layout-stack-1 ">
               {commandsFiltered.length > 0
                 ?
                 commandsFiltered.map((command, idx) => (
