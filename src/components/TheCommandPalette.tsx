@@ -138,7 +138,7 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
       }
       <dialog
         open={showCommandPalette}
-        class="rounded-2 p-8 layout-center border-solid border-1 border-color-primary pattern-dialog"
+        class="rounded-2 p-8 layout-center border-solid border-1 border-color-primary pattern-dialog bg-primary"
       >
         <div class="layout-stack-4">
           <div>
