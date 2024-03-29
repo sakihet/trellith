@@ -11,10 +11,10 @@ import { BoardFormDialog } from './BoardFormDialog'
 import { BgColor } from '../types/bgColor'
 import IconAdd from './IconAdd'
 import IconMoreHoriz from './IconMoreHoriz'
+import { showBoardDialog } from '../main'
 
 export default function PageIndex({ appState }: { appState: Signal<State> }) {
   const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false)
   const detailsElement = useRef<HTMLDetailsElement>(null)
   const repository = new RepositoryLocalStorage()
   const service = new ApplicationService(repository)
@@ -88,11 +88,11 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
   const storageDataSize = getSize()
 
   const handleToggleDialog = () => {
-    setDialogOpen(true)
+    showBoardDialog.value = true
   }
 
   const handleClickMouse = () => {
-    setDialogOpen(false)
+    showBoardDialog.value = false
   }
 
   return (
@@ -151,7 +151,7 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
             </div>
             <div>
               <BoardFormDialog
-                open={dialogOpen}
+                open={showBoardDialog.value}
                 handleClickMask={handleClickMouse}
                 addBoard={addBoard}
               />

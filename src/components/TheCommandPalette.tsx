@@ -4,7 +4,7 @@ import useLocation from "wouter-preact/use-location"
 import { Signal } from "@preact/signals"
 import { v4 as uuidv4 } from 'uuid'
 
-import { showCommandPalette } from "../main"
+import { showBoardDialog, showCommandPalette } from "../main"
 import { State } from "../types/state"
 import { Board } from "../types/board"
 
@@ -51,6 +51,16 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
     })
   }
 
+  const commandBoardCreate: Command = {
+    id: uuidv4(),
+    label: `Create a board`,
+    action: () => {
+      showCommandPalette.value = false
+      setLocation(`/`)
+      showBoardDialog.value = true
+    }
+  }
+
   const buildCommandsForCards = (board: Board): Command[] => {
     return board.lists.flatMap(l => {
       return l.cards.map(c => {
@@ -70,7 +80,8 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
     return [
       ...commandsDefault,
       ...buildCommandsForBoards(boards),
-      ...boards.flatMap(b => buildCommandsForCards(b))
+      ...boards.flatMap(b => buildCommandsForCards(b)),
+      commandBoardCreate
     ]
   }
 
