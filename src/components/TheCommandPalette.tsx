@@ -7,6 +7,11 @@ import { v4 as uuidv4 } from 'uuid'
 import { showBoardDialog, showCommandPalette } from "../main"
 import { State } from "../types/state"
 import { Board } from "../types/board"
+import { RepositoryLocalStorage } from "../repositories/repository"
+import { ApplicationService } from "../applications/applicationService"
+
+const repository = new RepositoryLocalStorage()
+const service = new ApplicationService(repository)
 
 type Command = {
   id: string
@@ -61,6 +66,23 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
     }
   }
 
+  const buildCommandsBoardDelete = (boards: Board[]): Command[] => {
+    return boards.map(b => {
+      return {
+        id: uuidv4(),
+        label: `Delete board: ${b.name}`,
+        action: () => {
+          // TODO: refactor
+          if (window.confirm(`Do you really want to delete board: ${b.name}`)) {
+            showCommandPalette.value = false
+            const updated = service.deleteBoard(appState.value, b.id)
+            appState.value = updated
+          }
+        }
+      }
+    })
+  }
+
   const buildCommandsForCards = (board: Board): Command[] => {
     return board.lists.flatMap(l => {
       return l.cards.map(c => {
@@ -81,7 +103,8 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
       ...commandsDefault,
       ...buildCommandsForBoards(boards),
       ...boards.flatMap(b => buildCommandsForCards(b)),
-      commandBoardCreate
+      commandBoardCreate,
+      ...buildCommandsBoardDelete(boards)
     ]
   }
 
