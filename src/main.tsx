@@ -26,6 +26,7 @@ import { signal } from '@preact/signals'
 const { appState, appTheme } = createAppState()
 
 export const showCommandPalette = signal(false)
+export const showBoardDialog = signal(false)
 
 function Main() {
   const repository = new RepositoryLocalStorage()
