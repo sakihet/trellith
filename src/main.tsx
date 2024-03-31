@@ -21,12 +21,8 @@ import { applyTheme } from './utils.ts'
 import { State } from './types/state.ts'
 import PageSandbox from './components/PageSandbox.tsx'
 import TheCommandPalette from './components/TheCommandPalette.tsx'
-import { signal } from '@preact/signals'
 
-const { appState, appTheme } = createAppState()
-
-export const showCommandPalette = signal(false)
-export const showBoardDialog = signal(false)
+export const { appState, appTheme, showCommandPalette, showBoardDialog } = createAppState()
 
 function Main() {
   const repository = new RepositoryLocalStorage()
