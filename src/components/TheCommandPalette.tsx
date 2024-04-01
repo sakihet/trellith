@@ -4,11 +4,13 @@ import useLocation from "wouter-preact/use-location"
 import { Signal } from "@preact/signals"
 import { v4 as uuidv4 } from 'uuid'
 
-import { showBoardDialog, showCommandPalette } from "../main"
+import { appTheme, showBoardDialog, showCommandPalette } from "../main"
 import { State } from "../types/state"
 import { Board } from "../types/board"
 import { RepositoryLocalStorage } from "../repositories/repository"
 import { ApplicationService } from "../applications/applicationService"
+import { applyTheme, setTheme } from "../utils"
+import { Theme } from "../types/theme"
 
 const repository = new RepositoryLocalStorage()
 const service = new ApplicationService(repository)
@@ -98,24 +100,39 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
     })
   }
 
-  const buildCommands = (boards: Board[]): Command[] => {
+  const commandThemeSwitch = (theme: Theme): Command => {
+    const themeNext = (theme === 'light') ? 'dark' : 'light'
+    return {
+      id: uuidv4(),
+      label: `Switch to ${themeNext} theme`,
+      action: () => {
+        appTheme.value = themeNext
+        applyTheme(appTheme.value)
+        setTheme(appTheme.value)
+        showCommandPalette.value = false
+      }
+    }
+  }
+
+  const buildCommands = (boards: Board[], theme: Theme): Command[] => {
     return [
       ...commandsDefault,
       ...buildCommandsForBoards(boards),
       ...boards.flatMap(b => buildCommandsForCards(b)),
       commandBoardCreate,
-      ...buildCommandsBoardDelete(boards)
+      ...buildCommandsBoardDelete(boards),
+      commandThemeSwitch(theme)
     ]
   }
 
   const [commandsFiltered, setCommandsFiltered] = useState<Command[]>(
-    buildCommands(appState.value.boards)
+    buildCommands(appState.value.boards, appTheme.value)
   )
 
   useEffect(() => {
     if (ref.current && showCommandPalette.value) {
       ref.current?.focus()
-      setCommandsFiltered(buildCommands(appState.value.boards))
+      setCommandsFiltered(buildCommands(appState.value.boards, appTheme.value))
     }
   }, [showCommandPalette.value, setCommandsFiltered])
 
@@ -127,10 +144,10 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
     setIndex(0)
     const query = e.currentTarget.value
     if (query === '') {
-      setCommandsFiltered(buildCommands(appState.value.boards))
+      setCommandsFiltered(buildCommands(appState.value.boards, appTheme.value))
     } else {
       setCommandsFiltered(
-        buildCommands(appState.value.boards).filter(c => c.label.toLowerCase().includes(query.toLowerCase()))
+        buildCommands(appState.value.boards, appTheme.value).filter(c => c.label.toLowerCase().includes(query.toLowerCase()))
       )
     }
   }
