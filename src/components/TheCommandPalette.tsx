@@ -1,6 +1,6 @@
 import { JSX } from "preact/jsx-runtime"
 import { useEffect, useRef, useState } from "preact/hooks"
-import useLocation from "wouter-preact/use-location"
+
 import { Signal } from "@preact/signals"
 import { v4 as uuidv4 } from 'uuid'
 
@@ -11,6 +11,7 @@ import { RepositoryLocalStorage } from "../repositories/repository"
 import { ApplicationService } from "../applications/applicationService"
 import { applyTheme, setTheme } from "../utils"
 import { Theme } from "../types/theme"
+import { useLocation } from "wouter-preact"
 
 const repository = new RepositoryLocalStorage()
 const service = new ApplicationService(repository)

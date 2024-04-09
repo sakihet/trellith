@@ -1,9 +1,10 @@
 import { useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
-import { navigate } from "wouter-preact/use-location"
+
 import FormBoardBgColor from "./FormBoardBgColor"
 import { BgColor } from "../types/bgColor"
 import IconMoreHoriz from "./IconMoreHoriz"
+import { navigate } from "wouter-preact/use-browser-location"
 
 export default function BoardHeader(
   {
