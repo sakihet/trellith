@@ -2,36 +2,69 @@ import { Link } from "wouter-preact"
 import { JSX } from "preact/jsx-runtime"
 import { Pos } from "../types/pos"
 import { Board } from "../types/board"
+import { useEffect, useRef } from "preact/hooks"
+import { draggable, dropTargetForElements, monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter"
+import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine"
 
 export default function BoardItem(
   {
     board,
     pos,
     cardsNum,
-    handleDragEnd,
     handleDragOver,
-    handleDragStart,
-    handleDrop
+    handleDrop,
   }: {
     board: Omit<Board, 'lists'>
     pos: Pos
     cardsNum: number
-    handleDragEnd: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
     handleDragOver: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-    handleDragStart: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-    handleDrop: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+    handleDrop: (elemTarget: HTMLDivElement, elemSource: HTMLDivElement) => void
   }
 ) {
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (el) {
+      return combine(
+        draggable({
+          element: el,
+          onDragStart: () => {
+            console.log('draggable: drag start')
+          },
+          onDrop: () => {
+            console.log('draggable: drop')
+          },
+        }),
+        dropTargetForElements({
+          element: el,
+          onDragEnter: () => {
+            console.log('target: drag enter')
+          },
+          onDragLeave: () => {
+            console.log('target: drag leave')
+          },
+          onDrop: () => {
+            console.log('target: drop')
+          }
+        }),
+        monitorForElements({
+          onDrop({ location, source }) {
+            const target = location.current.dropTargets[0]
+            handleDrop(target.element as HTMLDivElement, source.element as HTMLDivElement)
+          },
+        }),
+      )
+    }
+  }, [])
+
   return (
     <div
       class={`flex-column h-20 bg-primary parent-hiding-child border-solid border-2 border-color-primary hover-bg-board-item bg-${board.bgColor ? board.bgColor : 'primary'}`}
-      draggable
-      onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
-      onDragStart={handleDragStart}
-      onDrop={handleDrop}
       data-board-id={board.id}
       data-pos={pos}
+      ref={ref}
     >
       <Link
         class="p-4 cursor-pointer flex-column layout-stack-2 text-decoration-none text-primary"
