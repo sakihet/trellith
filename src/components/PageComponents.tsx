@@ -113,9 +113,7 @@ export default function PageComponents() {
               board={board1}
               pos="first"
               cardsNum={8}
-              handleDragEnd={() => { }}
               handleDragOver={() => { }}
-              handleDragStart={() => { }}
               handleDrop={() => { }}
             />
           </div>
@@ -125,9 +123,7 @@ export default function PageComponents() {
           <div>
             <BoardList
               boards={boards}
-              handleDragEnd={() => { }}
               handleDragOver={() => { }}
-              handleDragStart={() => { }}
               handleDrop={() => { }}
               handleToggleDialog={() => { }}
             />

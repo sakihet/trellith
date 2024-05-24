@@ -9,17 +9,13 @@ import IconClose from "./IconClose"
 export default function BoardList(
   {
     boards,
-    handleDragEnd,
     handleDragOver,
-    handleDragStart,
     handleDrop,
     handleToggleDialog
   }: {
     boards: Board[]
-    handleDragEnd: () => void
     handleDragOver: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-    handleDragStart: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-    handleDrop: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+    handleDrop: (elemTarget: HTMLDivElement, elemSource: HTMLDivElement) => void
     handleToggleDialog: (e: JSX.TargetedMouseEvent<HTMLButtonElement>) => void
   }
 ) {
@@ -81,9 +77,7 @@ export default function BoardList(
                 board={board}
                 pos={idx === 0 ? "first" : (idx === (boards.length - 1) ? "last" : "middle")}
                 cardsNum={board.lists.map(l => l.cards.length).reduce((accumulator, value) => { return accumulator + value }, 0)}
-                handleDragEnd={handleDragEnd}
                 handleDragOver={handleDragOver}
-                handleDragStart={handleDragStart}
                 handleDrop={handleDrop}
               />
             )

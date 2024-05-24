@@ -1,4 +1,4 @@
-import { useRef, useState } from 'preact/hooks'
+import { useRef } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { Signal } from '@preact/signals'
 import { ApplicationService } from '../applications/applicationService'
@@ -14,7 +14,6 @@ import IconMoreHoriz from './IconMoreHoriz'
 import { showBoardDialog } from '../main'
 
 export default function PageIndex({ appState }: { appState: Signal<State> }) {
-  const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
   const detailsElement = useRef<HTMLDetailsElement>(null)
   const repository = new RepositoryLocalStorage()
   const service = new ApplicationService(repository)
@@ -56,24 +55,15 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
     }
   }
 
-  const handleDragEnd = () => setDraggingBoardId(undefined)
-
   const handleDragOver = (e: JSX.TargetedDragEvent<HTMLDivElement>) => e.preventDefault()
 
-  const handleDragStart = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
-    if (e.dataTransfer) {
-      e.dataTransfer.effectAllowed = 'move'
-    }
-    const { boardId } = e.currentTarget.dataset
-    if (boardId) {
-      setTimeout(() => { setDraggingBoardId(boardId) }, 100)
-    }
-  }
-
-  const handleDrop = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
-    const { boardId, pos } = e.currentTarget.dataset
-    if (boardId && pos && draggingBoardId) {
-      appState.value = service.moveBoard(appState.value, draggingBoardId, pos as Pos, boardId)
+  const handleDrop = (elemTarget: HTMLDivElement, elemSource: HTMLDivElement) => {
+    const { boardId, pos } = elemTarget.dataset
+    if (boardId && pos) {
+      const sourceBoardId = elemSource.dataset.boardId
+      if (sourceBoardId) {
+        appState.value = service.moveBoard(appState.value, sourceBoardId, pos as Pos, boardId)
+      }
     }
   }
 
@@ -160,9 +150,7 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
           <div class="overflow-y-auto">
             <BoardList
               boards={appState.value.boards}
-              handleDragEnd={handleDragEnd}
               handleDragOver={handleDragOver}
-              handleDragStart={handleDragStart}
               handleDrop={handleDrop}
               handleToggleDialog={handleToggleDialog}
             />
