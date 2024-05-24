@@ -13,6 +13,7 @@
     "lint:fix": "eslint --fix ."
   },
   "dependencies": {
+    "@atlaskit/pragmatic-drag-and-drop": "^1.1.9",
     "@preact/signals": "^1.2.3",
     "colorjs.io": "^0.5.0",
     "preact": "^10.22.0",
