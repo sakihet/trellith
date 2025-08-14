@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@preact/preset-vite": "2.10.2",
-    "@size-limit/file": "^11.1.4",
+    "@size-limit/file": "11.2.0",
     "@types/uuid": "10.0.0",
     "@typescript-eslint/eslint-plugin": "^7.10.0",
     "@typescript-eslint/parser": "^7.10.0",
