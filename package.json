@@ -9,8 +9,8 @@
     "preview": "vite preview",
     "size": "npm run build && size-limit",
     "test": "vitest",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix ."
   },
   "dependencies": {
     "@preact/signals": "2.2.1",
