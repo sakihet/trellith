@@ -78,7 +78,7 @@ export class ApplicationService {
     return updated
   }
   deleteBoard(state: State, id: string): State {
-    const updated = { boards: [...state.boards.filter(b => b.id !== id)] }
+    const updated = { boards: state.boards.filter(b => b.id !== id) }
     this.repository.set(updated)
     return updated
   }
