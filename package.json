@@ -38,5 +38,9 @@
       "limit": "100 kB",
       "path": "dist/assets/index-*.js"
     }
-  ]
+  ],
+  "allowScripts": {
+    "esbuild": false,
+    "fsevents": false
+  }
 }
