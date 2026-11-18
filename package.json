@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@preact/signals": "2.11.4",
-    "colorjs.io": "0.5.2",
     "preact": "10.27.0",
     "uuid": "11.1.0"
   },
@@ -25,6 +24,7 @@
     "@preact/preset-vite": "2.10.6",
     "@size-limit/file": "11.2.0",
     "@types/uuid": "10.0.0",
+    "colorjs.io": "0.7.1",
     "oxlint": "^1.11.2",
     "size-limit": "^11.1.2",
     "typescript": "5.9.2",
