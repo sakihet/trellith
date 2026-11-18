@@ -16,7 +16,7 @@
     "lint:fix": "oxlint --fix ."
   },
   "dependencies": {
-    "@preact/signals": "2.2.1",
+    "@preact/signals": "2.11.4",
     "colorjs.io": "0.5.2",
     "preact": "10.27.0",
     "uuid": "11.1.0"
