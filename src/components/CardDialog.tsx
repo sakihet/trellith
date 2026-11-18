@@ -11,7 +11,7 @@ export function CardDialog({
   handleBlurCardDescription,
   handleClickDeleteCard,
   handleClickMask,
-  handleSubmitCardName
+  handleSubmitCardName,
 }: {
   isOpen: boolean
   card: Card | undefined
@@ -57,20 +57,14 @@ export function CardDialog({
   if (card) {
     return (
       <>
-        {isOpen &&
-          <div
-            class="pattern-mask"
-            onClick={handleClickMask}
-          />
-        }
+        {isOpen && <div class="pattern-mask" onClick={handleClickMask} />}
         <dialog
           class="layout-center layout-stack-2 w-full p-8 border-solid border-1 border-color-primary"
           open={isOpen}
         >
           <div class="h-6 flex-row">
             <div class="text-medium f-1">
-              {isEditingName
-                ?
+              {isEditingName ? (
                 <form onSubmit={handleSubmit}>
                   <input
                     class="h-6 w-full border-solid border-1 border-color-primary text-large"
@@ -81,8 +75,9 @@ export function CardDialog({
                     name="cardName"
                   />
                 </form>
-                : <div onClick={handleClickCardName}>{card.name}</div>
-              }
+              ) : (
+                <div onClick={handleClickCardName}>{card.name}</div>
+              )}
             </div>
             <div>
               <details class="pattern-dropdown">
@@ -100,7 +95,9 @@ export function CardDialog({
                         onClick={handleClickDeleteCard}
                         data-card-id={card.id}
                         data-list-id={cardListId}
-                      >Delete</button>
+                      >
+                        Delete
+                      </button>
                     </li>
                   </ul>
                 </div>
@@ -108,8 +105,7 @@ export function CardDialog({
             </div>
           </div>
           <div class="f-1">
-            {isEditingDescription
-              ?
+            {isEditingDescription ? (
               <textarea
                 class="border-solid border-1 border-color-primary w-full text-medium font-sans-serif"
                 rows={4}
@@ -118,17 +114,14 @@ export function CardDialog({
               >
                 {card.description}
               </textarea>
-              :
+            ) : (
               <div
                 class="font-sans-serif overflow-x-hidden overflow-wrap-break-word pre-wrap text-secondary"
                 onClick={handleClickDescription}
               >
-                {card.description === ""
-                  ? "No description"
-                  : card.description
-                }
+                {card.description === "" ? "No description" : card.description}
               </div>
-            }
+            )}
           </div>
           <div class="text-right layout-stack-2">
             <div class="text-tertiary text-small">
@@ -142,8 +135,6 @@ export function CardDialog({
       </>
     )
   } else {
-    return (
-      <div />
-    )
+    return <div />
   }
 }

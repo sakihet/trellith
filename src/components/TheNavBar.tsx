@@ -8,10 +8,10 @@ import { showCommandPalette } from "../main"
 
 export default function TheNavBar({ theme }: { theme: Signal<Theme> }) {
   const handleClick = () => {
-    if (theme.value === 'light') {
-      theme.value = 'dark'
+    if (theme.value === "light") {
+      theme.value = "dark"
     } else {
-      theme.value = 'light'
+      theme.value = "light"
     }
     applyTheme(theme.value)
     setTheme(theme.value)
@@ -27,10 +27,7 @@ export default function TheNavBar({ theme }: { theme: Signal<Theme> }) {
         <div class="h-12 p-3 flex-row bg-primary border-0 border-b-1 border-solid border-color-primary">
           <div class="f-1" />
           <div class="w-24">
-            <Link
-              href="/"
-              class="text-decoration-none h-6"
-            >
+            <Link href="/" class="text-decoration-none h-6">
               <h1 class="m-0 h-6 text-center text-medium text-primary font-weight-600 hover-bg-link cursor-pointer">
                 Trellith
               </h1>
@@ -57,13 +54,7 @@ export default function TheNavBar({ theme }: { theme: Signal<Theme> }) {
                 class="h-6 w-6 border-solid border-1 border-color-primary bg-transparent cursor-pointer hover text-primary text-icon"
                 onClick={handleClick}
               >
-                {
-                  theme.value === 'light'
-                    ?
-                    <IconLightMode />
-                    :
-                    <IconDarkMode />
-                }
+                {theme.value === "light" ? <IconLightMode /> : <IconDarkMode />}
               </button>
             </div>
           </div>

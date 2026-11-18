@@ -6,23 +6,21 @@ import FormBoardBgColor from "./FormBoardBgColor"
 import { BgColor } from "../types/bgColor"
 import IconMoreHoriz from "./IconMoreHoriz"
 
-export default function BoardHeader(
-  {
-    id,
-    name,
-    bgColor,
-    updateBoardName,
-    selectBgColor,
-    deleteBoard
-  }: {
-    id: string
-    name: string
-    bgColor: BgColor | null
-    updateBoardName: (id: string, name: string) => void
-    selectBgColor: (e: TargetedMouseEvent<HTMLInputElement>) => void
-    deleteBoard: (id: string) => void
-  }
-) {
+export default function BoardHeader({
+  id,
+  name,
+  bgColor,
+  updateBoardName,
+  selectBgColor,
+  deleteBoard,
+}: {
+  id: string
+  name: string
+  bgColor: BgColor | null
+  updateBoardName: (id: string, name: string) => void
+  selectBgColor: (e: TargetedMouseEvent<HTMLInputElement>) => void
+  deleteBoard: (id: string) => void
+}) {
   const [isEditing, setIsEditing] = useState(false)
   const inputElement = useRef<HTMLInputElement>(null)
 
@@ -40,7 +38,7 @@ export default function BoardHeader(
   const handleClickDelete = () => {
     if (window.confirm("Do you really want to delete this board?")) {
       deleteBoard(id)
-      navigate('/')
+      navigate("/")
     }
   }
 
@@ -54,14 +52,9 @@ export default function BoardHeader(
 
   return (
     <div class="flex-row h-6">
-      <h2
-        class="f-1 text-medium m-0"
-        onClick={handleClick}
-      >
-        {isEditing
-          ? <form
-            onSubmit={handleSubmit}
-          >
+      <h2 class="f-1 text-medium m-0" onClick={handleClick}>
+        {isEditing ? (
+          <form onSubmit={handleSubmit}>
             <input
               class="h-6 w-64 text-medium"
               type="text"
@@ -70,8 +63,9 @@ export default function BoardHeader(
               ref={inputElement}
             />
           </form>
-          : <div>{name}</div>
-        }
+        ) : (
+          <div>{name}</div>
+        )}
       </h2>
       <div class="w-6 h-6 bg-primary">
         <details class="pattern-dropdown">
@@ -84,10 +78,7 @@ export default function BoardHeader(
             <ul class="list-style-none p-0 m-0 text-secondary">
               <li class="">
                 <div class="px-4">
-                  <FormBoardBgColor
-                    selectedBgColor={bgColor}
-                    selectBgColor={selectBgColor}
-                  />
+                  <FormBoardBgColor selectedBgColor={bgColor} selectBgColor={selectBgColor} />
                 </div>
               </li>
               <li class="h-8">

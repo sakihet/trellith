@@ -1,4 +1,5 @@
 # Trellith
+
 [![test](https://github.com/sakihet/trellith/actions/workflows/test.yaml/badge.svg)](https://github.com/sakihet/trellith/actions/workflows/test.yaml)
 
 ![trellith](screenshots/trellith-with-frame.png)
@@ -21,11 +22,11 @@ Since data is stored in localStorage, the main thread gets blocked, and there is
 
 ## Screenshots
 
-||light|dark|
-| - | - | - |
-|board|![board-light](screenshots/trellith-board-light.png)|![board-dark](screenshots/trellith-board-dark.png)|
-|card |![card-light](screenshots/trellith-card-light.png)|![card-dark](screenshots/trellith-card-dark.png)|
-|index|![index-light](screenshots/trellith-index-light.png)|![index-dark](screenshots/trellith-index-dark.png)|
+|       | light                                                | dark                                               |
+| ----- | ---------------------------------------------------- | -------------------------------------------------- |
+| board | ![board-light](screenshots/trellith-board-light.png) | ![board-dark](screenshots/trellith-board-dark.png) |
+| card  | ![card-light](screenshots/trellith-card-light.png)   | ![card-dark](screenshots/trellith-card-dark.png)   |
+| index | ![index-light](screenshots/trellith-index-light.png) | ![index-dark](screenshots/trellith-index-dark.png) |
 
 ## Features
 

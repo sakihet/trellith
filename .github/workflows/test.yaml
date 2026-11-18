@@ -1,15 +1,15 @@
 name: test
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: ['24.x', '26.x']
+        node-version: ["24.x", "26.x"]
     steps:
       - uses: actions/checkout@v7
       - name: use node.js ${{ matrix.node-version }}
@@ -17,4 +17,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
+      - run: npm run fmt:check
+      - run: npm run lint
       - run: npm test

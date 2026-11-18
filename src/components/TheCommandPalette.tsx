@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "preact/hooks"
 
 import { Signal } from "@preact/signals"
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from "uuid"
 
 import { appTheme, showBoardDialog, showCommandPalette } from "../main"
 import { State } from "../types/state"
@@ -34,7 +34,7 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
       action: () => {
         setLocation("/")
         showCommandPalette.value = false
-      }
+      },
     },
     {
       id: uuidv4(),
@@ -42,19 +42,19 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
       action: () => {
         setLocation("/about")
         showCommandPalette.value = false
-      }
-    }
+      },
+    },
   ]
 
   const buildCommandsForBoards = (boards: Board[]): Command[] => {
-    return boards.map(b => {
+    return boards.map((b) => {
       return {
         id: uuidv4(),
         label: `Go to board: ${b.name}`,
         action: () => {
           setLocation(`/board/${b.id}`)
           showCommandPalette.value = false
-        }
+        },
       }
     })
   }
@@ -66,11 +66,11 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
       showCommandPalette.value = false
       setLocation(`/`)
       showBoardDialog.value = true
-    }
+    },
   }
 
   const buildCommandsBoardDelete = (boards: Board[]): Command[] => {
-    return boards.map(b => {
+    return boards.map((b) => {
       return {
         id: uuidv4(),
         label: `Delete board: ${b.name}`,
@@ -81,28 +81,28 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
             const updated = service.deleteBoard(appState.value, b.id)
             appState.value = updated
           }
-        }
+        },
       }
     })
   }
 
   const buildCommandsForCards = (board: Board): Command[] => {
-    return board.lists.flatMap(l => {
-      return l.cards.map(c => {
+    return board.lists.flatMap((l) => {
+      return l.cards.map((c) => {
         return {
           id: uuidv4(),
           label: `Go to card: [${board.name}] ${c.name}`,
           action: () => {
             setLocation(`/board/${board.id}/card/${c.id}`)
             showCommandPalette.value = false
-          }
+          },
         }
       })
     })
   }
 
   const commandThemeSwitch = (theme: Theme): Command => {
-    const themeNext = (theme === 'light') ? 'dark' : 'light'
+    const themeNext = theme === "light" ? "dark" : "light"
     return {
       id: uuidv4(),
       label: `Switch to ${themeNext} theme`,
@@ -111,7 +111,7 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
         applyTheme(appTheme.value)
         setTheme(appTheme.value)
         showCommandPalette.value = false
-      }
+      },
     }
   }
 
@@ -119,15 +119,15 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
     return [
       ...commandsDefault,
       ...buildCommandsForBoards(boards),
-      ...boards.flatMap(b => buildCommandsForCards(b)),
+      ...boards.flatMap((b) => buildCommandsForCards(b)),
       commandBoardCreate,
       ...buildCommandsBoardDelete(boards),
-      commandThemeSwitch(theme)
+      commandThemeSwitch(theme),
     ]
   }
 
   const [commandsFiltered, setCommandsFiltered] = useState<Command[]>(
-    buildCommands(appState.value.boards, appTheme.value)
+    buildCommands(appState.value.boards, appTheme.value),
   )
 
   useEffect(() => {
@@ -144,11 +144,13 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
   const handleInput = (e: TargetedEvent<HTMLInputElement>) => {
     setIndex(0)
     const query = e.currentTarget.value
-    if (query === '') {
+    if (query === "") {
       setCommandsFiltered(buildCommands(appState.value.boards, appTheme.value))
     } else {
       setCommandsFiltered(
-        buildCommands(appState.value.boards, appTheme.value).filter(c => c.label.toLowerCase().includes(query.toLowerCase()))
+        buildCommands(appState.value.boards, appTheme.value).filter((c) =>
+          c.label.toLowerCase().includes(query.toLowerCase()),
+        ),
       )
     }
   }
@@ -182,12 +184,7 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
 
   return (
     <div>
-      {showCommandPalette.value &&
-        <div
-          class="pattern-mask"
-          onClick={handleClickMask}
-        />
-      }
+      {showCommandPalette.value && <div class="pattern-mask" onClick={handleClickMask} />}
       <dialog
         open={showCommandPalette}
         class="rounded-2 p-8 layout-center border-solid border-1 border-color-primary pattern-dialog bg-primary"
@@ -205,8 +202,7 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
           </div>
           <div class="pattern-scrollbar-thin overflow-y-auto">
             <ul class="pattern-height-command-menu-list list-style-none layout-stack-1 ">
-              {commandsFiltered.length > 0
-                ?
+              {commandsFiltered.length > 0 ? (
                 commandsFiltered.map((command, idx) => (
                   <li key={command.id}>
                     <button
@@ -222,14 +218,12 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
                     </button>
                   </li>
                 ))
-                :
+              ) : (
                 <div class="px-2 py-1 text-secondary">Not found</div>
-              }
+              )}
             </ul>
           </div>
-          <pre class="text-secondary">
-            enter: select, ↓↑: navigate, ⌘+k: close
-          </pre>
+          <pre class="text-secondary">enter: select, ↓↑: navigate, ⌘+k: close</pre>
         </div>
       </dialog>
     </div>

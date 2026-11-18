@@ -1,4 +1,4 @@
-import { version } from '../../package.json'
+import { version } from "../../package.json"
 
 export default function TheFooter() {
   return (
@@ -9,11 +9,15 @@ export default function TheFooter() {
           <a
             class="text-decoration-none text-secondary hover-bg-link px-2"
             href="https://sakih.net/"
-          >© 2023-2025 saki</a>
+          >
+            © 2023-2025 saki
+          </a>
           <a
             class="text-decoration-none text-secondary hover-bg-link px-2"
             href="https://github.com/sakihet/trellith"
-          >GitHub</a>
+          >
+            GitHub
+          </a>
         </div>
         <div class="f-1 text-right">
           <span class="font-mono text-secondary">v{version}</span>

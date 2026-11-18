@@ -1,40 +1,44 @@
-import { useEffect, useRef, useState } from 'preact/hooks'
+import { useEffect, useRef, useState } from "preact/hooks"
 
-import { Signal } from '@preact/signals'
-import { useLocation } from 'wouter-preact'
-import CardForm from './CardForm'
-import BoardHeader from './BoardHeader'
-import ListHeader from './ListHeader'
-import { ApplicationService } from '../applications/applicationService'
-import { RepositoryLocalStorage } from '../repositories/repository'
-import { Pos } from '../types/pos'
-import { State } from '../types/state'
-import CardList from './CardList'
-import { Card } from '../types/card'
-import { filterListsByCardName } from '../utils'
-import { BgColor } from '../types/bgColor'
-import IconAdd from './IconAdd'
-import IconFilterList from './IconFilterList'
-import IconClose from './IconClose'
-import { CardDialog } from './CardDialog'
-import { TargetedDragEvent, TargetedEvent, TargetedFocusEvent, TargetedMouseEvent, TargetedSubmitEvent } from 'preact'
+import { Signal } from "@preact/signals"
+import { useLocation } from "wouter-preact"
+import CardForm from "./CardForm"
+import BoardHeader from "./BoardHeader"
+import ListHeader from "./ListHeader"
+import { ApplicationService } from "../applications/applicationService"
+import { RepositoryLocalStorage } from "../repositories/repository"
+import { Pos } from "../types/pos"
+import { State } from "../types/state"
+import CardList from "./CardList"
+import { Card } from "../types/card"
+import { filterListsByCardName } from "../utils"
+import { BgColor } from "../types/bgColor"
+import IconAdd from "./IconAdd"
+import IconFilterList from "./IconFilterList"
+import IconClose from "./IconClose"
+import { CardDialog } from "./CardDialog"
+import {
+  TargetedDragEvent,
+  TargetedEvent,
+  TargetedFocusEvent,
+  TargetedMouseEvent,
+  TargetedSubmitEvent,
+} from "preact"
 
 export type AddCardParams = {
   listId: string
   cardName: string
 }
 
-export default function PageBoard(
-  {
-    appState,
-    boardId,
-    cardId
-  }: {
-    appState: Signal<State>,
-    boardId: string,
-    cardId?: string
-  }
-) {
+export default function PageBoard({
+  appState,
+  boardId,
+  cardId,
+}: {
+  appState: Signal<State>
+  boardId: string
+  cardId?: string
+}) {
   const [draggingCardId, setDraggingCardId] = useState<string | undefined>(undefined)
   const [draggingCardListId, setDraggingCardListId] = useState<string | undefined>(undefined)
   const [draggingListId, setDraggingListId] = useState<string | undefined>(undefined)
@@ -42,7 +46,7 @@ export default function PageBoard(
   const inputCardFilterElement = useRef<HTMLInputElement>(null)
   const [dragEnteredListId, setDragEnteredListId] = useState<string | undefined>(undefined)
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(cardId ? true : false)
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState("")
   const repository = new RepositoryLocalStorage()
   const service = new ApplicationService(repository)
   const [dialogCard, setDialogCard] = useState<Card | undefined>(undefined)
@@ -72,7 +76,7 @@ export default function PageBoard(
   }
 
   const selectBgColor = (e: TargetedMouseEvent<HTMLInputElement>) => {
-    if (e.currentTarget.value !== 'none') {
+    if (e.currentTarget.value !== "none") {
       const bgColor = e.currentTarget.value as BgColor
       const updated = service.updateBoardBgColor(appState.value, bgColor, boardId)
       updateState(updated)
@@ -85,7 +89,13 @@ export default function PageBoard(
   const handleBlurDialogCardDescription = (e: TargetedFocusEvent<HTMLTextAreaElement>) => {
     const value = e.currentTarget.value
     if (dialogCard && dialogCardListId) {
-      const updated = service.updateCardDescription(appState.value, dialogCard.id, value, boardId, dialogCardListId)
+      const updated = service.updateCardDescription(
+        appState.value,
+        dialogCard.id,
+        value,
+        boardId,
+        dialogCardListId,
+      )
       updateState(updated)
       setDialogCard(service.findCardFromBoard(appState.value, dialogCard.id, boardId))
     }
@@ -137,7 +147,7 @@ export default function PageBoard(
 
   const handleDragStartCard = (e: TargetedDragEvent<HTMLDivElement>) => {
     if (e.dataTransfer) {
-      e.dataTransfer.effectAllowed = 'move'
+      e.dataTransfer.effectAllowed = "move"
     }
     const { cardId, listId } = e.currentTarget.dataset
     setDraggingCardId(cardId)
@@ -155,10 +165,22 @@ export default function PageBoard(
     const { listId, listPos } = e.currentTarget.dataset
     if (boardId) {
       if (draggingCardId && draggingCardListId && listId) {
-        const updated = service.moveCardToAnotherList(appState.value, draggingCardId, boardId, draggingCardListId, listId)
+        const updated = service.moveCardToAnotherList(
+          appState.value,
+          draggingCardId,
+          boardId,
+          draggingCardListId,
+          listId,
+        )
         updateState(updated)
       } else if (!draggingCardId && draggingListId && listId) {
-        const updated = service.moveList(appState.value, draggingListId, boardId, listId, listPos as Pos)
+        const updated = service.moveList(
+          appState.value,
+          draggingListId,
+          boardId,
+          listId,
+          listPos as Pos,
+        )
         updateState(updated)
       }
     }
@@ -167,7 +189,13 @@ export default function PageBoard(
   const handleDropOnSpacer = (e: TargetedDragEvent<HTMLDivElement>) => {
     const { listId, spacer } = e.currentTarget.dataset
     if (listId && spacer && draggingCardId && boardId && draggingCardListId) {
-      const updated = service.moveCardToLastOfAnotherList(appState.value, draggingCardId, boardId, draggingCardListId, listId)
+      const updated = service.moveCardToLastOfAnotherList(
+        appState.value,
+        draggingCardId,
+        boardId,
+        draggingCardListId,
+        listId,
+      )
       updateState(updated)
     }
   }
@@ -178,7 +206,7 @@ export default function PageBoard(
 
   const handleDragStartList = (e: TargetedDragEvent<HTMLDivElement>) => {
     if (e.dataTransfer) {
-      e.dataTransfer.effectAllowed = 'move'
+      e.dataTransfer.effectAllowed = "move"
     }
     const { listId } = e.currentTarget.dataset
     if (listId) {
@@ -196,9 +224,23 @@ export default function PageBoard(
     updateState(updated)
   }
 
-  const moveCard = (pos: Pos, dropTargetCardId: string, dropTargetBoardId: string, dropTargetListId: string) => {
+  const moveCard = (
+    pos: Pos,
+    dropTargetCardId: string,
+    dropTargetBoardId: string,
+    dropTargetListId: string,
+  ) => {
     if (draggingCardId && draggingCardListId) {
-      const updated = service.moveCard(appState.value, draggingCardId, dropTargetBoardId, draggingCardListId, pos, dropTargetCardId, dropTargetBoardId, dropTargetListId)
+      const updated = service.moveCard(
+        appState.value,
+        draggingCardId,
+        dropTargetBoardId,
+        draggingCardListId,
+        pos,
+        dropTargetCardId,
+        dropTargetBoardId,
+        dropTargetListId,
+      )
       updateState(updated)
     }
   }
@@ -223,7 +265,7 @@ export default function PageBoard(
     if (inputElement.current) {
       const updated = service.createList(appState.value, inputElement.current.value, boardId)
       updateState(updated)
-      inputElement.current.value = ''
+      inputElement.current.value = ""
     }
   }
 
@@ -235,15 +277,21 @@ export default function PageBoard(
   const handleSubmitDialogCardName = (e: TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
-    const cardName = formData.get('cardName')?.toString()
+    const cardName = formData.get("cardName")?.toString()
     if (cardName && dialogCard && dialogCardListId) {
-      const updated = service.updateCardName(appState.value, dialogCard.id, cardName, boardId, dialogCardListId)
+      const updated = service.updateCardName(
+        appState.value,
+        dialogCard.id,
+        cardName,
+        boardId,
+        dialogCardListId,
+      )
       updateState(updated)
       setDialogCard(service.findCardFromBoard(appState.value, dialogCard.id, boardId))
     }
   }
 
-  const found = appState.value.boards.find(b => {
+  const found = appState.value.boards.find((b) => {
     return b.id === boardId
   })
 
@@ -253,18 +301,20 @@ export default function PageBoard(
     if (query) {
       setQuery(query)
     } else {
-      setQuery('')
+      setQuery("")
     }
   }
 
   const handleReset = () => {
-    setQuery('')
+    setQuery("")
   }
 
   return (
-    <div class={`flex-column h-full layout-stack-2 bg-${found?.bgColor ? found.bgColor : 'primary'}`}>
+    <div
+      class={`flex-column h-full layout-stack-2 bg-${found?.bgColor ? found.bgColor : "primary"}`}
+    >
       <div class="py-3 layout-stack-2">
-        {found &&
+        {found && (
           <div class="px-3 h-6">
             <BoardHeader
               id={found.id}
@@ -275,7 +325,7 @@ export default function PageBoard(
               deleteBoard={deleteBoard}
             />
           </div>
-        }
+        )}
         <div class="px-3 h-6">
           <form onSubmit={handleSubmit} onReset={handleReset} autocomplete="off">
             <div class="flex-row">
@@ -302,45 +352,49 @@ export default function PageBoard(
         </div>
       </div>
       <div class="f-1 flex-row layout-stack-horizontal-4 overflow-x-auto px-3 pattern-scrollbar-thick">
-        {found && filterListsByCardName(query, found.lists).map((list, idx) =>
-          <div class="flex-column">
-            <div
-              class="w-64 p-3 bg-secondary rounded-2 layout-stack-3 drop-shadow"
-              draggable
-              onDrop={handleDropOnList}
-              onDragOver={handleDragOver}
-              onDragEnd={handleDragEndList}
-              onDragStart={handleDragStartList}
-              data-list-id={list.id}
-              data-list-pos={idx === 0 ? "first" : (idx === (found.lists.length - 1) ? "last" : "middle")}
-            >
-              <ListHeader
-                id={list.id}
-                name={list.name}
-                cardsNum={list.cards.length}
-                updateListName={updateListName}
-                handleClickDeleteCards={handleClickDeleteCards}
-                handleClickDeleteList={handleClickDeleteList}
-              />
-              <CardForm
-                listId={list.id}
-                addCard={addCard}
-              />
-              <CardList
-                cards={list.cards}
-                listId={list.id}
-                isDragEnterCardFromTheOther={!!draggingCardListId && (list.id !== draggingCardListId) && (list.id === dragEnteredListId)}
-                updateCardName={updateCardName}
-                deleteCard={deleteCard}
-                handleDragEndCard={handleDragEndCard}
-                handleDragEnterCard={handleDragEnterCard}
-                handleDragStartCard={handleDragStartCard}
-                handleDropOnCard={handleDropOnCard}
-                handleDropOnSpacer={handleDropOnSpacer}
-              />
+        {found &&
+          filterListsByCardName(query, found.lists).map((list, idx) => (
+            <div class="flex-column">
+              <div
+                class="w-64 p-3 bg-secondary rounded-2 layout-stack-3 drop-shadow"
+                draggable
+                onDrop={handleDropOnList}
+                onDragOver={handleDragOver}
+                onDragEnd={handleDragEndList}
+                onDragStart={handleDragStartList}
+                data-list-id={list.id}
+                data-list-pos={
+                  idx === 0 ? "first" : idx === found.lists.length - 1 ? "last" : "middle"
+                }
+              >
+                <ListHeader
+                  id={list.id}
+                  name={list.name}
+                  cardsNum={list.cards.length}
+                  updateListName={updateListName}
+                  handleClickDeleteCards={handleClickDeleteCards}
+                  handleClickDeleteList={handleClickDeleteList}
+                />
+                <CardForm listId={list.id} addCard={addCard} />
+                <CardList
+                  cards={list.cards}
+                  listId={list.id}
+                  isDragEnterCardFromTheOther={
+                    !!draggingCardListId &&
+                    list.id !== draggingCardListId &&
+                    list.id === dragEnteredListId
+                  }
+                  updateCardName={updateCardName}
+                  deleteCard={deleteCard}
+                  handleDragEndCard={handleDragEndCard}
+                  handleDragEnterCard={handleDragEnterCard}
+                  handleDragStartCard={handleDragStartCard}
+                  handleDropOnCard={handleDropOnCard}
+                  handleDropOnSpacer={handleDropOnSpacer}
+                />
+              </div>
             </div>
-          </div>
-        )}
+          ))}
         <div class="py-3">
           <form onSubmit={handleSubmitList} autocomplete="off">
             <div class="flex-row">
@@ -360,7 +414,7 @@ export default function PageBoard(
           </form>
         </div>
       </div>
-      {dialogCardListId &&
+      {dialogCardListId && (
         <CardDialog
           isOpen={isDialogOpen && !!dialogCard && !!dialogCardListId}
           card={dialogCard}
@@ -370,7 +424,7 @@ export default function PageBoard(
           handleClickMask={handleClickMask}
           handleSubmitCardName={handleSubmitDialogCardName}
         />
-      }
+      )}
     </div>
   )
 }

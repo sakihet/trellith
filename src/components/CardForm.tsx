@@ -4,15 +4,13 @@ import { AddCardParams } from "./PageBoard"
 import IconAdd from "./IconAdd"
 import { TargetedKeyboardEvent } from "preact"
 
-export default function CardForm(
-  {
-    listId,
-    addCard
-  }: {
-    listId: string
-    addCard: (params: AddCardParams) => void
-  }
-) {
+export default function CardForm({
+  listId,
+  addCard,
+}: {
+  listId: string
+  addCard: (params: AddCardParams) => void
+}) {
   const [editing, setEditing] = useState<boolean>(false)
   const [composing, setComposing] = useState<boolean>(false)
   const ref = useRef<HTMLTextAreaElement>(null)
@@ -30,11 +28,11 @@ export default function CardForm(
     setEditing(true)
   }
   const handleKeyDown = (e: TargetedKeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !composing) {
+    if (e.key === "Enter" && !composing) {
       e.preventDefault()
       if (ref.current?.value) {
         addCard({ listId: listId, cardName: ref.current?.value })
-        ref.current.value = ''
+        ref.current.value = ""
       }
     }
   }
@@ -50,8 +48,7 @@ export default function CardForm(
       class="h-8 w-full border-none text-left cursor-pointer bg-primary text-medium"
       onClick={handleClick}
     >
-      {editing
-        ?
+      {editing ? (
         <textarea
           class="w-full border-none rounded-1 p-2 resize-none text-medium font-sans-serif"
           onBlur={handleBlur}
@@ -61,11 +58,11 @@ export default function CardForm(
           onKeyDown={handleKeyDown}
           ref={ref}
         />
-        :
+      ) : (
         <div class="px-2">
           <IconAdd /> <span class="text-secondary">Add a card</span>
         </div>
-      }
+      )}
     </button>
   )
 }

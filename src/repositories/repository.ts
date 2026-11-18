@@ -1,6 +1,6 @@
 import { State } from "../types/state"
 
-const LOCAL_STORAGE_KEY = 'trellith'
+const LOCAL_STORAGE_KEY = "trellith"
 
 export interface Repository {
   set: (state: State) => void

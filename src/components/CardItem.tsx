@@ -5,30 +5,29 @@ import { Pos } from "../types/pos"
 import IconDialogs from "./IconDialogs"
 import { TargetedDragEvent, TargetedKeyboardEvent } from "preact"
 
-export default function CardItem(
-  {
-    id,
-    listId,
-    name,
-    pos,
-    hasDescription,
-    deleteCard,
-    updateCardName,
-    handleDragEnd,
-    handleDragStart,
-    handleDrop
-  }: {
-    id: string,
-    listId: string,
-    name: string,
-    pos: Pos,
-    hasDescription: boolean,
-    deleteCard: (cardId: string, listId: string) => void,
-    updateCardName: (id: string, name: string, listId: string) => void,
-    handleDragEnd: (e: TargetedDragEvent<HTMLDivElement>) => void,
-    handleDragStart: (e: TargetedDragEvent<HTMLDivElement>) => void,
-    handleDrop: (e: TargetedDragEvent<HTMLDivElement>) => void,
-  }) {
+export default function CardItem({
+  id,
+  listId,
+  name,
+  pos,
+  hasDescription,
+  deleteCard,
+  updateCardName,
+  handleDragEnd,
+  handleDragStart,
+  handleDrop,
+}: {
+  id: string
+  listId: string
+  name: string
+  pos: Pos
+  hasDescription: boolean
+  deleteCard: (cardId: string, listId: string) => void
+  updateCardName: (id: string, name: string, listId: string) => void
+  handleDragEnd: (e: TargetedDragEvent<HTMLDivElement>) => void
+  handleDragStart: (e: TargetedDragEvent<HTMLDivElement>) => void
+  handleDrop: (e: TargetedDragEvent<HTMLDivElement>) => void
+}) {
   const [editing, setEditing] = useState(false)
   const [composing, setComposing] = useState<boolean>(false)
   const ref = useRef<HTMLTextAreaElement>(null)
@@ -56,19 +55,19 @@ export default function CardItem(
     setComposing(false)
   }
   const handleKeyDown = (e: TargetedKeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !composing) {
+    if (e.key === "Enter" && !composing) {
       e.preventDefault()
       if (ref.current?.value) {
         updateCardName(id, ref.current?.value, listId)
         setEditing(false)
-      } else if (ref.current?.value === '') {
+      } else if (ref.current?.value === "") {
         deleteCard(id, listId)
       }
     }
   }
 
   const isSeparator = (name: string): boolean => {
-    return name === '---'
+    return name === "---"
   }
 
   return (
@@ -84,8 +83,7 @@ export default function CardItem(
     >
       <div class="flex-row relative">
         <div class="f-1 overflow-x-hidden">
-          {editing
-            ?
+          {editing ? (
             <textarea
               class="w-full borader-none rounded-1 p-2 resize-none text-medium font-sans-serif"
               onBlur={handleBlur}
@@ -94,27 +92,27 @@ export default function CardItem(
               oncompositionend={handleCompositionEnd}
               onKeyDown={handleKeyDown}
               ref={ref}
-            >{name}</textarea>
-            :
+            >
+              {name}
+            </textarea>
+          ) : (
             <>
-              {!isSeparator(name)
-                ? <div
-                  class="overflow-wrap-break-word"
-                  onClick={handleClickEdit}
-                >
+              {!isSeparator(name) ? (
+                <div class="overflow-wrap-break-word" onClick={handleClickEdit}>
                   {name}
                 </div>
-                : <button
+              ) : (
+                <button
                   class="w-full h-4 bg-transparent border-none px-2"
                   onClick={handleClickEdit}
                 >
                   <hr class="border-solid border-1 border-color-primary" />
                 </button>
-              }
+              )}
             </>
-          }
+          )}
         </div>
-        {!isSeparator(name) && !editing &&
+        {!isSeparator(name) && !editing && (
           <div class="pattern-hidden-child absolute r-0">
             <button
               class="h-6 w-6 border-none text-secondary px-1"
@@ -124,16 +122,15 @@ export default function CardItem(
               <IconDialogs />
             </button>
           </div>
-        }
+        )}
       </div>
-      {hasDescription && <div
-        class="h-6 text-secondary"
-      >
-        <span
-          class="px-1"
-          title="This card has a description."
-        >≡</span>
-      </div>}
+      {hasDescription && (
+        <div class="h-6 text-secondary">
+          <span class="px-1" title="This card has a description.">
+            ≡
+          </span>
+        </div>
+      )}
     </div>
   )
 }

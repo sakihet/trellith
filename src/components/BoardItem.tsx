@@ -4,28 +4,26 @@ import { Pos } from "../types/pos"
 import { Board } from "../types/board"
 import { TargetedDragEvent } from "preact"
 
-export default function BoardItem(
-  {
-    board,
-    pos,
-    cardsNum,
-    handleDragEnd,
-    handleDragOver,
-    handleDragStart,
-    handleDrop
-  }: {
-    board: Omit<Board, 'lists'>
-    pos: Pos
-    cardsNum: number
-    handleDragEnd: (e: TargetedDragEvent<HTMLDivElement>) => void
-    handleDragOver: (e: TargetedDragEvent<HTMLDivElement>) => void
-    handleDragStart: (e: TargetedDragEvent<HTMLDivElement>) => void
-    handleDrop: (e: TargetedDragEvent<HTMLDivElement>) => void
-  }
-) {
+export default function BoardItem({
+  board,
+  pos,
+  cardsNum,
+  handleDragEnd,
+  handleDragOver,
+  handleDragStart,
+  handleDrop,
+}: {
+  board: Omit<Board, "lists">
+  pos: Pos
+  cardsNum: number
+  handleDragEnd: (e: TargetedDragEvent<HTMLDivElement>) => void
+  handleDragOver: (e: TargetedDragEvent<HTMLDivElement>) => void
+  handleDragStart: (e: TargetedDragEvent<HTMLDivElement>) => void
+  handleDrop: (e: TargetedDragEvent<HTMLDivElement>) => void
+}) {
   return (
     <div
-      class={`flex-column h-20 bg-primary parent-hiding-child border-solid border-2 border-color-primary hover-bg-board-item bg-${board.bgColor ? board.bgColor : 'primary'}`}
+      class={`flex-column h-20 bg-primary parent-hiding-child border-solid border-2 border-color-primary hover-bg-board-item bg-${board.bgColor ? board.bgColor : "primary"}`}
       draggable
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
@@ -40,12 +38,8 @@ export default function BoardItem(
         draggable={false}
       >
         <div class="h-6 flex-row">
-          <div class="f-1">
-            {board.name}
-          </div>
-          <div class="text-secondary font-mono px-1">
-            {cardsNum}
-          </div>
+          <div class="f-1">{board.name}</div>
+          <div class="text-secondary font-mono px-1">{cardsNum}</div>
         </div>
         <div class="h-4"></div>
       </Link>

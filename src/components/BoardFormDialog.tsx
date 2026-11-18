@@ -3,25 +3,23 @@ import { useEffect, useRef, useState } from "preact/hooks"
 import { BgColor } from "../types/bgColor"
 import FormBoardBgColor from "./FormBoardBgColor"
 
-type ListsType = 'None' | 'Preset'
+type ListsType = "None" | "Preset"
 
-export function BoardFormDialog(
-  {
-    open,
-    handleClickMask,
-    addBoard
-  }: {
-    open: boolean,
-    handleClickMask: () => void,
-    addBoard: (name: string, listNames: string[], bgColor: BgColor | null) => void
-  }
-) {
+export function BoardFormDialog({
+  open,
+  handleClickMask,
+  addBoard,
+}: {
+  open: boolean
+  handleClickMask: () => void
+  addBoard: (name: string, listNames: string[], bgColor: BgColor | null) => void
+}) {
   const refName = useRef<HTMLInputElement>(null)
   const [bgColor, setBgColor] = useState<BgColor | null>(null)
   const [listsType, setListsType] = useState<ListsType>("None")
 
   const selectBgColor = (e: TargetedMouseEvent<HTMLInputElement>) => {
-    if (e.currentTarget.value !== 'none') {
+    if (e.currentTarget.value !== "none") {
       setBgColor(e.currentTarget.value as BgColor)
     } else {
       setBgColor(null)
@@ -35,10 +33,10 @@ export function BoardFormDialog(
   const handleSubmit = (e: TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (refName.current) {
-      if (refName.current.value !== '') {
-        const listNames = (listsType === "None") ? [] : ["Todo", "Doing", "Done"]
+      if (refName.current.value !== "") {
+        const listNames = listsType === "None" ? [] : ["Todo", "Doing", "Done"]
         addBoard(refName.current.value, listNames, bgColor)
-        refName.current.value = ''
+        refName.current.value = ""
         handleClickMask()
       }
     }
@@ -53,23 +51,15 @@ export function BoardFormDialog(
   if (open) {
     return (
       <>
-        <div
-          class="pattern-mask"
-          onClick={handleClickMask}
-        />
+        <div class="pattern-mask" onClick={handleClickMask} />
         <dialog
           open={open}
           class="layout-center p-8 border-solid border-1 border-color-primary bg-primary w-full"
         >
-          <form
-            onSubmit={handleSubmit}
-            class="layout-stack-8"
-          >
+          <form onSubmit={handleSubmit} class="layout-stack-8">
             <div class="layout-stack-4">
               <label class="flex-column layout-stack-2">
-                <span class="text-secondary text-small">
-                  Board title
-                </span>
+                <span class="text-secondary text-small">Board title</span>
                 <input
                   class="h-8 w-64 px-2 border-solid border-1 border-color-primary"
                   type="text"
@@ -86,7 +76,7 @@ export function BoardFormDialog(
                       value="None"
                       name="lists"
                       class=""
-                      checked={listsType === 'None'}
+                      checked={listsType === "None"}
                       onClick={handleChageLists}
                     />
                     <span class="px-1">None</span>
@@ -97,7 +87,7 @@ export function BoardFormDialog(
                       value="Preset"
                       name="lists"
                       class=""
-                      checked={listsType === 'Preset'}
+                      checked={listsType === "Preset"}
                       onClick={handleChageLists}
                     />
                     <span class="px-1">Todo, Doing, Done</span>
@@ -107,25 +97,20 @@ export function BoardFormDialog(
               <div class="layout-stack-2">
                 <div class="text-secondary text-small">Background color</div>
                 <div class="text-secondary text-small layout-stack-horizontal-1">
-                  <FormBoardBgColor
-                    selectedBgColor={bgColor}
-                    selectBgColor={selectBgColor}
-                  />
+                  <FormBoardBgColor selectedBgColor={bgColor} selectBgColor={selectBgColor} />
                 </div>
               </div>
             </div>
             <div class="">
-              <button
-                class="h-6 px-4 border-solid border-1 border-color-primary cursor-pointer bg-transparent"
-              >Create</button>
+              <button class="h-6 px-4 border-solid border-1 border-color-primary cursor-pointer bg-transparent">
+                Create
+              </button>
             </div>
           </form>
         </dialog>
       </>
     )
   } else {
-    return (
-      <></>
-    )
+    return <></>
   }
 }

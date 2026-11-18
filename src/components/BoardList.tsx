@@ -6,24 +6,22 @@ import IconFilterList from "./IconFilterList"
 import { filterBoardsByName } from "../utils"
 import IconClose from "./IconClose"
 
-export default function BoardList(
-  {
-    boards,
-    handleDragEnd,
-    handleDragOver,
-    handleDragStart,
-    handleDrop,
-    handleToggleDialog
-  }: {
-    boards: Board[]
-    handleDragEnd: () => void
-    handleDragOver: (e: TargetedDragEvent<HTMLDivElement>) => void
-    handleDragStart: (e: TargetedDragEvent<HTMLDivElement>) => void
-    handleDrop: (e: TargetedDragEvent<HTMLDivElement>) => void
-    handleToggleDialog: (e: TargetedMouseEvent<HTMLButtonElement>) => void
-  }
-) {
-  const [query, setQuery] = useState('')
+export default function BoardList({
+  boards,
+  handleDragEnd,
+  handleDragOver,
+  handleDragStart,
+  handleDrop,
+  handleToggleDialog,
+}: {
+  boards: Board[]
+  handleDragEnd: () => void
+  handleDragOver: (e: TargetedDragEvent<HTMLDivElement>) => void
+  handleDragStart: (e: TargetedDragEvent<HTMLDivElement>) => void
+  handleDrop: (e: TargetedDragEvent<HTMLDivElement>) => void
+  handleToggleDialog: (e: TargetedMouseEvent<HTMLButtonElement>) => void
+}) {
+  const [query, setQuery] = useState("")
   const inputElement = useRef<HTMLInputElement>(null)
 
   const handleSubmit = (e: TargetedSubmitEvent<HTMLFormElement>) => {
@@ -32,12 +30,12 @@ export default function BoardList(
     if (query) {
       setQuery(query)
     } else {
-      setQuery('')
+      setQuery("")
     }
   }
 
   const handleReset = () => {
-    setQuery('')
+    setQuery("")
   }
 
   return (
@@ -65,31 +63,34 @@ export default function BoardList(
           </button>
         </div>
       </form>
-      {boards.length === 0
-        ?
+      {boards.length === 0 ? (
         <button
           type="button"
           class="h-20 w-full border-none bg-secondary text-secondary hover cursor-pointer"
           onClick={handleToggleDialog}
-        >Create new board</button>
-        :
+        >
+          Create new board
+        </button>
+      ) : (
         <div class="layout-stack-2">
-          {
-            filterBoardsByName(query, boards).map((board, idx) =>
-              <BoardItem
-                key={board.id}
-                board={board}
-                pos={idx === 0 ? "first" : (idx === (boards.length - 1) ? "last" : "middle")}
-                cardsNum={board.lists.map(l => l.cards.length).reduce((accumulator, value) => { return accumulator + value }, 0)}
-                handleDragEnd={handleDragEnd}
-                handleDragOver={handleDragOver}
-                handleDragStart={handleDragStart}
-                handleDrop={handleDrop}
-              />
-            )
-          }
+          {filterBoardsByName(query, boards).map((board, idx) => (
+            <BoardItem
+              key={board.id}
+              board={board}
+              pos={idx === 0 ? "first" : idx === boards.length - 1 ? "last" : "middle"}
+              cardsNum={board.lists
+                .map((l) => l.cards.length)
+                .reduce((accumulator, value) => {
+                  return accumulator + value
+                }, 0)}
+              handleDragEnd={handleDragEnd}
+              handleDragOver={handleDragOver}
+              handleDragStart={handleDragStart}
+              handleDrop={handleDrop}
+            />
+          ))}
         </div>
-      }
+      )}
     </div>
   )
 }

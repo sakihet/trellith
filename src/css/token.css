@@ -61,7 +61,7 @@ body {
 }
 
 /* dark */
-.dark>* {
+.dark > * {
   color-scheme: dark;
   --color-bg-hover: var(--color-gray-700);
   --color-bg-link: var(--color-gray-700);
