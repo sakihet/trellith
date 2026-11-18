@@ -1,4 +1,3 @@
-import { JSX } from "preact/jsx-runtime"
 import { useEffect, useRef, useState } from "preact/hooks"
 
 import { Signal } from "@preact/signals"
@@ -12,6 +11,7 @@ import { ApplicationService } from "../applications/applicationService"
 import { applyTheme, setTheme } from "../utils"
 import { Theme } from "../types/theme"
 import { useLocation } from "wouter-preact"
+import { TargetedEvent, TargetedKeyboardEvent } from "preact"
 
 const repository = new RepositoryLocalStorage()
 const service = new ApplicationService(repository)
@@ -141,7 +141,7 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
     showCommandPalette.value = false
   }
 
-  const handleInput = (e: JSX.TargetedEvent<HTMLInputElement>) => {
+  const handleInput = (e: TargetedEvent<HTMLInputElement>) => {
     setIndex(0)
     const query = e.currentTarget.value
     if (query === '') {
@@ -153,7 +153,7 @@ export default function TheCommandPalette({ appState }: { appState: Signal<State
     }
   }
 
-  const handleKeyDown = (e: JSX.TargetedKeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: TargetedKeyboardEvent<HTMLInputElement>) => {
     switch (e.key) {
       case "ArrowDown":
         if (commandsFiltered.length - 1 > index) {

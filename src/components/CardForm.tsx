@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "preact/hooks"
-import { JSX } from "preact/jsx-runtime"
+
 import { AddCardParams } from "./PageBoard"
 import IconAdd from "./IconAdd"
+import { TargetedKeyboardEvent } from "preact"
 
 export default function CardForm(
   {
@@ -28,7 +29,7 @@ export default function CardForm(
   const handleClick = () => {
     setEditing(true)
   }
-  const handleKeyDown = (e: JSX.TargetedKeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (e: TargetedKeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !composing) {
       e.preventDefault()
       if (ref.current?.value) {

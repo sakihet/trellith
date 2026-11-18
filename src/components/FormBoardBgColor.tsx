@@ -1,5 +1,5 @@
-import { JSX } from "preact/jsx-runtime"
 import { BgColor } from "../types/bgColor"
+import { TargetedMouseEvent } from "preact"
 
 export default function FormBoardBgColor(
   {
@@ -7,7 +7,7 @@ export default function FormBoardBgColor(
     selectBgColor
   }: {
     selectedBgColor: BgColor | null,
-    selectBgColor: (e: JSX.TargetedMouseEvent<HTMLInputElement>) => void
+    selectBgColor: (e: TargetedMouseEvent<HTMLInputElement>) => void
   }) {
   return (
     <div class="nowrap layout-stack-horizontal-1">

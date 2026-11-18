@@ -1,5 +1,4 @@
 import { useRef, useState } from 'preact/hooks'
-import { JSX } from 'preact/jsx-runtime'
 import { Signal } from '@preact/signals'
 import { ApplicationService } from '../applications/applicationService'
 import { RepositoryLocalStorage } from '../repositories/repository'
@@ -12,6 +11,7 @@ import { BgColor } from '../types/bgColor'
 import IconAdd from './IconAdd'
 import IconMoreHoriz from './IconMoreHoriz'
 import { showBoardDialog } from '../main'
+import { TargetedDragEvent } from 'preact'
 
 export default function PageIndex({ appState }: { appState: Signal<State> }) {
   const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)
@@ -58,9 +58,9 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
 
   const handleDragEnd = () => setDraggingBoardId(undefined)
 
-  const handleDragOver = (e: JSX.TargetedDragEvent<HTMLDivElement>) => e.preventDefault()
+  const handleDragOver = (e: TargetedDragEvent<HTMLDivElement>) => e.preventDefault()
 
-  const handleDragStart = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+  const handleDragStart = (e: TargetedDragEvent<HTMLDivElement>) => {
     if (e.dataTransfer) {
       e.dataTransfer.effectAllowed = 'move'
     }
@@ -70,7 +70,7 @@ export default function PageIndex({ appState }: { appState: Signal<State> }) {
     }
   }
 
-  const handleDrop = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+  const handleDrop = (e: TargetedDragEvent<HTMLDivElement>) => {
     const { boardId, pos } = e.currentTarget.dataset
     if (boardId && pos && draggingBoardId) {
       appState.value = service.moveBoard(appState.value, draggingBoardId, pos as Pos, boardId)

@@ -1,6 +1,7 @@
 import { useRef, useState } from "preact/hooks"
-import { JSX } from "preact/jsx-runtime"
+
 import IconMoreHoriz from "./IconMoreHoriz"
+import { TargetedEvent } from "preact"
 
 export default function ListHeader(
   {
@@ -15,8 +16,8 @@ export default function ListHeader(
     name: string
     cardsNum: number
     updateListName: (id: string, name: string) => void
-    handleClickDeleteList: (e: JSX.TargetedEvent<HTMLButtonElement>) => void
-    handleClickDeleteCards: (e: JSX.TargetedEvent<HTMLButtonElement>) => void
+    handleClickDeleteList: (e: TargetedEvent<HTMLButtonElement>) => void
+    handleClickDeleteCards: (e: TargetedEvent<HTMLButtonElement>) => void
   }
 ) {
   const [editing, setEditing] = useState(false)
@@ -31,7 +32,7 @@ export default function ListHeader(
       inputElement.current?.focus()
     }, 100)
   }
-  const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputElement.current?.value) {
       updateListName(id, inputElement.current.value)

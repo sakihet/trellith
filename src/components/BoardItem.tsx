@@ -1,7 +1,8 @@
 import { Link } from "wouter-preact"
-import { JSX } from "preact/jsx-runtime"
+
 import { Pos } from "../types/pos"
 import { Board } from "../types/board"
+import { TargetedDragEvent } from "preact"
 
 export default function BoardItem(
   {
@@ -16,10 +17,10 @@ export default function BoardItem(
     board: Omit<Board, 'lists'>
     pos: Pos
     cardsNum: number
-    handleDragEnd: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-    handleDragOver: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-    handleDragStart: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-    handleDrop: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+    handleDragEnd: (e: TargetedDragEvent<HTMLDivElement>) => void
+    handleDragOver: (e: TargetedDragEvent<HTMLDivElement>) => void
+    handleDragStart: (e: TargetedDragEvent<HTMLDivElement>) => void
+    handleDrop: (e: TargetedDragEvent<HTMLDivElement>) => void
   }
 ) {
   return (

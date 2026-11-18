@@ -1,4 +1,4 @@
-import { JSX } from "preact/jsx-runtime"
+import { TargetedMouseEvent, TargetedDragEvent, TargetedSubmitEvent } from "preact"
 import { Board } from "../types/board"
 import BoardItem from "./BoardItem"
 import { useRef, useState } from "preact/hooks"
@@ -17,16 +17,16 @@ export default function BoardList(
   }: {
     boards: Board[]
     handleDragEnd: () => void
-    handleDragOver: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-    handleDragStart: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-    handleDrop: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-    handleToggleDialog: (e: JSX.TargetedMouseEvent<HTMLButtonElement>) => void
+    handleDragOver: (e: TargetedDragEvent<HTMLDivElement>) => void
+    handleDragStart: (e: TargetedDragEvent<HTMLDivElement>) => void
+    handleDrop: (e: TargetedDragEvent<HTMLDivElement>) => void
+    handleToggleDialog: (e: TargetedMouseEvent<HTMLButtonElement>) => void
   }
 ) {
   const [query, setQuery] = useState('')
   const inputElement = useRef<HTMLInputElement>(null)
 
-  const handleSubmit = (e: JSX.TargetedSubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: TargetedSubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
     const query = inputElement.current?.value
     if (query) {

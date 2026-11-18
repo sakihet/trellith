@@ -1,8 +1,8 @@
-import { JSX } from "preact/jsx-runtime"
 import { Card } from "../types/card"
 import { relativeTime } from "../utils"
 import { useRef, useState } from "preact/hooks"
 import IconMoreHoriz from "./IconMoreHoriz"
+import { TargetedEvent, TargetedFocusEvent, TargetedMouseEvent } from "preact"
 
 export function CardDialog({
   isOpen,
@@ -16,10 +16,10 @@ export function CardDialog({
   isOpen: boolean
   card: Card | undefined
   cardListId: string
-  handleBlurCardDescription: (e: JSX.TargetedFocusEvent<HTMLTextAreaElement>) => void
-  handleClickDeleteCard: (e: JSX.TargetedMouseEvent<HTMLButtonElement>) => void
-  handleClickMask: (e: JSX.TargetedMouseEvent<HTMLDivElement>) => void
-  handleSubmitCardName: (e: JSX.TargetedEvent<HTMLFormElement>) => void
+  handleBlurCardDescription: (e: TargetedFocusEvent<HTMLTextAreaElement>) => void
+  handleClickDeleteCard: (e: TargetedMouseEvent<HTMLButtonElement>) => void
+  handleClickMask: (e: TargetedMouseEvent<HTMLDivElement>) => void
+  handleSubmitCardName: (e: TargetedEvent<HTMLFormElement>) => void
 }) {
   const [isEditingName, setIsEditingName] = useState<boolean>(false)
   const [isEditingDescription, setIsEditingDescription] = useState<boolean>(false)
@@ -30,7 +30,7 @@ export function CardDialog({
     setIsEditingName(false)
   }
 
-  const handleBlurDescription = (e: JSX.TargetedFocusEvent<HTMLTextAreaElement>) => {
+  const handleBlurDescription = (e: TargetedFocusEvent<HTMLTextAreaElement>) => {
     setIsEditingDescription(false)
     handleBlurCardDescription(e)
   }
@@ -49,7 +49,7 @@ export function CardDialog({
     }, 100)
   }
 
-  const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: TargetedEvent<HTMLFormElement>) => {
     setIsEditingName(false)
     handleSubmitCardName(e)
   }

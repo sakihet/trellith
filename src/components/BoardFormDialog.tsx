@@ -1,5 +1,5 @@
+import { TargetedEvent, TargetedMouseEvent } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
-import { JSX } from "preact/jsx-runtime"
 import { BgColor } from "../types/bgColor"
 import FormBoardBgColor from "./FormBoardBgColor"
 
@@ -20,7 +20,7 @@ export function BoardFormDialog(
   const [bgColor, setBgColor] = useState<BgColor | null>(null)
   const [listsType, setListsType] = useState<ListsType>("None")
 
-  const selectBgColor = (e: JSX.TargetedMouseEvent<HTMLInputElement>) => {
+  const selectBgColor = (e: TargetedMouseEvent<HTMLInputElement>) => {
     if (e.currentTarget.value !== 'none') {
       setBgColor(e.currentTarget.value as BgColor)
     } else {
@@ -28,11 +28,11 @@ export function BoardFormDialog(
     }
   }
 
-  const handleChageLists = (e: JSX.TargetedEvent<HTMLInputElement>) => {
+  const handleChageLists = (e: TargetedEvent<HTMLInputElement>) => {
     setListsType(e.currentTarget.value as ListsType)
   }
 
-  const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (refName.current) {
       if (refName.current.value !== '') {

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'preact/hooks'
-import { JSX } from 'preact/jsx-runtime'
+
 import { Signal } from '@preact/signals'
 import { useLocation } from 'wouter-preact'
 import CardForm from './CardForm'
@@ -17,6 +17,7 @@ import IconAdd from './IconAdd'
 import IconFilterList from './IconFilterList'
 import IconClose from './IconClose'
 import { CardDialog } from './CardDialog'
+import { TargetedDragEvent, TargetedEvent, TargetedFocusEvent, TargetedMouseEvent, TargetedSubmitEvent } from 'preact'
 
 export type AddCardParams = {
   listId: string
@@ -70,7 +71,7 @@ export default function PageBoard(
     appState.value = state
   }
 
-  const selectBgColor = (e: JSX.TargetedMouseEvent<HTMLInputElement>) => {
+  const selectBgColor = (e: TargetedMouseEvent<HTMLInputElement>) => {
     if (e.currentTarget.value !== 'none') {
       const bgColor = e.currentTarget.value as BgColor
       const updated = service.updateBoardBgColor(appState.value, bgColor, boardId)
@@ -81,7 +82,7 @@ export default function PageBoard(
     }
   }
 
-  const handleBlurDialogCardDescription = (e: JSX.TargetedFocusEvent<HTMLTextAreaElement>) => {
+  const handleBlurDialogCardDescription = (e: TargetedFocusEvent<HTMLTextAreaElement>) => {
     const value = e.currentTarget.value
     if (dialogCard && dialogCardListId) {
       const updated = service.updateCardDescription(appState.value, dialogCard.id, value, boardId, dialogCardListId)
@@ -90,7 +91,7 @@ export default function PageBoard(
     }
   }
 
-  const handleClickDeleteCard = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
+  const handleClickDeleteCard = (e: TargetedEvent<HTMLButtonElement>) => {
     const { cardId, listId } = e.currentTarget.dataset
     if (cardId && listId && boardId) {
       const updated = service.deleteCard(appState.value, cardId, boardId, listId)
@@ -104,7 +105,7 @@ export default function PageBoard(
     updateState(updated)
   }
 
-  const handleClickDeleteCards = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
+  const handleClickDeleteCards = (e: TargetedEvent<HTMLButtonElement>) => {
     const { listId } = e.currentTarget.dataset
     if (listId && boardId) {
       const updated = service.deleteCardsByList(appState.value, listId, boardId)
@@ -112,7 +113,7 @@ export default function PageBoard(
     }
   }
 
-  const handleClickDeleteList = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
+  const handleClickDeleteList = (e: TargetedEvent<HTMLButtonElement>) => {
     if (window.confirm("Do you really want to delete this list?")) {
       const { listId } = e.currentTarget.dataset
       if (listId && boardId) {
@@ -122,19 +123,19 @@ export default function PageBoard(
     }
   }
 
-  const handleClickMask = (_e: JSX.TargetedMouseEvent<HTMLDivElement>) => {
+  const handleClickMask = (_e: TargetedMouseEvent<HTMLDivElement>) => {
     setIsDialogOpen(false)
     setLocation(`/board/${boardId}`)
   }
 
-  const handleDragOver = (e: JSX.TargetedDragEvent<HTMLDivElement>) => e.preventDefault()
+  const handleDragOver = (e: TargetedDragEvent<HTMLDivElement>) => e.preventDefault()
 
   const handleDragEndCard = () => {
     setDraggingCardId(undefined)
     setDraggingCardListId(undefined)
   }
 
-  const handleDragStartCard = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+  const handleDragStartCard = (e: TargetedDragEvent<HTMLDivElement>) => {
     if (e.dataTransfer) {
       e.dataTransfer.effectAllowed = 'move'
     }
@@ -143,14 +144,14 @@ export default function PageBoard(
     setDraggingCardListId(listId)
   }
 
-  const handleDropOnCard = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+  const handleDropOnCard = (e: TargetedDragEvent<HTMLDivElement>) => {
     const { cardId, listId, pos } = e.currentTarget.dataset
     if (pos && cardId && listId && boardId) {
       moveCard(pos as Pos, cardId, boardId, listId)
     }
   }
 
-  const handleDropOnList = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+  const handleDropOnList = (e: TargetedDragEvent<HTMLDivElement>) => {
     const { listId, listPos } = e.currentTarget.dataset
     if (boardId) {
       if (draggingCardId && draggingCardListId && listId) {
@@ -163,7 +164,7 @@ export default function PageBoard(
     }
   }
 
-  const handleDropOnSpacer = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+  const handleDropOnSpacer = (e: TargetedDragEvent<HTMLDivElement>) => {
     const { listId, spacer } = e.currentTarget.dataset
     if (listId && spacer && draggingCardId && boardId && draggingCardListId) {
       const updated = service.moveCardToLastOfAnotherList(appState.value, draggingCardId, boardId, draggingCardListId, listId)
@@ -175,7 +176,7 @@ export default function PageBoard(
     setDraggingListId(undefined)
   }
 
-  const handleDragStartList = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
+  const handleDragStartList = (e: TargetedDragEvent<HTMLDivElement>) => {
     if (e.dataTransfer) {
       e.dataTransfer.effectAllowed = 'move'
     }
@@ -217,7 +218,7 @@ export default function PageBoard(
     updateState(updated)
   }
 
-  const handleSubmitList = (e: JSX.TargetedEvent<HTMLFormElement>) => {
+  const handleSubmitList = (e: TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputElement.current) {
       const updated = service.createList(appState.value, inputElement.current.value, boardId)
@@ -226,12 +227,12 @@ export default function PageBoard(
     }
   }
 
-  const handleDragEnterCard = (e: JSX.TargetedEvent<HTMLDivElement>) => {
+  const handleDragEnterCard = (e: TargetedEvent<HTMLDivElement>) => {
     const { listId } = e.currentTarget.dataset
     setDragEnteredListId(listId)
   }
 
-  const handleSubmitDialogCardName = (e: JSX.TargetedEvent<HTMLFormElement>) => {
+  const handleSubmitDialogCardName = (e: TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const cardName = formData.get('cardName')?.toString()
@@ -246,7 +247,7 @@ export default function PageBoard(
     return b.id === boardId
   })
 
-  const handleSubmit = (e: JSX.TargetedSubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: TargetedSubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
     const query = inputCardFilterElement.current?.value
     if (query) {

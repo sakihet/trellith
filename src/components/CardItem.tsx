@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "preact/hooks"
-import { JSX } from "preact/jsx-runtime"
+
 import { useLocation } from "wouter-preact"
 import { Pos } from "../types/pos"
 import IconDialogs from "./IconDialogs"
+import { TargetedDragEvent, TargetedKeyboardEvent } from "preact"
 
 export default function CardItem(
   {
@@ -24,9 +25,9 @@ export default function CardItem(
     hasDescription: boolean,
     deleteCard: (cardId: string, listId: string) => void,
     updateCardName: (id: string, name: string, listId: string) => void,
-    handleDragEnd: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void,
-    handleDragStart: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void,
-    handleDrop: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void,
+    handleDragEnd: (e: TargetedDragEvent<HTMLDivElement>) => void,
+    handleDragStart: (e: TargetedDragEvent<HTMLDivElement>) => void,
+    handleDrop: (e: TargetedDragEvent<HTMLDivElement>) => void,
   }) {
   const [editing, setEditing] = useState(false)
   const [composing, setComposing] = useState<boolean>(false)
@@ -54,7 +55,7 @@ export default function CardItem(
   const handleCompositionEnd = () => {
     setComposing(false)
   }
-  const handleKeyDown = (e: JSX.TargetedKeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (e: TargetedKeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !composing) {
       e.preventDefault()
       if (ref.current?.value) {

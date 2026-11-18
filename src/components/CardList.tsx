@@ -1,4 +1,5 @@
-import { JSX } from "preact/jsx-runtime"
+
+import { TargetedDragEvent } from "preact"
 import { Card } from "../types/card"
 import CardItem from "./CardItem"
 
@@ -21,10 +22,10 @@ export default function CardList(
     deleteCard: (cardId: string, listId: string) => void
     updateCardName: (id: string, name: string, listId: string) => void
     handleDragEndCard: () => void
-    handleDragEnterCard: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-    handleDragStartCard: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-    handleDropOnCard: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
-    handleDropOnSpacer: (e: JSX.TargetedDragEvent<HTMLDivElement>) => void
+    handleDragEnterCard: (e: TargetedDragEvent<HTMLDivElement>) => void
+    handleDragStartCard: (e: TargetedDragEvent<HTMLDivElement>) => void
+    handleDropOnCard: (e: TargetedDragEvent<HTMLDivElement>) => void
+    handleDropOnSpacer: (e: TargetedDragEvent<HTMLDivElement>) => void
   }
 ) {
   return (

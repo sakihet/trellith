@@ -1,10 +1,10 @@
+import { TargetedMouseEvent, TargetedEvent } from "preact"
 import { useRef, useState } from "preact/hooks"
-import { JSX } from "preact/jsx-runtime"
+import { navigate } from "wouter-preact/use-browser-location"
 
 import FormBoardBgColor from "./FormBoardBgColor"
 import { BgColor } from "../types/bgColor"
 import IconMoreHoriz from "./IconMoreHoriz"
-import { navigate } from "wouter-preact/use-browser-location"
 
 export default function BoardHeader(
   {
@@ -19,7 +19,7 @@ export default function BoardHeader(
     name: string
     bgColor: BgColor | null
     updateBoardName: (id: string, name: string) => void
-    selectBgColor: (e: JSX.TargetedMouseEvent<HTMLInputElement>) => void
+    selectBgColor: (e: TargetedMouseEvent<HTMLInputElement>) => void
     deleteBoard: (id: string) => void
   }
 ) {
@@ -44,7 +44,7 @@ export default function BoardHeader(
     }
   }
 
-  const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputElement.current?.value) {
       updateBoardName(id, inputElement.current.value)
