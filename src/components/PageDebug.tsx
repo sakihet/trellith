@@ -1,20 +1,20 @@
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from "uuid"
 import AppButton from "./AppButton"
-import { State } from '../types/state'
-import { RepositoryLocalStorage } from '../repositories/repository'
-import { ApplicationService } from '../applications/applicationService'
-import { Signal } from '@preact/signals'
-import { Card } from '../types/card'
+import { State } from "../types/state"
+import { RepositoryLocalStorage } from "../repositories/repository"
+import { ApplicationService } from "../applications/applicationService"
+import { Signal } from "@preact/signals"
+import { Card } from "../types/card"
 
 const createCards = (startNum: number, endNum: number): Card[] => {
   const d = new Date().toISOString()
-  return [...Array(endNum - startNum + 1).keys()].map(n => {
+  return [...Array(endNum - startNum + 1).keys()].map((n) => {
     return {
       id: uuidv4(),
       name: `Card ${startNum + n}`,
-      description: '',
+      description: "",
       createdAt: d,
-      updatedAt: d
+      updatedAt: d,
     }
   })
 }
@@ -27,32 +27,32 @@ export default function PageDebug({ appState }: { appState: Signal<State> }) {
       boards: [
         {
           id: uuidv4(),
-          name: 'Board 1',
+          name: "Board 1",
           lists: [
             {
               id: uuidv4(),
-              name: 'List 1',
-              cards: createCards(1, 20)
+              name: "List 1",
+              cards: createCards(1, 20),
             },
             {
               id: uuidv4(),
-              name: 'List 2',
-              cards: createCards(21, 25)
+              name: "List 2",
+              cards: createCards(21, 25),
             },
             {
               id: uuidv4(),
-              name: 'List 3',
-              cards: createCards(26, 45)
+              name: "List 3",
+              cards: createCards(26, 45),
             },
             {
               id: uuidv4(),
-              name: 'List 4',
-              cards: createCards(46, 52)
+              name: "List 4",
+              cards: createCards(46, 52),
             },
           ],
-          bgColor: null
-        }
-      ]
+          bgColor: null,
+        },
+      ],
     }
     service.import(appState.value, state)
   }
@@ -63,10 +63,7 @@ export default function PageDebug({ appState }: { appState: Signal<State> }) {
         <div class="layout-stack-4">
           <h2>Debug</h2>
           <div class="layout-stack-4">
-            <AppButton
-              text="Create sample data"
-              onClick={createSampleData}
-            />
+            <AppButton text="Create sample data" onClick={createSampleData} />
           </div>
         </div>
       </div>

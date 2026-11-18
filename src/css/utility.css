@@ -399,25 +399,25 @@
   border-right-style: none;
 }
 
-.divide-solid>*+* {
+.divide-solid > * + * {
   border-style: solid;
 }
 
-.divide-x-1>*+* {
+.divide-x-1 > * + * {
   border-top-width: 0;
   border-left-width: 1px;
   border-right-width: 0;
   border-bottom-width: 0;
 }
 
-.divide-y-1>*+* {
+.divide-y-1 > * + * {
   border-top-width: 1px;
   border-left-width: 0;
   border-right-width: 0;
   border-bottom-width: 0;
 }
 
-.divide-color-primary>*+* {
+.divide-color-primary > * + * {
   border-color: var(--color-border-primary);
 }
 

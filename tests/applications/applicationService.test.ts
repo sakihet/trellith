@@ -1,8 +1,8 @@
-import { v4 as uuidv4 } from 'uuid'
-import { beforeEach, describe, expect, it } from 'vitest'
-import { ApplicationService } from '../../src/applications/applicationService'
-import { Repository } from '../../src/repositories/repository'
-import { State } from '../../src/types/state'
+import { v4 as uuidv4 } from "uuid"
+import { beforeEach, describe, expect, it } from "vitest"
+import { ApplicationService } from "../../src/applications/applicationService"
+import { Repository } from "../../src/repositories/repository"
+import { State } from "../../src/types/state"
 
 class RepositoryObject implements Repository {
   obj: State
@@ -23,7 +23,7 @@ class RepositoryObject implements Repository {
   }
 }
 
-describe('ApplicationService', () => {
+describe("ApplicationService", () => {
   let service: ApplicationService
   const boardId1 = uuidv4()
   const listId1 = uuidv4()
@@ -33,63 +33,77 @@ describe('ApplicationService', () => {
     boards: [
       {
         id: boardId1,
-        name: 'board1',
+        name: "board1",
         lists: [
           {
             id: listId1,
-            name: 'list1',
+            name: "list1",
             cards: [
               {
                 id: cardId1,
-                name: 'card 1',
-                description: '',
+                name: "card 1",
+                description: "",
                 createdAt: now.toISOString(),
-                updatedAt: now.toISOString()
-              }
-            ]
-          }
+                updatedAt: now.toISOString(),
+              },
+            ],
+          },
         ],
-        bgColor: null
-      }
-    ]
+        bgColor: null,
+      },
+    ],
   }
 
   beforeEach(() => {
     const repository = new RepositoryObject(state)
     service = new ApplicationService(repository)
   })
-  it('createBoard', () => {
-    const updated = service.createBoard(state, 'board2', [], null)
+  it("createBoard", () => {
+    const updated = service.createBoard(state, "board2", [], null)
     expect(updated.boards.length).toEqual(2)
   })
-  it('deleteBoard', () => {
+  it("deleteBoard", () => {
     const updated = service.deleteBoard(state, boardId1)
     expect(updated.boards.length).toEqual(0)
   })
-  it('createList', () => {
-    const updated = service.createList(state, 'list2', boardId1)
-    expect(updated.boards.find(b => b.id === boardId1)?.lists.length).toEqual(2)
+  it("createList", () => {
+    const updated = service.createList(state, "list2", boardId1)
+    expect(updated.boards.find((b) => b.id === boardId1)?.lists.length).toEqual(2)
   })
-  it('deleteList', () => {
+  it("deleteList", () => {
     const updated = service.deleteList(state, listId1, boardId1)
-    expect(updated.boards.find(b => b.id === boardId1)?.lists.length).toEqual(0)
+    expect(updated.boards.find((b) => b.id === boardId1)?.lists.length).toEqual(0)
   })
-  it('createCard', () => {
-    const updated = service.createCard(state, 'card2', boardId1, listId1)
-    expect(updated.boards.find(b => b.id === boardId1)?.lists.find(l => l.id === listId1)?.cards.length).toEqual(2)
-    expect(updated.boards.find(b => b.id === boardId1)?.lists.find(l => l.id === listId1)?.cards[0].name).toEqual('card2')
+  it("createCard", () => {
+    const updated = service.createCard(state, "card2", boardId1, listId1)
+    expect(
+      updated.boards.find((b) => b.id === boardId1)?.lists.find((l) => l.id === listId1)?.cards
+        .length,
+    ).toEqual(2)
+    expect(
+      updated.boards.find((b) => b.id === boardId1)?.lists.find((l) => l.id === listId1)?.cards[0]
+        .name,
+    ).toEqual("card2")
   })
-  it('deleteCard', () => {
+  it("deleteCard", () => {
     const updated = service.deleteCard(state, cardId1, boardId1, listId1)
-    expect(updated.boards.find(b => b.id === boardId1)?.lists.find(l => l.id === listId1)?.cards.length).toEqual(0)
+    expect(
+      updated.boards.find((b) => b.id === boardId1)?.lists.find((l) => l.id === listId1)?.cards
+        .length,
+    ).toEqual(0)
   })
-  it('updateCardName', () => {
+  it("updateCardName", () => {
     const cardBefore = service.findCard(state, cardId1, boardId1, listId1)
-    const updated = service.updateCardName(state, cardId1, 'updated', boardId1, listId1)
-    const cardAfter = updated.boards.find(b => b.id === boardId1)?.lists.find(l => l.id === listId1)?.cards.find(c => c.id === cardId1)
+    const updated = service.updateCardName(state, cardId1, "updated", boardId1, listId1)
+    const cardAfter = updated.boards
+      .find((b) => b.id === boardId1)
+      ?.lists.find((l) => l.id === listId1)
+      ?.cards.find((c) => c.id === cardId1)
     if (cardAfter && cardBefore) {
-      expect(cardAfter.name).toEqual('updated')
-      expect(new Date(cardAfter.updatedAt).getTime()).toBeGreaterThan(new Date(cardBefore.updatedAt).getTime())
+      expect(cardAfter.name).toEqual("updated")
+      expect(new Date(cardAfter.updatedAt).getTime()).toBeGreaterThan(
+        new Date(cardBefore.updatedAt).getTime(),
+      )
     }
   })
 })

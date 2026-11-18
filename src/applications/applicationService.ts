@@ -1,19 +1,19 @@
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from "uuid"
 import { Repository } from "../repositories/repository"
 import { Board } from "../types/board"
 import { List } from "../types/list"
 import { State } from "../types/state"
-import { Card } from '../types/card'
-import { Pos } from '../types/pos'
-import { BgColor } from '../types/bgColor'
+import { Card } from "../types/card"
+import { Pos } from "../types/pos"
+import { BgColor } from "../types/bgColor"
 
 const migrateState = (state: State): State => {
-  const boardsUpdaetd = state.boards.map(b => {
-    const listsUpdated = b.lists.map(l => {
-      const cardsUpdated = l.cards.map(c => {
+  const boardsUpdaetd = state.boards.map((b) => {
+    const listsUpdated = b.lists.map((l) => {
+      const cardsUpdated = l.cards.map((c) => {
         const nowStr = new Date().toISOString()
         if (!c.description) {
-          c.description = ''
+          c.description = ""
         }
         if (!c.createdAt) {
           c.createdAt = nowStr
@@ -36,9 +36,7 @@ const migrateState = (state: State): State => {
 export class ApplicationService {
   repository: Repository
 
-  constructor(
-    repository: Repository
-  ) {
+  constructor(repository: Repository) {
     this.repository = repository
   }
 
@@ -64,48 +62,59 @@ export class ApplicationService {
       return {
         id: uuidv4(),
         name: listName,
-        cards: []
+        cards: [],
       }
     })
     const board: Board = {
       id: uuidv4(),
       name: name,
       lists: lists,
-      bgColor: bgColor
+      bgColor: bgColor,
     }
     const updated = { boards: [board, ...state.boards] }
     this.repository.set(updated)
     return updated
   }
   deleteBoard(state: State, id: string): State {
-    const updated = { boards: state.boards.filter(b => b.id !== id) }
+    const updated = { boards: state.boards.filter((b) => b.id !== id) }
     this.repository.set(updated)
     return updated
   }
   moveBoard(state: State, draggingBoardId: string, pos: Pos, dropTargetBoardId: string): State {
-    const board = state.boards.find(b => b.id === draggingBoardId)
+    const board = state.boards.find((b) => b.id === draggingBoardId)
     if (board) {
       switch (pos) {
-        case 'first':
-          const updatedAtFirst = { boards: [board, ...state.boards.filter(b => b.id !== draggingBoardId)] }
+        case "first":
+          const updatedAtFirst = {
+            boards: [board, ...state.boards.filter((b) => b.id !== draggingBoardId)],
+          }
           this.repository.set(updatedAtFirst)
           return updatedAtFirst
-        case 'middle':
-          const idxDragging = state.boards.findIndex(b => b.id === draggingBoardId)
-          const idxDropTarget = state.boards.findIndex(b => b.id === dropTargetBoardId)
-          const found = state.boards.find(b => b.id === draggingBoardId)
+        case "middle":
+          const idxDragging = state.boards.findIndex((b) => b.id === draggingBoardId)
+          const idxDropTarget = state.boards.findIndex((b) => b.id === dropTargetBoardId)
+          const found = state.boards.find((b) => b.id === draggingBoardId)
           if (found) {
-            const stateDeleted = { boards: state.boards.filter(b => b.id !== draggingBoardId) }
-            const idx = stateDeleted.boards.findIndex(b => b.id === dropTargetBoardId)
-            const idxSlice = (idxDragging < idxDropTarget) ? (idx + 1) : ((idxDropTarget < idxDragging) ? idx : 0)
-            const updatedAtMiddle = { boards: [...stateDeleted.boards.slice(0, idxSlice), found, ...stateDeleted.boards.slice(idxSlice)] }
+            const stateDeleted = { boards: state.boards.filter((b) => b.id !== draggingBoardId) }
+            const idx = stateDeleted.boards.findIndex((b) => b.id === dropTargetBoardId)
+            const idxSlice =
+              idxDragging < idxDropTarget ? idx + 1 : idxDropTarget < idxDragging ? idx : 0
+            const updatedAtMiddle = {
+              boards: [
+                ...stateDeleted.boards.slice(0, idxSlice),
+                found,
+                ...stateDeleted.boards.slice(idxSlice),
+              ],
+            }
             this.repository.set(updatedAtMiddle)
             return updatedAtMiddle
           } else {
-            throw Error('moveBoard failed')
+            throw Error("moveBoard failed")
           }
-        case 'last':
-          const updatedAtLast = { boards: [...state.boards.filter(b => b.id !== draggingBoardId), board] }
+        case "last":
+          const updatedAtLast = {
+            boards: [...state.boards.filter((b) => b.id !== draggingBoardId), board],
+          }
           this.repository.set(updatedAtLast)
           return updatedAtLast
         default:
@@ -116,18 +125,18 @@ export class ApplicationService {
   }
   updateBoardName(state: State, name: string, boardId: string) {
     const updated = {
-      boards: state.boards.map(b => {
-        return (b.id === boardId) ? { ...b, name: name } : b
-      })
+      boards: state.boards.map((b) => {
+        return b.id === boardId ? { ...b, name: name } : b
+      }),
     }
     this.repository.set(updated)
     return updated
   }
   updateBoardBgColor(state: State, bgColor: BgColor | null, boardId: string) {
     const updated = {
-      boards: state.boards.map(b => {
-        return (b.id === boardId) ? { ...b, bgColor: bgColor } : b
-      })
+      boards: state.boards.map((b) => {
+        return b.id === boardId ? { ...b, bgColor: bgColor } : b
+      }),
     }
     this.repository.set(updated)
     return updated
@@ -137,63 +146,74 @@ export class ApplicationService {
     const list: List = {
       id: uuidv4(),
       name: name,
-      cards: []
+      cards: [],
     }
     const updated = {
-      boards: state.boards.map(b => {
-        return (b.id === boardId) ? { ...b, lists: [...b.lists, list] } : b
-      })
+      boards: state.boards.map((b) => {
+        return b.id === boardId ? { ...b, lists: [...b.lists, list] } : b
+      }),
     }
     this.repository.set(updated)
     return updated
   }
   deleteList(state: State, id: string, boardId: string): State {
     const updated = {
-      boards: state.boards.map(b => {
-        return (b.id === boardId) ? { ...b, lists: b.lists.filter(l => l.id !== id) } : b
-      })
+      boards: state.boards.map((b) => {
+        return b.id === boardId ? { ...b, lists: b.lists.filter((l) => l.id !== id) } : b
+      }),
     }
     this.repository.set(updated)
     return updated
   }
   findList(state: State, id: string, boardId: string): List | undefined {
-    return state.boards.find(b => b.id === boardId)?.lists.find(l => l.id === id)
+    return state.boards.find((b) => b.id === boardId)?.lists.find((l) => l.id === id)
   }
-  moveList(state: State, draggingListId: string, boardId: string, dropTargetListId: string, pos: Pos): State {
-    const board = state.boards.find(b => b.id === boardId)
+  moveList(
+    state: State,
+    draggingListId: string,
+    boardId: string,
+    dropTargetListId: string,
+    pos: Pos,
+  ): State {
+    const board = state.boards.find((b) => b.id === boardId)
     if (board) {
-      const idxDragging = board.lists.findIndex(b => b.id === draggingListId)
-      const idxDropTarget = board.lists.findIndex(b => b.id === dropTargetListId)
-      const found = board.lists.find(l => l.id === draggingListId)
-      const listsDeleted = board.lists.filter(l => l.id !== draggingListId)
+      const idxDragging = board.lists.findIndex((b) => b.id === draggingListId)
+      const idxDropTarget = board.lists.findIndex((b) => b.id === dropTargetListId)
+      const found = board.lists.find((l) => l.id === draggingListId)
+      const listsDeleted = board.lists.filter((l) => l.id !== draggingListId)
       if (found) {
         switch (pos) {
-          case 'first':
+          case "first":
             const listsUpdatedAtFirst = [found, ...listsDeleted]
             const updatedAtFirst: State = {
-              boards: state.boards.map(b => {
-                return (b.id === boardId) ? { ...b, lists: listsUpdatedAtFirst } : b
-              })
+              boards: state.boards.map((b) => {
+                return b.id === boardId ? { ...b, lists: listsUpdatedAtFirst } : b
+              }),
             }
             this.repository.set(updatedAtFirst)
             return updatedAtFirst
-          case 'middle':
-            const idx = listsDeleted.findIndex(l => l.id === dropTargetListId)
-            const idxSlice = (idxDragging < idxDropTarget) ? (idx + 1) : ((idxDropTarget < idxDragging) ? idx : 0)
-            const listsUpdated = [...listsDeleted.slice(0, idxSlice), found, ...listsDeleted.slice(idxSlice)]
+          case "middle":
+            const idx = listsDeleted.findIndex((l) => l.id === dropTargetListId)
+            const idxSlice =
+              idxDragging < idxDropTarget ? idx + 1 : idxDropTarget < idxDragging ? idx : 0
+            const listsUpdated = [
+              ...listsDeleted.slice(0, idxSlice),
+              found,
+              ...listsDeleted.slice(idxSlice),
+            ]
             const updatedAtMiddle: State = {
-              boards: state.boards.map(b => {
-                return (b.id === boardId) ? { ...b, lists: listsUpdated } : b
-              })
+              boards: state.boards.map((b) => {
+                return b.id === boardId ? { ...b, lists: listsUpdated } : b
+              }),
             }
             this.repository.set(updatedAtMiddle)
             return updatedAtMiddle
-          case 'last':
+          case "last":
             const listsUpdatedAtLast = [...listsDeleted, found]
             const updatedAtLast: State = {
-              boards: state.boards.map(b => {
-                return (b.id === boardId) ? { ...b, lists: listsUpdatedAtLast } : b
-              })
+              boards: state.boards.map((b) => {
+                return b.id === boardId ? { ...b, lists: listsUpdatedAtLast } : b
+              }),
             }
             this.repository.set(updatedAtLast)
             return updatedAtLast
@@ -206,17 +226,18 @@ export class ApplicationService {
   }
   updateListName(state: State, name: string, boardId: string, listId: string) {
     const updated = {
-      boards: state.boards.map(b => {
+      boards: state.boards.map((b) => {
         if (b.id === boardId) {
           return {
-            ...b, lists: b.lists.map(l => {
-              return (l.id === listId) ? { ...l, name: name } : l
-            })
+            ...b,
+            lists: b.lists.map((l) => {
+              return l.id === listId ? { ...l, name: name } : l
+            }),
           }
         } else {
           return b
         }
-      })
+      }),
     }
     this.repository.set(updated)
     return updated
@@ -227,19 +248,19 @@ export class ApplicationService {
     const card: Card = {
       id: uuidv4(),
       name: name,
-      description: '',
+      description: "",
       createdAt: now.toISOString(),
-      updatedAt: now.toISOString()
+      updatedAt: now.toISOString(),
     }
-    const board = state.boards.find(b => b.id === boardId)
+    const board = state.boards.find((b) => b.id === boardId)
     if (board) {
-      const updatedLists = board.lists.map(l => {
-        return (l.id === listId) ? { ...l, cards: [card, ...l.cards] } : l
+      const updatedLists = board.lists.map((l) => {
+        return l.id === listId ? { ...l, cards: [card, ...l.cards] } : l
       })
       const updated = {
-        boards: state.boards.map(b => {
-          return (b.id === boardId) ? { ...b, lists: updatedLists } : b
-        })
+        boards: state.boards.map((b) => {
+          return b.id === boardId ? { ...b, lists: updatedLists } : b
+        }),
       }
       this.repository.set(updated)
       return updated
@@ -247,15 +268,15 @@ export class ApplicationService {
     return state
   }
   deleteCard(state: State, cardId: string, boardId: string, listId: string): State {
-    const board = state.boards.find(b => b.id === boardId)
+    const board = state.boards.find((b) => b.id === boardId)
     if (board) {
-      const updatedLists = board.lists.map(l => {
-        return (l.id === listId) ? { ...l, cards: l.cards.filter(c => c.id !== cardId) } : l
+      const updatedLists = board.lists.map((l) => {
+        return l.id === listId ? { ...l, cards: l.cards.filter((c) => c.id !== cardId) } : l
       })
       const updated = {
-        boards: state.boards.map(b => {
-          return (b.id === boardId) ? { ...b, lists: updatedLists } : b
-        })
+        boards: state.boards.map((b) => {
+          return b.id === boardId ? { ...b, lists: updatedLists } : b
+        }),
       }
       this.repository.set(updated)
       return updated
@@ -263,15 +284,15 @@ export class ApplicationService {
     return state
   }
   deleteCardsByList(state: State, listId: string, boardId: string): State {
-    const board = state.boards.find(b => b.id === boardId)
+    const board = state.boards.find((b) => b.id === boardId)
     if (board) {
-      const updatedLists = board.lists.map(l => {
-        return (l.id === listId) ? { ...l, cards: [] } : l
+      const updatedLists = board.lists.map((l) => {
+        return l.id === listId ? { ...l, cards: [] } : l
       })
       const updated = {
-        boards: state.boards.map(b => {
-          return (b.id === boardId) ? { ...b, lists: updatedLists } : b
-        })
+        boards: state.boards.map((b) => {
+          return b.id === boardId ? { ...b, lists: updatedLists } : b
+        }),
       }
       this.repository.set(updated)
       return updated
@@ -286,52 +307,66 @@ export class ApplicationService {
     pos: Pos,
     dropTargetCardId: string,
     dropTargetBoardId: string,
-    dropTargetListId: string
+    dropTargetListId: string,
   ): State {
     const found = this.findCard(state, draggingCardId, draggingCardBoardId, draggingCardListId)
     const foundList = this.findList(state, draggingCardListId, draggingCardBoardId)
     const foundListDropTarget = this.findList(state, dropTargetListId, dropTargetBoardId)
     if (found && foundList && foundListDropTarget) {
-      const idxDragging = foundList.cards.findIndex(c => c.id === draggingCardId)
-      const idxDropTarget = foundListDropTarget.cards.findIndex(c => c.id === dropTargetCardId)
-      const stateDeleted = this.deleteCard(state, draggingCardId, draggingCardBoardId, draggingCardListId)
-      const dropTargetBoard = stateDeleted.boards.find(b => b.id === dropTargetBoardId)
+      const idxDragging = foundList.cards.findIndex((c) => c.id === draggingCardId)
+      const idxDropTarget = foundListDropTarget.cards.findIndex((c) => c.id === dropTargetCardId)
+      const stateDeleted = this.deleteCard(
+        state,
+        draggingCardId,
+        draggingCardBoardId,
+        draggingCardListId,
+      )
+      const dropTargetBoard = stateDeleted.boards.find((b) => b.id === dropTargetBoardId)
       if (dropTargetBoard) {
         switch (pos) {
-          case 'first':
-            const listsUpdatedAtFirst = dropTargetBoard.lists.map(l => {
-              return (l.id === dropTargetListId) ? { ...l, cards: [found, ...l.cards] } : l
+          case "first":
+            const listsUpdatedAtFirst = dropTargetBoard.lists.map((l) => {
+              return l.id === dropTargetListId ? { ...l, cards: [found, ...l.cards] } : l
             })
             const updatedAtFirst = {
-              boards: stateDeleted.boards.map(b => {
-                return (b.id === dropTargetBoardId) ? { ...b, lists: listsUpdatedAtFirst } : b
-              })
+              boards: stateDeleted.boards.map((b) => {
+                return b.id === dropTargetBoardId ? { ...b, lists: listsUpdatedAtFirst } : b
+              }),
             }
             this.repository.set(updatedAtFirst)
             return updatedAtFirst
-          case 'middle':
+          case "middle":
             if (draggingCardListId === dropTargetListId) {
               if (idxDropTarget) {
-                const dropTargetList = dropTargetBoard.lists.find(l => l.id === dropTargetListId)
+                const dropTargetList = dropTargetBoard.lists.find((l) => l.id === dropTargetListId)
                 if (dropTargetList) {
-                  const idx = dropTargetList.cards.findIndex(c => c.id === dropTargetCardId)
-                  const idxSlice = (idxDragging < idxDropTarget) ? (idx + 1) : ((idxDropTarget < idxDragging) ? idx : 0)
+                  const idx = dropTargetList.cards.findIndex((c) => c.id === dropTargetCardId)
+                  const idxSlice =
+                    idxDragging < idxDropTarget ? idx + 1 : idxDropTarget < idxDragging ? idx : 0
                   const updatedAtMiddle: State = {
-                    boards: stateDeleted.boards.map(b => {
+                    boards: stateDeleted.boards.map((b) => {
                       if (b.id === dropTargetBoardId) {
                         return {
-                          ...b, lists: b.lists.map(l => {
+                          ...b,
+                          lists: b.lists.map((l) => {
                             if (l.id === dropTargetListId) {
-                              return { ...l, cards: [...l.cards.slice(0, idxSlice), found, ...l.cards.slice(idxSlice)] }
+                              return {
+                                ...l,
+                                cards: [
+                                  ...l.cards.slice(0, idxSlice),
+                                  found,
+                                  ...l.cards.slice(idxSlice),
+                                ],
+                              }
                             } else {
                               return l
                             }
-                          })
+                          }),
                         }
                       } else {
                         return b
                       }
-                    })
+                    }),
                   }
                   this.repository.set(updatedAtMiddle)
                   return updatedAtMiddle
@@ -339,55 +374,71 @@ export class ApplicationService {
               }
             } else {
               const updatedAtMiddle: State = {
-                boards: stateDeleted.boards.map(b => {
+                boards: stateDeleted.boards.map((b) => {
                   if (b.id === dropTargetBoardId) {
                     return {
-                      ...b, lists: b.lists.map(l => {
+                      ...b,
+                      lists: b.lists.map((l) => {
                         if (l.id === dropTargetListId) {
-                          return { ...l, cards: [...l.cards.slice(0, idxDropTarget), found, ...l.cards.slice(idxDropTarget)] }
+                          return {
+                            ...l,
+                            cards: [
+                              ...l.cards.slice(0, idxDropTarget),
+                              found,
+                              ...l.cards.slice(idxDropTarget),
+                            ],
+                          }
                         } else {
                           return l
                         }
-                      })
+                      }),
                     }
                   } else {
                     return b
                   }
-                })
+                }),
               }
               this.repository.set(updatedAtMiddle)
               return updatedAtMiddle
             }
             break
-          case 'last':
+          case "last":
             if (draggingCardListId === dropTargetListId) {
-              const listsUpdatedAtLast = dropTargetBoard.lists.map(l => {
-                return (l.id === dropTargetListId) ? { ...l, cards: [...l.cards, found] } : l
+              const listsUpdatedAtLast = dropTargetBoard.lists.map((l) => {
+                return l.id === dropTargetListId ? { ...l, cards: [...l.cards, found] } : l
               })
               const updatedAtLast = {
-                boards: stateDeleted.boards.map(b => {
-                  return (b.id === dropTargetBoardId) ? { ...b, lists: listsUpdatedAtLast } : b
-                })
+                boards: stateDeleted.boards.map((b) => {
+                  return b.id === dropTargetBoardId ? { ...b, lists: listsUpdatedAtLast } : b
+                }),
               }
               this.repository.set(updatedAtLast)
               return updatedAtLast
             } else {
               const updatedAtLast: State = {
-                boards: stateDeleted.boards.map(b => {
+                boards: stateDeleted.boards.map((b) => {
                   if (b.id === dropTargetBoardId) {
                     return {
-                      ...b, lists: b.lists.map(l => {
+                      ...b,
+                      lists: b.lists.map((l) => {
                         if (l.id === dropTargetListId) {
-                          return { ...l, cards: [...l.cards.slice(0, idxDropTarget), found, ...l.cards.slice(idxDropTarget)] }
+                          return {
+                            ...l,
+                            cards: [
+                              ...l.cards.slice(0, idxDropTarget),
+                              found,
+                              ...l.cards.slice(idxDropTarget),
+                            ],
+                          }
                         } else {
                           return l
                         }
-                      })
+                      }),
                     }
                   } else {
                     return b
                   }
-                })
+                }),
               }
               this.repository.set(updatedAtLast)
               return updatedAtLast
@@ -400,17 +451,23 @@ export class ApplicationService {
     return state
   }
   findCard(state: State, id: string, boardId: string, listId: string) {
-    return state.boards.find(b => b.id === boardId)?.lists.find(l => l.id === listId)?.cards.find(b => b.id === id)
+    return state.boards
+      .find((b) => b.id === boardId)
+      ?.lists.find((l) => l.id === listId)
+      ?.cards.find((b) => b.id === id)
   }
   findCardFromBoard(state: State, id: string, boardId: string) {
-    return state.boards.find(b => b.id === boardId)?.lists.map(l => l.cards.find(b => b.id === id)).filter(c => c)[0]
+    return state.boards
+      .find((b) => b.id === boardId)
+      ?.lists.map((l) => l.cards.find((b) => b.id === id))
+      .filter((c) => c)[0]
   }
   findCardListIdFromBoard(state: State, id: string, boardId: string) {
     let listId
-    state.boards.map(b => {
+    state.boards.map((b) => {
       if (b.id === boardId) {
-        b.lists.map(l => {
-          const found = l.cards.find(c => c.id === id)
+        b.lists.map((l) => {
+          const found = l.cards.find((c) => c.id === id)
           if (found) {
             listId = l.id
           }
@@ -419,100 +476,124 @@ export class ApplicationService {
     })
     return listId
   }
-  moveCardToAnotherList(state: State, id: string, boardId: string, listIdSrc: string, listIdDst: string) {
+  moveCardToAnotherList(
+    state: State,
+    id: string,
+    boardId: string,
+    listIdSrc: string,
+    listIdDst: string,
+  ) {
     const found = this.findCard(state, id, boardId, listIdSrc)
-    if (found && (listIdSrc !== listIdDst)) {
+    if (found && listIdSrc !== listIdDst) {
       const stateDeleted = this.deleteCard(state, id, boardId, listIdSrc)
       const updated: State = {
-        boards: stateDeleted.boards.map(b => {
+        boards: stateDeleted.boards.map((b) => {
           if (b.id === boardId) {
             return {
-              ...b, lists: b.lists.map(l => {
-                return (l.id === listIdDst) ? { ...l, cards: [found, ...l.cards] } : l
-              })
+              ...b,
+              lists: b.lists.map((l) => {
+                return l.id === listIdDst ? { ...l, cards: [found, ...l.cards] } : l
+              }),
             }
           } else {
             return b
           }
-        })
+        }),
       }
       this.repository.set(updated)
       return updated
     }
     return state
   }
-  moveCardToLastOfAnotherList(state: State, id: string, boardId: string, listIdSrc: string, listIdDst: string) {
+  moveCardToLastOfAnotherList(
+    state: State,
+    id: string,
+    boardId: string,
+    listIdSrc: string,
+    listIdDst: string,
+  ) {
     const found = this.findCard(state, id, boardId, listIdSrc)
-    if (found && (listIdSrc !== listIdDst)) {
+    if (found && listIdSrc !== listIdDst) {
       const stateDeleted = this.deleteCard(state, id, boardId, listIdSrc)
       const updated: State = {
-        boards: stateDeleted.boards.map(b => {
+        boards: stateDeleted.boards.map((b) => {
           if (b.id === boardId) {
             return {
-              ...b, lists: b.lists.map(l => {
-                return (l.id === listIdDst) ? { ...l, cards: [...l.cards, found] } : l
-              })
+              ...b,
+              lists: b.lists.map((l) => {
+                return l.id === listIdDst ? { ...l, cards: [...l.cards, found] } : l
+              }),
             }
           } else {
             return b
           }
-        })
+        }),
       }
       this.repository.set(updated)
       return updated
     }
     return state
   }
-  updateCardName(state: State, cardId: string, name: string, boardId: string, listId: string): State {
+  updateCardName(
+    state: State,
+    cardId: string,
+    name: string,
+    boardId: string,
+    listId: string,
+  ): State {
     const now = new Date()
     const updated = {
-      boards: state.boards.map(b => {
-        return ((b.id === boardId)
+      boards: state.boards.map((b) => {
+        return b.id === boardId
           ? {
-            ...b, lists: b.lists.map(l => {
-              return ((l.id === listId)
-                ? {
-                  ...l, cards: l.cards.map(c => {
-                    return ((c.id === cardId)
-                      ? { ...c, name: name, updatedAt: now.toISOString() }
-                      : c)
-                  }
-                  )
-                }
-                : l
-              )
-            })
-          }
+              ...b,
+              lists: b.lists.map((l) => {
+                return l.id === listId
+                  ? {
+                      ...l,
+                      cards: l.cards.map((c) => {
+                        return c.id === cardId
+                          ? { ...c, name: name, updatedAt: now.toISOString() }
+                          : c
+                      }),
+                    }
+                  : l
+              }),
+            }
           : b
-        )
-      })
+      }),
     }
     this.repository.set(updated)
     return updated
   }
-  updateCardDescription(state: State, cardId: string, description: string, boardId: string, listId: string): State {
+  updateCardDescription(
+    state: State,
+    cardId: string,
+    description: string,
+    boardId: string,
+    listId: string,
+  ): State {
     const now = new Date()
     const updated = {
-      boards: state.boards.map(b => {
-        return ((b.id === boardId)
+      boards: state.boards.map((b) => {
+        return b.id === boardId
           ? {
-            ...b, lists: b.lists.map(l => {
-              return ((l.id === listId)
-                ? {
-                  ...l, cards: l.cards.map(c => {
-                    return ((c.id === cardId)
-                      ? { ...c, description: description, updatedAt: now.toISOString() }
-                      : c)
-                  }
-                  )
-                }
-                : l
-              )
-            })
-          }
+              ...b,
+              lists: b.lists.map((l) => {
+                return l.id === listId
+                  ? {
+                      ...l,
+                      cards: l.cards.map((c) => {
+                        return c.id === cardId
+                          ? { ...c, description: description, updatedAt: now.toISOString() }
+                          : c
+                      }),
+                    }
+                  : l
+              }),
+            }
           : b
-        )
-      })
+      }),
     }
     this.repository.set(updated)
     return updated

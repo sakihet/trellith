@@ -3,55 +3,55 @@ import { List } from "./types/list"
 import { Theme } from "./types/theme"
 
 export const applyTheme = (theme: Theme) => {
-  if (theme === 'dark') {
-    document.firstElementChild?.classList.add('dark')
+  if (theme === "dark") {
+    document.firstElementChild?.classList.add("dark")
   } else {
-    document.firstElementChild?.classList.remove('dark')
+    document.firstElementChild?.classList.remove("dark")
   }
 }
 
 export const getTheme = (): Theme => {
-  const key = 'theme'
+  const key = "theme"
   const item = localStorage.getItem(key)
   if (item) {
-    return item as Theme || 'light'
+    return (item as Theme) || "light"
   } else {
-    return window.matchMedia('(preferes-color-scheme: dark)').matches ? 'dark' : 'light'
+    return window.matchMedia("(preferes-color-scheme: dark)").matches ? "dark" : "light"
   }
 }
 
 export const setTheme = (theme: Theme) => {
-  localStorage.setItem('theme', theme)
+  localStorage.setItem("theme", theme)
 }
 
 export const relativeTime = (dateStr: string): string => {
   const now = new Date().getTime()
   const diff = now - new Date(dateStr).getTime()
-  const formatter = new Intl.RelativeTimeFormat('en')
+  const formatter = new Intl.RelativeTimeFormat("en")
   let formatted
   if (diff < 1000 * 10) {
-    formatted = 'now'
+    formatted = "now"
   } else if (diff < 1000 * 60) {
-    formatted = formatter.format(-(Math.floor(diff / 1000)), 'second')
+    formatted = formatter.format(-Math.floor(diff / 1000), "second")
   } else if (diff < 1000 * 60 * 60) {
-    formatted = formatter.format(-(Math.floor(diff / (1000 * 60))), 'minute')
+    formatted = formatter.format(-Math.floor(diff / (1000 * 60)), "minute")
   } else if (diff < 1000 * 60 * 60 * 24) {
-    formatted = formatter.format(-(Math.floor(diff / (1000 * 60 * 60))), 'hour')
+    formatted = formatter.format(-Math.floor(diff / (1000 * 60 * 60)), "hour")
   } else {
-    formatted = formatter.format(-(Math.floor(diff / (1000 * 60 * 60 * 24))), 'day')
+    formatted = formatter.format(-Math.floor(diff / (1000 * 60 * 60 * 24)), "day")
   }
   return formatted
 }
 
 export const filterBoardsByName = (query: string, boards: Board[]): Board[] => {
-  return boards.filter(b => b.name.toLowerCase().includes(query.toLowerCase()))
+  return boards.filter((b) => b.name.toLowerCase().includes(query.toLowerCase()))
 }
 
 export const filterListsByCardName = (query: string, lists: List[]): List[] => {
-  return lists.map(l => {
+  return lists.map((l) => {
     return {
       ...l,
-      cards: l.cards.filter(c => c.name.toLowerCase().includes(query.toLowerCase()))
+      cards: l.cards.filter((c) => c.name.toLowerCase().includes(query.toLowerCase())),
     }
   })
 }

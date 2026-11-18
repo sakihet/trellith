@@ -1,24 +1,23 @@
 import { useRef, useState } from "preact/hooks"
-import { JSX } from "preact/jsx-runtime"
-import IconMoreHoriz from "./IconMoreHoriz"
 
-export default function ListHeader(
-  {
-    id,
-    name,
-    cardsNum,
-    updateListName,
-    handleClickDeleteList,
-    handleClickDeleteCards
-  }: {
-    id: string
-    name: string
-    cardsNum: number
-    updateListName: (id: string, name: string) => void
-    handleClickDeleteList: (e: JSX.TargetedEvent<HTMLButtonElement>) => void
-    handleClickDeleteCards: (e: JSX.TargetedEvent<HTMLButtonElement>) => void
-  }
-) {
+import IconMoreHoriz from "./IconMoreHoriz"
+import { TargetedEvent } from "preact"
+
+export default function ListHeader({
+  id,
+  name,
+  cardsNum,
+  updateListName,
+  handleClickDeleteList,
+  handleClickDeleteCards,
+}: {
+  id: string
+  name: string
+  cardsNum: number
+  updateListName: (id: string, name: string) => void
+  handleClickDeleteList: (e: TargetedEvent<HTMLButtonElement>) => void
+  handleClickDeleteCards: (e: TargetedEvent<HTMLButtonElement>) => void
+}) {
   const [editing, setEditing] = useState(false)
   const inputElement = useRef<HTMLInputElement>(null)
 
@@ -31,7 +30,7 @@ export default function ListHeader(
       inputElement.current?.focus()
     }, 100)
   }
-  const handleSubmit = (e: JSX.TargetedEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: TargetedEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputElement.current?.value) {
       updateListName(id, inputElement.current.value)
@@ -42,8 +41,8 @@ export default function ListHeader(
   return (
     <div class="flex-row h-6 cursor-grab">
       <div class="f-1 overflow-hidden">
-        {editing
-          ? <form onSubmit={handleSubmit}>
+        {editing ? (
+          <form onSubmit={handleSubmit}>
             <input
               class="h-6 px-1 w-full"
               type="text"
@@ -52,18 +51,17 @@ export default function ListHeader(
               ref={inputElement}
             />
           </form>
-          : <div class="flex-row">
+        ) : (
+          <div class="flex-row">
             <div
               class="f-1 nowrap overflow-x-hidden text-overflow-ellipsis"
               onClick={handleClickEdit}
             >
               {name}
             </div>
-            <div class="px-2 text-secondary font-mono">
-              {cardsNum}
-            </div>
+            <div class="px-2 text-secondary font-mono">{cardsNum}</div>
           </div>
-        }
+        )}
       </div>
       <div class="w-6">
         <details class="pattern-dropdown">
