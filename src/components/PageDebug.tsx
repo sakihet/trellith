@@ -1,10 +1,11 @@
-import { v4 as uuidv4 } from "uuid"
-import AppButton from "./AppButton"
-import { State } from "../types/state"
-import { RepositoryLocalStorage } from "../repositories/repository"
-import { ApplicationService } from "../applications/applicationService"
 import { Signal } from "@preact/signals"
+import { v4 as uuidv4 } from "uuid"
+
+import { ApplicationService } from "../applications/applicationService"
+import { RepositoryLocalStorage } from "../repositories/repository"
 import { Card } from "../types/card"
+import { State } from "../types/state"
+import AppButton from "./AppButton"
 
 const createCards = (startNum: number, endNum: number): Card[] => {
   const d = new Date().toISOString()

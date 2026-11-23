@@ -1,5 +1,6 @@
 import { TargetedEvent, TargetedMouseEvent } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
+
 import { BgColor } from "../types/bgColor"
 import FormBoardBgColor from "./FormBoardBgColor"
 

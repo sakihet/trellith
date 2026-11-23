@@ -1,7 +1,8 @@
 import { Signal, signal } from "@preact/signals"
+
 import { State } from "./types/state"
-import { getTheme } from "./utils"
 import { Theme } from "./types/theme"
+import { getTheme } from "./utils"
 
 export function createAppState() {
   const appState: Signal<State> = signal<State>({ boards: [] })

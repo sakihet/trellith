@@ -1,22 +1,4 @@
-import { useEffect, useRef, useState } from "preact/hooks"
-
 import { Signal } from "@preact/signals"
-import { useLocation } from "wouter-preact"
-import CardForm from "./CardForm"
-import BoardHeader from "./BoardHeader"
-import ListHeader from "./ListHeader"
-import { ApplicationService } from "../applications/applicationService"
-import { RepositoryLocalStorage } from "../repositories/repository"
-import { Pos } from "../types/pos"
-import { State } from "../types/state"
-import CardList from "./CardList"
-import { Card } from "../types/card"
-import { filterListsByCardName } from "../utils"
-import { BgColor } from "../types/bgColor"
-import IconAdd from "./IconAdd"
-import IconFilterList from "./IconFilterList"
-import IconClose from "./IconClose"
-import { CardDialog } from "./CardDialog"
 import {
   TargetedDragEvent,
   TargetedEvent,
@@ -24,6 +6,24 @@ import {
   TargetedMouseEvent,
   TargetedSubmitEvent,
 } from "preact"
+import { useEffect, useRef, useState } from "preact/hooks"
+import { useLocation } from "wouter-preact"
+
+import { ApplicationService } from "../applications/applicationService"
+import { RepositoryLocalStorage } from "../repositories/repository"
+import { BgColor } from "../types/bgColor"
+import { Card } from "../types/card"
+import { Pos } from "../types/pos"
+import { State } from "../types/state"
+import { filterListsByCardName } from "../utils"
+import BoardHeader from "./BoardHeader"
+import { CardDialog } from "./CardDialog"
+import CardForm from "./CardForm"
+import CardList from "./CardList"
+import IconAdd from "./IconAdd"
+import IconClose from "./IconClose"
+import IconFilterList from "./IconFilterList"
+import ListHeader from "./ListHeader"
 
 export type AddCardParams = {
   listId: string

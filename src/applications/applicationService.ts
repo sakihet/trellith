@@ -1,11 +1,12 @@
 import { v4 as uuidv4 } from "uuid"
+
 import { Repository } from "../repositories/repository"
-import { Board } from "../types/board"
-import { List } from "../types/list"
-import { State } from "../types/state"
-import { Card } from "../types/card"
-import { Pos } from "../types/pos"
 import { BgColor } from "../types/bgColor"
+import { Board } from "../types/board"
+import { Card } from "../types/card"
+import { List } from "../types/list"
+import { Pos } from "../types/pos"
+import { State } from "../types/state"
 
 const migrateState = (state: State): State => {
   const boardsUpdaetd = state.boards.map((b) => {

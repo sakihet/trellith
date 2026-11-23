@@ -1,7 +1,7 @@
+import { TargetedEvent } from "preact"
 import { useRef, useState } from "preact/hooks"
 
 import IconMoreHoriz from "./IconMoreHoriz"
-import { TargetedEvent } from "preact"
 
 export default function ListHeader({
   id,

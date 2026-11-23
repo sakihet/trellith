@@ -1,8 +1,8 @@
+import { TargetedDragEvent } from "preact"
 import { Link } from "wouter-preact"
 
-import { Pos } from "../types/pos"
 import { Board } from "../types/board"
-import { TargetedDragEvent } from "preact"
+import { Pos } from "../types/pos"
 
 export default function BoardItem({
   board,

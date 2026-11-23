@@ -1,17 +1,16 @@
-import { useEffect, useRef, useState } from "preact/hooks"
-
 import { Signal } from "@preact/signals"
-import { v4 as uuidv4 } from "uuid"
-
-import { appTheme, showBoardDialog, showCommandPalette } from "../main"
-import { State } from "../types/state"
-import { Board } from "../types/board"
-import { RepositoryLocalStorage } from "../repositories/repository"
-import { ApplicationService } from "../applications/applicationService"
-import { applyTheme, setTheme } from "../utils"
-import { Theme } from "../types/theme"
-import { useLocation } from "wouter-preact"
 import { TargetedEvent, TargetedKeyboardEvent } from "preact"
+import { useEffect, useRef, useState } from "preact/hooks"
+import { v4 as uuidv4 } from "uuid"
+import { useLocation } from "wouter-preact"
+
+import { ApplicationService } from "../applications/applicationService"
+import { appTheme, showBoardDialog, showCommandPalette } from "../main"
+import { RepositoryLocalStorage } from "../repositories/repository"
+import { Board } from "../types/board"
+import { State } from "../types/state"
+import { Theme } from "../types/theme"
+import { applyTheme, setTheme } from "../utils"
 
 const repository = new RepositoryLocalStorage()
 const service = new ApplicationService(repository)

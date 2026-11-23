@@ -2,8 +2,8 @@ import { TargetedMouseEvent, TargetedEvent } from "preact"
 import { useRef, useState } from "preact/hooks"
 import { navigate } from "wouter-preact/use-browser-location"
 
-import FormBoardBgColor from "./FormBoardBgColor"
 import { BgColor } from "../types/bgColor"
+import FormBoardBgColor from "./FormBoardBgColor"
 import IconMoreHoriz from "./IconMoreHoriz"
 
 export default function BoardHeader({

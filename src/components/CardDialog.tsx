@@ -1,8 +1,9 @@
+import { TargetedEvent, TargetedFocusEvent, TargetedMouseEvent } from "preact"
+import { useRef, useState } from "preact/hooks"
+
 import { Card } from "../types/card"
 import { relativeTime } from "../utils"
-import { useRef, useState } from "preact/hooks"
 import IconMoreHoriz from "./IconMoreHoriz"
-import { TargetedEvent, TargetedFocusEvent, TargetedMouseEvent } from "preact"
 
 export function CardDialog({
   isOpen,

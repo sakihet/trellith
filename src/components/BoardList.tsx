@@ -1,10 +1,11 @@
 import { TargetedMouseEvent, TargetedDragEvent, TargetedSubmitEvent } from "preact"
-import { Board } from "../types/board"
-import BoardItem from "./BoardItem"
 import { useRef, useState } from "preact/hooks"
-import IconFilterList from "./IconFilterList"
+
+import { Board } from "../types/board"
 import { filterBoardsByName } from "../utils"
+import BoardItem from "./BoardItem"
 import IconClose from "./IconClose"
+import IconFilterList from "./IconFilterList"
 
 export default function BoardList({
   boards,

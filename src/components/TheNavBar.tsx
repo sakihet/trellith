@@ -1,10 +1,11 @@
-import { Link } from "wouter-preact"
-import { Theme } from "../types/theme"
 import { Signal } from "@preact/signals"
-import { applyTheme, setTheme } from "../utils"
-import IconLightMode from "./IconLightMode"
-import IconDarkMode from "./IconDarkMode"
+import { Link } from "wouter-preact"
+
 import { showCommandPalette } from "../main"
+import { Theme } from "../types/theme"
+import { applyTheme, setTheme } from "../utils"
+import IconDarkMode from "./IconDarkMode"
+import IconLightMode from "./IconLightMode"
 
 export default function TheNavBar({ theme }: { theme: Signal<Theme> }) {
   const handleClick = () => {

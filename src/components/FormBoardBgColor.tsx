@@ -1,5 +1,6 @@
-import { BgColor } from "../types/bgColor"
 import { TargetedMouseEvent } from "preact"
+
+import { BgColor } from "../types/bgColor"
 
 export default function FormBoardBgColor({
   selectedBgColor,

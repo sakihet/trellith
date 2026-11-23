@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid"
 import { beforeEach, describe, expect, it } from "vitest"
+
 import { ApplicationService } from "../../src/applications/applicationService"
 import { Repository } from "../../src/repositories/repository"
 import { State } from "../../src/types/state"

@@ -1,8 +1,8 @@
+import { TargetedKeyboardEvent } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
 
-import { AddCardParams } from "./PageBoard"
 import IconAdd from "./IconAdd"
-import { TargetedKeyboardEvent } from "preact"
+import { AddCardParams } from "./PageBoard"
 
 export default function CardForm({
   listId,

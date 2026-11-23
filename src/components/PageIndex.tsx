@@ -1,17 +1,18 @@
-import { useRef, useState } from "preact/hooks"
 import { Signal } from "@preact/signals"
+import { TargetedDragEvent } from "preact"
+import { useRef, useState } from "preact/hooks"
+
 import { ApplicationService } from "../applications/applicationService"
+import { showBoardDialog } from "../main"
 import { RepositoryLocalStorage } from "../repositories/repository"
+import { BgColor } from "../types/bgColor"
+import { Board } from "../types/board"
 import { Pos } from "../types/pos"
 import { State } from "../types/state"
-import BoardList from "./BoardList"
-import { Board } from "../types/board"
 import { BoardFormDialog } from "./BoardFormDialog"
-import { BgColor } from "../types/bgColor"
+import BoardList from "./BoardList"
 import IconAdd from "./IconAdd"
 import IconMoreHoriz from "./IconMoreHoriz"
-import { showBoardDialog } from "../main"
-import { TargetedDragEvent } from "preact"
 
 export default function PageIndex({ appState }: { appState: Signal<State> }) {
   const [draggingBoardId, setDraggingBoardId] = useState<string | undefined>(undefined)

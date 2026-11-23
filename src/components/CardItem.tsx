@@ -1,9 +1,9 @@
+import { TargetedDragEvent, TargetedKeyboardEvent } from "preact"
 import { useEffect, useRef, useState } from "preact/hooks"
-
 import { useLocation } from "wouter-preact"
+
 import { Pos } from "../types/pos"
 import IconDialogs from "./IconDialogs"
-import { TargetedDragEvent, TargetedKeyboardEvent } from "preact"
 
 export default function CardItem({
   id,
